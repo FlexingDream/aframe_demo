@@ -1,6 +1,6 @@
 import {Animation, Entity} from 'aframe-react';
 import React from 'react';
-import 'components/RayCaster';
+import 'aframe_components/RayCaster';
 export default props => {
   const geometry = {
     primitive: 'ring',

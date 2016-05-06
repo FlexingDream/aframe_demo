@@ -7,10 +7,10 @@ import 'aframe-layout-component';
 import Camera from './components/Camera';
 import Cursor from './components/Cursor';
 import Sky from './components/Sky';
-import './components/Collider';
-import './components/RayCaster';
+import './aframe_components/Collider';
+import './aframe_components/RayCaster';
 import Floor from './components/Floor';
-import './components/entity-generator';
+import './aframe_components/entity-generator';
 import $ from 'jquery';
 
 class BoilerplateScene extends React.Component {
@@ -171,13 +171,6 @@ class VisualizerBlock extends React.Component{
       </Entity>
       );
     }
-/*    blocks.push(
-        <Entity position={[0,-0.5,-254]} mixin="visualizer-ring" geometry={{"radius":this.props.heights[4] }} look-at="[camera]" material={{color: 'orange'}}></Entity>
-    );
-    blocks.push(
-        <Entity position={[0,-0.5,-250]} mixin="visualizer-ring" geometry={{"radius":this.props.heights[8] }} look-at="[camera]" material={{color: 'yellow'}}></Entity>
-        );*/
-
     return(<Entity>{blocks}</Entity>);
   }
 }
