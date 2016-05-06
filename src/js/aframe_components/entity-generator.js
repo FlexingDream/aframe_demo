@@ -7,7 +7,7 @@
 AFRAME.registerComponent('entity-generator', {
   schema: {
     mixin: {default: ''},
-    num: {default: 2000},
+    numElements: {default: 2000},
     raycasterEls: {default: '[mixin~="raycaster"]', type: 'selectorAll'},
     spread: {default: 50},
     minExclusion: {default: 0},
@@ -17,9 +17,8 @@ AFRAME.registerComponent('entity-generator', {
   // TODO: make the position of the elements depending on starting position
   init: function () {
     var data = this.data;
-
     // Create entities with supplied mixin.
-    for (var i = 0; i < data.num; i++) {
+    for (var i = 0; i < data.numElements; i++) {
       var entity = document.createElement('a-entity');
 
       entity.setAttribute('mixin', data.mixin);
