@@ -121,7 +121,7 @@ class BoilerplateScene extends React.Component {
           <RainingObjects animationDirection='alternate' mixin='snow' spread="75"/>
           <RainingObjects animationDirection='alternate' mixin='blue-speck' numElements="1000"/>
           <Pulse heights={this.state.heights}/>
-          <SnakeLines/>
+          <SnakeLines heights={this.state.heights}/>
         </Entity>
       </Scene>
     );
