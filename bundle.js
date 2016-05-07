@@ -179,8 +179,8 @@
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
 	          null,
-	          _react2.default.createElement(_RainingObjects2.default, { animationDirection: 'alternate', mixin: 'snow', spread: '75' }),
-	          _react2.default.createElement(_RainingObjects2.default, { animationDirection: 'alternate', mixin: 'blue-speck', numElements: '1000' }),
+	          _react2.default.createElement(_RainingObjects2.default, { animationDirection: 'alternate', mixin: 'snow', spread: '75', numElements: '500' }),
+	          _react2.default.createElement(_RainingObjects2.default, { animationDirection: 'alternate', mixin: 'blue-speck', numElements: '500' }),
 	          _react2.default.createElement(Pulse, { heights: this.state.heights }),
 	          _react2.default.createElement(SnakeLines, { heights: this.state.heights })
 	        )
@@ -226,7 +226,7 @@
 	}(_react2.default.Component);
 
 	SnakeLines.defaultProps = {
-	  numBlocks: 25,
+	  numBlocks: 12,
 	  spread: 30
 	};
 
@@ -258,7 +258,7 @@
 	}(_react2.default.Component);
 
 	Pulse.defaultProps = {
-	  numBlocks: 8
+	  numBlocks: 4
 	};
 
 	var VisualizerBlock = function (_React$Component4) {
