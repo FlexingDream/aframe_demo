@@ -41,7 +41,7 @@ class BoilerplateScene extends React.Component {
   setupAudio() {
     var audioPlease =  new Audio();
     // TODO: Make this the state
-    audioPlease.src = '/audio/alesso.mp3';
+    audioPlease.src = 'audio/alesso.mp3';
     audioPlease.loop = true;
     audioPlease.autoplay = true;
     BoilerplateScene.audio = audioPlease;
@@ -130,7 +130,7 @@ class BoilerplateScene extends React.Component {
 
 class SnakeLines extends React.Component{
   static defaultProps = {
-    numBlocks: 50,
+    numBlocks: 25,
     spread: 30
   };
 
