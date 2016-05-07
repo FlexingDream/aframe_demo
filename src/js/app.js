@@ -9,15 +9,13 @@ import Cursor from './components/Cursor';
 import Sky from './components/Sky';
 import Floor from './components/Floor';
 import RainingObjects from './components/RainingObjects';
+import Audio from './components/Audio';
 import './aframe_components/Collider';
 import './aframe_components/RayCaster';
 import './aframe_components/entity-generator';
 import $ from 'jquery';
 
 class BoilerplateScene extends React.Component {
-  static frequencyData;
-  static audio;
-  static analyzer;
   static frequencySize = 64;
 
   constructor(props) {
@@ -28,64 +26,12 @@ class BoilerplateScene extends React.Component {
       position: {
         x: 0,
         y: 0,
-        z: 0
-      }
+        z: 0,
+      },
+      song: 'audio/alesso.mp3'
     }
   }
 
-  componentDidMount(){
-    this.setupAudio();
-    this.updateCameraPosition();
-  }
-
-  setupAudio() {
-    var audioPlease =  new Audio();
-    // TODO: Make this the state
-    audioPlease.src = 'audio/alesso.mp3';
-    audioPlease.loop = true;
-    audioPlease.autoplay = true;
-    BoilerplateScene.audio = audioPlease;
-
-    document.getElementById('hi').appendChild(audioPlease);
-
-    var ctx = new AudioContext();
-
-    var src = ctx.createMediaElementSource(audioPlease);
-    var analyzer = ctx.createAnalyser();
-    src.connect(analyzer);
-    analyzer.connect(ctx.destination);
-
-    analyzer.fftSize = BoilerplateScene.frequencySize;
-    var frequencyData = new Uint8Array(analyzer.frequencyBinCount);
-    analyzer.getByteFrequencyData(frequencyData);
-
-    BoilerplateScene.analyzer = analyzer;
-    BoilerplateScene.frequencyData = frequencyData;
-    var that = this;
-    setInterval(function(){
-      that.updateAudio();
-    },100);
-  }
-
-  updateCameraPosition(){
-    var that = this;
-    setInterval(function(){
-      var position = Camera.getCameraPosition();
-      that.setState({position: position});
-    },2000);
-  }
-
-  updateAudio(){
-    // Get the new frequency data
-    BoilerplateScene.analyzer.getByteFrequencyData(BoilerplateScene.frequencyData);
-    var y = [];
-
-    // TODO: maybe change this to just be based off frequencySize
-    for (var i in BoilerplateScene.frequencyData){
-      y[i] = BoilerplateScene.frequencyData[i];
-    }
-    this.setState({heights:y});
-  }
   getMixins(){
     return(
       <Entity>
@@ -113,6 +59,7 @@ class BoilerplateScene extends React.Component {
         <a-assets>
           {mixins}
         </a-assets>
+        <Audio  audioSrc={this.state.song}/>
         <Camera position={[0,0,20]}>
           <Cursor />
         </Camera>
