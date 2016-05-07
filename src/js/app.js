@@ -65,8 +65,8 @@ class BoilerplateScene extends React.Component {
         </Camera>
         <Sky color='#1D2327'/>
         <Entity>
-          <RainingObjects animationDirection='alternate' mixin='snow' spread="75"/>
-          <RainingObjects animationDirection='alternate' mixin='blue-speck' numElements="1000"/>
+          <RainingObjects animationDirection='alternate' mixin='snow' spread="75" numElements="500"/>
+          <RainingObjects animationDirection='alternate' mixin='blue-speck' numElements="500"/>
           <Pulse heights={this.state.heights}/>
           <SnakeLines heights={this.state.heights}/>
         </Entity>
@@ -77,7 +77,7 @@ class BoilerplateScene extends React.Component {
 
 class SnakeLines extends React.Component{
   static defaultProps = {
-    numBlocks: 25,
+    numBlocks: 12,
     spread: 30
   };
 
@@ -104,7 +104,7 @@ class SnakeLines extends React.Component{
 
 class Pulse extends React.Component{
   static defaultProps = {
-    numBlocks: 8
+    numBlocks: 4
   };
 
   constructor(props){
