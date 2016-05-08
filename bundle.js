@@ -142,18 +142,14 @@
 	      return _react2.default.createElement(
 	        _aframeReact.Entity,
 	        null,
-	        _react2.default.createElement('a-mixin', { id: 'tree-base', geometry: 'primitive: box; height: 2.4; depth: 0.8; width: 0.8', material: 'color: #623B1C', position: [0, 0, 0] }),
-	        _react2.default.createElement('a-mixin', { id: 'tree-leaf', geometry: 'primitive: box; height: 1.2; depth: 1.5; width: 1.5', material: 'color: green', position: [0, 1.8, 0] }),
 	        _react2.default.createElement('a-mixin', { id: 'visualizer', geometry: 'primitive: box; depth: 1; height: 40; width: 5',
 	          material: 'color: red; opacity: 0.6;' }),
-	        _react2.default.createElement('a-mixin', { id: 'visualizer-ring', geometry: 'primitive: circle; radius:2',
+	        _react2.default.createElement('a-mixin', { id: 'visualizer-ring', geometry: 'primitive: circle; radius:0.5',
 	          material: 'color: red; opacity: 0.6;' }),
 	        _react2.default.createElement('a-mixin', { id: 'snow', geometry: 'primitive: box; depth: 0.02;height: 0.04; width: 0.04', material: 'color: #DDD; opacity: 0.4; shader: flat' }),
 	        _react2.default.createElement('a-mixin', { id: 'blue-speck', geometry: 'primitive: box; depth: 0.03;height: 0.05; width: 0.05', material: 'color: #2C4659; opacity: 0.2; shader: flat' }),
-	        _react2.default.createElement('a-mixin', { id: 'stars', geometry: 'primitive: box; depth: 0.1;height: 0.1; width: 0.1',
-	          material: 'color: #F99705; shader: flat'
-	        }),
-	        _react2.default.createElement('a-mixin', { id: 'pulse', geometry: 'primitive: circle; radius: 5;', material: 'color: white; opacity: 0.8; shader:flat;', position: '0 0 0' }),
+	        _react2.default.createElement('a-mixin', { id: 'pulse', geometry: 'primitive: circle; radius: 1;', material: 'color: white; opacity: 0.8; shader:flat;', position: '0 0 0' }),
+	        _react2.default.createElement('a-mixin', { id: 'waveform', geometry: 'primitive: box; height: 0.2; depth: 0.05; width: 0.05;', material: 'color: white; opacity: 0.8; shader:flat;', position: '0 0 0' }),
 	        _react2.default.createElement('a-mixin', { id: 'snake', geometry: 'primitive: box; height: 0.2; depth: 5; width: 0.2;', material: 'color: #72CCBC; shader: flat;', rotation: '0 0 90' })
 	      );
 	    }
@@ -163,7 +159,7 @@
 	      var mixins = this.getMixins();
 	      return _react2.default.createElement(
 	        _aframeReact.Scene,
-	        { stats: true },
+	        { stats: true, canvas: 'canvas: #mycanvas; height: 50; width:50;' },
 	        _react2.default.createElement(
 	          'a-assets',
 	          null,
@@ -179,10 +175,10 @@
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
 	          null,
-	          _react2.default.createElement(_RainingObjects2.default, { animationDirection: 'alternate', mixin: 'snow', spread: '75', numElements: '500' }),
-	          _react2.default.createElement(_RainingObjects2.default, { animationDirection: 'alternate', mixin: 'blue-speck', numElements: '500' }),
+	          _react2.default.createElement(_RainingObjects2.default, { animationDirection: 'alternate', mixin: 'snow', spread: '75', numElements: '1000' }),
+	          _react2.default.createElement(_RainingObjects2.default, { animationDirection: 'alternate', mixin: 'blue-speck', numElements: '250' }),
 	          _react2.default.createElement(Pulse, { heights: this.state.heights }),
-	          _react2.default.createElement(SnakeLines, { heights: this.state.heights })
+	          _react2.default.createElement(Waveform, { heights: this.state.heights })
 	        )
 	      );
 	    }
@@ -230,8 +226,46 @@
 	  spread: 30
 	};
 
-	var Pulse = function (_React$Component3) {
-	  _inherits(Pulse, _React$Component3);
+	var Waveform = function (_React$Component3) {
+	  _inherits(Waveform, _React$Component3);
+
+	  function Waveform(props) {
+	    _classCallCheck(this, Waveform);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Waveform).call(this, props));
+	  }
+
+	  _createClass(Waveform, [{
+	    key: 'render',
+	    value: function render() {
+	      var blocks = [];
+	      for (var i = 0; i < this.props.numBlocks; i++) {
+	        var v = this.props.heights[i] / 16;
+	        var y = v * 1 / 2;
+	        blocks.push(_react2.default.createElement(
+	          _aframeReact.Entity,
+	          null,
+	          _react2.default.createElement(_aframeReact.Entity, { mixin: 'waveform', position: [0, y, 0] })
+	        ));
+	      }
+	      return _react2.default.createElement(
+	        _aframeReact.Entity,
+	        { layout: { type: 'circle', radius: 8 } },
+	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '0 360 0', dur: '50000', repeat: 'indefinite', direction: 'alternate' }),
+	        blocks
+	      );
+	    }
+	  }]);
+
+	  return Waveform;
+	}(_react2.default.Component);
+
+	Waveform.defaultProps = {
+	  numBlocks: 256
+	};
+
+	var Pulse = function (_React$Component4) {
+	  _inherits(Pulse, _React$Component4);
 
 	  function Pulse(props) {
 	    _classCallCheck(this, Pulse);
@@ -261,8 +295,8 @@
 	  numBlocks: 4
 	};
 
-	var VisualizerBlock = function (_React$Component4) {
-	  _inherits(VisualizerBlock, _React$Component4);
+	var VisualizerBlock = function (_React$Component5) {
+	  _inherits(VisualizerBlock, _React$Component5);
 
 	  function VisualizerBlock(props) {
 	    _classCallCheck(this, VisualizerBlock);
@@ -301,84 +335,6 @@
 	  numBlocks: 16
 	};
 
-
-	var PassingObjects = _react2.default.createClass({
-	  displayName: 'PassingObjects',
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      geometry: {
-	        primitive: 'box',
-	        height: 3,
-	        width: 1,
-	        depth: 1
-	      },
-	      material: {
-	        color: 'gray'
-	      }
-	    };
-	  },
-
-	  // running objects passing on both sides
-	  render: function render() {
-
-	    var leftItems = [];
-	    var rightItems = [];
-	    var number = 4;
-	    for (var i = 0; i < number; i++) {
-	      leftItems.push(_react2.default.createElement(_aframeReact.Entity, { 'class': 'lookable', geometry: this.props.geometry, position: [-5, -0.5, -2 * i], material: this.props.material }));
-	      rightItems.push(_react2.default.createElement(_aframeReact.Entity, { 'class': 'lookable', geometry: this.props.geometry, position: [5, -0.5, -2 * i], material: this.props.material }));
-	    }
-	    return _react2.default.createElement(
-	      _aframeReact.Entity,
-	      null,
-	      _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', dur: '60000', easing: 'linear', repeat: 'indefinite', to: '0 0 200' }),
-	      leftItems,
-	      rightItems
-	    );
-	  }
-	});
-
-	var Stars = function (_React$Component5) {
-	  _inherits(Stars, _React$Component5);
-
-	  function Stars(props) {
-	    _classCallCheck(this, Stars);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Stars).call(this, props));
-	  }
-
-	  _createClass(Stars, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        _aframeReact.Entity,
-	        { 'entity-generator-stars': 'mixin: stars; num: 250; minExclusion:0;maxExclusion:30;' },
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'rotation', dur: '16000', easing: 'linear', repeat: 'indefinite', to: '360 360 0' })
-	      );
-	    }
-	  }]);
-
-	  return Stars;
-	}(_react2.default.Component);
-
-	var Tree = function (_React$Component6) {
-	  _inherits(Tree, _React$Component6);
-
-	  function Tree(props) {
-	    _classCallCheck(this, Tree);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Tree).call(this, props));
-	  }
-
-	  _createClass(Tree, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(_aframeReact.Entity, { 'entity-generator-trees': 'mixinTree:tree-base; mixinLeaf:tree-leaf; minExclusion: -10, maxExclusion: 10' });
-	    }
-	  }]);
-
-	  return Tree;
-	}(_react2.default.Component);
 
 	_reactDom2.default.render(_react2.default.createElement(BoilerplateScene, null), document.querySelector('.scene-container'));
 
@@ -90533,58 +90489,68 @@
 	  function Audio(props) {
 	    _classCallCheck(this, Audio);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Audio).call(this, props));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Audio).call(this, props));
+
+	    _this.state = {
+	      frequencyData: [],
+	      analyzer: ''
+	    };
+	    return _this;
 	  }
 
 	  _createClass(Audio, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      this.setupAudio();
-	    }
-	  }, {
-	    key: 'setupAudio',
-	    value: function setupAudio() {
-	      var audioPlease = document.createElement('audio'); //new Audio();
-	      /*    audioPlease.src = this.props.audioSrc;
-	          audioPlease.loop = true;
-	          audioPlease.autoplay = true;*/
-	      audioPlease.setAttribute('src', this.props.audioSrc);
-	      audioPlease.setAttribute('loop', true);
-	      audioPlease.setAttribute('autoplay', true);
+	      this.setupAudioElement();
 
-	      // TODO: pass this in as prop
-	      var element = document.createElement('div');
-	      element.setAttribute('class', 'audio-player');
-	      element.appendChild(audioPlease);
-	      document.getElementsByClassName('audio')[0].appendChild(element);
-	      var ctx = new AudioContext();
-
-	      var src = ctx.createMediaElementSource(audioPlease);
-	      var analyzer = ctx.createAnalyser();
-	      src.connect(analyzer);
-	      analyzer.connect(ctx.destination);
-
-	      analyzer.fftSize = this.props.frequencySize;
-	      var frequencyData = new Uint8Array(analyzer.frequencyBinCount);
-	      analyzer.getByteFrequencyData(frequencyData);
-
-	      Audio.analyzer = analyzer;
-	      Audio.frequencyData = frequencyData;
 	      var that = this;
 	      setInterval(function () {
 	        that.updateAudio();
 	      }, 100);
 	    }
 	  }, {
+	    key: 'setupAudioVisualizers',
+	    value: function setupAudioVisualizers(audioElement) {
+	      var ctx = new AudioContext();
+
+	      var src = ctx.createMediaElementSource(audioElement);
+	      var analyzer = ctx.createAnalyser();
+
+	      src.connect(analyzer);
+	      analyzer.connect(ctx.destination);
+
+	      analyzer.fftSize = this.props.fastFourierTransform;
+
+	      // FrequencyBinCount is unsigned long value HALF That of the FFT size
+	      this.state.frequencyData = new Uint8Array(analyzer.frequencyBinCount);
+	      analyzer.getByteFrequencyData(this.state.frequencyData);
+	      this.state.analyzer = analyzer;
+	    }
+	  }, {
+	    key: 'setupAudioElement',
+	    value: function setupAudioElement() {
+	      var audioElement = document.createElement('audio');
+	      audioElement.setAttribute('src', this.props.audioSrc);
+	      audioElement.setAttribute('loop', true);
+	      audioElement.setAttribute('autoplay', true);
+
+	      var element = document.createElement('div');
+	      element.setAttribute('class', 'audio-player');
+	      element.appendChild(audioElement);
+	      document.getElementsByClassName('audio')[0].appendChild(element);
+	      this.setupAudioVisualizers(audioElement);
+	    }
+	  }, {
 	    key: 'updateAudio',
 	    value: function updateAudio() {
 	      // Get the new frequency data
-	      Audio.analyzer.getByteFrequencyData(Audio.frequencyData);
+	      var frequencyData = this.state.frequencyData;
+	      this.state.analyzer.getByteFrequencyData(frequencyData);
 	      var y = [];
 
 	      // TODO: maybe change this to just be based off frequencySize
-	      for (var i in Audio.frequencyData) {
-	        y[i] = Audio.frequencyData[i];
+	      for (var i in frequencyData) {
+	        y[i] = frequencyData[i];
 	      }
 	      // TODO/FIXME: This is so dirty
 	      this._reactInternalInstance._currentElement._owner._instance.setState({ heights: y });
@@ -90600,7 +90566,7 @@
 	}(_react2.default.Component);
 
 	Audio.defaultProps = {
-	  frequencySize: 32,
+	  fastFourierTransform: 2048,
 	  audioSrc: { default: '' },
 	  heights: ''
 	};
