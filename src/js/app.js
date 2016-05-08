@@ -39,7 +39,7 @@ class BoilerplateScene extends React.Component {
         <a-mixin id="tree-leaf" geometry="primitive: box; height: 1.2; depth: 1.5; width: 1.5" material="color: green" position={[0,1.8,0]}></a-mixin>
         <a-mixin id="visualizer" geometry="primitive: box; depth: 1; height: 40; width: 5"
                                  material="color: red; opacity: 0.6;"></a-mixin>
-        <a-mixin id="visualizer-ring" geometry="primitive: circle; radius:2"
+        <a-mixin id="visualizer-ring" geometry="primitive: circle; radius:0.5"
                                  material="color: red; opacity: 0.6;"></a-mixin>
         <a-mixin id="snow" geometry="primitive: box; depth: 0.02;height: 0.04; width: 0.04" material="color: #DDD; opacity: 0.4; shader: flat"></a-mixin>
         <a-mixin id="blue-speck" geometry="primitive: box; depth: 0.03;height: 0.05; width: 0.05" material="color: #2C4659; opacity: 0.2; shader: flat"></a-mixin>
@@ -65,8 +65,8 @@ class BoilerplateScene extends React.Component {
         </Camera>
         <Sky color='#1D2327'/>
         <Entity>
-          <RainingObjects animationDirection='alternate' mixin='snow' spread="75" numElements="500"/>
-          <RainingObjects animationDirection='alternate' mixin='blue-speck' numElements="500"/>
+          <RainingObjects animationDirection='alternate' mixin='snow' spread="75" numElements="1000"/>
+          <RainingObjects animationDirection='alternate' mixin='blue-speck' numElements="250"/>
           <Pulse heights={this.state.heights}/>
           <SnakeLines heights={this.state.heights}/>
         </Entity>
