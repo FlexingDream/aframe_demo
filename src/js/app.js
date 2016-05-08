@@ -35,18 +35,14 @@ class BoilerplateScene extends React.Component {
   getMixins(){
     return(
       <Entity>
-        <a-mixin id="tree-base" geometry="primitive: box; height: 2.4; depth: 0.8; width: 0.8" material="color: #623B1C" position={[0,0,0]}></a-mixin>
-        <a-mixin id="tree-leaf" geometry="primitive: box; height: 1.2; depth: 1.5; width: 1.5" material="color: green" position={[0,1.8,0]}></a-mixin>
         <a-mixin id="visualizer" geometry="primitive: box; depth: 1; height: 40; width: 5"
                                  material="color: red; opacity: 0.6;"></a-mixin>
         <a-mixin id="visualizer-ring" geometry="primitive: circle; radius:0.5"
                                  material="color: red; opacity: 0.6;"></a-mixin>
         <a-mixin id="snow" geometry="primitive: box; depth: 0.02;height: 0.04; width: 0.04" material="color: #DDD; opacity: 0.4; shader: flat"></a-mixin>
         <a-mixin id="blue-speck" geometry="primitive: box; depth: 0.03;height: 0.05; width: 0.05" material="color: #2C4659; opacity: 0.2; shader: flat"></a-mixin>
-        <a-mixin id="stars" geometry="primitive: box; depth: 0.1;height: 0.1; width: 0.1"
-                          material="color: #F99705; shader: flat"
-                          ></a-mixin>
-        <a-mixin id="pulse" geometry="primitive: circle; radius: 5;" material="color: white; opacity: 0.8; shader:flat;" position="0 0 0" ></a-mixin>
+        <a-mixin id="pulse" geometry="primitive: circle; radius: 1;" material="color: white; opacity: 0.8; shader:flat;" position="0 0 0" ></a-mixin>
+        <a-mixin id="waveform" geometry="primitive: box; height: 0.2; depth: 0.05; width: 0.05;" material="color: white; opacity: 0.8; shader:flat;" position="0 0 0" ></a-mixin>
         <a-mixin id="snake" geometry="primitive: box; height: 0.2; depth: 5; width: 0.2;" material="color: #72CCBC; shader: flat;" rotation="0 0 90"></a-mixin>
       </Entity>
     );
@@ -55,7 +51,7 @@ class BoilerplateScene extends React.Component {
   render () {
     var mixins = this.getMixins();
     return (
-      <Scene stats>
+      <Scene stats canvas="canvas: #mycanvas; height: 50; width:50;">
         <a-assets>
           {mixins}
         </a-assets>
@@ -68,7 +64,7 @@ class BoilerplateScene extends React.Component {
           <RainingObjects animationDirection='alternate' mixin='snow' spread="75" numElements="1000"/>
           <RainingObjects animationDirection='alternate' mixin='blue-speck' numElements="250"/>
           <Pulse heights={this.state.heights}/>
-          <SnakeLines heights={this.state.heights}/>
+          <Waveform heights={this.state.heights}/>
         </Entity>
       </Scene>
     );
@@ -98,6 +94,35 @@ class SnakeLines extends React.Component{
     }
     return(
       <Entity look-at="[camera]">{snakes}</Entity>
+    );
+  }
+}
+
+class Waveform extends React.Component{
+  static defaultProps = {
+    numBlocks: 256
+  };
+
+  constructor(props){
+    super(props);
+  }
+
+  render(){
+    var blocks = [];
+    for (var i = 0;i < this.props.numBlocks; i++){
+      var v = this.props.heights[i]/16;
+      var y = v * 1/2;
+      blocks.push(
+        <Entity>
+          <Entity mixin="waveform" position={[0,y,0]}/>
+        </Entity>
+      );
+    }
+    return(
+      <Entity layout={{type: 'circle', radius: 8}} >
+        <Animation attribute="rotation" to="0 360 0" dur="50000" repeat="indefinite" direction="alternate"/>
+        {blocks}
+      </Entity>
     );
   }
 }
@@ -150,67 +175,7 @@ class VisualizerBlock extends React.Component{
   }
 }
 
-var PassingObjects = React.createClass({
-  getDefaultProps(){
-    return{
-      geometry:{
-        primitive: 'box',
-        height: 3,
-        width: 1,
-        depth: 1
-      },
-      material:{
-        color: 'gray'
-      }
-    }
-  },
-  // running objects passing on both sides
-  render(){
 
-    var leftItems =[];
-    var rightItems = [];
-    var number = 4;
-    for (var i =0;i<number;i++){
-      leftItems.push(<Entity class="lookable" geometry={this.props.geometry} position={[-5,-0.5,-2*i]} material={this.props.material}></Entity>);
-      rightItems.push(<Entity class="lookable" geometry={this.props.geometry} position={[5,-0.5,-2*i]} material={this.props.material}></Entity>);
-    }
-    return(
-      <Entity>
-        <Animation attribute="position" dur="60000" easing="linear" repeat="indefinite" to="0 0 200" />
-        {leftItems}
-        {rightItems}
-      </Entity>
-    );
-
-  }
-});
-
-
-
-class Stars extends React.Component{
-  constructor(props){
-    super(props);
-  }
-  render(){
-    return(
-      <Entity entity-generator-stars="mixin: stars; num: 250; minExclusion:0;maxExclusion:30;">
-        <Animation attribute="rotation" dur="16000" easing="linear" repeat="indefinite" to="360 360 0" />
-      </Entity>
-      );
-  }
-}
-
-class Tree extends React.Component{
-  constructor(props){
-    super(props);
-  }
-
-  render(){
-    return(
-      <Entity entity-generator-trees="mixinTree:tree-base; mixinLeaf:tree-leaf; minExclusion: -10, maxExclusion: 10"></Entity>
-      );
-  }
-}
 
 ReactDOM.render(<BoilerplateScene/>, document.querySelector('.scene-container'));
 

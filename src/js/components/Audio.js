@@ -31,7 +31,10 @@ class Audio extends React.Component{
     src.connect(analyzer);
     analyzer.connect(ctx.destination);
 
+
     analyzer.fftSize = this.props.fastFourierTransform;
+
+    // FrequencyBinCount is unsigned long value HALF That of the FFT size
     this.state.frequencyData = new Uint8Array(analyzer.frequencyBinCount);
     analyzer.getByteFrequencyData(this.state.frequencyData);
     this.state.analyzer = analyzer;
