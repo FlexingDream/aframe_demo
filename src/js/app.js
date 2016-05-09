@@ -64,7 +64,6 @@ class BoilerplateScene extends React.Component {
           <RainingObjects animationDirection='alternate' mixin='snow' spread="25" numElements="250"/>
           <Pulse heights={this.state.heights}/>
           <Waveform heights={this.state.heights}/>
-          <Entity geometry='primitive: box; height: 10; width: 10; depth: 10;' material='color:green;' class="lookable"/>
         </Entity>
       </Scene>
     );
@@ -143,7 +142,7 @@ class Pulse extends React.Component{
         <Entity mixin="pulse" geometry={{radius:this.props.heights[i]/50 }} position={[0,0,i]} />
       );
     }
-    return(<Entity look-at='[camera]'>{blocks}</Entity>);
+    return(<Entity cursor-listener class="lookable" look-at='[camera]'>{blocks}</Entity>);
   }
 
 }
