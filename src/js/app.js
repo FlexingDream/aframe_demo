@@ -20,7 +20,7 @@ class BoilerplateScene extends React.Component {
 
   constructor(props) {
     super(props);
-    var heights = Array.apply(null,Array(BoilerplateScene.frequencySize)).map(function(x,i){return 0.5});
+    var heights = Array.apply(null,Array(BoilerplateScene.frequencySize)).map(function(x,i){return 0});
     this.state = {
       heights: heights,
       position: {
@@ -41,7 +41,7 @@ class BoilerplateScene extends React.Component {
                                  material="color: red; opacity: 0.6;"></a-mixin>
         <a-mixin id="snow" geometry="primitive: box; depth: 0.02;height: 0.04; width: 0.04" material="color: #DDD; opacity: 0.4; shader: flat"></a-mixin>
         <a-mixin id="blue-speck" geometry="primitive: box; depth: 0.03;height: 0.05; width: 0.05" material="color: #2C4659; opacity: 0.2; shader: flat"></a-mixin>
-        <a-mixin id="pulse" geometry="primitive: circle; radius: 1;" material="color: white; opacity: 0.8; shader:flat;" position="0 0 0" ></a-mixin>
+        <a-mixin id="pulse" geometry="primitive: circle;" material="color: white; opacity: 0.8; shader:flat;" position="0 0 0" ></a-mixin>
         <a-mixin id="waveform" geometry="primitive: box; height: 0.2; depth: 0.05; width: 0.05;" material="color: white; opacity: 0.8; shader:flat;" position="0 0 0" ></a-mixin>
         <a-mixin id="snake" geometry="primitive: box; height: 0.2; depth: 5; width: 0.2;" material="color: #72CCBC; shader: flat;" rotation="0 0 90"></a-mixin>
       </Entity>
@@ -99,7 +99,7 @@ class SnakeLines extends React.Component{
 
 class Waveform extends React.Component{
   static defaultProps = {
-    numBlocks: 256
+    numBlocks: 128
   };
 
   constructor(props){
