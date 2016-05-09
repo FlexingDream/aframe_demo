@@ -18,7 +18,7 @@ AFRAME.registerComponent('cursor-interaction', {
 
     window.addEventListener('touchstart', function(){
       document.getElementsByTagName('audio')[0].play();
-      // document.getElementsByTagName('audio')[0].pause();
+      document.getElementsByTagName('audio')[0].pause();
     });
 
 
