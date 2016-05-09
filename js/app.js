@@ -28,7 +28,7 @@ class BoilerplateScene extends React.Component {
         y: 0,
         z: 0,
       },
-      song: 'audio/alesso.mp3'
+      song: 'https://res.cloudinary.com/gavinching/video/upload/v1462807480/alesso_eajztb.mp3'
     }
   }
 
@@ -65,6 +65,10 @@ class BoilerplateScene extends React.Component {
         </Entity>
       </Scene>
     );
+
+    //           <RainingObjects animationDirection='alternate' mixin='snow' spread="25" numElements="250"/>
+          // <Pulse heights={this.state.heights}/>
+          // <Waveform heights={this.state.heights}/>
   }
 }
 

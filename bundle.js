@@ -131,7 +131,7 @@
 	        y: 0,
 	        z: 0
 	      },
-	      song: 'audio/alesso.mp3'
+	      song: 'https://res.cloudinary.com/gavinching/video/upload/v1462807480/alesso_eajztb.mp3'
 	    };
 	    return _this;
 	  }
@@ -178,6 +178,10 @@
 	          _react2.default.createElement(Pulse, { heights: this.state.heights })
 	        )
 	      );
+
+	      //           <RainingObjects animationDirection='alternate' mixin='snow' spread="25" numElements="250"/>
+	      // <Pulse heights={this.state.heights}/>
+	      // <Waveform heights={this.state.heights}/>
 	    }
 	  }]);
 
