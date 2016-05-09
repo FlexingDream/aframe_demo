@@ -56,14 +56,12 @@ class BoilerplateScene extends React.Component {
           {mixins}
         </a-assets>
         <Audio  audioSrc={this.state.song}/>
-        <Camera position={[0,10,0]}>
+        <Camera position={[50,10,0]}>
           <Cursor />
         </Camera>
         <Sky color='#1D2327'/>
         <Entity>
-          <RainingObjects animationDirection='alternate' mixin='snow' spread="25" numElements="250"/>
           <Pulse heights={this.state.heights}/>
-          <Waveform heights={this.state.heights}/>
         </Entity>
       </Scene>
     );
