@@ -15,7 +15,7 @@ import './aframe_components/RayCaster';
 import './aframe_components/entity-generator';
 import $ from 'jquery';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import Perf from 'react-addons-perf';
+// import Perf from 'react-addons-perf';
 
 class BoilerplateScene extends React.Component {
   static frequencySize = 256;
@@ -185,6 +185,6 @@ class VisualizerBlock extends React.Component{
   }
 }
 
-window.Perf = Perf;
+// window.Perf = Perf;
 ReactDOM.render(<BoilerplateScene/>, document.querySelector('.scene-container'));
 
