@@ -122,7 +122,7 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BoilerplateScene).call(this, props));
 
 	    var heights = Array.apply(null, Array(BoilerplateScene.frequencySize)).map(function (x, i) {
-	      return 0.5;
+	      return 0;
 	    });
 	    _this.state = {
 	      heights: heights,
@@ -148,7 +148,7 @@
 	          material: 'color: red; opacity: 0.6;' }),
 	        _react2.default.createElement('a-mixin', { id: 'snow', geometry: 'primitive: box; depth: 0.02;height: 0.04; width: 0.04', material: 'color: #DDD; opacity: 0.4; shader: flat' }),
 	        _react2.default.createElement('a-mixin', { id: 'blue-speck', geometry: 'primitive: box; depth: 0.03;height: 0.05; width: 0.05', material: 'color: #2C4659; opacity: 0.2; shader: flat' }),
-	        _react2.default.createElement('a-mixin', { id: 'pulse', geometry: 'primitive: circle; radius: 1;', material: 'color: white; opacity: 0.8; shader:flat;', position: '0 0 0' }),
+	        _react2.default.createElement('a-mixin', { id: 'pulse', geometry: 'primitive: circle;', material: 'color: white; opacity: 0.8; shader:flat;', position: '0 0 0' }),
 	        _react2.default.createElement('a-mixin', { id: 'waveform', geometry: 'primitive: box; height: 0.2; depth: 0.05; width: 0.05;', material: 'color: white; opacity: 0.8; shader:flat;', position: '0 0 0' }),
 	        _react2.default.createElement('a-mixin', { id: 'snake', geometry: 'primitive: box; height: 0.2; depth: 5; width: 0.2;', material: 'color: #72CCBC; shader: flat;', rotation: '0 0 90' })
 	      );
@@ -260,7 +260,7 @@
 	}(_react2.default.Component);
 
 	Waveform.defaultProps = {
-	  numBlocks: 256
+	  numBlocks: 128
 	};
 
 	var Pulse = function (_React$Component4) {
