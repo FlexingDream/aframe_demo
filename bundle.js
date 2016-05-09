@@ -168,16 +168,14 @@
 	        _react2.default.createElement(_Audio2.default, { audioSrc: this.state.song }),
 	        _react2.default.createElement(
 	          _Camera2.default,
-	          { position: [0, 10, 0] },
+	          { position: [50, 10, 0] },
 	          _react2.default.createElement(_Cursor2.default, null)
 	        ),
 	        _react2.default.createElement(_Sky2.default, { color: '#1D2327' }),
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
 	          null,
-	          _react2.default.createElement(_RainingObjects2.default, { animationDirection: 'alternate', mixin: 'snow', spread: '25', numElements: '250' }),
-	          _react2.default.createElement(Pulse, { heights: this.state.heights }),
-	          _react2.default.createElement(Waveform, { heights: this.state.heights })
+	          _react2.default.createElement(Pulse, { heights: this.state.heights })
 	        )
 	      );
 	    }
