@@ -25,7 +25,7 @@ export default props => {
     far: 1000
   }
   return (
-    <Entity raycaster-helper raycaster={raycaster} cursor={cursor} geometry={geometry} material={material} position="0 0 -1" cursor-interaction>
+    <Entity  raycaster={raycaster} cursor={cursor} geometry={geometry} material={material} position="0 0 -1" cursor-interaction>
         <Animation begin="cursor-fusing" easing="ease-in" attribute="scale" fill="forwards" from="1 1 1" to="0.1 0.1 0.1"/>    
         <Animation begin="cursor-click" easing="ease-in" attribute="scale" fill='fowards' from ="0.1 0.1 0.1" to="1 1 1"/>     
     </Entity>

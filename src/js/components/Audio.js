@@ -6,7 +6,8 @@ class Audio extends React.Component{
     fastFourierTransform: 2048,
     audioSrc : {default: ''},
     heights: '',
-    refreshRate: 50
+    refreshRate: 50,
+    frequencySize: {default: 1024}
   };
   constructor(props){
     super(props);
@@ -63,11 +64,15 @@ class Audio extends React.Component{
     var y = [];
 
     // TODO: maybe change this to just be based off frequencySize
-    for (var i in frequencyData){
+    for (var i =0;i<this.props.frequencySize;i++){
       y[i] = frequencyData[i];
     }
     // TODO/FIXME: This is so dirty
     this._reactInternalInstance._currentElement._owner._instance.setState({heights:y});
+  }
+
+  shouldComponentUpdate(nextProps,nextState){
+    return false;
   }
 
   render(){
