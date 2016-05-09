@@ -14,8 +14,11 @@ import './aframe_components/Collider';
 import './aframe_components/RayCaster';
 import './aframe_components/entity-generator';
 import $ from 'jquery';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import Perf from 'react-addons-perf';
+
 class BoilerplateScene extends React.Component {
-  static frequencySize = 64;
+  static frequencySize = 256;
 
   constructor(props) {
     super(props);
@@ -29,6 +32,8 @@ class BoilerplateScene extends React.Component {
       },
       song: 'https://res.cloudinary.com/gavinching/video/upload/v1462807480/alesso_eajztb.mp3'
     }
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+
   }
 
   getMixins(){
@@ -54,14 +59,13 @@ class BoilerplateScene extends React.Component {
         <a-assets>
           {mixins}
         </a-assets>
-        <Audio  audioSrc={this.state.song}/>
-        <Camera position={[50,10,0]}>
+        <Audio  audioSrc={this.state.song} frequencySize={BoilerplateScene.frequencySize}/>
+        <Camera position={[0,10,100]}>
           <Cursor />
         </Camera>
         <Sky color='#1D2327'/>
-        <Entity>
-          <Pulse heights={this.state.heights}/>
-        </Entity>
+        <Pulse heights={this.state.heights}/>
+        <Waveform heights={this.state.heights}/>
       </Scene>
     );
 
@@ -106,7 +110,9 @@ class Waveform extends React.Component{
   constructor(props){
     super(props);
   }
-
+  shouldComponentUpdate(nextProps,nextState){
+    return nextProps.heights !== this.props.heights;
+  }
   render(){
     var blocks = [];
     for (var i = 0;i < this.props.numBlocks; i++){
@@ -135,7 +141,9 @@ class Pulse extends React.Component{
   constructor(props){
     super(props);
   }
-
+  shouldComponentUpdate(nextProps,nextState){
+    return nextProps.heights !== this.props.heights;
+  }
   render(){
     var blocks = [];
     for (var i = 0;i < this.props.numBlocks; i++){
@@ -156,7 +164,9 @@ class VisualizerBlock extends React.Component{
   constructor(props){
     super(props);
   }
-
+  shouldComponentUpdate(nextProps,nextState){
+    return nextProps.heights !== this.props.heights;
+  }
   render(){
     var blocks = [];
     var multiplier = 16;
@@ -175,6 +185,6 @@ class VisualizerBlock extends React.Component{
   }
 }
 
-
+window.Perf = Perf;
 ReactDOM.render(<BoilerplateScene/>, document.querySelector('.scene-container'));
 

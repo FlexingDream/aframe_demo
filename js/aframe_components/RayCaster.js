@@ -4,6 +4,8 @@ var originVector = new THREE.Vector3(0, 0, 0);
 /**
  * Draw raycaster ray.
  */
+
+// TODO: THERE'S A BUG
 AFRAME.registerComponent('raycaster-helper', {
   dependencies: ['material', 'raycaster'],
 
