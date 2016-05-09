@@ -168,7 +168,7 @@
 	        _react2.default.createElement(_Audio2.default, { audioSrc: this.state.song }),
 	        _react2.default.createElement(
 	          _Camera2.default,
-	          { position: [0, 0, 20] },
+	          { position: [0, 10, 0] },
 	          _react2.default.createElement(_Cursor2.default, null)
 	        ),
 	        _react2.default.createElement(_Sky2.default, { color: '#1D2327' }),

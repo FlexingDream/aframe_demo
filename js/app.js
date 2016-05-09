@@ -56,7 +56,7 @@ class BoilerplateScene extends React.Component {
           {mixins}
         </a-assets>
         <Audio  audioSrc={this.state.song}/>
-        <Camera position={[0,0,20]}>
+        <Camera position={[0,10,0]}>
           <Cursor />
         </Camera>
         <Sky color='#1D2327'/>
