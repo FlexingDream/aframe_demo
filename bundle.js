@@ -79,29 +79,29 @@
 
 	var _Cursor2 = _interopRequireDefault(_Cursor);
 
-	var _Sky = __webpack_require__(464);
+	var _Sky = __webpack_require__(465);
 
 	var _Sky2 = _interopRequireDefault(_Sky);
 
-	var _Floor = __webpack_require__(465);
+	var _Floor = __webpack_require__(466);
 
 	var _Floor2 = _interopRequireDefault(_Floor);
 
-	var _RainingObjects = __webpack_require__(466);
+	var _RainingObjects = __webpack_require__(467);
 
 	var _RainingObjects2 = _interopRequireDefault(_RainingObjects);
 
-	var _Audio = __webpack_require__(467);
+	var _Audio = __webpack_require__(468);
 
 	var _Audio2 = _interopRequireDefault(_Audio);
 
-	__webpack_require__(468);
+	__webpack_require__(469);
 
 	__webpack_require__(463);
 
-	__webpack_require__(469);
+	__webpack_require__(470);
 
-	var _jquery = __webpack_require__(470);
+	var _jquery = __webpack_require__(471);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -175,8 +175,7 @@
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
 	          null,
-	          _react2.default.createElement(_RainingObjects2.default, { animationDirection: 'alternate', mixin: 'snow', spread: '75', numElements: '1000' }),
-	          _react2.default.createElement(_RainingObjects2.default, { animationDirection: 'alternate', mixin: 'blue-speck', numElements: '250' }),
+	          _react2.default.createElement(_RainingObjects2.default, { animationDirection: 'alternate', mixin: 'snow', spread: '25', numElements: '250' }),
 	          _react2.default.createElement(Pulse, { heights: this.state.heights }),
 	          _react2.default.createElement(Waveform, { heights: this.state.heights })
 	        )
@@ -282,7 +281,7 @@
 	      }
 	      return _react2.default.createElement(
 	        _aframeReact.Entity,
-	        { 'look-at': '[camera]' },
+	        { 'cursor-listener': true, 'class': 'lookable', 'look-at': '[camera]' },
 	        blocks
 	      );
 	    }
@@ -90231,6 +90230,8 @@
 
 	__webpack_require__(463);
 
+	__webpack_require__(464);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = function (props) {
@@ -90247,18 +90248,19 @@
 	    opacity: props.opacity || 0.9,
 	    transparent: true
 	  };
-	  var cursor = {};
+	  var cursor = {
+	    fuse: true,
+	    timeout: 2000
+	  };
 	  var raycaster = {
 	    objects: '.lookable',
 	    far: 1000
 	  };
 	  return _react2.default.createElement(
 	    _aframeReact.Entity,
-	    { 'raycaster-helper': true, raycaster: raycaster, cursor: cursor, geometry: geometry, material: material, position: '0 0 -1' },
-	    _react2.default.createElement(_aframeReact.Animation, { begin: 'click', easing: 'ease-in', attribute: 'scale',
-	      fill: 'backwards', from: '0.1 0.1 0.1', to: '1 1 1' }),
-	    _react2.default.createElement(_aframeReact.Animation, { begin: 'fusing', easing: 'ease-in', attribute: 'scale',
-	      fill: 'forwards', from: '3 3 3', to: '0.1 0.1 0.1' })
+	    { 'raycaster-helper': true, raycaster: raycaster, cursor: cursor, geometry: geometry, material: material, position: '0 0 -1', 'cursor-interaction': true },
+	    _react2.default.createElement(_aframeReact.Animation, { begin: 'cursor-fusing', easing: 'ease-in', attribute: 'scale', fill: 'forwards', from: '1 1 1', to: '0.1 0.1 0.1' }),
+	    _react2.default.createElement(_aframeReact.Animation, { begin: 'cursor-click', easing: 'ease-in', attribute: 'scale', fill: 'fowards', from: '0.1 0.1 0.1', to: '1 1 1' })
 	  );
 	};
 
@@ -90295,6 +90297,24 @@
 
 /***/ },
 /* 464 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	AFRAME.registerComponent('cursor-interaction', {
+	  init: function init() {
+	    var el = this.el;
+
+	    // Set color using raycaster parent color.
+	    el.addEventListener('cursor-click', function (evt) {
+	      console.log(evt);
+	      document.getElementsByTagName('audio')[0].play();
+	    });
+	  }
+	});
+
+/***/ },
+/* 465 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -90346,7 +90366,7 @@
 	exports.default = Sky;
 
 /***/ },
-/* 465 */
+/* 466 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -90395,7 +90415,7 @@
 	exports.default = Floor;
 
 /***/ },
-/* 466 */
+/* 467 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -90458,7 +90478,7 @@
 	exports.default = RainingObjects;
 
 /***/ },
-/* 467 */
+/* 468 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -90532,7 +90552,8 @@
 	      var audioElement = document.createElement('audio');
 	      audioElement.setAttribute('src', this.props.audioSrc);
 	      audioElement.setAttribute('loop', true);
-	      audioElement.setAttribute('autoplay', true);
+	      // audioElement.setAttribute('autoplay',false);
+	      // audioElement.setAttribute('controls',true);
 
 	      var element = document.createElement('div');
 	      element.setAttribute('class', 'audio-player');
@@ -90575,34 +90596,29 @@
 	exports.default = Audio;
 
 /***/ },
-/* 468 */
+/* 469 */
 /***/ function(module, exports) {
 
 	'use strict';
 
 	AFRAME.registerComponent('collider', {
-	      init: function init() {
+	  init: function init() {
+	    var el = this.el;
 
-	            var el = this.el;
-	            el.addEventListener('click', function (e) {});
+	    // Set color using raycaster parent color.
+	    el.addEventListener('raycaster-intersected', function (evt) {
+	      console.log('intersected');
+	    });
 
-	            el.addEventListener('raycaster-intersected', function (evt) {
-	                  var raycasterEl = evt.detail.el;
-	                  el.setAttribute('visible', false);
-	            });
-
-	            el.addEventListener('raycaster-intersected-cleared', function (evt) {
-	                  el.setAttribute('visible', true);
-	            });
-
-	            el.addEventListener('raycaster-intersection', function (e) {
-	                  console.log(e);
-	            });
-	      }
+	    // Reset color.
+	    el.addEventListener('raycaster-intersected-cleared', function (evt) {
+	      console.log('intersected cleared');
+	    });
+	  }
 	});
 
 /***/ },
-/* 469 */
+/* 470 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -90744,7 +90760,7 @@
 	}
 
 /***/ },
-/* 470 */
+/* 471 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
