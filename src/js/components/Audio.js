@@ -5,7 +5,8 @@ class Audio extends React.Component{
   static defaultProps = {
     fastFourierTransform: 2048,
     audioSrc : {default: ''},
-    heights: ''
+    heights: '',
+    refreshRate: 50
   };
   constructor(props){
     super(props);
@@ -20,7 +21,7 @@ class Audio extends React.Component{
     var that = this;
     setInterval(function(){
       that.updateAudio();
-    },100);
+    },that.props.refreshRate);
   }
   setupAudioVisualizers(audioElement){
     var ctx = new AudioContext();

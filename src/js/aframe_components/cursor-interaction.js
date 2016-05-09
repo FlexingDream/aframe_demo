@@ -16,11 +16,13 @@ AFRAME.registerComponent('cursor-interaction', {
       }
     });
 
-    window.addEventListener('touchstart', function(){
+    document.addEventListener('touchstart',function start(e){
+      document.removeEventListener('touchstart',start,false);
       document.getElementsByTagName('audio')[0].play();
       document.getElementsByTagName('audio')[0].pause();
-    });
+    },false);
 
 
   }
+
 });

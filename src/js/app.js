@@ -55,12 +55,13 @@ class BoilerplateScene extends React.Component {
           {mixins}
         </a-assets>
         <Audio  audioSrc={this.state.song}/>
-        <Camera position={[50,10,0]}>
+        <Camera position={[0,10,100]}>
           <Cursor />
         </Camera>
         <Sky color='#1D2327'/>
         <Entity>
           <Pulse heights={this.state.heights}/>
+          <Waveform heights={this.state.heights}/>
         </Entity>
       </Scene>
     );
@@ -106,7 +107,9 @@ class Waveform extends React.Component{
   constructor(props){
     super(props);
   }
-
+  shouldComponentUpdate(nextProps,nextState){
+    return nextProps.heights !== this.props.heights;
+  }
   render(){
     var blocks = [];
     for (var i = 0;i < this.props.numBlocks; i++){
@@ -135,7 +138,9 @@ class Pulse extends React.Component{
   constructor(props){
     super(props);
   }
-
+  shouldComponentUpdate(nextProps,nextState){
+    return nextProps.heights !== this.props.heights;
+  }
   render(){
     var blocks = [];
     for (var i = 0;i < this.props.numBlocks; i++){
@@ -156,7 +161,9 @@ class VisualizerBlock extends React.Component{
   constructor(props){
     super(props);
   }
-
+  shouldComponentUpdate(nextProps,nextState){
+    return nextProps.heights !== this.props.heights;
+  }
   render(){
     var blocks = [];
     var multiplier = 16;
