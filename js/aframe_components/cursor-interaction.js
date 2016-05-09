@@ -7,5 +7,12 @@ AFRAME.registerComponent('cursor-interaction', {
       console.log(evt);
       document.getElementsByTagName('audio')[0].play();
     });
+
+    window.addEventListener('touchstart', function(){
+      document.getElementsByTagName('audio')[0].play();
+      document.getElementsByTagName('audio')[0].pause();
+    });
+
+
   }
 });
