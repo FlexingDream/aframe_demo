@@ -109,7 +109,7 @@
 
 	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
 
-	var _reactAddonsPerf = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-addons-perf\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _reactAddonsPerf = __webpack_require__(484);
 
 	var _reactAddonsPerf2 = _interopRequireDefault(_reactAddonsPerf);
 
@@ -101235,6 +101235,12 @@
 	return jQuery;
 	}));
 
+
+/***/ },
+/* 484 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(456);
 
 /***/ }
 /******/ ]);
