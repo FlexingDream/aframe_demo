@@ -61,10 +61,10 @@ class BoilerplateScene extends React.Component {
         </Camera>
         <Sky color='#1D2327'/>
         <Entity>
-          <RainingObjects animationDirection='alternate' mixin='snow' spread="75" numElements="1000"/>
-          <RainingObjects animationDirection='alternate' mixin='blue-speck' numElements="250"/>
+          <RainingObjects animationDirection='alternate' mixin='snow' spread="25" numElements="250"/>
           <Pulse heights={this.state.heights}/>
           <Waveform heights={this.state.heights}/>
+          <Entity geometry='primitive: box; height: 10; width: 10; depth: 10;' material='color:green;' class="lookable"/>
         </Entity>
       </Scene>
     );

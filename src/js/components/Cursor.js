@@ -16,7 +16,8 @@ export default props => {
     transparent: true
   };
   const cursor = {
-
+    fuse: true,
+    timeout: 2000
   };
   const raycaster = {
     objects: '.lookable',
@@ -24,10 +25,7 @@ export default props => {
   }
   return (
     <Entity raycaster-helper raycaster={raycaster} cursor={cursor} geometry={geometry} material={material} position="0 0 -1">
-      <Animation begin="click" easing="ease-in" attribute="scale"
-                     fill="backwards" from="0.1 0.1 0.1" to="1 1 1"/>
-        <Animation begin="fusing" easing="ease-in" attribute="scale"
-                     fill="forwards" from="3 3 3" to="0.1 0.1 0.1"/>         
+        <Animation begin="fusing" easing="ease-in" attribute="scale" fill="forwards" from="3 3 3" to="0.1 0.1 0.1"/>         
     </Entity>
   );
 }

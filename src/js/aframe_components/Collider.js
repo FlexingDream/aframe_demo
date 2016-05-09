@@ -1,22 +1,15 @@
 AFRAME.registerComponent('collider', {
-    init: function () {
+  init: function () {
+    var el = this.el;
 
-      var el = this.el;
-      el.addEventListener('click',function(e){
+    // Set color using raycaster parent color.
+    el.addEventListener('raycaster-intersected', function (evt) {
+      console.log('intersected');
+    });
 
-      });
-
-      el.addEventListener('raycaster-intersected', function (evt) {
-        var raycasterEl = evt.detail.el;
-        el.setAttribute('visible', false);
-      });
-
-      el.addEventListener('raycaster-intersected-cleared', function (evt) {
-        el.setAttribute('visible', true);
-      });
-
-      el.addEventListener('raycaster-intersection',function(e){
-        console.log(e);
-      });
-    }
-  });
+    // Reset color.
+    el.addEventListener('raycaster-intersected-cleared', function (evt) {
+      console.log('intersected cleared');
+    });
+  }
+});

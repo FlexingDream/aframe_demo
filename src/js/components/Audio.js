@@ -44,7 +44,8 @@ class Audio extends React.Component{
     var audioElement =  document.createElement('audio');
     audioElement.setAttribute('src',this.props.audioSrc);
     audioElement.setAttribute('loop',true);
-    audioElement.setAttribute('autoplay',true);
+    // audioElement.setAttribute('autoplay',false);
+    // audioElement.setAttribute('controls',true);
 
     var element = document.createElement('div');
     element.setAttribute('class','audio-player');
