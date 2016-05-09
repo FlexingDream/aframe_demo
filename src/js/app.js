@@ -14,7 +14,6 @@ import './aframe_components/Collider';
 import './aframe_components/RayCaster';
 import './aframe_components/entity-generator';
 import $ from 'jquery';
-
 class BoilerplateScene extends React.Component {
   static frequencySize = 64;
 
@@ -175,7 +174,6 @@ class VisualizerBlock extends React.Component{
     return(<Entity>{blocks}</Entity>);
   }
 }
-
 
 
 ReactDOM.render(<BoilerplateScene/>, document.querySelector('.scene-container'));
