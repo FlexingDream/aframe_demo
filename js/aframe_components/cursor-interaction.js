@@ -13,19 +13,22 @@ AFRAME.registerComponent('cursor-interaction', {
       // if (!data.startPlay){
         // document.getElementsByTagName('audio')[0].play(); 
         var node = $(".audio-player").data("audio-node");
-        node.start(0);
-        data.startPlay = true;
+
+        if (node){
+          node.start(0);
+        }
+
       // }
     });
 
-    document.addEventListener('touchstart',function start(e){
+/*    document.addEventListener('touchstart',function start(e){
       document.removeEventListener('touchstart',start,false);
       var node = $(".audio-player").data("audio-node");
       // document.getElementsByTagName('audio')[0].play();
       // document.getElementsByTagName('audio')[0].pause();
       node.start(0);
       node.stop(0);
-    },false);
+    },false);*/
 
 
   }
