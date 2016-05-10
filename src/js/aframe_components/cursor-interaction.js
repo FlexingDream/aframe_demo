@@ -21,14 +21,14 @@ AFRAME.registerComponent('cursor-interaction', {
       // }
     });
 
-    document.addEventListener('touchstart',function start(e){
+/*    document.addEventListener('touchstart',function start(e){
       document.removeEventListener('touchstart',start,false);
       var node = $(".audio-player").data("audio-node");
       // document.getElementsByTagName('audio')[0].play();
       // document.getElementsByTagName('audio')[0].pause();
       node.start(0);
       node.stop(0);
-    },false);
+    },false);*/
 
 
   }

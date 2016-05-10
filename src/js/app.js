@@ -6,7 +6,6 @@ import './aframe_components/entity-generator';
 import {Animation, Entity, Scene} from 'aframe-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Perf from 'react-addons-perf';
 import Camera from './components/Camera';
 import Cursor from './components/Cursor';
@@ -35,11 +34,6 @@ class BoilerplateScene extends React.Component {
       },
       song: 'https://res.cloudinary.com/gavinching/video/upload/v1462807480/alesso_eajztb.mp3'
     }
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-
-  }
-
-  componentWillUpdate (nextProps,nextState){
   }
 
   getMixins(){
