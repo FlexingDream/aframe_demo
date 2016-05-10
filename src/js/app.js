@@ -1,26 +1,27 @@
 import 'aframe';
-import 'babel-polyfill';
+import 'aframe-layout-component';
+import './aframe_components/Collider';
+import './aframe_components/RayCaster';
+import './aframe_components/entity-generator';
 import {Animation, Entity, Scene} from 'aframe-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'aframe-layout-component';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import Perf from 'react-addons-perf';
 import Camera from './components/Camera';
 import Cursor from './components/Cursor';
 import Sky from './components/Sky';
 import Floor from './components/Floor';
 import RainingObjects from './components/RainingObjects';
 import Audio from './components/Audio';
-import './aframe_components/Collider';
-import './aframe_components/RayCaster';
-import './aframe_components/entity-generator';
+import 'babel-polyfill';
 import $ from 'jquery';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
-import Perf from 'react-addons-perf';
+import _ from 'underscore';
 
 class BoilerplateScene extends React.Component {
   static defaultProps = {
     frequencySize : 128,
-    refreshRate: 50
+    refreshRate: 100
   };
   constructor(props) {
     super(props);
@@ -36,6 +37,9 @@ class BoilerplateScene extends React.Component {
     }
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
 
+  }
+
+  componentWillUpdate (nextProps,nextState){
   }
 
   getMixins(){
@@ -67,7 +71,7 @@ class BoilerplateScene extends React.Component {
         </Camera>
         <Sky color='#1D2327'/>
         <Waveform heights={this.state.heights}/>
-        <Entity cursor-listener class="lookable" geometry="primitive: box; height: 1; depth: 1; width:1;" material="color:blue;" position = "0 0 0" />
+        <Pulse heights={this.state.heights}/>
         <RainingObjects animationDirection='alternate' mixin='snow' spread="25" numElements="250"/>
       </Scene>
     );
@@ -114,7 +118,7 @@ class Waveform extends React.Component{
     super(props);
   }
   shouldComponentUpdate(nextProps,nextState){
-    return nextProps.heights !== this.props.heights;
+    return !_.isEqual(nextProps.heights,this.props.heights);
   }
   render(){
     var blocks = [];
@@ -122,9 +126,9 @@ class Waveform extends React.Component{
       var v = this.props.heights[i]/16;
       var y = v * 1/2;
       blocks.push(
-        <Entity>
-          <Entity mixin="waveform" position={[0,y,0]}/>
-        </Entity>
+      <Entity>
+        <Entity mixin="waveform" position={[0,y,0]}/>
+      </Entity>
       );
     }
     return(
@@ -145,7 +149,7 @@ class Pulse extends React.Component{
     super(props);
   }
   shouldComponentUpdate(nextProps,nextState){
-    return nextProps.heights !== this.props.heights;
+    return !_.isEqual(nextProps.heights,this.props.heights);
   }
   render(){
     var blocks = [];
@@ -160,5 +164,6 @@ class Pulse extends React.Component{
 }
 
 window.Perf = Perf;
+window.$ = $;
 ReactDOM.render(<BoilerplateScene/>, document.querySelector('.scene-container'));
 
