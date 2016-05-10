@@ -12,7 +12,9 @@ class RainingObjects extends React.Component{
     super(props);
     this.state = {
     };
-
+  }
+  shouldComponentUpdate(nextProps,nextState){
+    return false;
   }
   render(){
     return(
