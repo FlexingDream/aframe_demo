@@ -12,7 +12,12 @@ var JS_LOADERS = [
   'babel?cacheDirectory&presets[]=react,presets[]=es2015,presets[]=stage-0'
 ];
 
-var PLUGINS = [];
+var PLUGINS = [
+  new webpack.DefinePlugin({
+    'process.env': {
+      'NODE_ENV': '"production"'
+  }})
+];
 if (IS_PRODUCTION) {
   // Uglify in production.
   PLUGINS.push(

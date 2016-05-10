@@ -114,6 +114,7 @@ class Audio extends React.Component{
   updateAudio(){
     // Get the new frequency data
     var frequencyData = this.state.frequencyData;
+    if (frequencyData.length == 0) return;
     this.state.analyzer.getByteFrequencyData(frequencyData);
     var y = [];
 

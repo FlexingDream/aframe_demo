@@ -13,8 +13,11 @@ AFRAME.registerComponent('cursor-interaction', {
       // if (!data.startPlay){
         // document.getElementsByTagName('audio')[0].play(); 
         var node = $(".audio-player").data("audio-node");
-        node.start(0);
-        data.startPlay = true;
+
+        if (node){
+          node.start(0);
+        }
+
       // }
     });
 

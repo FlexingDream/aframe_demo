@@ -111,7 +111,8 @@ class SnakeLines extends React.Component{
 
 class Waveform extends React.Component{
   static defaultProps = {
-    numBlocks: 64
+    numBlocks: 64,
+    radius: 8
   };
 
   constructor(props){
@@ -121,20 +122,24 @@ class Waveform extends React.Component{
     return !_.isEqual(nextProps.heights,this.props.heights);
   }
   render(){
-    var blocks = [];
+    var elements = [];
+    var template = React.createElement(Entity, {
+      mixin: "waveform",
+    },null);
+    var radius = this.props.radius;
     for (var i = 0;i < this.props.numBlocks; i++){
-      var v = this.props.heights[i]/16;
-      var y = v * 1/2;
-      blocks.push(
-      <Entity>
-        <Entity mixin="waveform" position={[0,y,0]}/>
-      </Entity>
-      );
+      var y = this.props.heights[i]/32;
+      var x,z,rad;
+      rad = i * (2 * Math.PI)/ this.props.numBlocks;
+      x = radius * Math.cos(rad);
+      z = radius * Math.sin(rad);
+      var newElement = React.cloneElement(template, {position: [x,y,z]},null);
+      elements.push(newElement);
     }
     return(
-      <Entity layout={{type: 'circle', radius: 8}} >
+      <Entity>
         <Animation attribute="rotation" to="0 360 0" dur="50000" repeat="indefinite" direction="alternate"/>
-        {blocks}
+        {elements}
       </Entity>
     );
   }
@@ -152,13 +157,15 @@ class Pulse extends React.Component{
     return !_.isEqual(nextProps.heights,this.props.heights);
   }
   render(){
-    var blocks = [];
+    var elements = [];
+    var template = React.createElement(Entity, {
+      mixin: "pulse",
+    },null);
     for (var i = 0;i < this.props.numBlocks; i++){
-      blocks.push(
-        <Entity mixin="pulse" geometry={{radius:this.props.heights[i]/50 }} position={[0,0,i]} />
-      );
+      var newElement = React.cloneElement(template, {position: [0,0,i], geometry: {radius: this.props.heights[i]/50}},null);
+      elements.push(newElement);
     }
-    return(<Entity cursor-listener class="lookable" look-at='[camera]'>{blocks}</Entity>);
+    return(<Entity cursor-listener class="lookable" look-at='[camera]'>{elements}</Entity>);
   }
 
 }
