@@ -15,14 +15,16 @@ import './aframe_components/RayCaster';
 import './aframe_components/entity-generator';
 import $ from 'jquery';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-// import Perf from 'react-addons-perf';
+import Perf from 'react-addons-perf';
 
 class BoilerplateScene extends React.Component {
-  static frequencySize = 256;
-
+  static defaultProps = {
+    frequencySize : 128,
+    refreshRate: 50
+  };
   constructor(props) {
     super(props);
-    var heights = Array.apply(null,Array(BoilerplateScene.frequencySize)).map(function(x,i){return 0});
+    var heights = Array.apply(null,Array(this.props.frequencySize)).map(function(x,i){return 0});
     this.state = {
       heights: heights,
       position: {
@@ -55,17 +57,18 @@ class BoilerplateScene extends React.Component {
   render () {
     var mixins = this.getMixins();
     return (
-      <Scene stats canvas="canvas: #mycanvas; height: 50; width:50;">
+      <Scene stats>
         <a-assets>
           {mixins}
         </a-assets>
-        <Audio  audioSrc={this.state.song} frequencySize={BoilerplateScene.frequencySize}/>
-        <Camera position={[0,10,100]}>
+        <Audio  audioSrc={this.state.song} frequencySize={this.props.frequencySize} refreshRate={this.props.refreshRate}/>
+        <Camera position={[0,10,0]}>
           <Cursor />
         </Camera>
         <Sky color='#1D2327'/>
-        <Pulse heights={this.state.heights}/>
         <Waveform heights={this.state.heights}/>
+        <Entity cursor-listener class="lookable" geometry="primitive: box; height: 1; depth: 1; width:1;" material="color:blue;" position = "0 0 0" />
+        <RainingObjects animationDirection='alternate' mixin='snow' spread="25" numElements="250"/>
       </Scene>
     );
 
@@ -104,7 +107,7 @@ class SnakeLines extends React.Component{
 
 class Waveform extends React.Component{
   static defaultProps = {
-    numBlocks: 128
+    numBlocks: 64
   };
 
   constructor(props){
@@ -156,35 +159,6 @@ class Pulse extends React.Component{
 
 }
 
-class VisualizerBlock extends React.Component{
-  static defaultProps = {
-    numBlocks: 16
-  };
-
-  constructor(props){
-    super(props);
-  }
-  shouldComponentUpdate(nextProps,nextState){
-    return nextProps.heights !== this.props.heights;
-  }
-  render(){
-    var blocks = [];
-    var multiplier = 16;
-    var startingX = multiplier * this.props.numBlocks/2 * -1;
-    var startingZ = startingX;
-    for (var i = 0;i < this.props.numBlocks; i++){
-      blocks.push(
-      <Entity>
-        <Entity position={[startingX,-0.5,(startingZ+i*multiplier)]} mixin="visualizer" geometry={{height:this.props.heights[i] }} material={{color:'blue'}}  look-at="[camera]" />
-        <Entity position={[-1*startingX,-0.5,(startingZ+i*multiplier)]} mixin="visualizer" geometry={{height:this.props.heights[i] }} material={{color:'green'}}  look-at="[camera]" />
-        <Entity position={[0,-0.5,-250+i]} mixin="visualizer-ring" geometry={{"radius":this.props.heights[i+2] }} look-at="[camera]" material={{color: 'orange'}}></Entity>
-      </Entity>
-      );
-    }
-    return(<Entity>{blocks}</Entity>);
-  }
-}
-
-// window.Perf = Perf;
+window.Perf = Perf;
 ReactDOM.render(<BoilerplateScene/>, document.querySelector('.scene-container'));
 
