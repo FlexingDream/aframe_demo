@@ -1,0 +1,9 @@
+{
+  "firebase": "musicpua",
+  "public": "gh-pages",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
