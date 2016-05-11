@@ -35,12 +35,7 @@ class BoilerplateScene extends React.Component {
   getMixins(){
     return(
       <Entity>
-        <a-mixin id="visualizer" geometry="primitive: box; depth: 1; height: 40; width: 5"
-                                 material="color: red; opacity: 0.6;"></a-mixin>
-        <a-mixin id="visualizer-ring" geometry="primitive: circle; radius:0.5"
-                                 material="color: red; opacity: 0.6;"></a-mixin>
         <a-mixin id="snow" geometry="primitive: box; depth: 0.02;height: 0.04; width: 0.04" material="color: #DDD; opacity: 0.4; shader: flat"></a-mixin>
-        <a-mixin id="blue-speck" geometry="primitive: box; depth: 0.03;height: 0.05; width: 0.05" material="color: #2C4659; opacity: 0.2; shader: flat"></a-mixin>
         <a-mixin id="pulse" geometry="primitive: circle;" material="color: white; opacity: 0.8; shader:flat;" position="0 0 0" ></a-mixin>
         <a-mixin id="waveform" geometry="primitive: box; height: 0.2; depth: 0.05; width: 0.05;" material="color: white; opacity: 0.8; shader:flat;" position="0 0 0" ></a-mixin>
         <a-mixin id="snake" geometry="primitive: box; height: 0.2; depth: 5; width: 0.2;" material="color: #72CCBC; shader: flat;" rotation="0 0 90"></a-mixin>
@@ -53,6 +48,7 @@ class BoilerplateScene extends React.Component {
     return (
       <Scene stats>
         <a-assets>
+          <a-mixin id="spaceship" src="3d_models/model.dae" />
           <img id="loading" src="img/loading.jpg"/>
           {mixins}
         </a-assets>
@@ -62,8 +58,8 @@ class BoilerplateScene extends React.Component {
         </Camera>
         <Sky color='#1D2327'/>
         <Waveform heights={this.state.heights}/>
-        <Pulse heights={this.state.heights}/>
         <a-image src="#loading" position="0 10 -5" visible='false'></a-image>
+        <Pulse heights={this.state.heights}/>
         <RainingObjects animationDirection='alternate' mixin='snow' spread="25" numElements="250"/>
       </Scene>
     );
@@ -72,6 +68,19 @@ class BoilerplateScene extends React.Component {
           // <Pulse heights={this.state.heights}/>
           // <Waveform heights={this.state.heights}/>
   }
+}
+
+class Rocket extends React.Component{
+  constructor(props){
+    super(props);
+  }
+  render(){
+    return(<Entity collada-model="#spaceship">
+      <Entity position="10 10 10" id="point"/>
+      <Animation attribute="position" to="10 10 10" dur="30000" look-at='[#point]'/>
+      </Entity>);
+  }
+
 }
 
 class SnakeLines extends React.Component{
