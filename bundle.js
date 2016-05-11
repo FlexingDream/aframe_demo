@@ -178,7 +178,7 @@
 	        _react2.default.createElement(_Sky2.default, { color: '#1D2327' }),
 	        _react2.default.createElement(_Waveform2.default, { heights: this.state.heights }),
 	        _react2.default.createElement('a-image', { src: '#loading', position: '0 10 -5', visible: 'false' }),
-	        _react2.default.createElement('a-entity', { 'collada-model': '#spaceship' }),
+	        _react2.default.createElement(Rocket, null),
 	        _react2.default.createElement(_RainingObjects2.default, { animationDirection: 'alternate', mixin: 'snow', spread: '25', numElements: '250' })
 	      );
 
@@ -196,8 +196,32 @@
 	  refreshRate: 50
 	};
 
-	var SnakeLines = function (_React$Component2) {
-	  _inherits(SnakeLines, _React$Component2);
+	var Rocket = function (_React$Component2) {
+	  _inherits(Rocket, _React$Component2);
+
+	  function Rocket(props) {
+	    _classCallCheck(this, Rocket);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Rocket).call(this, props));
+	  }
+
+	  _createClass(Rocket, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _aframeReact.Entity,
+	        { 'collada-model': '#spaceship' },
+	        _react2.default.createElement(_aframeReact.Entity, { position: '10 10 10', id: 'point' }),
+	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '10 10 10', dur: '30000', 'look-at': '[#point]' })
+	      );
+	    }
+	  }]);
+
+	  return Rocket;
+	}(_react2.default.Component);
+
+	var SnakeLines = function (_React$Component3) {
+	  _inherits(SnakeLines, _React$Component3);
 
 	  function SnakeLines(props) {
 	    _classCallCheck(this, SnakeLines);
@@ -233,8 +257,8 @@
 	  spread: 30
 	};
 
-	var Pulse = function (_React$Component3) {
-	  _inherits(Pulse, _React$Component3);
+	var Pulse = function (_React$Component4) {
+	  _inherits(Pulse, _React$Component4);
 
 	  function Pulse(props) {
 	    _classCallCheck(this, Pulse);
