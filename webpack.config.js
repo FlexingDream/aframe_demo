@@ -2,6 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 require('babel-polyfill');
 
+
 var IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 var ENTRY_POINTS = [

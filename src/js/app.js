@@ -13,6 +13,7 @@ import Sky from './components/Sky';
 import Floor from './components/Floor';
 import RainingObjects from './components/RainingObjects';
 import Audio from './components/Audio';
+import Waveform from './components/Waveform';
 import 'babel-polyfill';
 import $ from 'jquery';
 import _ from 'underscore';
@@ -20,18 +21,13 @@ import _ from 'underscore';
 class BoilerplateScene extends React.Component {
   static defaultProps = {
     frequencySize : 128,
-    refreshRate: 100
+    refreshRate: 50
   };
   constructor(props) {
     super(props);
     var heights = Array.apply(null,Array(this.props.frequencySize)).map(function(x,i){return 0});
     this.state = {
       heights: heights,
-      position: {
-        x: 0,
-        y: 0,
-        z: 0,
-      },
       song: 'https://res.cloudinary.com/gavinching/video/upload/v1462807480/alesso_eajztb.mp3'
     }
   }
@@ -57,6 +53,7 @@ class BoilerplateScene extends React.Component {
     return (
       <Scene stats>
         <a-assets>
+          <img id="loading" src="img/loading.jpg"/>
           {mixins}
         </a-assets>
         <Audio  audioSrc={this.state.song} frequencySize={this.props.frequencySize} refreshRate={this.props.refreshRate}/>
@@ -66,6 +63,7 @@ class BoilerplateScene extends React.Component {
         <Sky color='#1D2327'/>
         <Waveform heights={this.state.heights}/>
         <Pulse heights={this.state.heights}/>
+        <a-image src="#loading" position="0 10 -5" visible='false'></a-image>
         <RainingObjects animationDirection='alternate' mixin='snow' spread="25" numElements="250"/>
       </Scene>
     );
@@ -103,42 +101,6 @@ class SnakeLines extends React.Component{
   }
 }
 
-class Waveform extends React.Component{
-  static defaultProps = {
-    numBlocks: 64,
-    radius: 8
-  };
-
-  constructor(props){
-    super(props);
-  }
-  shouldComponentUpdate(nextProps,nextState){
-    return !_.isEqual(nextProps.heights,this.props.heights);
-  }
-  render(){
-    var elements = [];
-    var template = React.createElement(Entity, {
-      mixin: "waveform",
-    },null);
-    var radius = this.props.radius;
-    for (var i = 0;i < this.props.numBlocks; i++){
-      var y = this.props.heights[i]/32;
-      var x,z,rad;
-      rad = i * (2 * Math.PI)/ this.props.numBlocks;
-      x = radius * Math.cos(rad);
-      z = radius * Math.sin(rad);
-      var newElement = React.cloneElement(template, {position: [x,y,z]},null);
-      elements.push(newElement);
-    }
-    return(
-      <Entity>
-        <Animation attribute="rotation" to="0 360 0" dur="50000" repeat="indefinite" direction="alternate"/>
-        {elements}
-      </Entity>
-    );
-  }
-}
-
 class Pulse extends React.Component{
   static defaultProps = {
     numBlocks: 4
@@ -164,7 +126,9 @@ class Pulse extends React.Component{
 
 }
 
-window.Perf = Perf;
 window.$ = $;
+
+// ONLY FOR DEV MODE OTHERWISE WONT WORK
+window.Perf = Perf;
 ReactDOM.render(<BoilerplateScene/>, document.querySelector('.scene-container'));
 

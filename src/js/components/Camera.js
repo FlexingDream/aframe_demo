@@ -7,13 +7,12 @@ class Camera extends React.Component{
     super(props);
   }
 
-  static getCameraPosition(){
-    var elem = document.getElementsByClassName("camera")[0];
-    var position = elem.getAttribute('position');
-    return (position);
-  }
   render(){
-    return (<Entity><Entity class="camera" camera="" look-controls="" wasd-controls="" position={[0,0,5]} {...this.props}/></Entity>);
+    return (<Entity class="camera" camera="" look-controls="" wasd-controls="" {...this.props}/>);
+  }
+
+  shouldComponentUpdate(nextProps,nextState){
+    return false;
   }
 };
 

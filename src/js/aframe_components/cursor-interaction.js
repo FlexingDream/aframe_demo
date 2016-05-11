@@ -10,15 +10,10 @@ AFRAME.registerComponent('cursor-interaction', {
     el.addEventListener('cursor-click', function (evt) {
       console.log(evt);
 
-      // if (!data.startPlay){
-        // document.getElementsByTagName('audio')[0].play(); 
-        var node = $(".audio-player").data("audio-node");
-
-        if (node){
-          node.start(0);
-        }
-
-      // }
+      var node = $(".audio-player").data("audio-node");
+      if (node){
+        node.start(0);
+      }
     });
 
 /*    document.addEventListener('touchstart',function start(e){
