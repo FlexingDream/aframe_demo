@@ -59,7 +59,7 @@ class BoilerplateScene extends React.Component {
         <Sky color='#1D2327'/>
         <Waveform heights={this.state.heights}/>
         <a-image src="#loading" position="0 10 -5" visible='false'></a-image>
-        <Pulse heights={this.state.heights}/>
+        <Rocket/>
         <RainingObjects animationDirection='alternate' mixin='snow' spread="25" numElements="250"/>
       </Scene>
     );
@@ -75,9 +75,10 @@ class Rocket extends React.Component{
     super(props);
   }
   render(){
-    return(<Entity collada-model="#spaceship">
-      <Entity position="10 10 10" id="point"/>
-      <Animation attribute="position" to="10 10 10" dur="30000" look-at='[#point]'/>
+    return(
+      <Entity>
+        <Entity collada-model="#spaceship" look-at='#point' position="10 0 0" rotation="90 90 -90"/>
+          <Animation attribute="rotation" to="0 360 0" dur="10000"  repeat="indefinite" ease="linear"/>
       </Entity>);
   }
 

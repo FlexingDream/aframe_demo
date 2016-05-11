@@ -178,7 +178,7 @@
 	        _react2.default.createElement(_Sky2.default, { color: '#1D2327' }),
 	        _react2.default.createElement(_Waveform2.default, { heights: this.state.heights }),
 	        _react2.default.createElement('a-image', { src: '#loading', position: '0 10 -5', visible: 'false' }),
-	        _react2.default.createElement(Pulse, { heights: this.state.heights }),
+	        _react2.default.createElement(Rocket, null),
 	        _react2.default.createElement(_RainingObjects2.default, { animationDirection: 'alternate', mixin: 'snow', spread: '25', numElements: '250' })
 	      );
 
@@ -210,9 +210,9 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _aframeReact.Entity,
-	        { 'collada-model': '#spaceship' },
-	        _react2.default.createElement(_aframeReact.Entity, { position: '10 10 10', id: 'point' }),
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '10 10 10', dur: '30000', 'look-at': '[#point]' })
+	        null,
+	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#spaceship', 'look-at': '#point', position: '10 0 0', rotation: '90 90 -90' }),
+	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '0 360 0', dur: '10000', repeat: 'indefinite', ease: 'linear' })
 	      );
 	    }
 	  }]);
