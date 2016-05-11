@@ -59,7 +59,7 @@ class BoilerplateScene extends React.Component {
         <Sky color='#1D2327'/>
         <Waveform heights={this.state.heights}/>
         <a-image src="#loading" position="0 10 -5" visible='false'></a-image>
-        <Rocket/>
+        <Pulse heights={this.state.heights}/>
         <RainingObjects animationDirection='alternate' mixin='snow' spread="25" numElements="250"/>
       </Scene>
     );

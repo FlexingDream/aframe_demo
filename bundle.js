@@ -178,7 +178,7 @@
 	        _react2.default.createElement(_Sky2.default, { color: '#1D2327' }),
 	        _react2.default.createElement(_Waveform2.default, { heights: this.state.heights }),
 	        _react2.default.createElement('a-image', { src: '#loading', position: '0 10 -5', visible: 'false' }),
-	        _react2.default.createElement(Rocket, null),
+	        _react2.default.createElement(Pulse, { heights: this.state.heights }),
 	        _react2.default.createElement(_RainingObjects2.default, { animationDirection: 'alternate', mixin: 'snow', spread: '25', numElements: '250' })
 	      );
 
