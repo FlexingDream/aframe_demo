@@ -1,14 +1,14 @@
-import {Entity} from 'aframe-react';
+import {Entity,Animation} from 'aframe-react';
 import React from 'react';
 import _ from 'underscore';
 import $ from 'jquery';
 class Audio extends React.Component{
   static defaultProps = {
-    fastFourierTransform: 2048,
+    fastFourierTransform: 1024,
     audioSrc : {default: ''},
     heights: '',
     refreshRate: 50,
-    frequencySize: {default: 1024}
+    frequencySize: {default: 512}
   };
   constructor(props){
     super(props);
@@ -67,13 +67,19 @@ class Audio extends React.Component{
         that.state.frequencyData = new Uint8Array(analyzer.frequencyBinCount);
         analyzer.getByteFrequencyData(that.state.frequencyData);
         that.state.analyzer = analyzer;
+
+        var animationLoadIn = document.createElement('a-animation');
+        animationLoadIn.setAttribute('attribute','visible');
+        animationLoadIn.setAttribute('to',true);
+        document.getElementsByTagName('a-image')[0].appendChild(animationLoadIn);
+        document.getElementsByTagName('a-image')[0].setAttribute('visible',true);
       },
 
       function(e){"Error with decoding audio data" + e.err});
 
-  }
+    } 
 
-  request.send();
+    request.send();
 
   //
   }
