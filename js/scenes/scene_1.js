@@ -17,7 +17,7 @@ import 'babel-polyfill';
 import $ from 'jquery';
 import _ from 'underscore';
 
-var ASSET_LOCATION = "src/"
+var ASSET_LOCATION = ""
 
 class Scene1 extends React.Component{
   static defaultProps = {

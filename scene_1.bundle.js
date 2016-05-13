@@ -112,7 +112,7 @@
 	// import Waveform from '../components/Waveform';
 
 
-	var ASSET_LOCATION = "src/";
+	var ASSET_LOCATION = "";
 
 	var Scene1 = function (_React$Component) {
 	  _inherits(Scene1, _React$Component);
