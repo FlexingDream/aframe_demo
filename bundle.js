@@ -176,9 +176,9 @@
 	        _react2.default.createElement(
 	          'a-assets',
 	          null,
-	          _react2.default.createElement('a-mixin', { id: 'spaceship', src: 'src/3d_models/model.dae' }),
-	          _react2.default.createElement('a-mixin', { id: 'saturn', src: 'src/3d_models/saturn.dae' }),
-	          _react2.default.createElement('img', { id: 'loading', src: 'src/img/loading.jpg' }),
+	          _react2.default.createElement('a-mixin', { id: 'spaceship', src: '3d_models/model.dae' }),
+	          _react2.default.createElement('a-mixin', { id: 'saturn', src: '3d_models/saturn.dae' }),
+	          _react2.default.createElement('img', { id: 'loading', src: 'img/loading.jpg' }),
 	          mixins
 	        ),
 	        _react2.default.createElement(_Audio2.default, { audioSrc: this.state.song, frequencySize: this.props.frequencySize, refreshRate: this.props.refreshRate, shouldUpdateFrequencies: this.shouldUpdateFrequencies.bind(this) }),

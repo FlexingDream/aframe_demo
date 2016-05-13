@@ -61,9 +61,9 @@ class BoilerplateScene extends React.Component {
     return (
       <Scene stats>
         <a-assets>
-          <a-mixin id="spaceship" src="src/3d_models/model.dae" />
-          <a-mixin id="saturn" src="src/3d_models/saturn.dae" />
-          <img id="loading" src="src/img/loading.jpg"/>
+          <a-mixin id="spaceship" src="3d_models/model.dae" />
+          <a-mixin id="saturn" src="3d_models/saturn.dae" />
+          <img id="loading" src="img/loading.jpg"/>
           {mixins}
         </a-assets>
         <Audio  audioSrc={this.state.song} frequencySize={this.props.frequencySize} refreshRate={this.props.refreshRate} shouldUpdateFrequencies={this.shouldUpdateFrequencies.bind(this)}/>
