@@ -4,10 +4,17 @@ import _ from 'underscore';
 
 class Waveform extends React.Component{
   static defaultProps = {
-    numBlocks: 64,
-    radius: 8
+    numBlocks: 16,
+    radius: 16
   };
-
+  getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
   constructor(props){
     super(props);
   }
@@ -21,12 +28,14 @@ class Waveform extends React.Component{
     },null);
     var radius = this.props.radius;
     for (var i = 0;i < this.props.numBlocks; i++){
-      var y = this.props.heights[i]/32;
+      // var y = this.props.heights[i]/32;
       var x,z,rad;
       rad = i * (2 * Math.PI)/ this.props.numBlocks;
       x = radius * Math.cos(rad);
+      var y = 0;
+      var height = this.props.heights[i] == 0 ? 0.5 : this.props.heights[i]/256;
       z = radius * Math.sin(rad);
-      var newElement = React.cloneElement(template, {position: [x,y,z]},null);
+      var newElement = React.cloneElement(template, {position: [x,y,z],key: i, geometry:{radius: height}, material:{color: this.getRandomColor()}},null);
       elements.push(newElement);
     }
     return(

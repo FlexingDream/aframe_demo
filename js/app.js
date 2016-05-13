@@ -20,7 +20,7 @@ import _ from 'underscore';
 
 class BoilerplateScene extends React.Component {
   static defaultProps = {
-    frequencySize : 128,
+    frequencySize : 80,
     refreshRate: 50
   };
   constructor(props) {
@@ -28,19 +28,32 @@ class BoilerplateScene extends React.Component {
     var heights = Array.apply(null,Array(this.props.frequencySize)).map(function(x,i){return 0});
     this.state = {
       heights: heights,
-      song: 'https://res.cloudinary.com/gavinching/video/upload/v1462807480/alesso_eajztb.mp3'
+      song: 'https://cdn.rawgit.com/FlexingDream/aframe_demo/master/src/audio/alesso.mp3'
     }
+  }
+
+  shouldComponentUpdate(newProps,newState){
+    if (_.isEqual(newState.heights, this.state.heights) )
+      return false;
+    else
+     return true;
   }
 
   getMixins(){
     return(
       <Entity>
         <a-mixin id="snow" geometry="primitive: box; depth: 0.02;height: 0.04; width: 0.04" material="color: #DDD; opacity: 0.4; shader: flat"></a-mixin>
-        <a-mixin id="pulse" geometry="primitive: circle;" material="color: white; opacity: 0.8; shader:flat;" position="0 0 0" ></a-mixin>
-        <a-mixin id="waveform" geometry="primitive: box; height: 0.2; depth: 0.05; width: 0.05;" material="color: white; opacity: 0.8; shader:flat;" position="0 0 0" ></a-mixin>
+        <a-mixin id="pulse" geometry="primitive: circle; radius: 1;" material="color: white; opacity: 0.8; shader:flat;" position="0 0 0" ></a-mixin>
+        <a-mixin id="waveform" geometry="primitive: circle; radius: 0.5;" material="color: white; opacity: 0.8; shader:flat;" position="0 0 0" look-at='[camera]'></a-mixin>
+
         <a-mixin id="snake" geometry="primitive: box; height: 0.2; depth: 5; width: 0.2;" material="color: #72CCBC; shader: flat;" rotation="0 0 90"></a-mixin>
+        <a-mixin id="planet" geometry="primitive: sphere; radius: 50;" material="color: white; "></a-mixin>
       </Entity>
     );
+  }
+  shouldUpdateFrequencies(heights){
+    if (!_.isEqual(heights,this.state.heights))
+      this.setState({heights: heights});
   }
 
   render () {
@@ -48,25 +61,51 @@ class BoilerplateScene extends React.Component {
     return (
       <Scene stats>
         <a-assets>
-          <a-mixin id="spaceship" src="3d_models/model.dae" />
-          <img id="loading" src="img/loading.jpg"/>
+          <a-mixin id="spaceship" src="src/3d_models/model.dae" />
+          <a-mixin id="saturn" src="src/3d_models/saturn.dae" />
+          <img id="loading" src="src/img/loading.jpg"/>
           {mixins}
         </a-assets>
-        <Audio  audioSrc={this.state.song} frequencySize={this.props.frequencySize} refreshRate={this.props.refreshRate}/>
+        <Audio  audioSrc={this.state.song} frequencySize={this.props.frequencySize} refreshRate={this.props.refreshRate} shouldUpdateFrequencies={this.shouldUpdateFrequencies.bind(this)}/>
         <Camera position={[0,10,0]}>
           <Cursor />
         </Camera>
         <Sky color='#1D2327'/>
         <Waveform heights={this.state.heights}/>
+        <Pulse heights={this.state.heights}/>
         <a-image src="#loading" position="0 10 -5" visible='false'></a-image>
-        <Rocket/>
-        <RainingObjects animationDirection='alternate' mixin='snow' spread="25" numElements="250"/>
+        <SolarSystem/>
+        <RainingObjects animationDirection='alternate' mixin='snow' spread="50" numElements="500"/>
       </Scene>
     );
-
+//        <Sky color='#1D2327'/>
     //           <RainingObjects animationDirection='alternate' mixin='snow' spread="25" numElements="250"/>
           // <Pulse heights={this.state.heights}/>
           // <Waveform heights={this.state.heights}/>
+  }
+}
+
+class SolarSystem extends React.Component{
+  constructor(props){
+    super(props);
+  }
+
+
+  render(){
+    var planets = [];
+    return(
+      <Entity>
+        <Rocket/>
+        <Entity collada-model="#saturn" position="150 0 0" rotation="90 90 90">
+          <Animation attribute="rotation" to="360 360 360" dur="120000" repeat="indefinite" ease="linear" />
+        </Entity>
+        <Entity entity-generator-planets="numElements: 10; mixin: planet; spread: 500;minExclusion: -100; maxExclusion: 100;"/>
+      </Entity>
+    );
+  }
+
+  shouldComponentUpdate(nextProps,nextState){
+    return false;
   }
 }
 
@@ -77,9 +116,13 @@ class Rocket extends React.Component{
   render(){
     return(
       <Entity>
-        <Entity collada-model="#spaceship" look-at='#point' position="10 0 0" rotation="90 90 -90"/>
-          <Animation attribute="rotation" to="0 360 0" dur="10000"  repeat="indefinite" ease="linear"/>
+        <Entity collada-model="#spaceship" look-at='#point' position="100 0 0" rotation="90 90 90"/>
+          <Animation attribute="rotation" to="0 -360 0" dur="60000"  repeat="indefinite" ease="linear"/>
       </Entity>);
+  }
+
+  shouldComponentUpdate(nextState,nextProps){
+    return false;
   }
 
 }
@@ -128,7 +171,8 @@ class Pulse extends React.Component{
       mixin: "pulse",
     },null);
     for (var i = 0;i < this.props.numBlocks; i++){
-      var newElement = React.cloneElement(template, {position: [0,0,i], geometry: {radius: this.props.heights[i]/50}},null);
+      var height = this.props.heights[i] == 0 ? 1 : this.props.heights[i]/50;
+      var newElement = React.cloneElement(template, {position: [0,0,i], geometry: {radius: height}, key: i},null);
       elements.push(newElement);
     }
     return(<Entity cursor-listener class="lookable" look-at='[camera]'>{elements}</Entity>);
