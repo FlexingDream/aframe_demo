@@ -1,19 +1,19 @@
 import 'aframe';
 import 'aframe-layout-component';
-import './aframe_components/Collider';
-import './aframe_components/RayCaster';
-import './aframe_components/entity-generator';
+import '../aframe_components/Collider';
+import '../aframe_components/RayCaster';
+import '../aframe_components/entity-generator';
 import {Animation, Entity, Scene} from 'aframe-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Perf from 'react-addons-perf';
-import Camera from './components/Camera';
-import Cursor from './components/Cursor';
-import Sky from './components/Sky';
-import Floor from './components/Floor';
-import RainingObjects from './components/RainingObjects';
-import Audio from './components/Audio';
-import Waveform from './components/Waveform';
+import Camera from '../components/Camera';
+import Cursor from '../components/Cursor';
+import Sky from '../components/Sky';
+import Floor from '../components/Floor';
+import RainingObjects from '../components/RainingObjects';
+import Audio from '../components/Audio';
+import Waveform from '../components/Waveform';
 import 'babel-polyfill';
 import $ from 'jquery';
 import _ from 'underscore';
@@ -61,9 +61,9 @@ class BoilerplateScene extends React.Component {
     return (
       <Scene stats>
         <a-assets>
-          <a-mixin id="spaceship" src="3d_models/model.dae" />
-          <a-mixin id="saturn" src="3d_models/saturn.dae" />
-          <img id="loading" src="img/loading.jpg"/>
+          <a-mixin id="spaceship" src="../3d_models/model.dae" />
+          <a-mixin id="saturn" src="../3d_models/saturn.dae" />
+          <img id="loading" src="../img/loading.jpg"/>
           {mixins}
         </a-assets>
         <Audio  audioSrc={this.state.song} frequencySize={this.props.frequencySize} refreshRate={this.props.refreshRate} shouldUpdateFrequencies={this.shouldUpdateFrequencies.bind(this)}/>

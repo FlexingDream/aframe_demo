@@ -33,7 +33,7 @@ class Waveform extends React.Component{
       rad = i * (2 * Math.PI)/ this.props.numBlocks;
       x = radius * Math.cos(rad);
       var y = 0;
-      var height = this.props.heights[i] == 0 ? 0.5 : this.props.heights[i]/256;
+      var height = this.props.heights[i] == 0 ? 0.5 : this.props.heights[i]/128;
       z = radius * Math.sin(rad);
       var newElement = React.cloneElement(template, {position: [x,y,z],key: i, geometry:{radius: height}, material:{color: this.getRandomColor()}},null);
       elements.push(newElement);
