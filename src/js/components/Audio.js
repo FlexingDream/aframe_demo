@@ -17,6 +17,8 @@ class Audio extends React.Component{
       analyzer: ''
     };
   }
+
+
   componentDidMount(){
     // this.setupAudioElement();
     this.setupAudioBuffer();
@@ -64,7 +66,8 @@ class Audio extends React.Component{
         analyzer.fftSize = that.props.fastFourierTransform;
 
         // FrequencyBinCount is unsigned long value HALF That of the FFT size
-        that.state.frequencyData = new Uint8Array(analyzer.frequencyBinCount);
+        // that.state.frequencyData = new Uint8Array(analyzer.frequencyBinCount);
+        that.state.frequencyData = new Uint8Array(that.props.frequencySize);
         analyzer.getByteFrequencyData(that.state.frequencyData);
         that.state.analyzer = analyzer;
 
@@ -129,8 +132,10 @@ class Audio extends React.Component{
       y[i] = frequencyData[i];
     }
     // TODO/FIXME: This is so dirty
-    if (!_.isEqual(this._reactInternalInstance._currentElement._owner._instance.state.heights,y))
-      this._reactInternalInstance._currentElement._owner._instance.setState({heights:y});
+    // if (!_.isEqual(this._reactInternalInstance._currentElement._owner._instance.state.heights,y))
+      // this._reactInternalInstance._currentElement._owner._instance.setState({heights:y});
+
+      this.props.shouldUpdateFrequencies(y);
   }
 
   shouldComponentUpdate(nextProps,nextState){

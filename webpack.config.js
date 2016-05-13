@@ -3,7 +3,7 @@ var webpack = require('webpack');
 require('babel-polyfill');
 
 
-var IS_PRODUCTION = process.env.NODE_ENV === 'production';
+var IS_PRODUCTION = process.env.NODE_ENV === 'development';
 
 var ENTRY_POINTS = [
   './src/js/app'
@@ -16,7 +16,7 @@ var JS_LOADERS = [
 var PLUGINS = [
   new webpack.DefinePlugin({
     'process.env': {
-      'NODE_ENV': '"production"'
+      'NODE_ENV': '"development"'
   }})
 ];
 if (IS_PRODUCTION) {
