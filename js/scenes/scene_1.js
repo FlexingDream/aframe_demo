@@ -17,6 +17,8 @@ import 'babel-polyfill';
 import $ from 'jquery';
 import _ from 'underscore';
 
+var ASSET_LOCATION = "src/"
+
 class Scene1 extends React.Component{
   static defaultProps = {
     frequencySize : 80,
@@ -61,7 +63,7 @@ class Scene1 extends React.Component{
     return (
       <Scene stats>
         <a-assets>
-          <img id="loading" src="../img/loading.jpg"/>
+          <img id="loading" src={ASSET_LOCATION +"img/loading.jpg" }/>
           {mixins}
         </a-assets>
         <Audio  audioSrc={this.state.song} frequencySize={this.props.frequencySize} refreshRate={this.props.refreshRate} shouldUpdateFrequencies={this.shouldUpdateFrequencies.bind(this)}/>
