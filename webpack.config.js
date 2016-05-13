@@ -5,9 +5,10 @@ require('babel-polyfill');
 
 var IS_PRODUCTION = process.env.NODE_ENV === 'development';
 
-var ENTRY_POINTS = [
-  './src/js/app'
-];
+/*var ENTRY_POINTS = [
+  './src/js/app',
+  './src/js/scenes/scene_1.js'
+];*/
 
 var JS_LOADERS = [
   'babel?cacheDirectory&presets[]=react,presets[]=es2015,presets[]=stage-0'
@@ -32,10 +33,13 @@ if (IS_PRODUCTION) {
 }
 
 module.exports = {
-  entry: ENTRY_POINTS,
+  entry: {
+    scene_2: './src/js/scenes/scene_2',
+    scene_1: './src/js/scenes/scene_1'
+  },
   output: {
     // Bundle will be served at /bundle.js locally.
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     // Bundle will be built at ./src/media/js.
     path: './build',
     publicPath: '/',
