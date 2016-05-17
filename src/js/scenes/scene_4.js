@@ -31,6 +31,7 @@ class Scene4 extends React.Component{
   getModels(){
     return(
       <Entity>
+      <a-asset-item id="speaker" src="../3d_models/speakers.dae"></a-asset-item>
       </Entity>
     );
   }
@@ -49,7 +50,7 @@ class Scene4 extends React.Component{
 
   render(){
     return(
-    <Scene stats fog={{type:'linear', color:'#AAA'}}>
+    <Scene stats>
       {this.getAssets()}
       <Camera position={[0,1,0]}>
         <Cursor />
@@ -59,15 +60,56 @@ class Scene4 extends React.Component{
       <Floor color='gray' />
       <Lasers type='line' numBlocks="20" position="0 0 0"/>
       <Lasers type='line' numBlocks="20" position="5 0 5"/>
-      <RainingObjects mixin="rain" numElements="1000" spread="100"/>
+      <Stands/>
     </Scene>);
+  }
+}
+
+class Stands extends React.Component{
+  render(){
+    return(
+      <Entity>
+        <Entity geometry="primitive: box; height: 10; depth: 3; width: 50;" position="-40 0 10" material="color: black" rotation="0 90 0">
+          <Entity geometry="primitive: box; height: 20; depth: 3; width: 50;" position="0 0 -10" material="color: white" rotation="0 0 0"/>
+          <Entity geometry="primitive: box; height: 40; depth: 3; width: 50;" position="0 0 -20" material="color: gray" rotation="0 0 0"/>
+        </Entity>
+        <Entity geometry="primitive: box; height: 10; depth: 3; width: 50;" position="40 0 10" material="color: black" rotation="0 90 0">
+          <Entity geometry="primitive: box; height: 20; depth: 3; width: 50;" position="0 0 10" material="color: white" rotation="0 0 0"/>
+          <Entity geometry="primitive: box; height: 40; depth: 3; width: 50;" position="0 0 20" material="color: gray" rotation="0 0 0"/>
+        </Entity>
+        <Entity geometry="primitive: box; height: 10; depth: 3; width: 50;" position="-40 0 70" material="color: black" rotation="0 90 0">
+          <Entity geometry="primitive: box; height: 20; depth: 3; width: 50;" position="0 0 -10" material="color: white" rotation="0 0 0"/>
+          <Entity geometry="primitive: box; height: 40; depth: 3; width: 50;" position="0 0 -20" material="color: gray" rotation="0 0 0"/>
+        </Entity>
+        <Entity geometry="primitive: box; height: 10; depth: 3; width: 50;" position="40 0 70" material="color: black" rotation="0 90 0">
+          <Entity geometry="primitive: box; height: 20; depth: 3; width: 50;" position="0 0 10" material="color: white" rotation="0 0 0"/>
+          <Entity geometry="primitive: box; height: 40; depth: 3; width: 50;" position="0 0 20" material="color: gray" rotation="0 0 0"/>
+        </Entity>
+        <Entity geometry="primitive: box; height: 10; depth: 3; width: 50;" position="0 0 100" material="color: black" rotation="0 0 0">
+          <Entity geometry="primitive: box; height: 20; depth: 3; width: 50;" position="0 0 10" material="color: white" rotation="0 0 0"/>
+          <Entity geometry="primitive: box; height: 40; depth: 3; width: 50;" position="0 0 20" material="color: gray" rotation="0 0 0"/>
+        </Entity>
+      </Entity>
+    );
+  }
+}
+
+class StageProps extends React.Component{
+  shouldComponentUpdate(nextProps,nextState){
+    return false;
+  }
+  render(){
+    return(<Entity>
+        <Entity collada-model='#speaker' position="40 -30 10" class="" rotation="0 0 0"/>
+        <Entity collada-model='#speaker' position="-60 -30 10" class="" rotation="0 0 0"/>
+      </Entity>);
   }
 }
 
 class Stage extends React.Component{
   static defaultProps = {
-    frequencySize : 40,
-    refreshRate: 100
+    frequencySize : 20,
+    refreshRate: 150
   };
   constructor(props){
     super(props);
@@ -88,9 +130,10 @@ class Stage extends React.Component{
       <Entity geometry={{primitive: 'box',height: 60,width:100,depth:10}}
           material={{color: 'white', shader: 'flat'}} position=" 0 30 -60">
         <Audio  audioSrc={this.state.song} frequencySize={this.props.frequencySize} refreshRate={this.props.refreshRate} shouldUpdateFrequencies={this.shouldUpdateFrequencies.bind(this)}/>
-        <Entity geometry={{primitive: 'box', height: 10, width: 90, depth: 5}} material={{color: 'black'}} position="0 -30 10"/>
+        <Entity geometry={{primitive: 'box', height: 10, width: 90, depth: 5}} material={{color: 'gray'}} position="0 -30 10"/>
         <Waveform heights={this.state.heights} type='line' position="-16 2 12" numBlocks='16'/>
         <Curtains/>
+        <StageProps/>
       </Entity>
     );
   }
