@@ -137,7 +137,11 @@
 	  }, {
 	    key: 'getModels',
 	    value: function getModels() {
-	      return _react2.default.createElement(_aframeReact.Entity, null);
+	      return _react2.default.createElement(
+	        _aframeReact.Entity,
+	        null,
+	        _react2.default.createElement('a-asset-item', { id: 'speaker', src: '../3d_models/speakers.dae' })
+	      );
 	    }
 	  }, {
 	    key: 'getAssets',
@@ -157,7 +161,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _aframeReact.Scene,
-	        { stats: true, fog: { type: 'linear', color: '#AAA' } },
+	        { stats: true },
 	        this.getAssets(),
 	        _react2.default.createElement(
 	          _Camera2.default,
@@ -169,7 +173,7 @@
 	        _react2.default.createElement(_Floor2.default, { color: 'gray' }),
 	        _react2.default.createElement(_Laser2.default, { type: 'line', numBlocks: '20', position: '0 0 0' }),
 	        _react2.default.createElement(_Laser2.default, { type: 'line', numBlocks: '20', position: '5 0 5' }),
-	        _react2.default.createElement(_RainingObjects2.default, { mixin: 'rain', numElements: '1000', spread: '100' })
+	        _react2.default.createElement(Stands, null)
 	      );
 	    }
 	  }]);
@@ -177,22 +181,103 @@
 	  return Scene4;
 	}(_react2.default.Component);
 
-	var Stage = function (_React$Component2) {
-	  _inherits(Stage, _React$Component2);
+	var Stands = function (_React$Component2) {
+	  _inherits(Stands, _React$Component2);
+
+	  function Stands() {
+	    _classCallCheck(this, Stands);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Stands).apply(this, arguments));
+	  }
+
+	  _createClass(Stands, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _aframeReact.Entity,
+	        null,
+	        _react2.default.createElement(
+	          _aframeReact.Entity,
+	          { geometry: 'primitive: box; height: 10; depth: 3; width: 50;', position: '-40 0 10', material: 'color: black', rotation: '0 90 0' },
+	          _react2.default.createElement(_aframeReact.Entity, { geometry: 'primitive: box; height: 20; depth: 3; width: 50;', position: '0 0 -10', material: 'color: white', rotation: '0 0 0' }),
+	          _react2.default.createElement(_aframeReact.Entity, { geometry: 'primitive: box; height: 40; depth: 3; width: 50;', position: '0 0 -20', material: 'color: gray', rotation: '0 0 0' })
+	        ),
+	        _react2.default.createElement(
+	          _aframeReact.Entity,
+	          { geometry: 'primitive: box; height: 10; depth: 3; width: 50;', position: '40 0 10', material: 'color: black', rotation: '0 90 0' },
+	          _react2.default.createElement(_aframeReact.Entity, { geometry: 'primitive: box; height: 20; depth: 3; width: 50;', position: '0 0 10', material: 'color: white', rotation: '0 0 0' }),
+	          _react2.default.createElement(_aframeReact.Entity, { geometry: 'primitive: box; height: 40; depth: 3; width: 50;', position: '0 0 20', material: 'color: gray', rotation: '0 0 0' })
+	        ),
+	        _react2.default.createElement(
+	          _aframeReact.Entity,
+	          { geometry: 'primitive: box; height: 10; depth: 3; width: 50;', position: '-40 0 70', material: 'color: black', rotation: '0 90 0' },
+	          _react2.default.createElement(_aframeReact.Entity, { geometry: 'primitive: box; height: 20; depth: 3; width: 50;', position: '0 0 -10', material: 'color: white', rotation: '0 0 0' }),
+	          _react2.default.createElement(_aframeReact.Entity, { geometry: 'primitive: box; height: 40; depth: 3; width: 50;', position: '0 0 -20', material: 'color: gray', rotation: '0 0 0' })
+	        ),
+	        _react2.default.createElement(
+	          _aframeReact.Entity,
+	          { geometry: 'primitive: box; height: 10; depth: 3; width: 50;', position: '40 0 70', material: 'color: black', rotation: '0 90 0' },
+	          _react2.default.createElement(_aframeReact.Entity, { geometry: 'primitive: box; height: 20; depth: 3; width: 50;', position: '0 0 10', material: 'color: white', rotation: '0 0 0' }),
+	          _react2.default.createElement(_aframeReact.Entity, { geometry: 'primitive: box; height: 40; depth: 3; width: 50;', position: '0 0 20', material: 'color: gray', rotation: '0 0 0' })
+	        ),
+	        _react2.default.createElement(
+	          _aframeReact.Entity,
+	          { geometry: 'primitive: box; height: 10; depth: 3; width: 50;', position: '0 0 100', material: 'color: black', rotation: '0 0 0' },
+	          _react2.default.createElement(_aframeReact.Entity, { geometry: 'primitive: box; height: 20; depth: 3; width: 50;', position: '0 0 10', material: 'color: white', rotation: '0 0 0' }),
+	          _react2.default.createElement(_aframeReact.Entity, { geometry: 'primitive: box; height: 40; depth: 3; width: 50;', position: '0 0 20', material: 'color: gray', rotation: '0 0 0' })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Stands;
+	}(_react2.default.Component);
+
+	var StageProps = function (_React$Component3) {
+	  _inherits(StageProps, _React$Component3);
+
+	  function StageProps() {
+	    _classCallCheck(this, StageProps);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(StageProps).apply(this, arguments));
+	  }
+
+	  _createClass(StageProps, [{
+	    key: 'shouldComponentUpdate',
+	    value: function shouldComponentUpdate(nextProps, nextState) {
+	      return false;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _aframeReact.Entity,
+	        null,
+	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#speaker', position: '40 -30 10', 'class': '', rotation: '0 0 0' }),
+	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#speaker', position: '-60 -30 10', 'class': '', rotation: '0 0 0' })
+	      );
+	    }
+	  }]);
+
+	  return StageProps;
+	}(_react2.default.Component);
+
+	var Stage = function (_React$Component4) {
+	  _inherits(Stage, _React$Component4);
 
 	  function Stage(props) {
 	    _classCallCheck(this, Stage);
 
-	    var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Stage).call(this, props));
+	    var _this4 = _possibleConstructorReturn(this, Object.getPrototypeOf(Stage).call(this, props));
 
-	    var heights = Array.apply(null, Array(_this2.props.frequencySize)).map(function (x, i) {
+	    var heights = Array.apply(null, Array(_this4.props.frequencySize)).map(function (x, i) {
 	      return 0;
 	    });
-	    _this2.state = {
+	    _this4.state = {
 	      heights: heights,
 	      song: 'https://rawgit.com/FlexingDream/aframe_demo/master/src/audio/mountains.mp3'
 	    };
-	    return _this2;
+	    return _this4;
 	  }
 
 	  _createClass(Stage, [{
@@ -208,9 +293,10 @@
 	        { geometry: { primitive: 'box', height: 60, width: 100, depth: 10 },
 	          material: { color: 'white', shader: 'flat' }, position: ' 0 30 -60' },
 	        _react2.default.createElement(_Audio2.default, { audioSrc: this.state.song, frequencySize: this.props.frequencySize, refreshRate: this.props.refreshRate, shouldUpdateFrequencies: this.shouldUpdateFrequencies.bind(this) }),
-	        _react2.default.createElement(_aframeReact.Entity, { geometry: { primitive: 'box', height: 10, width: 90, depth: 5 }, material: { color: 'black' }, position: '0 -30 10' }),
+	        _react2.default.createElement(_aframeReact.Entity, { geometry: { primitive: 'box', height: 10, width: 90, depth: 5 }, material: { color: 'gray' }, position: '0 -30 10' }),
 	        _react2.default.createElement(_Waveform2.default, { heights: this.state.heights, type: 'line', position: '-16 2 12', numBlocks: '16' }),
-	        _react2.default.createElement(Curtains, null)
+	        _react2.default.createElement(Curtains, null),
+	        _react2.default.createElement(StageProps, null)
 	      );
 	    }
 	  }]);
@@ -219,12 +305,12 @@
 	}(_react2.default.Component);
 
 	Stage.defaultProps = {
-	  frequencySize: 40,
-	  refreshRate: 100
+	  frequencySize: 20,
+	  refreshRate: 150
 	};
 
-	var Curtains = function (_React$Component3) {
-	  _inherits(Curtains, _React$Component3);
+	var Curtains = function (_React$Component5) {
+	  _inherits(Curtains, _React$Component5);
 
 	  function Curtains(props) {
 	    _classCallCheck(this, Curtains);
@@ -264,8 +350,8 @@
 	  return Curtains;
 	}(_react2.default.Component);
 
-	var Room = function (_React$Component4) {
-	  _inherits(Room, _React$Component4);
+	var Room = function (_React$Component6) {
+	  _inherits(Room, _React$Component6);
 
 	  function Room(props) {
 	    _classCallCheck(this, Room);
