@@ -1,7 +1,7 @@
 import 'aframe';
 import 'aframe-layout-component';
 import '../aframe_components/Collider';
-import '../aframe_components/RayCaster';
+import '../aframe_components/raycaster-helper';
 import '../aframe_components/entity-generator';
 import {Animation, Entity, Scene} from 'aframe-react';
 import React from 'react';
