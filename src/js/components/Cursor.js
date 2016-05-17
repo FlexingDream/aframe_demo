@@ -1,6 +1,6 @@
 import {Animation, Entity} from 'aframe-react';
 import React from 'react';
-import 'aframe_components/RayCaster';
+import 'aframe_components/raycaster-helper';
 import 'aframe_components/cursor-interaction';
 export default props => {
   const geometry = {
@@ -21,11 +21,11 @@ export default props => {
     timeout: 2000
   };
   const raycaster = {
-    objects: '.lookable',
+    objects: "[mixin~='rain']",
     far: 1000
   }
   return (
-    <Entity  raycaster={raycaster} cursor={cursor} geometry={geometry} material={material} position="0 0 -1" cursor-interaction>
+    <Entity raycaster-helper raycaster={raycaster} cursor={cursor} geometry={geometry} material={material} position="0 0 -1" cursor-interaction>
         <Animation begin="cursor-fusing" easing="ease-in" attribute="scale" fill="forwards" from="1 1 1" to="0.1 0.1 0.1"/>    
         <Animation begin="cursor-click" easing="ease-in" attribute="scale" fill='fowards' from ="0.1 0.1 0.1" to="1 1 1"/>     
     </Entity>

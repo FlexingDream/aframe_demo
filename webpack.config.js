@@ -34,6 +34,9 @@ if (IS_PRODUCTION) {
 
 module.exports = {
   entry: {
+    testing: './src/js/scenes/testing',
+    scene_4: './src/js/scenes/scene_4',
+    scene_3: './src/js/scenes/scene_3',
     scene_2: './src/js/scenes/scene_2',
     scene_1: './src/js/scenes/scene_1'
   },

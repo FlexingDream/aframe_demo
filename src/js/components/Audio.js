@@ -74,8 +74,21 @@ class Audio extends React.Component{
         var animationLoadIn = document.createElement('a-animation');
         animationLoadIn.setAttribute('attribute','visible');
         animationLoadIn.setAttribute('to',true);
-        document.getElementsByTagName('a-image')[0].appendChild(animationLoadIn);
-        document.getElementsByTagName('a-image')[0].setAttribute('visible',true);
+        if (document.getElementsByTagName('a-image')>0){
+          document.getElementsByTagName('a-image')[0].appendChild(animationLoadIn);
+          document.getElementsByTagName('a-image')[0].setAttribute('visible',true);
+        }
+        if (document.getElementById('curtain')){
+          var left = document.getElementById('curtain-left');
+          var right = document.getElementById('curtain-right');
+          left.emit('start');
+          right.emit('start');
+          left.children[0].addEventListener('animationend',function(){
+            $(left).remove();
+            $(right).remove();
+            node.start(0);
+          });
+        }
       },
 
       function(e){"Error with decoding audio data" + e.err});

@@ -1,5 +1,7 @@
 AFRAME.registerComponent('collider', {
+  dependencies: ['raycaster'],
   init: function () {
+    console.log('init collider');
     var el = this.el;
 
     // Set color using raycaster parent color.

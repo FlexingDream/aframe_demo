@@ -7,7 +7,7 @@ AFRAME.registerComponent('cursor-interaction', {
     var el = this.el;
     var data = this;data
     // Set color using raycaster parent color.
-    el.addEventListener('cursor-click', function (evt) {
+    el.addEventListener('click', function (evt) {
       console.log(evt);
 
       var node = $(".audio-player").data("audio-node");

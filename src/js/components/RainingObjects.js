@@ -1,5 +1,6 @@
 import {Animation, Entity} from 'aframe-react';
 import React from 'react';
+import '../aframe_components/Collider';
 
 class RainingObjects extends React.Component{
   static defaultProps = {
