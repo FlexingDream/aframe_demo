@@ -141,8 +141,8 @@
 	      return _react2.default.createElement(
 	        _aframeReact.Entity,
 	        null,
-	        _react2.default.createElement('a-asset-item', { id: 'moon', src: '../3d_models/moon.dae' }),
-	        _react2.default.createElement('a-asset-item', { id: 'terrain', src: '../3d_models/terrain.dae' })
+	        _react2.default.createElement('a-asset-item', { id: 'moon', src: '3d_models/moon.dae' }),
+	        _react2.default.createElement('a-asset-item', { id: 'terrain', src: '3d_models/terrain.dae' })
 	      );
 	    }
 	  }, {
