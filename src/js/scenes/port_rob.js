@@ -17,8 +17,8 @@ AframeExtras.loaders.registerAll();
 
 class PortRob extends React.Component{
   static defaultProps = {
-    frequencySize : 80,
-    refreshRate: 50
+    frequencySize : 0,
+    refreshRate: 0
   };
   constructor(props){
     super(props);
@@ -28,6 +28,9 @@ class PortRob extends React.Component{
       song: 'https://cdn.rawgit.com/FlexingDream/aframe_demo/pua/src/audio/port_rob_cut.mp3'
     }
   }
+  shouldUpdateFrequencies(heights){
+  }
+
   getMixins(){
     return(
       <Entity>
