@@ -40,8 +40,8 @@ class PortRob extends React.Component{
   getModels(){
     return(
       <Entity>
-        <a-asset-item id="moon" src="../3d_models/moon.dae"></a-asset-item>
-        <a-asset-item id="terrain" src="../3d_models/terrain.dae"></a-asset-item>
+        <a-asset-item id="moon" src="3d_models/moon.dae"></a-asset-item>
+        <a-asset-item id="terrain" src="3d_models/terrain.dae"></a-asset-item>
       </Entity>
     );
   }
