@@ -25,7 +25,7 @@ class PortRob extends React.Component{
     var heights = Array.apply(null,Array(this.props.frequencySize)).map(function(x,i){return 0});
     this.state = {
       heights: heights,
-      song: 'https://cdn.rawgit.com/FlexingDream/aframe_demo/master/src/audio/alesso.mp3'
+      song: 'https://cdn.rawgit.com/FlexingDream/aframe_demo/pua/src/audio/port_rob_cut.mp3'
     }
   }
   getMixins(){
