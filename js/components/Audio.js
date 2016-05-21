@@ -89,6 +89,9 @@ class Audio extends React.Component{
             node.start(0);
           });
         }
+        else{
+          node.start(0);
+        }
       },
 
       function(e){"Error with decoding audio data" + e.err});
