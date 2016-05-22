@@ -2,17 +2,24 @@ var path = require('path');
 var webpack = require('webpack');
 require('babel-polyfill');
 
-var IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
-var ENTRY_POINTS = [
-  './src/js/app'
-];
+var IS_PRODUCTION = process.env.NODE_ENV === 'development';
+
+/*var ENTRY_POINTS = [
+  './src/js/app',
+  './src/js/scenes/scene_1.js'
+];*/
 
 var JS_LOADERS = [
   'babel?cacheDirectory&presets[]=react,presets[]=es2015,presets[]=stage-0'
 ];
 
-var PLUGINS = [];
+var PLUGINS = [
+  new webpack.DefinePlugin({
+    'process.env': {
+      'NODE_ENV': '"development"'
+  }})
+];
 if (IS_PRODUCTION) {
   // Uglify in production.
   PLUGINS.push(
@@ -26,10 +33,18 @@ if (IS_PRODUCTION) {
 }
 
 module.exports = {
-  entry: ENTRY_POINTS,
+  entry: {
+    port_rob: './src/js/scenes/port_rob',
+    testing: './src/js/scenes/testing',
+    scene_5: './src/js/scenes/scene_5',
+    scene_4: './src/js/scenes/scene_4',
+    scene_3: './src/js/scenes/scene_3',
+    scene_2: './src/js/scenes/scene_2',
+    scene_1: './src/js/scenes/scene_1'
+  },
   output: {
     // Bundle will be served at /bundle.js locally.
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     // Bundle will be built at ./src/media/js.
     path: './build',
     publicPath: '/',
