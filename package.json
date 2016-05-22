@@ -23,7 +23,7 @@
     "gh-pages": "npm run ghpages",
     "serve": "cd src && python -m SimpleHTTPServer 5555",
     "http-serve" : "cd src && http-server -p 5000 -a 192.168.0.246",
-    "serve-js": "webpack-dev-server --content-base src --progress --watch --history-api-fallback --inline --hot",
+    "serve-js": "webpack-dev-server --host 192.168.0.15 --content-base src --progress --watch --history-api-fallback --inline --hot",
     "firebase": "npm run preghpages && firebase deploy"
   },
   "repository": {

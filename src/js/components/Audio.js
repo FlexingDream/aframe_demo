@@ -37,7 +37,7 @@ class Audio extends React.Component{
     var data = buffer.getChannelData(0);
   var that = this;
 
-    // 
+    //
    var request = new XMLHttpRequest();
 
   request.open('GET', this.props.audioSrc, true);
@@ -96,7 +96,7 @@ class Audio extends React.Component{
 
       function(e){"Error with decoding audio data" + e.err});
 
-    } 
+    }
 
     request.send();
 
@@ -106,7 +106,7 @@ class Audio extends React.Component{
   setupAudioVisualizers(audioElement){
     var AudioContext = AudioContext || webkitAudioContext || mozAudioContext;
     var audioCtx = new AudioContext();
-    
+
     var src = audioCtx.createMediaElementSource(audioElement);
 
     var analyzer = audioCtx.createAnalyser();
