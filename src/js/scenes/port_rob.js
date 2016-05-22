@@ -40,8 +40,9 @@ class PortRob extends React.Component{
   getModels(){
     return(
       <Entity>
-        <a-asset-item id="moon" src="3d_models/moon.dae"></a-asset-item>
-        <a-asset-item id="terrain" src="3d_models/terrain.dae"></a-asset-item>
+        <a-asset-item id="moon" src="../3d_models/moon.dae"></a-asset-item>
+        <a-asset-item id="terrain" src="../3d_models/terrain.dae"></a-asset-item>
+        <a-asset-item id="hand" src="../3d_models/hand.dae"></a-asset-item>
       </Entity>
     );
   }
@@ -62,14 +63,21 @@ class PortRob extends React.Component{
     return(
     <Scene stats fog={{type: 'linear', near:50,color: '#1D2327'}}>
       {this.getAssets()}
-      <Camera position={[0,1,0]} wasd-controls={{enabled: true}}>
+      <Camera position={[0,1,0]} wasd-controls={{enabled: false}}>
         <Cursor />
         <Animation attribute="position" to="0 0 -100" dur="80000" ease="ease-in-out" />
+        <Entity collada-model="#hand" scale="0.1 0.1 0.1" position="0 -1.4 -1.5" rotation="0 105 15">
+          <Animation attribute="position" to="0 -1.6 -1.5" dur="10000" repeat="indefinite" direction="alternate" from="0 -1.4 -1.5" ease="ease-in-out"/>
+        </Entity>
       </Camera>
+      <Entity light={{type: 'directional', intensity: 0.9}} position="0 100 0"/>
       <Audio  audioSrc={this.state.song} frequencySize={this.props.frequencySize} refreshRate={this.props.refreshRate} shouldUpdateFrequencies={this.shouldUpdateFrequencies.bind(this)}/>
       <Sky color='#0B141A'/>
       <Entity collada-model='#moon' position="0 0 -500" scale="75 75 75" rotation="180 180 140">
         <Animation attribute="position" to="0 100 -500" dur="30000" ease="ease-in-out" />
+        <Entity light={{type: 'point', intensity:0.8, distance: 150}}>
+          <Animation attribute="position" to="0 100 -400" dur="30000" ease="ease-in-out"/>
+        </Entity>
       </Entity>
       <Entity collada-model="#terrain" position="0 -5 0" rotation="0 270 0" rotation="0 90 0"/>
       <Fog/>
