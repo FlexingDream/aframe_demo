@@ -12,6 +12,7 @@ import Camera from '../components/Camera';
 import Cursor from '../components/Cursor';
 import Audio from '../components/Audio';
 import Sky from '../components/Sky';
+import '../aframe_components/entity-generator';
 // import '../aframe_components/three-model.js';
 AframeExtras.loaders.registerAll();
 
@@ -34,6 +35,8 @@ class PortRob extends React.Component{
   getMixins(){
     return(
       <Entity>
+        <a-mixin id="starPrimitive" geometry="primitive: circle; radius: 0.5;" material="color: #FFEE35;" look-at='[camera]'/>
+
       </Entity>
     );
   }
@@ -80,25 +83,35 @@ class PortRob extends React.Component{
     return(
     <Scene id="scene" stats fog={{type: 'linear', near:50,color: '#1D2327'}}>
       {this.getAssets()}
-      <Camera id="camera" position={[0,10,0]} wasd-controls={{enabled: false}} >
+      <Camera id="camera" position={[0,15,0]} wasd-controls={{enabled: false}} >
         <Cursor />
         <Animation attribute="position" to="0 0 -100" dur="80000" ease="ease-in-out" begin="start_song"/>
+        <Entity light={{type: 'point'}} position="0 0 0" />
         <Hand/>
-
       </Camera>
-      <Entity light={{type: 'directional', intensity: 0.9}} position="0 100 0"/>
+      <Entity light={{type: 'point', intensity: 0.8, distance: 400}} position="0 200 0"/>
       <Audio  audioSrc={this.state.song} frequencySize={this.props.frequencySize} refreshRate={this.props.refreshRate} shouldUpdateFrequencies={this.shouldUpdateFrequencies.bind(this)}/>
       <Sky color='#0B141A'/>
-      <Entity id="moon" collada-model='#moon-asset' position="0 0 -500" scale="75 75 75" rotation="180 180 140">
-        <Animation attribute="position" to="0 100 -500" dur="60000" ease="ease-in-out" begin="start_song"/>
+      <Entity id="moon" collada-model='#moon-asset' position="-25 -40 -500" scale="75 75 75" rotation="180 180 140">
+        <Animation attribute="position" to="-25 100 -500" dur="60000" ease="ease-in-out" begin="start_song"/>
       </Entity>
       <Entity collada-model="#terrain-asset" position="0 -5 0" rotation="0 90 0"/>
       <Valley/>
       <Fog/>
+      <Stars/>
     </Scene>);
   }
 }
 
+class Stars extends React.Component{
+  render(){
+    return(
+      <Entity entity-generator-primitive="mixin: starPrimitive; numElements: 200; spread: 500; minExclusion: 0;maxExclusion: 50;" >  
+        <Animation attribute='rotation' to='0 90 0' ease='ease-linear' repeat='indefinite' dur="60000" direction='alternate'/>
+      </Entity>
+      );
+  }
+}
 class Hand extends React.Component{
   constructor(props){
     super(props);
@@ -128,10 +141,10 @@ class Fog extends React.Component{
 
     return(
       <Entity>
-        <Entity geometry={{primitive: 'box', width: 800, height: 25, depth: 2}} position="0 20 -480" material={{color: '#B38AAA', opacity: 0.2}}/>
-        <Entity geometry={{primitive: 'box', width: 800, height: 25, depth: 2}} position="0 10 -478" material={{color: '#673D68', opacity: 0.4}}/>
-        <Entity geometry={{primitive: 'box', width: 800, height: 25, depth: 2}} position="0 10 -476" material={{color: '#A86B9F', opacity: 0.6}}/>
-        <Entity geometry={{primitive: 'box', width: 800, height: 50, depth: 2}} position="0 0 -474" material={{color: '#93639F', opacity: 0.8}}/>
+        <Entity geometry={{primitive: 'box', width: 800, height: 100, depth: 2}} position="0 20 -480" material={{color: '#B38AAA', opacity: 0.2}}/>
+        <Entity geometry={{primitive: 'box', width: 800, height: 60, depth: 2}} position="0 10 -478" material={{color: '#673D68', opacity: 0.4}}/>
+        <Entity geometry={{primitive: 'box', width: 800, height: 100, depth: 2}} position="0 10 -476" material={{color: '#A86B9F', opacity: 0.6}}/>
+        <Entity geometry={{primitive: 'box', width: 800, height: 100, depth: 2}} position="0 0 -474" material={{color: '#93639F', opacity: 0.8}}/>
       </Entity>
     );
   }
