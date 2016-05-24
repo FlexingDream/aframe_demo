@@ -88,21 +88,21 @@
 
 	var _Audio2 = _interopRequireDefault(_Audio);
 
-	__webpack_require__(515);
+	__webpack_require__(514);
 
-	var _Laser = __webpack_require__(517);
+	var _Laser = __webpack_require__(521);
 
 	var _Laser2 = _interopRequireDefault(_Laser);
 
-	var _Floor = __webpack_require__(518);
+	var _Floor = __webpack_require__(522);
 
 	var _Floor2 = _interopRequireDefault(_Floor);
 
-	var _RainingObjects = __webpack_require__(516);
+	var _RainingObjects = __webpack_require__(520);
 
 	var _RainingObjects2 = _interopRequireDefault(_RainingObjects);
 
-	var _Waveform = __webpack_require__(519);
+	var _Waveform = __webpack_require__(523);
 
 	var _Waveform2 = _interopRequireDefault(_Waveform);
 
@@ -100988,6 +100988,9 @@
 	              (0, _jquery2.default)(right).remove();
 	              node.start(0);
 	            });
+	          } else if (document.getElementById('scene')) {
+	            document.getElementById('scene').emit('song_loaded');
+	            node.start(0);
 	          } else {
 	            node.start(0);
 	          }
@@ -101085,30 +101088,6 @@
 /* 512 */,
 /* 513 */,
 /* 514 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	AFRAME.registerComponent('collider', {
-	  dependencies: ['raycaster'],
-	  init: function init() {
-	    console.log('init collider');
-	    var el = this.el;
-
-	    // Set color using raycaster parent color.
-	    el.addEventListener('raycaster-intersected', function (evt) {
-	      console.log('intersected');
-	    });
-
-	    // Reset color.
-	    el.addEventListener('raycaster-intersected-cleared', function (evt) {
-	      console.log('intersected cleared');
-	    });
-	  }
-	});
-
-/***/ },
-/* 515 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -101304,7 +101283,35 @@
 	}
 
 /***/ },
-/* 516 */
+/* 515 */,
+/* 516 */,
+/* 517 */,
+/* 518 */,
+/* 519 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	AFRAME.registerComponent('collider', {
+	  dependencies: ['raycaster'],
+	  init: function init() {
+	    console.log('init collider');
+	    var el = this.el;
+
+	    // Set color using raycaster parent color.
+	    el.addEventListener('raycaster-intersected', function (evt) {
+	      console.log('intersected');
+	    });
+
+	    // Reset color.
+	    el.addEventListener('raycaster-intersected-cleared', function (evt) {
+	      console.log('intersected cleared');
+	    });
+	  }
+	});
+
+/***/ },
+/* 520 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -101321,7 +101328,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	__webpack_require__(514);
+	__webpack_require__(519);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -101383,7 +101390,7 @@
 	exports.default = RainingObjects;
 
 /***/ },
-/* 517 */
+/* 521 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -101518,7 +101525,7 @@
 	exports.default = Lasers;
 
 /***/ },
-/* 518 */
+/* 522 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -101567,7 +101574,7 @@
 	exports.default = Floor;
 
 /***/ },
-/* 519 */
+/* 523 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

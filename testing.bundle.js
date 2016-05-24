@@ -76,11 +76,11 @@
 
 	var _Cursor2 = _interopRequireDefault(_Cursor);
 
-	__webpack_require__(515);
-
 	__webpack_require__(514);
 
-	__webpack_require__(521);
+	__webpack_require__(519);
+
+	__webpack_require__(525);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -99167,30 +99167,6 @@
 
 	'use strict';
 
-	AFRAME.registerComponent('collider', {
-	  dependencies: ['raycaster'],
-	  init: function init() {
-	    console.log('init collider');
-	    var el = this.el;
-
-	    // Set color using raycaster parent color.
-	    el.addEventListener('raycaster-intersected', function (evt) {
-	      console.log('intersected');
-	    });
-
-	    // Reset color.
-	    el.addEventListener('raycaster-intersected-cleared', function (evt) {
-	      console.log('intersected cleared');
-	    });
-	  }
-	});
-
-/***/ },
-/* 515 */
-/***/ function(module, exports) {
-
-	'use strict';
-
 	/* global AFRAME */
 
 	/**
@@ -99382,12 +99358,40 @@
 	}
 
 /***/ },
+/* 515 */,
 /* 516 */,
 /* 517 */,
 /* 518 */,
-/* 519 */,
+/* 519 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	AFRAME.registerComponent('collider', {
+	  dependencies: ['raycaster'],
+	  init: function init() {
+	    console.log('init collider');
+	    var el = this.el;
+
+	    // Set color using raycaster parent color.
+	    el.addEventListener('raycaster-intersected', function (evt) {
+	      console.log('intersected');
+	    });
+
+	    // Reset color.
+	    el.addEventListener('raycaster-intersected-cleared', function (evt) {
+	      console.log('intersected cleared');
+	    });
+	  }
+	});
+
+/***/ },
 /* 520 */,
-/* 521 */
+/* 521 */,
+/* 522 */,
+/* 523 */,
+/* 524 */,
+/* 525 */
 /***/ function(module, exports) {
 
 	'use strict';

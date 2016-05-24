@@ -121526,6 +121526,9 @@
 	              (0, _jquery2.default)(right).remove();
 	              node.start(0);
 	            });
+	          } else if (document.getElementById('scene')) {
+	            document.getElementById('scene').emit('song_loaded');
+	            node.start(0);
 	          } else {
 	            node.start(0);
 	          }

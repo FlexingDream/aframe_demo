@@ -50,7 +50,7 @@
 
 	var _aframeReact = __webpack_require__(1);
 
-	var _scene_template = __webpack_require__(520);
+	var _scene_template = __webpack_require__(524);
 
 	var _scene_template2 = _interopRequireDefault(_scene_template);
 
@@ -82,9 +82,9 @@
 
 	var _Audio2 = _interopRequireDefault(_Audio);
 
-	__webpack_require__(515);
+	__webpack_require__(514);
 
-	var _Laser = __webpack_require__(517);
+	var _Laser = __webpack_require__(521);
 
 	var _Laser2 = _interopRequireDefault(_Laser);
 
@@ -100887,6 +100887,9 @@
 	              (0, _jquery2.default)(right).remove();
 	              node.start(0);
 	            });
+	          } else if (document.getElementById('scene')) {
+	            document.getElementById('scene').emit('song_loaded');
+	            node.start(0);
 	          } else {
 	            node.start(0);
 	          }
@@ -101127,8 +101130,7 @@
 	module.exports = shallowCompare;
 
 /***/ },
-/* 514 */,
-/* 515 */
+/* 514 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -101324,8 +101326,13 @@
 	}
 
 /***/ },
+/* 515 */,
 /* 516 */,
-/* 517 */
+/* 517 */,
+/* 518 */,
+/* 519 */,
+/* 520 */,
+/* 521 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -101460,9 +101467,9 @@
 	exports.default = Lasers;
 
 /***/ },
-/* 518 */,
-/* 519 */,
-/* 520 */
+/* 522 */,
+/* 523 */,
+/* 524 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
