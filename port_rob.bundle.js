@@ -221,9 +221,77 @@
 	      document.getElementById('part_2').removeEventListener('start_part2', this.startPart2, false);
 	      // $("#part_1").remove();
 	      document.getElementById('part_2').setAttribute('visible', true);
-	      document.getElementById('moon').emit("move_moon");
-	      document.getElementById('world_light').emit('dim_light');
-	      document.getElementById('moon_light').emit('brighten_light');
+	      // document.getElementById('moon').emit("move_moon");
+	      // document.getElementById('world_light').emit('dim_light');
+	      // document.getElementById('moon_light').emit('brighten_light');
+
+	      var chainEvents = [];
+	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(2) > a-entity", "reveal", 3000);
+	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(3) > a-entity", "reveal", 3000);
+	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(4) > a-entity", "reveal", 3000);
+	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(5) > a-entity", "reveal", 6000);
+	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(6) > a-entity", "reveal", 5000);
+	      chainEvents.newChainEvent(".group_1", "hide_group_1", 4000);
+	      chainEvents.newChainEvent("#part_2 .group_2 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
+	      chainEvents.newChainEvent("#part_2 .group_2 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
+	      chainEvents.newChainEvent(".group_2", "hide_group_2", 3000);
+	      chainEvents.newChainEvent("#part_2 .group_3 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
+	      chainEvents.newChainEvent("#part_2 .group_3 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
+	      chainEvents.newChainEvent("#part_2 .group_3 > a-entity:nth-child(4) > a-entity", "reveal", 2000);
+	      chainEvents.newChainEvent("#part_2 .group_3 > a-entity:nth-child(5) > a-entity", "reveal", 2000);
+	      chainEvents.newChainEvent("#part_2 .group_3 > a-entity:nth-child(6) > a-entity", "reveal", 2000);
+	      chainEvents.newChainEvent(".group_3", "hide_group_3", 2000);
+	      chainEvents.newChainEvent("#part_2 .group_4 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
+	      chainEvents.newChainEvent("#part_2 .group_4 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
+	      chainEvents.newChainEvent(".group_4", "hide_group_4", 2000);
+
+	      chainEvents.newChainEvent("#part_2 .group_5 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
+	      chainEvents.newChainEvent("#part_2 .group_5 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
+	      chainEvents.newChainEvent(".group_5", "hide_group_5", 3000);
+	      chainEvents.newChainEvent("#part_2 .group_6 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
+	      chainEvents.newChainEvent("#part_2 .group_6 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
+	      chainEvents.newChainEvent("#part_2 .group_6 > a-entity:nth-child(4) > a-entity", "reveal", 2000);
+	      chainEvents.newChainEvent("#part_2 .group_6 > a-entity:nth-child(5) > a-entity", "reveal", 2000);
+	      chainEvents.newChainEvent("#part_2 .group_6 > a-entity:nth-child(6) > a-entity", "reveal", 2000);
+	      chainEvents.newChainEvent(".group_6", "hide_group_6", 2000);
+	      chainEvents.newChainEvent("#part_2 .group_7 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
+	      chainEvents.newChainEvent("#part_2 .group_7 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
+	      chainEvents.newChainEvent(".group_7", "hide_group_7", 4000);
+
+	      chainEvents.reverse();
+	      this.chainTimingEvents(chainEvents);
+
+	      /*    setTimeout(function(){
+	            document.getElementsByClassName("part2-text")[0].emit("reveal");
+	            setTimeout(function(){
+	              document.getElementsByClassName("part2-text")[1].emit("reveal");
+	              setTimeout(function(){
+	                document.getElementsByClassName("part2-text")[2].emit("reveal");
+	                setTimeout(function(){
+	                  document.getElementsByClassName("part2-text")[3].emit('reveal');
+	                  setTimeout(function(){
+	                    document.getElementsByClassName("part2-text")[4].emit('reveal');
+	                    setTimeout(function(){
+	                      document.getElementsByClassName('group_1')[0].emit('hide_group_1');
+	                    },8000);
+	                  },5000);
+	                },6000);
+	              },3000);
+	            },2000);
+	      
+	          },1000);*/
+	    }
+	  }, {
+	    key: 'chainTimingEvents',
+	    value: function chainTimingEvents(chainEvents) {
+	      if (chainEvents <= 0) return;
+	      var that = this;
+	      var newEvent = chainEvents.pop();
+	      setTimeout(function () {
+	        console.log(newEvent);
+	        document.querySelector(newEvent.querySelector).emit(newEvent.emitEvent);
+	        that.chainTimingEvents(chainEvents);
+	      }, newEvent.delay);
 	    }
 	  }, {
 	    key: 'captureSongStart',
@@ -238,7 +306,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _aframeReact.Scene,
-	        { id: 'scene', stats: true, fog: { type: 'linear', near: 50, color: '#1D2327' } },
+	        { id: 'scene', stats: true, fog: { type: 'exponential', density: 0.005, near: 25, color: '#1D2327' } },
 	        this.getAssets(),
 	        _react2.default.createElement(
 	          _Camera2.default,
@@ -246,11 +314,7 @@
 	          _react2.default.createElement(_Cursor2.default, null),
 	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 -200', dur: '160000', ease: 'ease-in-out', begin: '' }),
 	          _react2.default.createElement(Hand, null),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { id: 'world_light', light: { type: 'point', distance: 200, decay: 2 } },
-	            _react2.default.createElement(_aframeReact.Animation, { attribute: 'light.intensity', dur: '10000', to: '0.4', begin: 'dim_light' })
-	          )
+	          '      '
 	        ),
 	        _react2.default.createElement(_Audio2.default, { audioSrc: this.state.song, frequencySize: this.props.frequencySize, refreshRate: this.props.refreshRate, shouldUpdateFrequencies: this.shouldUpdateFrequencies.bind(this) }),
 	        _react2.default.createElement(Intro, null),
@@ -278,6 +342,11 @@
 	  }
 
 	  _createClass(Intro, [{
+	    key: 'shouldComponentUpdate',
+	    value: function shouldComponentUpdate(nextProps, nextState) {
+	      return false;
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -286,23 +355,39 @@
 	        _react2.default.createElement(_Sky2.default, { color: 'black' }),
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
-	          { position: '-30 50 -50', 'look-at': '[camera]' },
+	          { position: '-30 40 -70' },
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
-	            { 'class': 'intro-text', text: { text: "IS ANYONE THERE?", height: 1, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	            _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            { position: '-2 -10' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'intro-text', text: { text: "IS ANYONE THERE?", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
 	          ),
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
-	            { 'class': 'intro-text', text: { text: "OH - ", height: 1, size: 5 }, position: '0 -10 0', material: { color: 'white' }, visible: 'false' },
-	            _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            { position: '-2 -20 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'intro-text', text: { text: "OH - ", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
 	          ),
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
-	            { 'class': 'intro-text', text: { text: "HI!", height: 1, size: 5 }, position: '0 -20 0', material: { color: 'white' }, visible: 'false' },
-	            _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            { position: '-2 -30 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'intro-text', text: { text: "HI!", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
 	          ),
-	          _react2.default.createElement(_aframeReact.Entity, { 'class': 'intro-text', text: { text: "Porter Robinson - Sad Machine", height: 1, size: 8 }, position: '5 20 0', material: { color: 'white' } })
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '-40 0 0' },
+	            _react2.default.createElement(_aframeReact.Entity, { 'class': 'intro-text', text: { text: "Porter Robinson - Sad Machine", height: 0.5, size: 8 }, material: { color: 'white' } })
+	          )
 	        )
 	      );
 	    }
@@ -321,6 +406,11 @@
 	  }
 
 	  _createClass(Part1, [{
+	    key: 'shouldComponentUpdate',
+	    value: function shouldComponentUpdate(nextProps, nextState) {
+	      return false;
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -347,26 +437,267 @@
 	  }
 
 	  _createClass(Part2, [{
-	    key: 'render',
-
+	    key: 'shouldComponentUpdate',
+	    value: function shouldComponentUpdate(nextProps, nextState) {
+	      return false;
+	    }
 	    // <Entity light={{type: 'point', intensity: 0.8, distance: 400}} position="0 200 0"/>
 
+	  }, {
+	    key: 'render',
 	    value: function render() {
+
 	      return _react2.default.createElement(
 	        _aframeReact.Entity,
 	        { id: 'part_2', visible: 'false' },
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 -800', dur: '120000', ease: 'ease-in-out', begin: 'move_moon' }),
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
-	          { id: 'moon', 'collada-model': '#moon-asset', position: '-25 -40 -500', scale: '75 75 75', rotation: '180 180 140' },
+	          { id: 'moon', 'collada-model': '#moon-asset', position: '-25 -80 -500', scale: '75 75 75', rotation: '180 180 140' },
 	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '-25 150 -500', dur: '60000', ease: 'ease-in-out', begin: 'move_moon' })
 	        ),
+	        _react2.default.createElement(Stars, null),
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
-	          { light: { type: 'point', distance: 300 }, position: '-25 -50 -480' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'light.intensity', to: '1', from: '0', begin: 'brighten_light', dur: '60000' })
+	          { position: '-60 70 -150', rotation: '45 45 45', 'class': 'group_1' },
+	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_1' }),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 0 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: ">WHO SURVIVED?", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 -10 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: ">SOMEBODY NEW?", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 -20 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: ">ANYONE ELSE BUT YOU?", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 -30 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: ">ON A LONELY NIGHT WAS A BLINDING LIGHT.", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 -40 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: ">A HUNDRED LEADERS WOULD BE BORNE OF YOU.", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          )
 	        ),
-	        _react2.default.createElement(Stars, null)
+	        _react2.default.createElement(
+	          _aframeReact.Entity,
+	          { position: '10 70 -170', 'class': 'group_2' },
+	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_2' }),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 0 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: "AND THOUGH I KNOW", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 -10 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: "SINCE YOU'VE AWAKENED HER AGAIN", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _aframeReact.Entity,
+	          { position: '30 70 -190', rotation: '45 -45 -45', 'class': 'group_3' },
+	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_3' }),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 0 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: "SHE DEPENDS ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 -10 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: "SHE DEPENDS ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 -20 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: "SHE'LL GO ALONE", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 -30 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: "AND NEVER SPEAK", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 -40 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: "OF THIS AGAIN", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _aframeReact.Entity,
+	          { position: '-60 70 -210', rotation: '45 45 45', 'class': 'group_4' },
+	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_4' }),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 0 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: "WE DEPEND ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 -10 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: "WE DEPEND ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _aframeReact.Entity,
+	          { position: '10 70 -230', 'class': 'group_5' },
+	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_5' }),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 0 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: "AND THOUGH I KNOW", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 -10 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: "SINCE YOU'VE AWAKENED HER AGAIN", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _aframeReact.Entity,
+	          { position: '30 70 -250', rotation: '45 -45 -45', 'class': 'group_6' },
+	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_6' }),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 0 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: "SHE DEPENDS ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 -10 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: "SHE DEPENDS ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 -20 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: "SHE'LL GO ALONE", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 -30 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: "AND NEVER SPEAK", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 -40 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: "OF THIS AGAIN", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _aframeReact.Entity,
+	          { position: '-60 70 -270', rotation: '45 45 45', 'class': 'group_7' },
+	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_7' }),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 0 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: "WE DEPEND ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 -10 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', text: { text: "WE DEPEND ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          )
+	        )
 	      );
 	    }
 	  }]);
@@ -384,11 +715,16 @@
 	  }
 
 	  _createClass(Stars, [{
+	    key: 'shouldComponentUpdate',
+	    value: function shouldComponentUpdate(nextProps, nextState) {
+	      return false;
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _aframeReact.Entity,
-	        { 'entity-generator-primitive': 'mixin: starPrimitive; numElements: 200; spread: 500; minExclusion: 0;maxExclusion: 50;' },
+	        { 'entity-generator-primitive': 'mixin: starPrimitive; numElements: 200; spread: 500; minExclusion: 0;maxExclusion: 10;' },
 	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '0 90 0', ease: 'ease-linear', repeat: 'indefinite', dur: '60000', direction: 'alternate' })
 	      );
 	    }
@@ -399,6 +735,13 @@
 
 	var Hand = function (_React$Component6) {
 	  _inherits(Hand, _React$Component6);
+
+	  _createClass(Hand, [{
+	    key: 'shouldComponentUpdate',
+	    value: function shouldComponentUpdate(nextProps, nextState) {
+	      return false;
+	    }
+	  }]);
 
 	  function Hand(props) {
 	    _classCallCheck(this, Hand);
@@ -426,6 +769,13 @@
 	var Valley = function (_React$Component7) {
 	  _inherits(Valley, _React$Component7);
 
+	  _createClass(Valley, [{
+	    key: 'shouldComponentUpdate',
+	    value: function shouldComponentUpdate(nextProps, nextState) {
+	      return false;
+	    }
+	  }]);
+
 	  function Valley(props) {
 	    _classCallCheck(this, Valley);
 
@@ -452,12 +802,17 @@
 	  }
 
 	  _createClass(Fog, [{
+	    key: 'shouldComponentUpdate',
+	    value: function shouldComponentUpdate(nextProps, nextState) {
+	      return false;
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 
 	      return _react2.default.createElement(
 	        _aframeReact.Entity,
-	        null,
+	        { material: 'fog:false' },
 	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 -800', dur: '120000' }),
 	        _react2.default.createElement(_aframeReact.Entity, { geometry: { primitive: 'box', width: 800, height: 100, depth: 2 }, position: '0 20 -480', material: { color: '#B38AAA', opacity: 0.2 } }),
 	        _react2.default.createElement(_aframeReact.Entity, { geometry: { primitive: 'box', width: 800, height: 60, depth: 2 }, position: '0 10 -478', material: { color: '#673D68', opacity: 0.4 } }),
@@ -470,8 +825,17 @@
 	  return Fog;
 	}(_react2.default.Component);
 
-	window.$ = _jquery2.default;
+	Array.prototype.newChainEvent = function (selector, emitEvent, delay) {
+	  if (selector == '') return;
+	  var x = {};
+	  x.querySelector = selector;
+	  x.emitEvent = emitEvent;
+	  x.delay = delay;
+	  this.push(x);
+	  return this;
+	};
 
+	window.$ = _jquery2.default;
 	// ONLY FOR DEV MODE OTHERWISE WONT WORK
 	window.Perf = _reactAddonsPerf2.default;
 	_reactDom2.default.render(_react2.default.createElement(PortRob, null), document.querySelector('.scene-container'));

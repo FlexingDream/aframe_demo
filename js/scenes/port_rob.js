@@ -114,10 +114,78 @@ class PortRob extends React.Component{
     document.getElementById('part_2').removeEventListener('start_part2',this.startPart2,false);
     // $("#part_1").remove();
     document.getElementById('part_2').setAttribute('visible',true);
-    document.getElementById('moon').emit("move_moon");
-    document.getElementById('world_light').emit('dim_light');
-    document.getElementById('moon_light').emit('brighten_light');
+    // document.getElementById('moon').emit("move_moon");
+    // document.getElementById('world_light').emit('dim_light');
+    // document.getElementById('moon_light').emit('brighten_light');
+
+    var chainEvents = [];
+    chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(2) > a-entity","reveal",3000);
+    chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(3) > a-entity","reveal",3000);
+    chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(4) > a-entity","reveal",3000);
+    chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(5) > a-entity","reveal",6000);
+    chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(6) > a-entity","reveal",5000);
+    chainEvents.newChainEvent(".group_1","hide_group_1",4000);
+    chainEvents.newChainEvent("#part_2 .group_2 > a-entity:nth-child(2) > a-entity","reveal",1000);
+    chainEvents.newChainEvent("#part_2 .group_2 > a-entity:nth-child(3) > a-entity","reveal",2000);
+    chainEvents.newChainEvent(".group_2","hide_group_2",3000);
+    chainEvents.newChainEvent("#part_2 .group_3 > a-entity:nth-child(2) > a-entity","reveal",1000);
+    chainEvents.newChainEvent("#part_2 .group_3 > a-entity:nth-child(3) > a-entity","reveal",2000);
+    chainEvents.newChainEvent("#part_2 .group_3 > a-entity:nth-child(4) > a-entity","reveal",2000);
+    chainEvents.newChainEvent("#part_2 .group_3 > a-entity:nth-child(5) > a-entity","reveal",2000);
+    chainEvents.newChainEvent("#part_2 .group_3 > a-entity:nth-child(6) > a-entity","reveal",2000);
+    chainEvents.newChainEvent(".group_3","hide_group_3",2000);
+    chainEvents.newChainEvent("#part_2 .group_4 > a-entity:nth-child(2) > a-entity","reveal",1000);
+    chainEvents.newChainEvent("#part_2 .group_4 > a-entity:nth-child(3) > a-entity","reveal",2000);
+    chainEvents.newChainEvent(".group_4","hide_group_4",2000);
+
+    chainEvents.newChainEvent("#part_2 .group_5 > a-entity:nth-child(2) > a-entity","reveal",1000);
+    chainEvents.newChainEvent("#part_2 .group_5 > a-entity:nth-child(3) > a-entity","reveal",2000);
+    chainEvents.newChainEvent(".group_5","hide_group_5",3000);
+    chainEvents.newChainEvent("#part_2 .group_6 > a-entity:nth-child(2) > a-entity","reveal",1000);
+    chainEvents.newChainEvent("#part_2 .group_6 > a-entity:nth-child(3) > a-entity","reveal",2000);
+    chainEvents.newChainEvent("#part_2 .group_6 > a-entity:nth-child(4) > a-entity","reveal",2000);
+    chainEvents.newChainEvent("#part_2 .group_6 > a-entity:nth-child(5) > a-entity","reveal",2000);
+    chainEvents.newChainEvent("#part_2 .group_6 > a-entity:nth-child(6) > a-entity","reveal",2000);
+    chainEvents.newChainEvent(".group_6","hide_group_6",2000);
+    chainEvents.newChainEvent("#part_2 .group_7 > a-entity:nth-child(2) > a-entity","reveal",1000);
+    chainEvents.newChainEvent("#part_2 .group_7 > a-entity:nth-child(3) > a-entity","reveal",2000);
+    chainEvents.newChainEvent(".group_7","hide_group_7",4000);
+
+    chainEvents.reverse();
+    this.chainTimingEvents(chainEvents);
+
+/*    setTimeout(function(){
+      document.getElementsByClassName("part2-text")[0].emit("reveal");
+      setTimeout(function(){
+        document.getElementsByClassName("part2-text")[1].emit("reveal");
+        setTimeout(function(){
+          document.getElementsByClassName("part2-text")[2].emit("reveal");
+          setTimeout(function(){
+            document.getElementsByClassName("part2-text")[3].emit('reveal');
+            setTimeout(function(){
+              document.getElementsByClassName("part2-text")[4].emit('reveal');
+              setTimeout(function(){
+                document.getElementsByClassName('group_1')[0].emit('hide_group_1');
+              },8000);
+            },5000);
+          },6000);
+        },3000);
+      },2000);
+
+    },1000);*/
   }
+
+  chainTimingEvents(chainEvents){
+    if (chainEvents<=0) return;
+    var that = this;
+    var newEvent = chainEvents.pop();
+    setTimeout(function(){
+      console.log(newEvent);
+      document.querySelector(newEvent.querySelector).emit(newEvent.emitEvent);
+      that.chainTimingEvents(chainEvents);
+    },newEvent.delay);
+  }
+
 
   captureSongStart(){
     document.getElementById('scene').addEventListener('song_loaded',this.startSong.bind(this),false);
@@ -128,16 +196,16 @@ class PortRob extends React.Component{
 
   render(){
     return(
-    <Scene id="scene" stats fog={{type: 'linear', near:50,color: '#1D2327'}}>
+    <Scene id="scene" stats fog={{type: 'exponential', density:0.005, near:25,color: '#1D2327'}}>
       {this.getAssets()}
       <Camera id="camera" position={[0,10,0]} wasd-controls={{enabled: false}} >
         <Cursor />
         <Animation attribute="position" to="0 0 -200" dur="160000" ease="ease-in-out" begin=""/>
         <Hand/>
-        <Entity id="world_light" light={{type: 'point', distance: 200, decay: 2}}>
+{/*        <Entity id="world_light" light={{type: 'point', distance: 200, decay: 2}}>
           <Animation attribute="light.intensity" dur="10000" to="0.4" begin="dim_light"/>
         </Entity>
-      </Camera>
+*/}      </Camera>
       <Audio  audioSrc={this.state.song} frequencySize={this.props.frequencySize} refreshRate={this.props.refreshRate} shouldUpdateFrequencies={this.shouldUpdateFrequencies.bind(this)}/>
       <Intro/>
       <Part1/>
@@ -147,21 +215,32 @@ class PortRob extends React.Component{
 }
 
 class Intro extends React.Component{
+  shouldComponentUpdate(nextProps,nextState){
+    return false;
+  }
   render(){
     return(
     <Entity id="intro">
       <Sky color="black"/>
-      <Entity position="-30 50 -50" look-at='[camera]'>
-        <Entity class="intro-text" text={{text: "IS ANYONE THERE?",height: 1, size: 5}}  material={{color:'white'}} visible="false">
+      <Entity position="-30 40 -70">
+        <Entity position="-2 -10">
+          <Entity class="intro-text" text={{text: "IS ANYONE THERE?",height: 0.5, size: 5}}  material={{color:'white'}} visible="false">
           <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+          </Entity>
         </Entity>
-        <Entity class="intro-text" text={{text: "OH - ",height: 1, size: 5}}  position="0 -10 0" material={{color:'white'}} visible="false">
+        <Entity position="-2 -20 0">
+          <Entity class="intro-text" text={{text: "OH - ",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
           <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+          </Entity>
         </Entity>
-        <Entity class="intro-text" text={{text: "HI!",height: 1, size: 5}}  position="0 -20 0" material={{color:'white'}} visible="false">
+        <Entity position="-2 -30 0">
+          <Entity class="intro-text" text={{text: "HI!",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
           <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+          </Entity>
         </Entity>
-        <Entity class="intro-text" text={{text: "Porter Robinson - Sad Machine",height: 1, size: 8}}  position="5 20 0" material={{color:'white'}}/>
+        <Entity position="-40 0 0">
+          <Entity class="intro-text" text={{text: "Porter Robinson - Sad Machine",height: 0.5, size: 8}} material={{color:'white'}}/>
+        </Entity>
       </Entity>
     </Entity>
     );
@@ -169,6 +248,9 @@ class Intro extends React.Component{
 }
 
 class Part1 extends React.Component{
+  shouldComponentUpdate(nextProps,nextState){
+    return false;
+  }
   render(){
     return(
       <Entity id="part_1" visible="false">
@@ -183,34 +265,182 @@ class Part1 extends React.Component{
 }
 
 class Part2 extends React.Component{
+  shouldComponentUpdate(nextProps,nextState){
+    return false;
+  }
         // <Entity light={{type: 'point', intensity: 0.8, distance: 400}} position="0 200 0"/>
 
   render(){
+        // <Animation attribute="position" to="0 0 -800" dur="120000" ease="ease-in-out" begin="move_moon"/>
+
     return(
       <Entity id="part_2" visible="false">
-        <Animation attribute="position" to="0 0 -800" dur="120000" ease="ease-in-out" begin="move_moon"/>
-        <Entity id="moon" collada-model='#moon-asset' position="-25 -40 -500" scale="75 75 75" rotation="180 180 140">
+        <Entity id="moon" collada-model='#moon-asset' position="-25 -80 -500" scale="75 75 75" rotation="180 180 140">
           <Animation attribute="position" to="-25 150 -500" dur="60000" ease="ease-in-out" begin="move_moon"/>
         </Entity>
-        <Entity light={{type: 'point', distance: 300}} position="-25 -50 -480">
+{/*        <Entity id="moon_light" light={{type: 'point', distance: 300}} position="-25 -50 -480">
           <Animation attribute="light.intensity" to="1" from="0" begin="brighten_light" dur="60000"/>
-        </Entity>
+        </Entity>*/}
         <Stars/>
+        <Entity position="-60 70 -150" rotation="45 45 45" class="group_1">
+          <Animation attribute="visible" to="false" dur="5000" begin="hide_group_1"/>
+          <Entity position="0 0 0">
+            <Entity class="part2-text" text={{text: ">WHO SURVIVED?",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -10 0">
+            <Entity class="part2-text" text={{text: ">SOMEBODY NEW?",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -20 0">
+            <Entity class="part2-text" text={{text: ">ANYONE ELSE BUT YOU?",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -30 0">
+            <Entity class="part2-text" text={{text: ">ON A LONELY NIGHT WAS A BLINDING LIGHT.",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -40 0">
+            <Entity class="part2-text" text={{text: ">A HUNDRED LEADERS WOULD BE BORNE OF YOU.",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+{/*          <Entity light={{type: 'point', intensity: 0.8, distance: 100}} position="0 0 10" />
+*/}
+        </Entity>
+        <Entity position="10 70 -170" class="group_2">
+          <Animation attribute="visible" to="false" dur="5000" begin="hide_group_2"/>
+          <Entity position="0 0 0">
+            <Entity class="part2-text" text={{text: "AND THOUGH I KNOW",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -10 0">
+            <Entity class="part2-text" text={{text: "SINCE YOU'VE AWAKENED HER AGAIN",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+        </Entity>
+        <Entity position="30 70 -190" rotation="45 -45 -45" class="group_3">
+          <Animation attribute="visible" to="false" dur="5000" begin="hide_group_3"/>
+          <Entity position="0 0 0">
+            <Entity class="part2-text" text={{text: "SHE DEPENDS ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -10 0">
+            <Entity class="part2-text" text={{text: "SHE DEPENDS ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -20 0">
+            <Entity class="part2-text" text={{text: "SHE'LL GO ALONE",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -30 0">
+            <Entity class="part2-text" text={{text: "AND NEVER SPEAK",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -40 0">
+            <Entity class="part2-text" text={{text: "OF THIS AGAIN",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+        </Entity>
+        <Entity position="-60 70 -210" rotation="45 45 45" class="group_4">
+          <Animation attribute="visible" to="false" dur="5000" begin="hide_group_4"/>
+          <Entity position="0 0 0">
+            <Entity class="part2-text" text={{text: "WE DEPEND ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -10 0">
+            <Entity class="part2-text" text={{text: "WE DEPEND ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+        </Entity>
+        <Entity position="10 70 -230" class="group_5">
+          <Animation attribute="visible" to="false" dur="5000" begin="hide_group_5"/>
+          <Entity position="0 0 0">
+            <Entity class="part2-text" text={{text: "AND THOUGH I KNOW",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -10 0">
+            <Entity class="part2-text" text={{text: "SINCE YOU'VE AWAKENED HER AGAIN",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+        </Entity>
+        <Entity position="30 70 -250" rotation="45 -45 -45" class="group_6">
+          <Animation attribute="visible" to="false" dur="5000" begin="hide_group_6"/>
+          <Entity position="0 0 0">
+            <Entity class="part2-text" text={{text: "SHE DEPENDS ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -10 0">
+            <Entity class="part2-text" text={{text: "SHE DEPENDS ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -20 0">
+            <Entity class="part2-text" text={{text: "SHE'LL GO ALONE",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -30 0">
+            <Entity class="part2-text" text={{text: "AND NEVER SPEAK",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -40 0">
+            <Entity class="part2-text" text={{text: "OF THIS AGAIN",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+        </Entity>
+        <Entity position="-60 70 -270" rotation="45 45 45" class="group_7">
+          <Animation attribute="visible" to="false" dur="5000" begin="hide_group_7"/>
+          <Entity position="0 0 0">
+            <Entity class="part2-text" text={{text: "WE DEPEND ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -10 0">
+            <Entity class="part2-text" text={{text: "WE DEPEND ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+        </Entity>
       </Entity>
     );
   }
 }
 
 class Stars extends React.Component{
+  shouldComponentUpdate(nextProps,nextState){
+    return false;
+  }
   render(){
     return(
-      <Entity entity-generator-primitive="mixin: starPrimitive; numElements: 200; spread: 500; minExclusion: 0;maxExclusion: 50;" >  
+      <Entity entity-generator-primitive="mixin: starPrimitive; numElements: 200; spread: 500; minExclusion: 0;maxExclusion: 10;" >  
         <Animation attribute='rotation' to='0 90 0' ease='ease-linear' repeat='indefinite' dur="60000" direction='alternate'/>
       </Entity>
       );
   }
 }
 class Hand extends React.Component{
+  shouldComponentUpdate(nextProps,nextState){
+    return false;
+  }
   constructor(props){
     super(props);
   }
@@ -228,6 +458,9 @@ class Hand extends React.Component{
 }
 
 class Valley extends React.Component{
+  shouldComponentUpdate(nextProps,nextState){
+    return false;
+  }
   constructor(props){
     super(props);
   }
@@ -238,10 +471,13 @@ class Valley extends React.Component{
 }
 
 class Fog extends React.Component{
+  shouldComponentUpdate(nextProps,nextState){
+    return false;
+  }
   render(){
 
     return(
-      <Entity>
+      <Entity material="fog:false">
         <Animation attribute="position" to="0 0 -800" dur="120000"/>
         <Entity geometry={{primitive: 'box', width: 800, height: 100, depth: 2}} position="0 20 -480" material={{color: '#B38AAA', opacity: 0.2}}/>
         <Entity geometry={{primitive: 'box', width: 800, height: 60, depth: 2}} position="0 10 -478" material={{color: '#673D68', opacity: 0.4}}/>
@@ -252,8 +488,17 @@ class Fog extends React.Component{
   }
 }
 
-window.$ = $;
+Array.prototype.newChainEvent = function(selector,emitEvent,delay){
+    if (selector == '') return;
+    var x = {};
+    x.querySelector = selector;
+    x.emitEvent = emitEvent;
+    x.delay = delay;
+    this.push(x);
+    return this;
+}
 
+window.$ = $;
 // ONLY FOR DEV MODE OTHERWISE WONT WORK
 window.Perf = Perf;
 ReactDOM.render(<PortRob/>, document.querySelector('.scene-container'));
