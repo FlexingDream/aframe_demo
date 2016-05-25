@@ -118,7 +118,17 @@ class PortRob extends React.Component{
     document.getElementById('world_light').emit('dim_light');
     document.getElementById('moon_light').emit('brighten_light');
 
-    setTimeout(function(){
+    var chainEvents = [];
+    chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(2) > a-entity","reveal",1000);
+    chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(3) > a-entity","reveal",2000);
+    chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(4) > a-entity","reveal",3000);
+    chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(5) > a-entity","reveal",6000);
+    chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(6) > a-entity","reveal",5000);
+    chainEvents.newChainEvent(".group_1","hide_group_1",8000);
+    chainEvents.reverse();
+    this.chainTimingEvents(chainEvents);
+
+/*    setTimeout(function(){
       document.getElementsByClassName("part2-text")[0].emit("reveal");
       setTimeout(function(){
         document.getElementsByClassName("part2-text")[1].emit("reveal");
@@ -128,14 +138,28 @@ class PortRob extends React.Component{
             document.getElementsByClassName("part2-text")[3].emit('reveal');
             setTimeout(function(){
               document.getElementsByClassName("part2-text")[4].emit('reveal');
+              setTimeout(function(){
+                document.getElementsByClassName('group_1')[0].emit('hide_group_1');
+              },8000);
             },5000);
           },6000);
         },3000);
       },2000);
 
-    },1000);
-
+    },1000);*/
   }
+
+  chainTimingEvents(chainEvents){
+    if (chainEvents<=0) return;
+    var that = this;
+    var newEvent = chainEvents.pop();
+    setTimeout(function(){
+      console.log(newEvent);
+      document.querySelector(newEvent.querySelector).emit(newEvent.emitEvent);
+      that.chainTimingEvents(chainEvents);
+    },newEvent.delay);
+  }
+
 
   captureSongStart(){
     document.getElementById('scene').addEventListener('song_loaded',this.startSong.bind(this),false);
@@ -232,7 +256,8 @@ class Part2 extends React.Component{
           <Animation attribute="light.intensity" to="1" from="0" begin="brighten_light" dur="60000"/>
         </Entity>
         <Stars/>
-        <Entity position="-60 70 -150" rotation="45 45 45" >
+        <Entity position="-60 70 -150" rotation="45 45 45" class="group_1">
+          <Animation attribute="visible" to="false" dur="5000" begin="hide_group_1"/>
           <Entity position="0 0 0">
             <Entity class="part2-text" text={{text: ">WHO SURVIVED?",height: 1, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
@@ -327,8 +352,17 @@ class Fog extends React.Component{
   }
 }
 
-window.$ = $;
+Array.prototype.newChainEvent = function(selector,emitEvent,delay){
+    if (selector == '') return;
+    var x = {};
+    x.querySelector = selector;
+    x.emitEvent = emitEvent;
+    x.delay = delay;
+    this.push(x);
+    return this;
+}
 
+window.$ = $;
 // ONLY FOR DEV MODE OTHERWISE WONT WORK
 window.Perf = Perf;
 ReactDOM.render(<PortRob/>, document.querySelector('.scene-container'));
