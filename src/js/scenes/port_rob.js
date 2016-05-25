@@ -17,6 +17,8 @@ import 'aframe-text-component';
 // import '../aframe_components/three-model.js';
 AframeExtras.loaders.registerAll();
 
+var MODEL_LOCATION = "../3d_models/";
+
 class PortRob extends React.Component{
   static defaultProps = {
     frequencySize : 0,
@@ -44,11 +46,11 @@ class PortRob extends React.Component{
   getModels(){
     return(
       <Entity>
-        <a-asset-item id="moon-asset" src="../3d_models/moon.dae"></a-asset-item>
-        <a-asset-item id="terrain-asset" src="../3d_models/terrain.dae"></a-asset-item>
-        <a-asset-item id="hand-asset" src="../3d_models/hand.dae"></a-asset-item>
-        <a-asset-item id="valley-asset" src="../3d_models/valley.dae"></a-asset-item>
-        <a-asset-item id="gradient-sky-asset" src="../3d_models/gradient-sky.dae"></a-asset-item>
+        <a-asset-item id="moon-asset" src={MODEL_LOCATION+"moon.dae"}></a-asset-item>
+        <a-asset-item id="terrain-asset" src={MODEL_LOCATION+"terrain.dae"}></a-asset-item>
+        <a-asset-item id="hand-asset" src={MODEL_LOCATION+"hand.dae"}></a-asset-item>
+        <a-asset-item id="valley-asset" src={MODEL_LOCATION+"valley.dae"}></a-asset-item>
+        <a-asset-item id="gradient-sky-asset" src={MODEL_LOCATION+"gradient-sky.dae"}></a-asset-item>
       </Entity>
     );
   }
@@ -112,9 +114,27 @@ class PortRob extends React.Component{
     document.getElementById('part_2').removeEventListener('start_part2',this.startPart2,false);
     // $("#part_1").remove();
     document.getElementById('part_2').setAttribute('visible',true);
-    document.getElementById('moon').emit("move_moon");
+    // document.getElementById('moon').emit("move_moon");
     document.getElementById('world_light').emit('dim_light');
     document.getElementById('moon_light').emit('brighten_light');
+
+    setTimeout(function(){
+      document.getElementsByClassName("part2-text")[0].emit("reveal");
+      setTimeout(function(){
+        document.getElementsByClassName("part2-text")[1].emit("reveal");
+        setTimeout(function(){
+          document.getElementsByClassName("part2-text")[2].emit("reveal");
+          setTimeout(function(){
+            document.getElementsByClassName("part2-text")[3].emit('reveal');
+            setTimeout(function(){
+              document.getElementsByClassName("part2-text")[4].emit('reveal');
+            },5000);
+          },6000);
+        },3000);
+      },2000);
+
+    },1000);
+
   }
 
   captureSongStart(){
@@ -145,21 +165,32 @@ class PortRob extends React.Component{
 }
 
 class Intro extends React.Component{
+  shouldComponentUpdate(nextProps,nextState){
+    return false;
+  }
   render(){
     return(
     <Entity id="intro">
       <Sky color="black"/>
-      <Entity position="-30 50 -50" look-at='[camera]'>
-        <Entity class="intro-text" text={{text: "IS ANYONE THERE?",height: 1, size: 5}}  material={{color:'white'}} visible="false">
+      <Entity position="-30 40 -80">
+        <Entity position="-2 -10">
+          <Entity class="intro-text" text={{text: "IS ANYONE THERE?",height: 1, size: 5}}  material={{color:'white'}} visible="false">
           <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+          </Entity>
         </Entity>
-        <Entity class="intro-text" text={{text: "OH - ",height: 1, size: 5}}  position="0 -10 0" material={{color:'white'}} visible="false">
+        <Entity position="-2 -20 0">
+          <Entity class="intro-text" text={{text: "OH - ",height: 1, size: 5}} material={{color:'white'}} visible="false">
           <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+          </Entity>
         </Entity>
-        <Entity class="intro-text" text={{text: "HI!",height: 1, size: 5}}  position="0 -20 0" material={{color:'white'}} visible="false">
+        <Entity position="-2 -30 0">
+          <Entity class="intro-text" text={{text: "HI!",height: 1, size: 5}} material={{color:'white'}} visible="false">
           <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+          </Entity>
         </Entity>
-        <Entity class="intro-text" text={{text: "Porter Robinson - Sad Machine",height: 1, size: 8}}  position="5 20 0" material={{color:'white'}}/>
+        <Entity position="-40 0 0">
+          <Entity class="intro-text" text={{text: "Porter Robinson - Sad Machine",height: 1, size: 8}} material={{color:'white'}}/>
+        </Entity>
       </Entity>
     </Entity>
     );
@@ -167,6 +198,9 @@ class Intro extends React.Component{
 }
 
 class Part1 extends React.Component{
+  shouldComponentUpdate(nextProps,nextState){
+    return false;
+  }
   render(){
     return(
       <Entity id="part_1" visible="false">
@@ -181,25 +215,59 @@ class Part1 extends React.Component{
 }
 
 class Part2 extends React.Component{
+  shouldComponentUpdate(nextProps,nextState){
+    return false;
+  }
         // <Entity light={{type: 'point', intensity: 0.8, distance: 400}} position="0 200 0"/>
 
   render(){
+        // <Animation attribute="position" to="0 0 -800" dur="120000" ease="ease-in-out" begin="move_moon"/>
+
     return(
       <Entity id="part_2" visible="false">
-        <Animation attribute="position" to="0 0 -800" dur="120000" ease="ease-in-out" begin="move_moon"/>
-        <Entity id="moon" collada-model='#moon-asset' position="-25 -40 -500" scale="75 75 75" rotation="180 180 140">
+        <Entity id="moon" collada-model='#moon-asset' position="-25 -80 -500" scale="75 75 75" rotation="180 180 140">
           <Animation attribute="position" to="-25 150 -500" dur="60000" ease="ease-in-out" begin="move_moon"/>
         </Entity>
-        <Entity light={{type: 'point', distance: 300}} position="-25 -50 -480">
+        <Entity id="moon_light" light={{type: 'point', distance: 300}} position="-25 -50 -480">
           <Animation attribute="light.intensity" to="1" from="0" begin="brighten_light" dur="60000"/>
         </Entity>
         <Stars/>
+        <Entity position="-60 70 -150" rotation="45 45 45" >
+          <Entity position="0 0 0">
+            <Entity class="part2-text" text={{text: ">WHO SURVIVED?",height: 1, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -10 0">
+            <Entity class="part2-text" text={{text: ">SOMEBODY NEW?",height: 1, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -20 0">
+            <Entity class="part2-text" text={{text: ">ANYONE ELSE BUT YOU?",height: 1, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -30 0">
+            <Entity class="part2-text" text={{text: ">ON A LONELY NIGHT WAS A BLINDING LIGHT.",height: 1, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -40 0">
+            <Entity class="part2-text" text={{text: ">A HUNDRED LEADERS WOULD BE BORNE OF YOU.",height: 1, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+        </Entity>
       </Entity>
     );
   }
 }
 
 class Stars extends React.Component{
+  shouldComponentUpdate(nextProps,nextState){
+    return false;
+  }
   render(){
     return(
       <Entity entity-generator-primitive="mixin: starPrimitive; numElements: 200; spread: 500; minExclusion: 0;maxExclusion: 50;" >  
@@ -209,6 +277,9 @@ class Stars extends React.Component{
   }
 }
 class Hand extends React.Component{
+  shouldComponentUpdate(nextProps,nextState){
+    return false;
+  }
   constructor(props){
     super(props);
   }
@@ -226,6 +297,9 @@ class Hand extends React.Component{
 }
 
 class Valley extends React.Component{
+  shouldComponentUpdate(nextProps,nextState){
+    return false;
+  }
   constructor(props){
     super(props);
   }
@@ -236,6 +310,9 @@ class Valley extends React.Component{
 }
 
 class Fog extends React.Component{
+  shouldComponentUpdate(nextProps,nextState){
+    return false;
+  }
   render(){
 
     return(
