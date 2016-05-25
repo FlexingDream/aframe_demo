@@ -173,6 +173,8 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.captureSongStart();
+
+	      (0, _jquery2.default)("#scene").css('width', '100%');
 	    }
 	  }, {
 	    key: 'startSong',
@@ -306,7 +308,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _aframeReact.Scene,
-	        { id: 'scene', stats: true, fog: { type: 'exponential', density: 0.005, near: 25, color: '#1D2327' } },
+	        { id: 'scene', stats: true, fog: { type: 'exponential', density: 0.005, near: 25, color: '#1D2327' }, canvas: { width: screen.width / 2 } },
 	        this.getAssets(),
 	        _react2.default.createElement(
 	          _Camera2.default,
