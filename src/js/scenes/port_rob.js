@@ -17,7 +17,7 @@ import 'aframe-text-component';
 // import '../aframe_components/three-model.js';
 AframeExtras.loaders.registerAll();
 
-var MODEL_LOCATION = "../3d_models/";
+var MODEL_LOCATION = "3d_models/";
 
 class PortRob extends React.Component{
   static defaultProps = {
@@ -70,6 +70,8 @@ class PortRob extends React.Component{
 
   componentDidMount(){
     this.captureSongStart();
+
+    $("#scene").css('width','100%');
   }
 
   startSong(){
@@ -186,7 +188,6 @@ class PortRob extends React.Component{
     },newEvent.delay);
   }
 
-
   captureSongStart(){
     document.getElementById('scene').addEventListener('song_loaded',this.startSong.bind(this),false);
     document.getElementById('intro').addEventListener('start_intro',this.startIntro.bind(this),false);
@@ -196,7 +197,7 @@ class PortRob extends React.Component{
 
   render(){
     return(
-    <Scene id="scene" stats fog={{type: 'exponential', density:0.005, near:25,color: '#1D2327'}}>
+    <Scene id="scene" stats fog={{type: 'exponential', density:0.005, near:25,color: '#1D2327'}} canvas={{width: screen.width/2}}>
       {this.getAssets()}
       <Camera id="camera" position={[0,10,0]} wasd-controls={{enabled: false}} >
         <Cursor />
