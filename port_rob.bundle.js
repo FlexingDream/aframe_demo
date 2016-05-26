@@ -218,8 +218,8 @@
 	      document.getElementById('part_1').removeEventListener('start_part1', this.startPart1, false);
 	      (0, _jquery2.default)("#intro").remove();
 	      var chainEvents = [];
-	      chainEvents.newChainEvent("hand", "show_hand", 4000);
-	      chainEvents.newChainEvent("hand", "rotate_hand", 4000);
+	      chainEvents.newChainEvent("#hand", "show_hand", 4000);
+	      chainEvents.newChainEvent("#hand", "rotate_hand", 4000);
 	      chainEvents.reverse();
 	      this.chainTimingEvents(chainEvents);
 	      setTimeout(function () {
@@ -362,7 +362,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _aframeReact.Scene,
-	        { id: 'scene', fog: { color: this.state.fogColour }, canvas: { width: screen.width / 2 } },
+	        { id: 'scene', stats: true, fog: { color: this.state.fogColour }, canvas: { width: screen.width / 2 } },
 	        this.getAssets(),
 	        _react2.default.createElement(
 	          _Camera2.default,

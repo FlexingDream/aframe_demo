@@ -109,8 +109,8 @@ class PortRob extends React.Component{
     document.getElementById('part_1').removeEventListener('start_part1',this.startPart1,false);
     $("#intro").remove();
     var chainEvents = [];
-    chainEvents.newChainEvent("hand","show_hand",4000);
-    chainEvents.newChainEvent("hand","rotate_hand",4000);
+    chainEvents.newChainEvent("#hand","show_hand",4000);
+    chainEvents.newChainEvent("#hand","rotate_hand",4000);
     chainEvents.reverse();
     this.chainTimingEvents(chainEvents);
     setTimeout(function(){
@@ -254,7 +254,7 @@ class PortRob extends React.Component{
 
   render(){
     return(
-    <Scene id="scene" fog={{color: this.state.fogColour}} canvas={{width: screen.width/2}}>
+    <Scene id="scene" stats fog={{color: this.state.fogColour}} canvas={{width: screen.width/2}}>
       {this.getAssets()}
       <Camera id="camera" position={[0,10,0]} wasd-controls={{enabled: false}} >
         <Cursor />
