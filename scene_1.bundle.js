@@ -52,7 +52,7 @@
 
 	__webpack_require__(163);
 
-	__webpack_require__(519);
+	__webpack_require__(520);
 
 	__webpack_require__(507);
 
@@ -84,7 +84,7 @@
 
 	var _Sky2 = _interopRequireDefault(_Sky);
 
-	var _RainingObjects = __webpack_require__(520);
+	var _RainingObjects = __webpack_require__(519);
 
 	var _RainingObjects2 = _interopRequireDefault(_RainingObjects);
 
@@ -101314,6 +101314,42 @@
 	  }
 	});
 
+	AFRAME.registerComponent('entity-generator-positive-y', {
+	  schema: {
+	    mixin: { default: '' },
+	    numElements: { default: 2000 },
+	    raycasterEls: { default: '[mixin~="raycaster"]', type: 'selectorAll' },
+	    spread: { default: 50 },
+	    minExclusion: { default: 0 },
+	    maxExclusion: { default: 25 }
+	  },
+
+	  // TODO: make the position of the elements depending on starting position
+	  init: function init() {
+	    var data = this.data;
+	    // Create entities with supplied mixin.
+	    for (var i = 0; i < data.numElements; i++) {
+	      var entity = document.createElement('a-entity');
+
+	      entity.setAttribute('mixin', data.mixin);
+	      // Set random position with supplied spread.
+	      entity.setAttribute('position', {
+	        x: getSpecificSpread(data.spread, data.minExclusion, data.maxExclusion),
+	        y: getPositiveSpread(data.spread, 0, 0),
+	        z: getSpecificSpread(data.spread, data.minExclusion, data.maxExclusion)
+	      });
+	      this.el.appendChild(entity);
+	    }
+	    // Refresh raycasters.
+	    if (!data.raycasterEls) {
+	      return;
+	    }
+	    for (i = 0; i < data.raycasterEls.length; i++) {
+	      data.raycasterEls[i].components.raycaster.refreshObjects();
+	    }
+	  }
+	});
+
 	AFRAME.registerComponent('entity-generator-primitive', {
 	  schema: {
 	    mixin: { default: '' },
@@ -101468,30 +101504,6 @@
 /* 517 */,
 /* 518 */,
 /* 519 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	AFRAME.registerComponent('collider', {
-	  dependencies: ['raycaster'],
-	  init: function init() {
-	    console.log('init collider');
-	    var el = this.el;
-
-	    // Set color using raycaster parent color.
-	    el.addEventListener('raycaster-intersected', function (evt) {
-	      console.log('intersected');
-	    });
-
-	    // Reset color.
-	    el.addEventListener('raycaster-intersected-cleared', function (evt) {
-	      console.log('intersected cleared');
-	    });
-	  }
-	});
-
-/***/ },
-/* 520 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -101508,7 +101520,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	__webpack_require__(519);
+	__webpack_require__(520);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -101539,18 +101551,20 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(_aframeReact.Entity, {
-	        "entity-generator": {
+	        "entity-generator-positive-y": {
 	          numElements: this.props.numElements,
 	          mixin: this.props.mixin,
-	          spread: this.props.spread
+	          spread: this.props.spread,
+	          minExclusion: this.props.minExclusion,
+	          maxExclusion: this.props.maxExclusion
 	        },
-	        position: "0 10 0"
+	        position: this.props.position
 	      }, _react2.default.createElement(_aframeReact.Animation, {
 	        attribute: "position",
-	        dur: "16000",
+	        dur: this.props.duration,
 	        easing: "linear",
 	        repeat: "indefinite",
-	        to: "0 0 0",
+	        to: this.props.position,
 	        direction: this.props.animationDirection
 	      }));
 	    }
@@ -101563,11 +101577,39 @@
 	  animationDirection: { default: 'normal' },
 	  mixin: { default: '' },
 	  numElements: 2000,
-	  spread: 50
+	  spread: 50,
+	  position: '0 10 0',
+	  duration: 16000,
+	  minExclusion: 0,
+	  maxExclusion: 25
 	};
 	;
 
 	exports.default = RainingObjects;
+
+/***/ },
+/* 520 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	AFRAME.registerComponent('collider', {
+	  dependencies: ['raycaster'],
+	  init: function init() {
+	    console.log('init collider');
+	    var el = this.el;
+
+	    // Set color using raycaster parent color.
+	    el.addEventListener('raycaster-intersected', function (evt) {
+	      console.log('intersected');
+	    });
+
+	    // Reset color.
+	    el.addEventListener('raycaster-intersected-cleared', function (evt) {
+	      console.log('intersected cleared');
+	    });
+	  }
+	});
 
 /***/ },
 /* 521 */
