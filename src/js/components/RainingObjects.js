@@ -7,7 +7,11 @@ class RainingObjects extends React.Component{
     animationDirection: {default: 'normal'},
     mixin: {default: ''},
     numElements: 2000,
-    spread: 50
+    spread: 50,
+    position: '0 10 0',
+    duration: 16000,
+    minExclusion: 0,
+    maxExclusion: 25
   }
   constructor(props){
     super(props);
@@ -21,20 +25,22 @@ class RainingObjects extends React.Component{
     return(
       React.createElement(Entity,
         {
-          "entity-generator" : {
+          "entity-generator-positive-y": {
             numElements: this.props.numElements,
             mixin: this.props.mixin,
             spread:this.props.spread,
+            minExclusion: this.props.minExclusion,
+            maxExclusion: this.props.maxExclusion
           },
-          position: "0 10 0"
+          position: this.props.position
         }
       ,React.createElement(Animation, 
         {
           attribute: "position",
-          dur: "16000",
+          dur: this.props.duration,
           easing: "linear",
           repeat: "indefinite",
-          to: "0 0 0",
+          to: this.props.position,
           direction: this.props.animationDirection
         })
       )
