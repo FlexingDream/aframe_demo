@@ -220,9 +220,9 @@
 	      var chainEvents = [];
 	      chainEvents.newChainEvent("hand", "show_hand", 4000);
 	      chainEvents.newChainEvent("hand", "rotate_hand", 4000);
-
+	      chainEvents.reverse();
+	      this.chainTimingEvents(chainEvents);
 	      setTimeout(function () {
-	        // document.getElementById("world_light").emit("dim_light");
 	        document.getElementById("part_2").emit("start_part2");
 	      }, 40000);
 	    }
@@ -230,12 +230,8 @@
 	    key: 'startPart2',
 	    value: function startPart2() {
 	      document.getElementById('part_2').removeEventListener('start_part2', this.startPart2, false);
-	      // $("#part_1").remove();
 	      document.getElementById('part_2').setAttribute('visible', true);
 	      document.getElementById('moon').emit("move_moon");
-
-	      // document.getElementById('world_light').emit('dim_light');
-	      // document.getElementById('moon_light').emit('brighten_light');
 
 	      var chainEvents = [];
 
