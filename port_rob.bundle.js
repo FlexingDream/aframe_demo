@@ -375,8 +375,7 @@
 	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 -200', dur: '160000', ease: 'ease-in-out', begin: '' }),
 	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 -400', dur: '100000', eaase: 'ease-in-out', begin: 'part_4' }),
 	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 -600', dur: '100000', eaase: 'ease-in-out', begin: 'part_5' }),
-	          _react2.default.createElement(Hand, null),
-	          '      '
+	          _react2.default.createElement(Hand, null)
 	        ),
 	        _react2.default.createElement(_Audio2.default, { audioSrc: this.state.song, frequencySize: this.props.frequencySize, refreshRate: this.props.refreshRate, shouldUpdateFrequencies: this.shouldUpdateFrequencies.bind(this) }),
 	        _react2.default.createElement(_Sky2.default, { id: 'sky' }),

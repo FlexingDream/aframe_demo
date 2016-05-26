@@ -265,10 +265,7 @@ class PortRob extends React.Component{
         <Animation attribute="position" to="0 0 -400" dur="100000" eaase="ease-in-out" begin="part_4"/>
         <Animation attribute="position" to="0 0 -600" dur="100000" eaase="ease-in-out" begin="part_5"/>
         <Hand/>
-{/*        <Entity id="world_light" light={{type: 'point', distance: 200, decay: 2}}>
-          <Animation attribute="light.intensity" dur="10000" to="0.4" begin="dim_light"/>
-        </Entity>
-*/}      </Camera>
+      </Camera>
       <Audio  audioSrc={this.state.song} frequencySize={this.props.frequencySize} refreshRate={this.props.refreshRate} shouldUpdateFrequencies={this.shouldUpdateFrequencies.bind(this)}/>
       <Sky id="sky"/>
       <Intro/>
