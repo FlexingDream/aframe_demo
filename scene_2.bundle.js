@@ -100920,7 +100920,7 @@
 
 	        audioCtx.decodeAudioData(audioData, function (buffer) {
 	          node.buffer = buffer;
-	          node.loop = true;
+	          node.loop = false;
 	          node.connect(audioCtx.destination);
 	          // node.start(0);
 	          var element = document.createElement('div');

@@ -199,8 +199,17 @@
 	  }, {
 	    key: 'startIntro',
 	    value: function startIntro() {
-	      document.getElementById('intro').removeEventListener('start_intro', this.startIntro, false);
+	      var chainEvents = [];
 
+	      document.getElementById('intro').removeEventListener('start_intro', this.startIntro, false);
+	      /*    chainEvents.newChainEvent(".loading",'loaded',0);
+	          chainEvents.newChainEvent('#intro > a-entity > a-entity:nth-child(1)','reveal',0);
+	          chainEvents.newChainEvent('#intro > a-entity > a-entity:nth-child(2)','reveal',2000);
+	          chainEvents.newChainEvent('#intro > a-entity > a-entity:nth-child(3)','reveal',600)
+	          chainEvents.newChainEvent('#part_1','start_part1',1000);
+	          chainEvents.reverse();
+	          this.chainTimingEvents(chainEvents);*/
+	      document.getElementsByClassName("loading")[0].emit('hide');
 	      document.getElementsByClassName("intro-text")[0].emit("reveal");
 	      setTimeout(function () {
 	        document.getElementsByClassName("intro-text")[1].emit("reveal");
@@ -218,6 +227,7 @@
 	      document.getElementById('part_1').removeEventListener('start_part1', this.startPart1, false);
 	      (0, _jquery2.default)("#intro").remove();
 	      var chainEvents = [];
+	      chainEvents.newChainEvent("#camera", "part_1", 0);
 	      chainEvents.newChainEvent("#hand", "show_hand", 4000);
 	      chainEvents.newChainEvent("#hand", "rotate_hand", 4000);
 	      chainEvents.reverse();
@@ -276,7 +286,7 @@
 	      chainEvents.newChainEvent('#part_3', "reveal", 500);
 	      chainEvents.newChainEvent('#part_3 a-entity > .part3-text', "reveal", 1000);
 	      chainEvents.newChainEvent('#part_3', 'hide', 2000);
-	      chainEvents.newChainEvent('#part_4', 'reveal', 0);
+	      chainEvents.newChainEvent('#part_4', 'reveal_part4', 0);
 	      chainEvents.newChainEvent("#camera", "part_4", 0);
 
 	      chainEvents.newChainEvent("#scene", "change_white", 0);
@@ -306,17 +316,18 @@
 	      chainEvents.newChainEvent("#camera", "part_5", 0);
 
 	      chainEvents.newChainEvent("#scene", "change_black", 0);
+	      chainEvents.newChainEvent("#moon", "move_moon", 0);
 	      chainEvents.newChainEvent("#part_5 .group_1 > a-entity:nth-child(2) > a-entity", "reveal", 20000);
 	      chainEvents.newChainEvent("#part_5 .group_1 > a-entity:nth-child(3) > a-entity", "reveal", 3000);
 
 	      chainEvents.newChainEvent("#part_5 .group_1", "hide_group_1", 1000);
 	      chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
 	      chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(4) > a-entity", "reveal", 2000);
+	      chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(4) > a-entity", "reveal", 3000);
 	      chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(5) > a-entity", "reveal", 2000);
 	      chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(6) > a-entity", "reveal", 2000);
 
-	      chainEvents.newChainEvent("#part_5 .group_2", "hide_group_2", 3000);
+	      chainEvents.newChainEvent("#part_5 .group_2", "hide_group_2", 2000);
 	      chainEvents.newChainEvent("#part_5 .group_3 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
 	      chainEvents.newChainEvent("#part_5 .group_3 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
 	      chainEvents.newChainEvent("#part_5 .group_3", "hide_group_3", 2000);
@@ -334,6 +345,8 @@
 	      chainEvents.newChainEvent("#part_5 .group_6 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
 	      chainEvents.newChainEvent("#part_5 .group_6 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
 	      chainEvents.newChainEvent("#part_5 .group_6", "hide_group_6", 2000);
+
+	      chainEvents.newChainEvent("#part_6", "show", 2000);
 
 	      chainEvents.reverse();
 	      this.chainTimingEvents(chainEvents);
@@ -362,13 +375,13 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _aframeReact.Scene,
-	        { id: 'scene', stats: true, fog: { color: this.state.fogColour }, canvas: { width: screen.width / 2 } },
+	        { id: 'scene', fog: { color: this.state.fogColour }, canvas: { width: screen.width / 2 } },
 	        this.getAssets(),
 	        _react2.default.createElement(
 	          _Camera2.default,
 	          { id: 'camera', position: [0, 10, 0], 'wasd-controls': { enabled: false } },
 	          _react2.default.createElement(_Cursor2.default, null),
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 -200', dur: '160000', ease: 'ease-in-out', begin: '' }),
+	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 -200', dur: '160000', ease: 'ease-in-out', begin: 'part_1' }),
 	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 -400', dur: '100000', eaase: 'ease-in-out', begin: 'part_4' }),
 	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 -600', dur: '100000', eaase: 'ease-in-out', begin: 'part_5' }),
 	          _react2.default.createElement(Hand, null)
@@ -380,7 +393,8 @@
 	        _react2.default.createElement(Part2, null),
 	        _react2.default.createElement(Part3, null),
 	        _react2.default.createElement(Part4, null),
-	        _react2.default.createElement(Part5, null)
+	        _react2.default.createElement(Part5, null),
+	        _react2.default.createElement(Part6, null)
 	      );
 	    }
 	  }]);
@@ -418,7 +432,7 @@
 	          { position: '-30 40 -70' },
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
-	            { position: '-2 -10' },
+	            { position: '-2 -10 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
 	              { 'class': 'intro-text', text: { text: "IS ANYONE THERE?", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
@@ -447,6 +461,15 @@
 	            _aframeReact.Entity,
 	            { position: '-40 0 0' },
 	            _react2.default.createElement(_aframeReact.Entity, { 'class': 'intro-text', text: { text: "Porter Robinson - Sad Machine", height: 0.5, size: 8 }, material: { color: 'white' } })
+	          ),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '-2 -30 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'loading', text: { text: "Loading...", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'true' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'false', begin: 'hide' })
+	            )
 	          )
 	        )
 	      );
@@ -833,7 +856,7 @@
 	      return _react2.default.createElement(
 	        _aframeReact.Entity,
 	        { id: 'part_4', visible: 'false' },
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'true', begin: 'reveal', dur: '10000' }),
+	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'true', begin: 'reveal_part4' }),
 	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', begin: 'hide_part4' }),
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
@@ -1048,7 +1071,7 @@
 	            { position: '0 -20 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { text: { text: "SHE'LL GO ALONE", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { text: { text: "I'LL GO ALONE", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -1066,7 +1089,7 @@
 	            { position: '0 -40 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { text: { text: "OF THIS AGAIN", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { text: { text: "OF YOU AGAIN", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          )
@@ -1096,7 +1119,7 @@
 	        ),
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
-	          { position: '-35 70 -545', 'class': 'group_4' },
+	          { position: '-35 70 -565', 'class': 'group_4' },
 	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_4' }),
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
@@ -1119,7 +1142,7 @@
 	        ),
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
-	          { position: '-35 70 -565', rotation: '0 0 0', 'class': 'group_5' },
+	          { position: '-35 70 -585', rotation: '0 0 0', 'class': 'group_5' },
 	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_5' }),
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
@@ -1169,7 +1192,7 @@
 	        ),
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
-	          { position: '-35 70 -585', rotation: '0 0 0', 'class': 'group_6' },
+	          { position: '-35 70 -605', rotation: '0 0 0', 'class': 'group_6' },
 	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_6' }),
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
@@ -1199,8 +1222,52 @@
 	  return Part5;
 	}(_react2.default.Component);
 
-	var Stars = function (_React$Component8) {
-	  _inherits(Stars, _React$Component8);
+	var Part6 = function (_React$Component8) {
+	  _inherits(Part6, _React$Component8);
+
+	  function Part6() {
+	    _classCallCheck(this, Part6);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Part6).apply(this, arguments));
+	  }
+
+	  _createClass(Part6, [{
+	    key: 'render',
+	    value: function render() {
+	      var primitives = ['box', 'cylinder', 'ring', 'sphere', 'torus', 'torusKnot', 'cone'];
+	      var shapes = [];
+	      var spread = 20;
+	      for (var i = 0; i < 6; i++) {
+	        var x,
+	            y,
+	            z = 0;
+	        x = Math.floor(Math.random() * spread) + 1;
+	        x *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
+	        y = Math.floor(Math.random() * spread) + 1;
+	        y *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
+	        z = Math.floor(Math.random() * spread) + 1;
+	        z *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
+	        shapes.push(_react2.default.createElement(
+	          _aframeReact.Entity,
+	          { geometry: { primitive: primitives[Math.floor(Math.random() * 7)] }, position: "" + x + " " + y + " " + z },
+	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 0', dur: '180000', ease: 'linear', key: i })
+	        ));
+	      }
+	      return _react2.default.createElement(
+	        _aframeReact.Entity,
+	        { id: 'part_6', visible: 'false', position: '0 -5 -600' },
+	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', begin: 'hide' }),
+	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'true', begin: 'show' }),
+	        shapes
+	      );
+	    }
+	  }]);
+
+	  return Part6;
+	}(_react2.default.Component);
+
+	var Stars = function (_React$Component9) {
+	  _inherits(Stars, _React$Component9);
 
 	  function Stars() {
 	    _classCallCheck(this, Stars);
@@ -1227,8 +1294,8 @@
 	  return Stars;
 	}(_react2.default.Component);
 
-	var Hand = function (_React$Component9) {
-	  _inherits(Hand, _React$Component9);
+	var Hand = function (_React$Component10) {
+	  _inherits(Hand, _React$Component10);
 
 	  _createClass(Hand, [{
 	    key: 'shouldComponentUpdate',
@@ -1260,8 +1327,8 @@
 	  return Hand;
 	}(_react2.default.Component);
 
-	var Valley = function (_React$Component10) {
-	  _inherits(Valley, _React$Component10);
+	var Valley = function (_React$Component11) {
+	  _inherits(Valley, _React$Component11);
 
 	  _createClass(Valley, [{
 	    key: 'shouldComponentUpdate',
@@ -1286,8 +1353,8 @@
 	  return Valley;
 	}(_react2.default.Component);
 
-	var Fog = function (_React$Component11) {
-	  _inherits(Fog, _React$Component11);
+	var Fog = function (_React$Component12) {
+	  _inherits(Fog, _React$Component12);
 
 	  function Fog() {
 	    _classCallCheck(this, Fog);
@@ -122606,7 +122673,7 @@
 
 	        audioCtx.decodeAudioData(audioData, function (buffer) {
 	          node.buffer = buffer;
-	          node.loop = true;
+	          node.loop = false;
 	          node.connect(audioCtx.destination);
 	          // node.start(0);
 	          var element = document.createElement('div');
