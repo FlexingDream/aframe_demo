@@ -91,8 +91,17 @@ class PortRob extends React.Component{
   }
 
   startIntro(){
-    document.getElementById('intro').removeEventListener('start_intro',this.startIntro,false);
+    var chainEvents = [];
 
+    document.getElementById('intro').removeEventListener('start_intro',this.startIntro,false);
+/*    chainEvents.newChainEvent(".loading",'loaded',0);
+    chainEvents.newChainEvent('#intro > a-entity > a-entity:nth-child(1)','reveal',0);
+    chainEvents.newChainEvent('#intro > a-entity > a-entity:nth-child(2)','reveal',2000);
+    chainEvents.newChainEvent('#intro > a-entity > a-entity:nth-child(3)','reveal',600)
+    chainEvents.newChainEvent('#part_1','start_part1',1000);
+    chainEvents.reverse();
+    this.chainTimingEvents(chainEvents);*/
+    document.getElementsByClassName("loading")[0].emit('hide');
     document.getElementsByClassName("intro-text")[0].emit("reveal");
     setTimeout(function(){
       document.getElementsByClassName("intro-text")[1].emit("reveal");
@@ -109,6 +118,7 @@ class PortRob extends React.Component{
     document.getElementById('part_1').removeEventListener('start_part1',this.startPart1,false);
     $("#intro").remove();
     var chainEvents = [];
+    chainEvents.newChainEvent("#camera","part_1",0);
     chainEvents.newChainEvent("#hand","show_hand",4000);
     chainEvents.newChainEvent("#hand","rotate_hand",4000);
     chainEvents.reverse();
@@ -167,7 +177,7 @@ class PortRob extends React.Component{
     chainEvents.newChainEvent('#part_3',"reveal",500);
     chainEvents.newChainEvent('#part_3 a-entity > .part3-text',"reveal",1000);
     chainEvents.newChainEvent('#part_3','hide',2000);
-    chainEvents.newChainEvent('#part_4','reveal',0);
+    chainEvents.newChainEvent('#part_4','reveal_part4',0);
     chainEvents.newChainEvent("#camera","part_4",0);
 
     chainEvents.newChainEvent("#scene","change_white",0);
@@ -198,17 +208,18 @@ class PortRob extends React.Component{
     chainEvents.newChainEvent("#camera","part_5",0);
 
     chainEvents.newChainEvent("#scene","change_black",0);
+    chainEvents.newChainEvent("#moon","move_moon",0);
     chainEvents.newChainEvent("#part_5 .group_1 > a-entity:nth-child(2) > a-entity","reveal",20000);
     chainEvents.newChainEvent("#part_5 .group_1 > a-entity:nth-child(3) > a-entity","reveal",3000);
 
     chainEvents.newChainEvent("#part_5 .group_1","hide_group_1",1000);
     chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(2) > a-entity","reveal",1000);
     chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(3) > a-entity","reveal",2000);
-    chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(4) > a-entity","reveal",2000);
+    chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(4) > a-entity","reveal",3000);
     chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(5) > a-entity","reveal",2000);
     chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(6) > a-entity","reveal",2000);
 
-    chainEvents.newChainEvent("#part_5 .group_2","hide_group_2",3000);
+    chainEvents.newChainEvent("#part_5 .group_2","hide_group_2",2000);
     chainEvents.newChainEvent("#part_5 .group_3 > a-entity:nth-child(2) > a-entity","reveal",1000);
     chainEvents.newChainEvent("#part_5 .group_3 > a-entity:nth-child(3) > a-entity","reveal",2000);
     chainEvents.newChainEvent("#part_5 .group_3","hide_group_3",2000);
@@ -227,7 +238,7 @@ class PortRob extends React.Component{
     chainEvents.newChainEvent("#part_5 .group_6 > a-entity:nth-child(3) > a-entity","reveal",2000);
     chainEvents.newChainEvent("#part_5 .group_6","hide_group_6",2000);
 
-
+    chainEvents.newChainEvent("#part_6","show",2000);
 
     chainEvents.reverse();
     this.chainTimingEvents(chainEvents);
@@ -254,11 +265,11 @@ class PortRob extends React.Component{
 
   render(){
     return(
-    <Scene id="scene" stats fog={{color: this.state.fogColour}} canvas={{width: screen.width/2}}>
+    <Scene id="scene" fog={{color: this.state.fogColour}} canvas={{width: screen.width/2}}>
       {this.getAssets()}
       <Camera id="camera" position={[0,10,0]} wasd-controls={{enabled: false}} >
         <Cursor />
-        <Animation attribute="position" to="0 0 -200" dur="160000" ease="ease-in-out" begin=""/>
+        <Animation attribute="position" to="0 0 -200" dur="160000" ease="ease-in-out" begin="part_1"/>
         <Animation attribute="position" to="0 0 -400" dur="100000" eaase="ease-in-out" begin="part_4"/>
         <Animation attribute="position" to="0 0 -600" dur="100000" eaase="ease-in-out" begin="part_5"/>
         <Hand/>
@@ -271,6 +282,7 @@ class PortRob extends React.Component{
       <Part3/>
       <Part4/>
       <Part5/>
+      <Part6/>
     </Scene>);
   }
 }
@@ -283,7 +295,7 @@ class Intro extends React.Component{
     return(
     <Entity id="intro">
       <Entity position="-30 40 -70">
-        <Entity position="-2 -10">
+        <Entity position="-2 -10 0">
           <Entity class="intro-text" text={{text: "IS ANYONE THERE?",height: 0.5, size: 5}}  material={{color:'white'}} visible="false">
           <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
           </Entity>
@@ -300,6 +312,11 @@ class Intro extends React.Component{
         </Entity>
         <Entity position="-40 0 0">
           <Entity class="intro-text" text={{text: "Porter Robinson - Sad Machine",height: 0.5, size: 8}} material={{color:'white'}}/>
+        </Entity>
+        <Entity position="-2 -30 0">
+          <Entity class="loading" text={{text: "Loading...",height: 0.5, size: 5}} material={{color:'white'}} visible="true">
+          <Animation attribute="visible" dur="400" to="false" begin="hide"/>
+          </Entity>
         </Entity>
       </Entity>
     </Entity>
@@ -508,7 +525,7 @@ class Part4 extends React.Component{
   render(){
     return(
       <Entity id="part_4" visible="false">
-        <Animation attribute="visible" to="true" begin="reveal" dur="10000"/>
+        <Animation attribute="visible" to="true" begin="reveal_part4"/>
         <Animation attribute="visible" to="false" begin="hide_part4"/>
         <Entity collada-model="#valley-asset" position="0 -5 -100" rotation="0 0 0">
           <Animation attribute="rotation" to="0 0 360" from="0 0 0" repeat="indefinite" dur="120000" ease="linear"/>
@@ -627,7 +644,7 @@ class Part5 extends React.Component{
             </Entity>
           </Entity>
           <Entity position="0 -20 0">
-            <Entity  text={{text: "SHE'LL GO ALONE",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity  text={{text: "I'LL GO ALONE",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
@@ -637,7 +654,7 @@ class Part5 extends React.Component{
             </Entity>
           </Entity>
           <Entity position="0 -40 0">
-            <Entity  text={{text: "OF THIS AGAIN",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity  text={{text: "OF YOU AGAIN",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
@@ -655,7 +672,7 @@ class Part5 extends React.Component{
             </Entity>
           </Entity>
         </Entity>
-        <Entity position="-35 70 -545" class="group_4">
+        <Entity position="-35 70 -565" class="group_4">
           <Animation attribute="visible" to="false" dur="5000" begin="hide_group_4"/>
           <Entity position="0 0 0">
             <Entity  text={{text: "AND THOUGH I KNOW",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
@@ -668,7 +685,7 @@ class Part5 extends React.Component{
             </Entity>
           </Entity>
         </Entity>
-        <Entity position="-35 70 -565" rotation="0 0 0" class="group_5">
+        <Entity position="-35 70 -585" rotation="0 0 0" class="group_5">
           <Animation attribute="visible" to="false" dur="5000" begin="hide_group_5"/>
           <Entity position="0 0 0">
             <Entity  text={{text: "SHE DEPENDS ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
@@ -696,7 +713,7 @@ class Part5 extends React.Component{
             </Entity>
           </Entity>
         </Entity>
-        <Entity position="-35 70 -585" rotation="0 0 0" class="group_6">
+        <Entity position="-35 70 -605" rotation="0 0 0" class="group_6">
           <Animation attribute="visible" to="false" dur="5000" begin="hide_group_6"/>
           <Entity position="0 0 0">
             <Entity  text={{text: "WE DEPEND ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
@@ -713,6 +730,33 @@ class Part5 extends React.Component{
         <Entity collada-model="#terrain-asset-1" position="0 -10 -550" rotation="0 0 0"/>
       </Entity>
     );
+  }
+}
+
+class Part6 extends React.Component{
+  render(){
+    var primitives = ['box','cylinder', 'ring', 'sphere', 'torus', 'torusKnot', 'cone'];
+    var shapes = [];
+    var spread = 20;
+    for (var i = 0;i< 6; i++){
+      var x,y,z = 0;
+      x = Math.floor(Math.random() * spread)+1;
+      x *=Math.floor(Math.random()*2) == 1 ? 1 : -1;
+      y = Math.floor(Math.random() * spread)+1;
+      y *=Math.floor(Math.random()*2) == 1 ? 1 : -1;
+      z = Math.floor(Math.random() * spread)+1;
+      z *=Math.floor(Math.random()*2) == 1 ? 1 : -1;
+      shapes.push(<Entity geometry={{primitive: primitives[Math.floor(Math.random() *7)]}} position={"" + x + " " + y + " " + z}>
+        <Animation attribute="position" to="0 0 0" dur="180000" ease="linear" key ={i} />
+      </Entity>);
+    }
+    return(
+      <Entity id="part_6" visible="false" position="0 -5 -600">
+        <Animation attribute="visible" to="false" begin="hide"/>
+        <Animation attribute="visible" to="true" begin="show"/>
+        {shapes}
+      </Entity>
+      );
   }
 }
 
