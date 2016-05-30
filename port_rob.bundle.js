@@ -104,6 +104,8 @@
 
 	var _RainingObjects2 = _interopRequireDefault(_RainingObjects);
 
+	__webpack_require__(521);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -130,15 +132,20 @@
 	    });
 	    _this.state = {
 	      heights: heights,
-	      song: 'https://cdn.rawgit.com/FlexingDream/aframe_demo/pua/src/audio/port_rob_full.mp3',
-	      fogColour: '#F97B8E'
+	      // song: 'https://cdn.rawgit.com/FlexingDream/aframe_demo/pua/src/audio/port_rob_full.mp3',
+	      song: 'audio/port_rob_full.mp3',
+	      fogColour: '#F97B8E',
+	      shouldPlay: true,
+	      stage: 0
 	    };
 	    return _this;
 	  }
 
 	  _createClass(PortRob, [{
-	    key: 'shouldUpdateFrequencies',
-	    value: function shouldUpdateFrequencies(heights) {}
+	    key: 'shouldComponentUpdate',
+	    value: function shouldComponentUpdate(nextProps, nextState) {
+	      if (nextState.fogColour != this.state.fogColour) return true;else if (nextState.shouldPlay == false) return true;else if (nextState.stage != this.state.stage) return true;else return false;
+	    }
 	  }, {
 	    key: 'getMixins',
 	    value: function getMixins() {
@@ -146,7 +153,8 @@
 	        _aframeReact.Entity,
 	        null,
 	        _react2.default.createElement('a-mixin', { id: 'starPrimitive', geometry: 'primitive: circle; radius: 0.5;', material: 'color: #FFEE35;', 'look-at': '[camera]' }),
-	        _react2.default.createElement('a-mixin', { id: 'snow', geometry: 'primitive: box; depth: 0.02;height: 0.04; width: 0.04', material: 'color: #DDD; opacity: 0.4; shader: flat' })
+	        _react2.default.createElement('a-mixin', { id: 'snow', geometry: 'primitive: box; depth: 0.02;height: 0.04; width: 0.04', material: 'color: #DDD; opacity: 0.4; shader: flat' }),
+	        _react2.default.createElement('a-mixin', { id: 'font', text: 'font: digital dream skew narrow; height: 0.5; size: 5' })
 	      );
 	    }
 	  }, {
@@ -176,10 +184,18 @@
 	      );
 	    }
 	  }, {
+	    key: 'showTimer',
+	    value: function showTimer() {
+	      var timestamp = document.createElement('span');document.body.appendChild(timestamp);timestamp.style.position = 'absolute';timestamp.style.top = '20px';timestamp.style.right = '20px';var ascene = document.querySelector('a-scene');
+	      window.setInterval(function () {
+	        timestamp.textContent = parseFloat(ascene.time / 1000).toFixed(2);
+	      }, 100);
+	    }
+	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.captureSongStart();
-
+	      this.showTimer();
 	      (0, _jquery2.default)("#scene").css('width', '100%');
 	    }
 	  }, {
@@ -202,13 +218,6 @@
 	      var chainEvents = [];
 
 	      document.getElementById('intro').removeEventListener('start_intro', this.startIntro, false);
-	      /*    chainEvents.newChainEvent(".loading",'loaded',0);
-	          chainEvents.newChainEvent('#intro > a-entity > a-entity:nth-child(1)','reveal',0);
-	          chainEvents.newChainEvent('#intro > a-entity > a-entity:nth-child(2)','reveal',2000);
-	          chainEvents.newChainEvent('#intro > a-entity > a-entity:nth-child(3)','reveal',600)
-	          chainEvents.newChainEvent('#part_1','start_part1',1000);
-	          chainEvents.reverse();
-	          this.chainTimingEvents(chainEvents);*/
 	      document.getElementsByClassName("loading")[0].emit('hide');
 	      document.getElementsByClassName("intro-text")[0].emit("reveal");
 	      setTimeout(function () {
@@ -225,15 +234,17 @@
 	    key: 'startPart1',
 	    value: function startPart1() {
 	      document.getElementById('part_1').removeEventListener('start_part1', this.startPart1, false);
-	      (0, _jquery2.default)("#intro").remove();
+	      this.setState({ stage: 1 });
 	      var chainEvents = [];
 	      chainEvents.newChainEvent("#camera", "part_1", 0);
 	      chainEvents.newChainEvent("#hand", "show_hand", 4000);
 	      chainEvents.newChainEvent("#hand", "rotate_hand", 4000);
 	      chainEvents.reverse();
+	      var that = this;
 	      this.chainTimingEvents(chainEvents);
 	      setTimeout(function () {
 	        document.getElementById("part_2").emit("start_part2");
+	        that.setState({ stage: 2 });
 	      }, 40000);
 	    }
 	  }, {
@@ -250,11 +261,11 @@
 	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(3) > a-entity", "reveal", 3000);
 	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(4) > a-entity", "reveal", 3000);
 	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(5) > a-entity", "reveal", 6000);
-	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(6) > a-entity", "reveal", 1000);
-	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(7) > a-entity", "reveal", 5000);
+	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(6) > a-entity", "reveal", 2000);
+	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(7) > a-entity", "reveal", 4000);
 	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(8) > a-entity", "reveal", 1000);
 
-	      chainEvents.newChainEvent("#part_2 .group_1", "hide_group_1", 1000);
+	      chainEvents.newChainEvent("#part_2 .group_1", "hide_group_1", 2000);
 	      chainEvents.newChainEvent("#part_2 .group_2 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
 	      chainEvents.newChainEvent("#part_2 .group_2 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
 	      chainEvents.newChainEvent("#part_2 .group_2", "hide_group_2", 3000);
@@ -282,18 +293,40 @@
 
 	      chainEvents.newChainEvent("#part_1", "hide", 0);
 	      chainEvents.newChainEvent("#part_2", "hide", 0);
+	      chainEvents.newChainEvent('#part_3', "start_part3", 0);
 
+	      chainEvents.reverse();
+	      this.chainTimingEvents(chainEvents);
+	    }
+	  }, {
+	    key: 'startPart3',
+	    value: function startPart3() {
+	      document.getElementById('part_3').removeEventListener('start_part3', this.startPart3, false);
+
+	      var chainEvents = [];
 	      chainEvents.newChainEvent('#part_3', "reveal", 500);
 	      chainEvents.newChainEvent('#part_3 a-entity > .part3-text', "reveal", 1000);
 	      chainEvents.newChainEvent('#part_3', 'hide', 2000);
+	      chainEvents.newChainEvent('#part_4', "start_part4", 0);
+
+	      chainEvents.reverse();
+	      this.chainTimingEvents(chainEvents);
+	    }
+	  }, {
+	    key: 'startPart4',
+	    value: function startPart4() {
+	      document.getElementById('part_4').removeEventListener('start_part4', this.startPart4, false);
+
+	      var chainEvents = [];
+
 	      chainEvents.newChainEvent('#part_4', 'reveal_part4', 0);
-	      chainEvents.newChainEvent("#camera", "part_4", 0);
+	      // chainEvents.newChainEvent("#camera","part_4",0);
 
 	      chainEvents.newChainEvent("#scene", "change_white", 0);
-	      chainEvents.newChainEvent("#part_4 .group_1 > a-entity:nth-child(2) > a-entity", "reveal", 40000);
+	      chainEvents.newChainEvent("#part_4 .group_1 > a-entity:nth-child(2) > a-entity", "reveal", 41000);
 	      chainEvents.newChainEvent("#part_4 .group_1 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
 	      chainEvents.newChainEvent("#part_4 .group_1 > a-entity:nth-child(4) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_4 .group_1", "hide", 1000);
+	      chainEvents.newChainEvent("#part_4 .group_1", "hide", 2000);
 
 	      chainEvents.newChainEvent("#part_4 .group_2 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
 	      chainEvents.newChainEvent("#part_4 .group_2 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
@@ -311,43 +344,53 @@
 	      chainEvents.newChainEvent("#part_4 .group_4", "hide", 2000);
 
 	      chainEvents.newChainEvent("#part_4", "hide_part4", 0);
+	      // chainEvents.newChainEvent('#part_5',"start_part5",0);
+	      chainEvents.newChainEvent("#scene", "song_finished", 10000);
 
-	      chainEvents.newChainEvent("#part_5", "reveal_part5", 0);
-	      chainEvents.newChainEvent("#camera", "part_5", 0);
+	      chainEvents.reverse();
+	      this.chainTimingEvents(chainEvents);
+	    }
+	  }, {
+	    key: 'startPart5',
+	    value: function startPart5() {
+	      /*    chainEvents.newChainEvent("#part_5","reveal_part5",0);
+	          // chainEvents.newChainEvent("#camera","part_5",0);
+	            chainEvents.newChainEvent("#scene","change_black",0);
+	          chainEvents.newChainEvent("#moon","move_moon",0);
+	          chainEvents.newChainEvent("#part_5 .group_1 > a-entity:nth-child(2) > a-entity","reveal",20000);
+	          chainEvents.newChainEvent("#part_5 .group_1 > a-entity:nth-child(3) > a-entity","reveal",3000);
+	            chainEvents.newChainEvent("#part_5 .group_1","hide_group_1",1000);
+	          chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(2) > a-entity","reveal",1000);
+	          chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(3) > a-entity","reveal",2000);
+	          chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(4) > a-entity","reveal",3000);
+	          chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(5) > a-entity","reveal",2000);
+	          chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(6) > a-entity","reveal",2000);
+	            chainEvents.newChainEvent("#part_5 .group_2","hide_group_2",2000);
+	          chainEvents.newChainEvent("#part_5 .group_3 > a-entity:nth-child(2) > a-entity","reveal",1000);
+	          chainEvents.newChainEvent("#part_5 .group_3 > a-entity:nth-child(3) > a-entity","reveal",2000);
+	          chainEvents.newChainEvent("#part_5 .group_3","hide_group_3",2000);
+	          chainEvents.newChainEvent("#part_5 .group_4 > a-entity:nth-child(2) > a-entity","reveal",1000);
+	          chainEvents.newChainEvent("#part_5 .group_4 > a-entity:nth-child(3) > a-entity","reveal",2000);
+	          chainEvents.newChainEvent("#part_5 .group_4","hide_group_4",2000);
+	            chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(2) > a-entity","reveal",1000);
+	          chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(3) > a-entity","reveal",2000);
+	          chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(4) > a-entity","reveal",2000);
+	          chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(5) > a-entity","reveal",2000);
+	          chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(6) > a-entity","reveal",2000);
+	            chainEvents.newChainEvent("#part_5 .group_5","hide_group_5",3000);
+	          chainEvents.newChainEvent("#part_5 .group_6 > a-entity:nth-child(2) > a-entity","reveal",1000);
+	          chainEvents.newChainEvent("#part_5 .group_6 > a-entity:nth-child(3) > a-entity","reveal",2000);
+	          chainEvents.newChainEvent("#part_5 .group_6","hide_group_6",2000);
+	            chainEvents.newChainEvent("#part_6","show",2000);*/
+	    }
+	  }, {
+	    key: 'endSong',
+	    value: function endSong() {
+	      document.getElementById('scene').removeEventListener('song_finished', this.endSong, false);
+	      this.setState({ shouldPlay: false });
 
+	      var chainEvents = [];
 	      chainEvents.newChainEvent("#scene", "change_black", 0);
-	      chainEvents.newChainEvent("#moon", "move_moon", 0);
-	      chainEvents.newChainEvent("#part_5 .group_1 > a-entity:nth-child(2) > a-entity", "reveal", 20000);
-	      chainEvents.newChainEvent("#part_5 .group_1 > a-entity:nth-child(3) > a-entity", "reveal", 3000);
-
-	      chainEvents.newChainEvent("#part_5 .group_1", "hide_group_1", 1000);
-	      chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
-	      chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(4) > a-entity", "reveal", 3000);
-	      chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(5) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(6) > a-entity", "reveal", 2000);
-
-	      chainEvents.newChainEvent("#part_5 .group_2", "hide_group_2", 2000);
-	      chainEvents.newChainEvent("#part_5 .group_3 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
-	      chainEvents.newChainEvent("#part_5 .group_3 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_5 .group_3", "hide_group_3", 2000);
-	      chainEvents.newChainEvent("#part_5 .group_4 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
-	      chainEvents.newChainEvent("#part_5 .group_4 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_5 .group_4", "hide_group_4", 2000);
-
-	      chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
-	      chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(4) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(5) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(6) > a-entity", "reveal", 2000);
-
-	      chainEvents.newChainEvent("#part_5 .group_5", "hide_group_5", 3000);
-	      chainEvents.newChainEvent("#part_5 .group_6 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
-	      chainEvents.newChainEvent("#part_5 .group_6 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_5 .group_6", "hide_group_6", 2000);
-
-	      chainEvents.newChainEvent("#part_6", "show", 2000);
-
 	      chainEvents.reverse();
 	      this.chainTimingEvents(chainEvents);
 	    }
@@ -369,32 +412,33 @@
 	      document.getElementById('intro').addEventListener('start_intro', this.startIntro.bind(this), false);
 	      document.getElementById('part_1').addEventListener('start_part1', this.startPart1.bind(this), false);
 	      document.getElementById('part_2').addEventListener('start_part2', this.startPart2.bind(this), false);
+	      document.getElementById('part_3').addEventListener('start_part3', this.startPart3.bind(this), false);
+	      document.getElementById('part_4').addEventListener('start_part4', this.startPart4.bind(this), false);
+	      document.getElementById('scene').addEventListener('song_finished', this.endSong.bind(this), false);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _aframeReact.Scene,
-	        { id: 'scene', fog: { color: this.state.fogColour }, canvas: { width: screen.width / 2 } },
+	        { id: 'scene', stats: true, fog: { color: this.state.fogColour }, canvas: { width: screen.width / 2 } },
 	        this.getAssets(),
 	        _react2.default.createElement(
 	          _Camera2.default,
 	          { id: 'camera', position: [0, 10, 0], 'wasd-controls': { enabled: false } },
 	          _react2.default.createElement(_Cursor2.default, null),
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 -200', dur: '160000', ease: 'ease-in-out', begin: 'part_1' }),
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 -400', dur: '100000', eaase: 'ease-in-out', begin: 'part_4' }),
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 -600', dur: '100000', eaase: 'ease-in-out', begin: 'part_5' }),
+	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 -400', dur: '260000', ease: 'ease-in-out', begin: 'part_1' }),
 	          _react2.default.createElement(Hand, null)
 	        ),
-	        _react2.default.createElement(_Audio2.default, { audioSrc: this.state.song, frequencySize: this.props.frequencySize, refreshRate: this.props.refreshRate, shouldUpdateFrequencies: this.shouldUpdateFrequencies.bind(this) }),
+	        _react2.default.createElement(_Audio2.default, { audioSrc: this.state.song, shouldUpdateFrequencies: 'false', shouldPlay: this.state.shouldPlay }),
 	        _react2.default.createElement(_Sky2.default, { id: 'sky' }),
-	        _react2.default.createElement(Intro, null),
-	        _react2.default.createElement(Part1, null),
-	        _react2.default.createElement(Part2, null),
+	        this.state.stage == 0 ? _react2.default.createElement(Intro, null) : '',
+	        this.state.stage <= 2 ? _react2.default.createElement(Part1, null) : '',
+	        this.state.stage <= 2 ? _react2.default.createElement(Part2, null) : '',
+	        '}',
 	        _react2.default.createElement(Part3, null),
 	        _react2.default.createElement(Part4, null),
-	        _react2.default.createElement(Part5, null),
-	        _react2.default.createElement(Part6, null)
+	        _react2.default.createElement(Ending, null)
 	      );
 	    }
 	  }]);
@@ -410,18 +454,23 @@
 	var Intro = function (_React$Component2) {
 	  _inherits(Intro, _React$Component2);
 
-	  function Intro() {
-	    _classCallCheck(this, Intro);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Intro).apply(this, arguments));
-	  }
-
 	  _createClass(Intro, [{
 	    key: 'shouldComponentUpdate',
 	    value: function shouldComponentUpdate(nextProps, nextState) {
-	      return false;
+	      return true;
 	    }
-	  }, {
+	  }]);
+
+	  function Intro(props) {
+	    _classCallCheck(this, Intro);
+
+	    var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Intro).call(this, props));
+
+	    _this2.state = {};
+	    return _this2;
+	  }
+
+	  _createClass(Intro, [{
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -435,7 +484,7 @@
 	            { position: '-2 -10 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'intro-text', text: { text: "IS ANYONE THERE?", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'intro-text', mixin: 'font', text: { text: "IS ANYONE THERE?" }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -444,7 +493,7 @@
 	            { position: '-2 -20 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'intro-text', text: { text: "OH - ", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'intro-text', mixin: 'font', text: { text: "OH - " }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -453,21 +502,21 @@
 	            { position: '-2 -30 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'intro-text', text: { text: "HI!", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'intro-text', mixin: 'font', text: { text: "HI!" }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
 	            { position: '-40 0 0' },
-	            _react2.default.createElement(_aframeReact.Entity, { 'class': 'intro-text', text: { text: "Porter Robinson - Sad Machine", height: 0.5, size: 8 }, material: { color: 'white' } })
+	            _react2.default.createElement(_aframeReact.Entity, { 'class': 'intro-text', text: { text: "Porter Robinson - Sad Machine", size: 8 }, material: { color: 'white' } })
 	          ),
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
 	            { position: '-2 -30 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'loading', text: { text: "Loading...", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'true' },
+	              { 'class': 'loading', mixin: 'font', text: { text: "Loading..." }, material: { color: 'white' }, visible: 'true' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'false', begin: 'hide' })
 	            )
 	          )
@@ -546,7 +595,7 @@
 	            { position: '0 0 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: ">WHO SURVIVED?", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: ">WHO SURVIVED?", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -555,7 +604,7 @@
 	            { position: '0 -10 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: ">SOMEBODY NEW?", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: ">SOMEBODY NEW?", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -564,7 +613,7 @@
 	            { position: '0 -20 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: ">ANYONE ELSE BUT YOU?", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: ">ANYONE ELSE BUT YOU?", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -573,7 +622,7 @@
 	            { position: '0 -30 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: ">ON A LONELY NIGHT", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: ">ON A LONELY NIGHT", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -582,7 +631,7 @@
 	            { position: '0 -40 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: ">WAS A BLINDING LIGHT.", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: ">WAS A BLINDING LIGHT.", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -591,7 +640,7 @@
 	            { position: '0 -50 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: ">A HUNDRED LEADERS", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: ">A HUNDRED LEADERS", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -600,7 +649,7 @@
 	            { position: '0 -60 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: ">WOULD BE BORNE OF YOU.", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: ">WOULD BE BORNE OF YOU.", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          )
@@ -614,7 +663,7 @@
 	            { position: '0 0 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: "AND THOUGH I KNOW", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: "AND THOUGH I KNOW", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -623,7 +672,7 @@
 	            { position: '0 -10 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: "SINCE YOU'VE AWAKENED HER AGAIN", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: "SINCE YOU'VE AWAKENED HER AGAIN", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          )
@@ -637,7 +686,7 @@
 	            { position: '0 0 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: "SHE DEPENDS ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: "SHE DEPENDS ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -646,7 +695,7 @@
 	            { position: '0 -10 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: "SHE DEPENDS ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: "SHE DEPENDS ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -655,7 +704,7 @@
 	            { position: '0 -20 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: "SHE'LL GO ALONE", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: "SHE'LL GO ALONE", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -664,7 +713,7 @@
 	            { position: '0 -30 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: "AND NEVER SPEAK", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: "AND NEVER SPEAK", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -673,7 +722,7 @@
 	            { position: '0 -40 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: "OF THIS AGAIN", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: "OF THIS AGAIN", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          )
@@ -687,7 +736,7 @@
 	            { position: '0 0 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: "WE DEPEND ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: "WE DEPEND ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -696,7 +745,7 @@
 	            { position: '0 -10 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: "WE DEPEND ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: "WE DEPEND ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          )
@@ -710,7 +759,7 @@
 	            { position: '0 0 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: "AND THOUGH I KNOW", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: "AND THOUGH I KNOW", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -719,7 +768,7 @@
 	            { position: '0 -10 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: "SINCE YOU'VE AWAKENED HER AGAIN", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: "SINCE YOU'VE AWAKENED HER AGAIN", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          )
@@ -733,7 +782,7 @@
 	            { position: '0 0 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: "SHE DEPENDS ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: "SHE DEPENDS ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -742,7 +791,7 @@
 	            { position: '0 -10 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: "SHE DEPENDS ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: "SHE DEPENDS ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -751,7 +800,7 @@
 	            { position: '0 -20 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: "SHE'LL GO ALONE", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: "SHE'LL GO ALONE", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -760,7 +809,7 @@
 	            { position: '0 -30 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: "AND NEVER SPEAK", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: "AND NEVER SPEAK", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -769,7 +818,7 @@
 	            { position: '0 -40 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: "OF THIS AGAIN", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: "OF THIS AGAIN", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          )
@@ -783,7 +832,7 @@
 	            { position: '0 0 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: "WE DEPEND ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: "WE DEPEND ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -792,7 +841,7 @@
 	            { position: '0 -10 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part2-text', text: { text: "WE DEPEND ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part2-text', mixin: 'font', text: { text: "WE DEPEND ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          )
@@ -823,13 +872,13 @@
 	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', begin: 'hide', dur: '1000' }),
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
-	          { position: '-35 40 -285', rotation: '0 0 0' },
+	          { position: '-55 40 -285', rotation: '0 0 0' },
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
 	            { position: '0 0 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part3-text', text: { text: ">I'LL DEPEND ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              { 'class': 'part3-text', text: { text: ">I'LL DEPEND ON YOU", size: 15 }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          )
@@ -860,19 +909,19 @@
 	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', begin: 'hide_part4' }),
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
-	          { 'collada-model': '#valley-asset', position: '0 -5 -100', rotation: '0 0 0' },
+	          { 'collada-model': '#valley-asset', position: '0 -5 200', rotation: '0 0 90' },
 	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '0 0 360', from: '0 0 0', repeat: 'indefinite', dur: '120000', ease: 'linear' })
 	        ),
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
-	          { position: '-35 40 -350', rotation: '0 0 0', 'class': 'group_1' },
+	          { position: '-35 40 -360', rotation: '0 0 0', 'class': 'group_1' },
 	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide' }),
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
 	            { position: '0 0 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part4-text', text: { text: ">I DON'T KNOW MUCH", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	              { 'class': 'part4-text', mixin: 'font', text: { text: ">I DON'T KNOW MUCH", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -881,7 +930,7 @@
 	            { position: '0 -10 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part4-text', text: { text: "ABOUT YOUR LIFE", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	              { 'class': 'part4-text', mixin: 'font', text: { text: "ABOUT YOUR LIFE", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -890,21 +939,21 @@
 	            { position: '0 -20 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part4-text', text: { text: "BEYOND THESE WALLS", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	              { 'class': 'part4-text', mixin: 'font', text: { text: "BEYOND THESE WALLS", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          )
 	        ),
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
-	          { position: '-35 40 -380', rotation: '0 0 0', 'class': 'group_2' },
+	          { position: '-35 40 -390', rotation: '0 0 0', 'class': 'group_2' },
 	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide' }),
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
 	            { position: '0 0 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part4-text', text: { text: "THE FLEETING SENSE", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	              { 'class': 'part4-text', mixin: 'font', text: { text: "THE FLEETING SENSE", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -913,7 +962,7 @@
 	            { position: '0 -10 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part4-text', text: { text: "OF LOVE WITHIN THESE", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	              { 'class': 'part4-text', mixin: 'font', text: { text: "OF LOVE WITHIN THESE", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -922,21 +971,21 @@
 	            { position: '0 -20 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part4-text', text: { text: "GODFORSAKEN WALLS", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	              { 'class': 'part4-text', mixin: 'font', text: { text: "GODFORSAKEN WALLS", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          )
 	        ),
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
-	          { position: '-35 40 -410', rotation: '0 0 0', 'class': 'group_3' },
+	          { position: '-35 40 -420', rotation: '0 0 0', 'class': 'group_3' },
 	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide' }),
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
 	            { position: '0 0 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part4-text', text: { text: "AND YOU CAN HEAR IT", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	              { 'class': 'part4-text', mixin: 'font', text: { text: "AND YOU CAN HEAR IT", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -945,7 +994,7 @@
 	            { position: '0 -10 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part4-text', text: { text: "IN HIS VOICE IN", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	              { 'class': 'part4-text', mixin: 'font', text: { text: "IN HIS VOICE IN", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -954,21 +1003,21 @@
 	            { position: '0 -20 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part4-text', text: { text: "EVERY CALL", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	              { 'class': 'part4-text', mixin: 'font', text: { text: "EVERY CALL", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          )
 	        ),
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
-	          { position: '-35 40 -440', rotation: '0 0 0', 'class': 'group_4' },
+	          { position: '-35 40 -450', rotation: '0 0 0', 'class': 'group_4' },
 	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide' }),
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
 	            { position: '0 0 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part4-text', text: { text: "THIS GIRL WHO'S SLEPT", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	              { 'class': 'part4-text', mixin: 'font', text: { text: "THIS GIRL WHO'S SLEPT", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -977,7 +1026,7 @@
 	            { position: '0 -10 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part4-text', text: { text: "A HUNDRED YEARS HAS ", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	              { 'class': 'part4-text', mixin: 'font', text: { text: "A HUNDRED YEARS HAS ", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          ),
@@ -986,7 +1035,7 @@
 	            { position: '0 -20 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part4-text', text: { text: "SOMETHING AFTER ALL", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	              { 'class': 'part4-text', mixin: 'font', text: { text: "SOMETHING AFTER ALL", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          )
@@ -1383,6 +1432,25 @@
 	  }]);
 
 	  return Fog;
+	}(_react2.default.Component);
+
+	var Ending = function (_React$Component13) {
+	  _inherits(Ending, _React$Component13);
+
+	  function Ending() {
+	    _classCallCheck(this, Ending);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Ending).apply(this, arguments));
+	  }
+
+	  _createClass(Ending, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(_aframeReact.Entity, null);
+	    }
+	  }]);
+
+	  return Ending;
 	}(_react2.default.Component);
 
 	Array.prototype.newChainEvent = function (selector, emitEvent, delay) {
@@ -122634,21 +122702,33 @@
 
 	    _this.state = {
 	      frequencyData: [],
-	      analyzer: ''
+	      analyzer: '',
+	      node: '',
+	      audioElement: []
 	    };
 	    return _this;
 	  }
 
 	  _createClass(Audio, [{
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      if (nextProps.shouldPlay == false) {
+	        var node = this.state.node;
+	        node.stop(0);
+	      }
+	    }
+	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      // this.setupAudioElement();
-	      this.setupAudioBuffer();
+	      this.setupAudioElement();
+	      // this.setupAudioBuffer();
 
-	      var that = this;
-	      setInterval(function () {
-	        that.updateAudio();
-	      }, that.props.refreshRate);
+	      if (this.props.shouldUpdateFrequencies) {
+	        var that = this;
+	        setInterval(function () {
+	          that.updateAudio();
+	        }, that.props.refreshRate);
+	      }
 	    }
 	  }, {
 	    key: 'setupAudioBuffer',
@@ -122658,6 +122738,7 @@
 	      var node = audioCtx.createBufferSource();
 	      // createBuffer(channels, samples, sampleRate)
 	      var buffer = audioCtx.createBuffer(1, 4096, audioCtx.sampleRate);
+
 	      var data = buffer.getChannelData(0);
 	      var that = this;
 
@@ -122667,7 +122748,6 @@
 	      request.open('GET', this.props.audioSrc, true);
 
 	      request.responseType = 'arraybuffer';
-
 	      request.onload = function () {
 	        var audioData = request.response;
 
@@ -122681,19 +122761,20 @@
 	          (0, _jquery2.default)(element).data('audio-node', node);
 	          document.getElementsByClassName('audio')[0].appendChild(element);
 
-	          var analyzer = audioCtx.createAnalyser();
+	          if (that.props.shouldUpdateFrequencies) {
+	            var analyzer = audioCtx.createAnalyser();
 
-	          node.connect(analyzer);
-	          analyzer.connect(audioCtx.destination);
+	            node.connect(analyzer);
+	            analyzer.connect(audioCtx.destination);
 
-	          analyzer.fftSize = that.props.fastFourierTransform;
+	            analyzer.fftSize = that.props.fastFourierTransform;
 
-	          // FrequencyBinCount is unsigned long value HALF That of the FFT size
-	          // that.state.frequencyData = new Uint8Array(analyzer.frequencyBinCount);
-	          that.state.frequencyData = new Uint8Array(that.props.frequencySize);
-	          analyzer.getByteFrequencyData(that.state.frequencyData);
-	          that.state.analyzer = analyzer;
-
+	            // FrequencyBinCount is unsigned long value HALF That of the FFT size
+	            // that.state.frequencyData = new Uint8Array(analyzer.frequencyBinCount);
+	            that.state.frequencyData = new Uint8Array(that.props.frequencySize);
+	            analyzer.getByteFrequencyData(that.state.frequencyData);
+	            that.state.analyzer = analyzer;
+	          }
 	          var animationLoadIn = document.createElement('a-animation');
 	          animationLoadIn.setAttribute('attribute', 'visible');
 	          animationLoadIn.setAttribute('to', true);
@@ -122717,6 +122798,7 @@
 	          } else {
 	            node.start(0);
 	          }
+	          that.setState({ node: node });
 	        }, function (e) {
 	          "Error with decoding audio data" + e.err;
 	        });
@@ -122751,14 +122833,27 @@
 	    value: function setupAudioElement() {
 	      var audioElement = document.createElement('audio');
 	      audioElement.setAttribute('src', this.props.audioSrc);
-	      audioElement.setAttribute('loop', true);
+	      audioElement.setAttribute('loop', false);
 	      audioElement.setAttribute('crossOrigin', "anonymous");
 
 	      var element = document.createElement('div');
 	      element.setAttribute('class', 'audio-player');
 	      element.appendChild(audioElement);
-	      // document.getElementsByClassName('audio')[0].appendChild(element);
+	      document.getElementsByClassName('audio')[0].appendChild(element);
+	      this.setState({ audioElement: audioElement });
+	      var that = this;
+	      setTimeout(function () {
+	        that.startAudioElement();
+	      }, 2000);
 	      // this.setupAudioVisualizers(audioElement);
+	    }
+	  }, {
+	    key: 'startAudioElement',
+	    value: function startAudioElement() {
+	      if (document.getElementById('scene')) {
+	        document.getElementById('scene').emit('song_loaded');
+	        document.querySelector('audio').play();
+	      }
 	    }
 	  }, {
 	    key: 'updateAudio',
@@ -122769,7 +122864,6 @@
 	      this.state.analyzer.getByteFrequencyData(frequencyData);
 	      var y = [];
 
-	      // TODO: maybe change this to just be based off frequencySize
 	      for (var i = 0; i < this.props.frequencySize; i++) {
 	        y[i] = frequencyData[i];
 	      }
@@ -122799,7 +122893,9 @@
 	  audioSrc: { default: '' },
 	  heights: '',
 	  refreshRate: 50,
-	  frequencySize: { default: 512 }
+	  frequencySize: { default: 512 },
+	  shouldPlay: { default: false },
+	  shouldUpdateFrequencies: { default: false }
 	};
 	;
 
@@ -123688,6 +123784,14 @@
 	    });
 	  }
 	});
+
+/***/ },
+/* 521 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	if (_typeface_js && _typeface_js.loadFace) _typeface_js.loadFace({ "glyphs": { "0": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "1": { "ha": 889, "x_min": 17, "x_max": 654, "o": "m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "2": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "3": { "ha": 889, "x_min": 17, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "4": { "ha": 889, "x_min": 32, "x_max": 844, "o": "m 793 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 793 500 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 674 -169 l 633 -107 l 683 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 174 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 z " }, "5": { "ha": 889, "x_min": 17, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "6": { "ha": 889, "x_min": -36, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "7": { "ha": 889, "x_min": 64, "x_max": 783, "o": "m 783 1029 l 728 971 l 524 971 l 481 1026 l 536 1085 l 742 1085 l 783 1029 m 713 801 l 508 497 l 467 497 l 481 617 l 704 950 l 729 950 l 713 801 m 449 1029 l 393 971 l 188 971 l 146 1026 l 201 1085 l 407 1085 l 449 1029 m 313 222 l 88 -111 l 64 -111 l 81 36 l 285 342 l 325 342 l 313 222 z " }, "8": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "9": { "ha": 889, "x_min": 17, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, " ": { "ha": 889, "x_min": 0, "x_max": 0, "o": "" }, "!": { "ha": 889, "x_min": 260, "x_max": 514, "o": "m 464 500 l 413 439 l 371 500 l 422 946 l 474 1007 l 514 946 l 464 500 m 425 -144 q 397 -212 421 -183 q 333 -246 371 -246 q 278 -211 299 -246 q 264 -144 260 -181 q 294 -76 269 -106 q 356 -46 319 -46 q 411 -76 393 -46 q 425 -144 429 -106 z " }, "\"": { "ha": 889, "x_min": 14, "x_max": 458, "o": "m 440 778 l 389 717 l 349 778 l 368 946 l 419 1007 l 458 946 l 440 778 m 106 778 l 53 717 l 14 778 l 32 946 l 85 1007 l 125 946 l 106 778 z " }, "#": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 793 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 793 500 m 458 500 l 407 439 l 367 500 l 417 946 l 469 1007 l 508 946 l 458 500 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 674 -169 l 633 -107 l 683 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 174 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 440 338 l 390 -107 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "$": { "ha": 889, "x_min": 17, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 z " }, "%": { "ha": 889, "x_min": 32, "x_max": 775, "o": "m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 z " }, "&": { "ha": 889, "x_min": -36, "x_max": 668, "o": "m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 m 654 222 l 431 -111 l 407 -111 l 424 36 l 628 342 l 668 342 l 654 222 z " }, "'": { "ha": 889, "x_min": 349, "x_max": 458, "o": "m 440 778 l 389 717 l 349 778 l 368 946 l 419 1007 l 458 946 l 440 778 z " }, "(": { "ha": 889, "x_min": 299, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 z " }, ")": { "ha": 889, "x_min": 17, "x_max": 508, "o": "m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "*": { "ha": 889, "x_min": 71, "x_max": 736, "o": "m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 350 497 l 310 497 l 175 801 l 192 950 l 215 950 l 364 617 l 350 497 m 617 -111 l 592 -111 l 444 222 l 458 342 l 497 342 l 633 36 l 617 -111 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 z " }, "+": { "ha": 889, "x_min": 85, "x_max": 724, "o": "m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 z " }, ",": { "ha": 889, "x_min": 324, "x_max": 493, "o": "m 489 -144 q 456 -253 483 -189 q 388 -329 421 -329 q 339 -257 357 -329 q 329 -144 324 -196 q 358 -76 333 -106 q 419 -46 382 -46 q 475 -76 457 -46 q 489 -144 493 -106 z " }, "-": { "ha": 889, "x_min": 85, "x_max": 724, "o": "m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 z " }, ".": { "ha": 889, "x_min": 319, "x_max": 489, "o": "m 485 -144 q 454 -214 481 -182 q 392 -246 428 -246 q 338 -211 357 -246 q 324 -144 319 -181 q 353 -76 328 -106 q 415 -46 378 -46 q 471 -76 453 -46 q 485 -144 489 -106 z " }, "/": { "ha": 889, "x_min": 71, "x_max": 736, "o": "m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 z " }, ":": { "ha": 889, "x_min": 299, "x_max": 510, "o": "m 506 604 q 478 538 501 565 q 414 506 451 506 q 357 538 376 506 q 344 604 340 565 q 374 674 349 643 q 436 706 399 706 q 492 674 474 706 q 506 604 510 643 m 464 235 q 433 164 460 196 q 371 132 407 132 q 315 167 335 132 q 303 235 299 197 q 333 304 308 275 q 394 333 357 333 q 449 302 431 333 q 464 235 467 271 z " }, ";": { "ha": 889, "x_min": 304, "x_max": 514, "o": "m 510 604 q 482 538 506 565 q 418 506 456 506 q 361 538 381 506 q 349 604 344 565 q 378 674 353 643 q 442 706 404 706 q 497 671 478 706 q 510 604 514 642 m 468 235 q 432 122 463 188 q 367 49 397 49 q 318 125 336 49 q 308 235 304 188 q 336 304 313 275 q 399 333 360 333 q 453 303 435 333 q 468 235 472 272 z " }, "<": { "ha": 889, "x_min": 444, "x_max": 736, "o": "m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 617 -111 l 592 -111 l 444 222 l 458 342 l 497 342 l 633 36 l 617 -111 z " }, "=": { "ha": 889, "x_min": 69, "x_max": 739, "o": "m 739 560 l 683 501 l 478 501 l 436 557 l 492 615 l 696 615 l 739 560 m 403 560 l 347 501 l 143 501 l 100 557 l 156 615 l 361 615 l 403 560 m 708 282 l 653 224 l 447 224 l 404 279 l 460 338 l 664 338 l 708 282 m 372 282 l 317 224 l 113 224 l 69 279 l 125 338 l 331 338 l 372 282 z " }, ">": { "ha": 889, "x_min": 71, "x_max": 364, "o": "m 350 497 l 310 497 l 175 801 l 192 950 l 215 950 l 364 617 l 350 497 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 z " }, "?": { "ha": 889, "x_min": 149, "x_max": 840, "o": "m 786 1029 l 731 971 l 526 971 l 483 1026 l 539 1085 l 744 1085 l 786 1029 m 790 500 l 738 439 l 697 500 l 749 949 l 800 1010 l 840 949 l 790 500 m 453 1029 l 397 971 l 192 971 l 149 1026 l 204 1085 l 408 1085 l 453 1029 m 719 421 l 664 363 l 458 363 l 415 418 l 471 476 l 675 476 l 719 421 m 386 -107 l 335 -169 l 294 -107 l 344 338 l 397 399 l 436 338 l 386 -107 z " }, "@": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 350 497 l 310 497 l 175 801 l 192 950 l 215 950 l 364 617 l 350 497 m 617 -111 l 592 -111 l 444 222 l 458 342 l 497 342 l 633 36 l 617 -111 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "A": { "ha": 889, "x_min": -33, "x_max": 779, "o": "m 689 497 l 647 497 l 513 801 l 529 950 l 553 950 l 703 617 l 689 497 m 726 421 l 671 363 l 465 363 l 424 418 l 479 476 l 683 476 l 726 421 m 729 -107 l 678 -169 l 636 -107 l 688 338 l 739 399 l 779 338 l 729 -107 m 388 801 l 183 497 l 143 497 l 157 617 l 381 950 l 404 950 l 388 801 m 392 421 l 336 363 l 131 363 l 88 418 l 143 476 l 349 476 l 392 421 m 58 -107 l 7 -169 l -33 -107 l 17 338 l 69 399 l 108 338 l 58 -107 z " }, "B": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "C": { "ha": 889, "x_min": -36, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "D": { "ha": 889, "x_min": -36, "x_max": 699, "o": "m 686 497 l 646 497 l 508 801 l 525 950 l 550 950 l 699 617 l 686 497 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 654 222 l 431 -111 l 407 -111 l 424 36 l 628 342 l 668 342 l 654 222 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "E": { "ha": 889, "x_min": -36, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "F": { "ha": 889, "x_min": -42, "x_max": 786, "o": "m 786 1029 l 731 971 l 526 971 l 483 1026 l 539 1085 l 744 1085 l 786 1029 m 453 1029 l 397 971 l 192 971 l 149 1026 l 204 1085 l 408 1085 l 453 1029 m 719 421 l 664 363 l 458 363 l 415 418 l 471 476 l 675 476 l 719 421 m 119 500 l 68 439 l 28 500 l 78 946 l 131 1007 l 169 946 l 119 500 m 383 421 l 328 363 l 124 363 l 81 418 l 136 476 l 342 476 l 383 421 m 51 -107 l 0 -169 l -42 -107 l 10 338 l 61 399 l 101 338 l 51 -107 z " }, "G": { "ha": 889, "x_min": -36, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "H": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 793 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 793 500 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 674 -169 l 633 -107 l 683 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 174 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "I": { "ha": 889, "x_min": 17, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "J": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "K": { "ha": 889, "x_min": -36, "x_max": 736, "o": "m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 617 -111 l 592 -111 l 444 222 l 458 342 l 497 342 l 633 36 l 617 -111 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "L": { "ha": 889, "x_min": -32, "x_max": 658, "o": "m 128 500 l 76 439 l 36 500 l 86 946 l 138 1007 l 178 946 l 128 500 m 658 -187 l 603 -246 l 399 -246 l 356 -190 l 411 -132 l 617 -132 l 658 -187 m 60 -107 l 8 -169 l -32 -107 l 18 338 l 69 399 l 110 338 l 60 -107 m 325 -187 l 269 -246 l 64 -246 l 21 -190 l 76 -132 l 281 -132 l 325 -187 z " }, "M": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 793 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 793 500 m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 725 -107 l 674 -169 l 633 -107 l 683 338 l 736 399 l 775 338 l 725 -107 m 350 497 l 310 497 l 174 801 l 190 950 l 214 950 l 364 617 l 350 497 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 174 946 l 124 500 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "N": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 793 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 793 500 m 725 -107 l 674 -169 l 633 -107 l 683 338 l 736 399 l 775 338 l 725 -107 m 350 497 l 310 497 l 174 801 l 190 950 l 214 950 l 364 617 l 350 497 m 617 -111 l 592 -111 l 443 222 l 457 342 l 497 342 l 633 36 l 617 -111 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 174 946 l 124 500 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "O": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "P": { "ha": 889, "x_min": -42, "x_max": 840, "o": "m 786 1029 l 731 971 l 526 971 l 483 1026 l 539 1085 l 744 1085 l 786 1029 m 790 500 l 738 439 l 697 500 l 749 949 l 800 1010 l 840 949 l 790 500 m 453 1029 l 397 971 l 192 971 l 149 1026 l 204 1085 l 408 1085 l 453 1029 m 719 421 l 664 363 l 458 363 l 415 418 l 471 476 l 675 476 l 719 421 m 119 500 l 68 439 l 28 500 l 78 946 l 131 1007 l 169 946 l 119 500 m 383 421 l 328 363 l 124 363 l 81 418 l 136 476 l 342 476 l 383 421 m 51 -107 l 0 -169 l -42 -107 l 10 338 l 61 399 l 101 338 l 51 -107 z " }, "Q": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 617 -111 l 592 -111 l 444 222 l 458 342 l 497 342 l 633 36 l 617 -111 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "R": { "ha": 889, "x_min": -42, "x_max": 840, "o": "m 786 1029 l 731 971 l 526 971 l 483 1026 l 539 1085 l 744 1085 l 786 1029 m 790 500 l 738 439 l 697 500 l 749 949 l 800 1010 l 840 949 l 790 500 m 453 1029 l 397 971 l 192 971 l 149 1026 l 204 1085 l 408 1085 l 453 1029 m 719 421 l 664 363 l 458 363 l 415 418 l 471 476 l 675 476 l 719 421 m 614 -111 l 589 -111 l 440 222 l 453 342 l 493 342 l 631 36 l 614 -111 m 119 500 l 68 439 l 28 500 l 78 946 l 131 1007 l 169 946 l 119 500 m 383 421 l 328 363 l 124 363 l 81 418 l 136 476 l 342 476 l 383 421 m 51 -107 l 0 -169 l -42 -107 l 10 338 l 61 399 l 101 338 l 51 -107 z " }, "S": { "ha": 889, "x_min": 17, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "T": { "ha": 889, "x_min": 149, "x_max": 786, "o": "m 786 1029 l 731 971 l 526 971 l 483 1026 l 539 1085 l 744 1085 l 786 1029 m 453 1029 l 397 971 l 192 971 l 149 1026 l 204 1085 l 408 1085 l 453 1029 m 454 500 l 403 439 l 364 500 l 414 946 l 464 1007 l 504 946 l 454 500 m 386 -107 l 335 -169 l 294 -107 l 344 338 l 397 399 l 436 338 l 386 -107 z " }, "U": { "ha": 889, "x_min": -32, "x_max": 849, "o": "m 797 500 l 747 439 l 707 500 l 757 949 l 808 1010 l 849 949 l 797 500 m 731 -107 l 678 -169 l 638 -107 l 688 338 l 740 399 l 781 338 l 731 -107 m 128 500 l 76 439 l 36 500 l 86 946 l 138 1007 l 178 946 l 128 500 m 658 -187 l 603 -246 l 397 -246 l 356 -190 l 411 -132 l 617 -132 l 658 -187 m 60 -107 l 8 -169 l -32 -107 l 18 338 l 69 399 l 110 338 l 60 -107 m 324 -187 l 268 -246 l 64 -246 l 21 -190 l 75 -132 l 281 -132 l 324 -187 z " }, "V": { "ha": 889, "x_min": 29, "x_max": 842, "o": "m 790 500 l 739 439 l 699 500 l 749 949 l 801 1010 l 842 949 l 790 500 m 651 222 l 428 -111 l 403 -111 l 419 36 l 625 342 l 664 342 l 651 222 m 119 500 l 69 439 l 29 500 l 79 946 l 131 1007 l 169 946 l 119 500 m 279 -111 l 254 -111 l 106 222 l 119 342 l 158 342 l 296 36 l 279 -111 z " }, "W": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 793 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 793 500 m 725 -107 l 674 -169 l 633 -107 l 683 338 l 736 399 l 775 338 l 725 -107 m 617 -111 l 592 -111 l 443 222 l 457 342 l 497 342 l 633 36 l 617 -111 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 174 946 l 124 500 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "X": { "ha": 889, "x_min": 71, "x_max": 736, "o": "m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 350 497 l 310 497 l 175 801 l 192 950 l 215 950 l 364 617 l 350 497 m 617 -111 l 592 -111 l 444 222 l 458 342 l 497 342 l 633 36 l 617 -111 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 z " }, "Y": { "ha": 889, "x_min": 178, "x_max": 740, "o": "m 724 801 l 519 497 l 478 497 l 492 617 l 715 950 l 740 950 l 724 801 m 353 497 l 314 497 l 178 801 l 193 950 l 218 950 l 367 617 l 353 497 m 393 -107 l 342 -169 l 303 -107 l 353 338 l 403 399 l 443 338 l 393 -107 z " }, "Z": { "ha": 889, "x_min": 17, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "[": { "ha": 889, "x_min": 299, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 z " }, "\\": { "ha": 889, "x_min": 175, "x_max": 633, "o": "m 350 497 l 310 497 l 175 801 l 192 950 l 215 950 l 364 617 l 350 497 m 617 -111 l 592 -111 l 444 222 l 458 342 l 497 342 l 633 36 l 617 -111 z " }, "]": { "ha": 889, "x_min": 17, "x_max": 508, "o": "m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "^": { "ha": 889, "x_min": 106, "x_max": 664, "o": "m 651 497 l 611 497 l 475 801 l 492 950 l 515 950 l 664 617 l 651 497 m 351 801 l 146 497 l 106 497 l 119 617 l 342 950 l 367 950 l 351 801 z " }, "_": { "ha": 889, "x_min": 85, "x_max": 724, "o": "m 724 -187 l 668 -246 l 463 -246 l 419 -190 l 475 -132 l 681 -132 l 724 -187 m 388 -187 l 332 -246 l 128 -246 l 85 -190 l 140 -132 l 346 -132 l 388 -187 z " }, "`": { "ha": 889, "x_min": 140, "x_max": 331, "o": "m 317 497 l 275 497 l 140 801 l 157 950 l 181 950 l 331 617 l 317 497 z " }, "a": { "ha": 889, "x_min": -33, "x_max": 779, "o": "m 689 497 l 647 497 l 513 801 l 529 950 l 553 950 l 703 617 l 689 497 m 726 421 l 671 363 l 465 363 l 424 418 l 479 476 l 683 476 l 726 421 m 729 -107 l 678 -169 l 636 -107 l 688 338 l 739 399 l 779 338 l 729 -107 m 388 801 l 183 497 l 143 497 l 157 617 l 381 950 l 404 950 l 388 801 m 392 421 l 336 363 l 131 363 l 88 418 l 143 476 l 349 476 l 392 421 m 58 -107 l 7 -169 l -33 -107 l 17 338 l 69 399 l 108 338 l 58 -107 z " }, "b": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "c": { "ha": 889, "x_min": -36, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "d": { "ha": 889, "x_min": -36, "x_max": 699, "o": "m 686 497 l 646 497 l 508 801 l 525 950 l 550 950 l 699 617 l 686 497 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 654 222 l 431 -111 l 407 -111 l 424 36 l 628 342 l 668 342 l 654 222 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "e": { "ha": 889, "x_min": -36, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "f": { "ha": 889, "x_min": -42, "x_max": 786, "o": "m 786 1029 l 731 971 l 526 971 l 483 1026 l 539 1085 l 744 1085 l 786 1029 m 453 1029 l 397 971 l 192 971 l 149 1026 l 204 1085 l 408 1085 l 453 1029 m 719 421 l 664 363 l 458 363 l 415 418 l 471 476 l 675 476 l 719 421 m 119 500 l 68 439 l 28 500 l 78 946 l 131 1007 l 169 946 l 119 500 m 383 421 l 328 363 l 124 363 l 81 418 l 136 476 l 342 476 l 383 421 m 51 -107 l 0 -169 l -42 -107 l 10 338 l 61 399 l 101 338 l 51 -107 z " }, "g": { "ha": 889, "x_min": -36, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "h": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 793 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 793 500 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 674 -169 l 633 -107 l 683 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 174 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "i": { "ha": 889, "x_min": 17, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "j": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "k": { "ha": 889, "x_min": -36, "x_max": 736, "o": "m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 617 -111 l 592 -111 l 444 222 l 458 342 l 497 342 l 633 36 l 617 -111 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "l": { "ha": 889, "x_min": -32, "x_max": 658, "o": "m 128 500 l 76 439 l 36 500 l 86 946 l 138 1007 l 178 946 l 128 500 m 658 -187 l 603 -246 l 399 -246 l 356 -190 l 411 -132 l 617 -132 l 658 -187 m 60 -107 l 8 -169 l -32 -107 l 18 338 l 69 399 l 110 338 l 60 -107 m 325 -187 l 269 -246 l 64 -246 l 21 -190 l 76 -132 l 281 -132 l 325 -187 z " }, "m": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 793 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 793 500 m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 725 -107 l 674 -169 l 633 -107 l 683 338 l 736 399 l 775 338 l 725 -107 m 350 497 l 310 497 l 174 801 l 190 950 l 214 950 l 364 617 l 350 497 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 174 946 l 124 500 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "n": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 793 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 793 500 m 725 -107 l 674 -169 l 633 -107 l 683 338 l 736 399 l 775 338 l 725 -107 m 350 497 l 310 497 l 174 801 l 190 950 l 214 950 l 364 617 l 350 497 m 617 -111 l 592 -111 l 443 222 l 457 342 l 497 342 l 633 36 l 617 -111 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 174 946 l 124 500 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "o": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "p": { "ha": 889, "x_min": -42, "x_max": 840, "o": "m 786 1029 l 731 971 l 526 971 l 483 1026 l 539 1085 l 744 1085 l 786 1029 m 790 500 l 738 439 l 697 500 l 749 949 l 800 1010 l 840 949 l 790 500 m 453 1029 l 397 971 l 192 971 l 149 1026 l 204 1085 l 408 1085 l 453 1029 m 719 421 l 664 363 l 458 363 l 415 418 l 471 476 l 675 476 l 719 421 m 119 500 l 68 439 l 28 500 l 78 946 l 131 1007 l 169 946 l 119 500 m 383 421 l 328 363 l 124 363 l 81 418 l 136 476 l 342 476 l 383 421 m 51 -107 l 0 -169 l -42 -107 l 10 338 l 61 399 l 101 338 l 51 -107 z " }, "q": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 617 -111 l 592 -111 l 444 222 l 458 342 l 497 342 l 633 36 l 617 -111 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "r": { "ha": 889, "x_min": -42, "x_max": 840, "o": "m 786 1029 l 731 971 l 526 971 l 483 1026 l 539 1085 l 744 1085 l 786 1029 m 790 500 l 738 439 l 697 500 l 749 949 l 800 1010 l 840 949 l 790 500 m 453 1029 l 397 971 l 192 971 l 149 1026 l 204 1085 l 408 1085 l 453 1029 m 719 421 l 664 363 l 458 363 l 415 418 l 471 476 l 675 476 l 719 421 m 614 -111 l 589 -111 l 440 222 l 453 342 l 493 342 l 631 36 l 614 -111 m 119 500 l 68 439 l 28 500 l 78 946 l 131 1007 l 169 946 l 119 500 m 383 421 l 328 363 l 124 363 l 81 418 l 136 476 l 342 476 l 383 421 m 51 -107 l 0 -169 l -42 -107 l 10 338 l 61 399 l 101 338 l 51 -107 z " }, "s": { "ha": 889, "x_min": 17, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "t": { "ha": 889, "x_min": 149, "x_max": 786, "o": "m 786 1029 l 731 971 l 526 971 l 483 1026 l 539 1085 l 744 1085 l 786 1029 m 453 1029 l 397 971 l 192 971 l 149 1026 l 204 1085 l 408 1085 l 453 1029 m 454 500 l 403 439 l 364 500 l 414 946 l 464 1007 l 504 946 l 454 500 m 386 -107 l 335 -169 l 294 -107 l 344 338 l 397 399 l 436 338 l 386 -107 z " }, "u": { "ha": 889, "x_min": -32, "x_max": 849, "o": "m 797 500 l 747 439 l 707 500 l 757 949 l 808 1010 l 849 949 l 797 500 m 731 -107 l 678 -169 l 638 -107 l 688 338 l 740 399 l 781 338 l 731 -107 m 128 500 l 76 439 l 36 500 l 86 946 l 138 1007 l 178 946 l 128 500 m 658 -187 l 603 -246 l 397 -246 l 356 -190 l 411 -132 l 617 -132 l 658 -187 m 60 -107 l 8 -169 l -32 -107 l 18 338 l 69 399 l 110 338 l 60 -107 m 324 -187 l 268 -246 l 64 -246 l 21 -190 l 75 -132 l 281 -132 l 324 -187 z " }, "v": { "ha": 889, "x_min": 29, "x_max": 842, "o": "m 790 500 l 739 439 l 699 500 l 749 949 l 801 1010 l 842 949 l 790 500 m 651 222 l 428 -111 l 403 -111 l 419 36 l 625 342 l 664 342 l 651 222 m 119 500 l 69 439 l 29 500 l 79 946 l 131 1007 l 169 946 l 119 500 m 279 -111 l 254 -111 l 106 222 l 119 342 l 158 342 l 296 36 l 279 -111 z " }, "w": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 793 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 793 500 m 725 -107 l 674 -169 l 633 -107 l 683 338 l 736 399 l 775 338 l 725 -107 m 617 -111 l 592 -111 l 443 222 l 457 342 l 497 342 l 633 36 l 617 -111 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 174 946 l 124 500 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "x": { "ha": 889, "x_min": 71, "x_max": 736, "o": "m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 350 497 l 310 497 l 175 801 l 192 950 l 215 950 l 364 617 l 350 497 m 617 -111 l 592 -111 l 444 222 l 458 342 l 497 342 l 633 36 l 617 -111 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 z " }, "y": { "ha": 889, "x_min": 178, "x_max": 740, "o": "m 724 801 l 519 497 l 478 497 l 492 617 l 715 950 l 740 950 l 724 801 m 353 497 l 314 497 l 178 801 l 193 950 l 218 950 l 367 617 l 353 497 m 393 -107 l 342 -169 l 303 -107 l 353 338 l 403 399 l 443 338 l 393 -107 z " }, "z": { "ha": 889, "x_min": 17, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "{": { "ha": 889, "x_min": 85, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 z " }, "|": { "ha": 889, "x_min": 299, "x_max": 508, "o": "m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 z " }, "}": { "ha": 889, "x_min": 17, "x_max": 724, "o": "m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 z " }, "Æ": { "ha": 889, "x_min": -36, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 385 801 l 181 497 l 140 497 l 153 617 l 376 950 l 401 950 l 385 801 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "Ø": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "æ": { "ha": 889, "x_min": -36, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 385 801 l 181 497 l 140 497 l 153 617 l 376 950 l 401 950 l 385 801 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "ø": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " } }, "familyName": "Digital dream Skew Narrow", "ascender": 1111, "descender": -329, "underlinePosition": -133, "underlineThickness": 20, "boundingBox": { "yMin": -237, "xMin": -30, "yMax": 800, "xMax": 611 }, "resolution": 1000, "original_font_information": { "format": 0, "copyright": "(c) Jakob Fischer at www.pizzadude.dk - DO NOT DISTRIBUTE WITHOUT AUTHOR'S PERMISSION!", "fontFamily": "digital dream skew narrow", "fontSubfamily": "Regular", "uniqueID": "Digital dream SkewNarrow", "fullName": "Digital dream Skew Narrow", "version": "2", "postScriptName": "DigitaldreamSkewNarrow", "trademark": "" }, "cssFontWeight": "normal", "cssFontStyle": "normal" });
 
 /***/ }
 /******/ ]);

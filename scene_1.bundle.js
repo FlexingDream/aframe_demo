@@ -92,7 +92,7 @@
 
 	var _Audio2 = _interopRequireDefault(_Audio);
 
-	var _Laser = __webpack_require__(521);
+	var _Laser = __webpack_require__(522);
 
 	var _Laser2 = _interopRequireDefault(_Laser);
 
@@ -100947,21 +100947,33 @@
 
 	    _this.state = {
 	      frequencyData: [],
-	      analyzer: ''
+	      analyzer: '',
+	      node: '',
+	      audioElement: []
 	    };
 	    return _this;
 	  }
 
 	  _createClass(Audio, [{
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      if (nextProps.shouldPlay == false) {
+	        var node = this.state.node;
+	        node.stop(0);
+	      }
+	    }
+	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      // this.setupAudioElement();
-	      this.setupAudioBuffer();
+	      this.setupAudioElement();
+	      // this.setupAudioBuffer();
 
-	      var that = this;
-	      setInterval(function () {
-	        that.updateAudio();
-	      }, that.props.refreshRate);
+	      if (this.props.shouldUpdateFrequencies) {
+	        var that = this;
+	        setInterval(function () {
+	          that.updateAudio();
+	        }, that.props.refreshRate);
+	      }
 	    }
 	  }, {
 	    key: 'setupAudioBuffer',
@@ -100971,6 +100983,7 @@
 	      var node = audioCtx.createBufferSource();
 	      // createBuffer(channels, samples, sampleRate)
 	      var buffer = audioCtx.createBuffer(1, 4096, audioCtx.sampleRate);
+
 	      var data = buffer.getChannelData(0);
 	      var that = this;
 
@@ -100980,7 +100993,6 @@
 	      request.open('GET', this.props.audioSrc, true);
 
 	      request.responseType = 'arraybuffer';
-
 	      request.onload = function () {
 	        var audioData = request.response;
 
@@ -100994,19 +101006,20 @@
 	          (0, _jquery2.default)(element).data('audio-node', node);
 	          document.getElementsByClassName('audio')[0].appendChild(element);
 
-	          var analyzer = audioCtx.createAnalyser();
+	          if (that.props.shouldUpdateFrequencies) {
+	            var analyzer = audioCtx.createAnalyser();
 
-	          node.connect(analyzer);
-	          analyzer.connect(audioCtx.destination);
+	            node.connect(analyzer);
+	            analyzer.connect(audioCtx.destination);
 
-	          analyzer.fftSize = that.props.fastFourierTransform;
+	            analyzer.fftSize = that.props.fastFourierTransform;
 
-	          // FrequencyBinCount is unsigned long value HALF That of the FFT size
-	          // that.state.frequencyData = new Uint8Array(analyzer.frequencyBinCount);
-	          that.state.frequencyData = new Uint8Array(that.props.frequencySize);
-	          analyzer.getByteFrequencyData(that.state.frequencyData);
-	          that.state.analyzer = analyzer;
-
+	            // FrequencyBinCount is unsigned long value HALF That of the FFT size
+	            // that.state.frequencyData = new Uint8Array(analyzer.frequencyBinCount);
+	            that.state.frequencyData = new Uint8Array(that.props.frequencySize);
+	            analyzer.getByteFrequencyData(that.state.frequencyData);
+	            that.state.analyzer = analyzer;
+	          }
 	          var animationLoadIn = document.createElement('a-animation');
 	          animationLoadIn.setAttribute('attribute', 'visible');
 	          animationLoadIn.setAttribute('to', true);
@@ -101030,6 +101043,7 @@
 	          } else {
 	            node.start(0);
 	          }
+	          that.setState({ node: node });
 	        }, function (e) {
 	          "Error with decoding audio data" + e.err;
 	        });
@@ -101064,14 +101078,27 @@
 	    value: function setupAudioElement() {
 	      var audioElement = document.createElement('audio');
 	      audioElement.setAttribute('src', this.props.audioSrc);
-	      audioElement.setAttribute('loop', true);
+	      audioElement.setAttribute('loop', false);
 	      audioElement.setAttribute('crossOrigin', "anonymous");
 
 	      var element = document.createElement('div');
 	      element.setAttribute('class', 'audio-player');
 	      element.appendChild(audioElement);
-	      // document.getElementsByClassName('audio')[0].appendChild(element);
+	      document.getElementsByClassName('audio')[0].appendChild(element);
+	      this.setState({ audioElement: audioElement });
+	      var that = this;
+	      setTimeout(function () {
+	        that.startAudioElement();
+	      }, 2000);
 	      // this.setupAudioVisualizers(audioElement);
+	    }
+	  }, {
+	    key: 'startAudioElement',
+	    value: function startAudioElement() {
+	      if (document.getElementById('scene')) {
+	        document.getElementById('scene').emit('song_loaded');
+	        document.querySelector('audio').play();
+	      }
 	    }
 	  }, {
 	    key: 'updateAudio',
@@ -101082,7 +101109,6 @@
 	      this.state.analyzer.getByteFrequencyData(frequencyData);
 	      var y = [];
 
-	      // TODO: maybe change this to just be based off frequencySize
 	      for (var i = 0; i < this.props.frequencySize; i++) {
 	        y[i] = frequencyData[i];
 	      }
@@ -101112,7 +101138,9 @@
 	  audioSrc: { default: '' },
 	  heights: '',
 	  refreshRate: 50,
-	  frequencySize: { default: 512 }
+	  frequencySize: { default: 512 },
+	  shouldPlay: { default: false },
+	  shouldUpdateFrequencies: { default: false }
 	};
 	;
 
@@ -101612,7 +101640,8 @@
 	});
 
 /***/ },
-/* 521 */
+/* 521 */,
+/* 522 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

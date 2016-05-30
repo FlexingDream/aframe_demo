@@ -15,6 +15,7 @@ import Sky from '../components/Sky';
 import '../aframe_components/entity-generator';
 import 'aframe-text-component';
 import RainingObjects from '../components/RainingObjects';
+import '../fonts/digital_dream_reg';
 // import '../aframe_components/three-model.js';
 AframeExtras.loaders.registerAll();
 
@@ -30,11 +31,18 @@ class PortRob extends React.Component{
     var heights = Array.apply(null,Array(this.props.frequencySize)).map(function(x,i){return 0});
     this.state = {
       heights: heights,
-      song: 'https://cdn.rawgit.com/FlexingDream/aframe_demo/pua/src/audio/port_rob_full.mp3',
-      fogColour: '#F97B8E'
+      // song: 'https://cdn.rawgit.com/FlexingDream/aframe_demo/pua/src/audio/port_rob_full.mp3',
+      song: 'audio/port_rob_full.mp3',
+      fogColour: '#F97B8E',
+      shouldPlay: true,
+      stage: 0
     }
   }
-  shouldUpdateFrequencies(heights){
+  shouldComponentUpdate(nextProps,nextState){
+    if (nextState.fogColour != this.state.fogColour) return true;
+    else if (nextState.shouldPlay == false) return true;
+    else if (nextState.stage != this.state.stage) return true;
+    else return false;
   }
 
   getMixins(){
@@ -42,6 +50,7 @@ class PortRob extends React.Component{
       <Entity>
         <a-mixin id="starPrimitive" geometry="primitive: circle; radius: 0.5;" material="color: #FFEE35;" look-at='[camera]'/>
         <a-mixin id="snow" geometry="primitive: box; depth: 0.02;height: 0.04; width: 0.04" material="color: #DDD; opacity: 0.4; shader: flat"></a-mixin>
+        <a-mixin id="font" text="font: digital dream skew narrow; height: 0.5; size: 5"></a-mixin>
       </Entity>
     );
   }
@@ -70,10 +79,14 @@ class PortRob extends React.Component{
       );
   }
 
+  showTimer(){
+    var timestamp = document.createElement('span');document.body.appendChild(timestamp);timestamp.style.position='absolute';timestamp.style.top = '20px';timestamp.style.right = '20px';var ascene=document.querySelector('a-scene');
+    window.setInterval(function(){timestamp.textContent = parseFloat(ascene.time/1000).toFixed(2)}, 100);
+  }
 
   componentDidMount(){
     this.captureSongStart();
-
+    this.showTimer();
     $("#scene").css('width','100%');
   }
 
@@ -94,13 +107,6 @@ class PortRob extends React.Component{
     var chainEvents = [];
 
     document.getElementById('intro').removeEventListener('start_intro',this.startIntro,false);
-/*    chainEvents.newChainEvent(".loading",'loaded',0);
-    chainEvents.newChainEvent('#intro > a-entity > a-entity:nth-child(1)','reveal',0);
-    chainEvents.newChainEvent('#intro > a-entity > a-entity:nth-child(2)','reveal',2000);
-    chainEvents.newChainEvent('#intro > a-entity > a-entity:nth-child(3)','reveal',600)
-    chainEvents.newChainEvent('#part_1','start_part1',1000);
-    chainEvents.reverse();
-    this.chainTimingEvents(chainEvents);*/
     document.getElementsByClassName("loading")[0].emit('hide');
     document.getElementsByClassName("intro-text")[0].emit("reveal");
     setTimeout(function(){
@@ -116,15 +122,17 @@ class PortRob extends React.Component{
 
   startPart1(){
     document.getElementById('part_1').removeEventListener('start_part1',this.startPart1,false);
-    $("#intro").remove();
+    this.setState({stage: 1});
     var chainEvents = [];
     chainEvents.newChainEvent("#camera","part_1",0);
     chainEvents.newChainEvent("#hand","show_hand",4000);
     chainEvents.newChainEvent("#hand","rotate_hand",4000);
     chainEvents.reverse();
+    var that = this;
     this.chainTimingEvents(chainEvents);
     setTimeout(function(){
       document.getElementById("part_2").emit("start_part2");
+      that.setState({stage: 2});
     },40000);
   }
 
@@ -141,11 +149,11 @@ class PortRob extends React.Component{
     chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(3) > a-entity","reveal",3000);
     chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(4) > a-entity","reveal",3000);
     chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(5) > a-entity","reveal",6000);
-    chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(6) > a-entity","reveal",1000);
-    chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(7) > a-entity","reveal",5000);
+    chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(6) > a-entity","reveal",2000);
+    chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(7) > a-entity","reveal",4000);
     chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(8) > a-entity","reveal",1000);
 
-    chainEvents.newChainEvent("#part_2 .group_1","hide_group_1",1000);
+    chainEvents.newChainEvent("#part_2 .group_1","hide_group_1",2000);
     chainEvents.newChainEvent("#part_2 .group_2 > a-entity:nth-child(2) > a-entity","reveal",1000);
     chainEvents.newChainEvent("#part_2 .group_2 > a-entity:nth-child(3) > a-entity","reveal",2000);
     chainEvents.newChainEvent("#part_2 .group_2","hide_group_2",3000);
@@ -173,18 +181,37 @@ class PortRob extends React.Component{
 
     chainEvents.newChainEvent("#part_1","hide",0);
     chainEvents.newChainEvent("#part_2","hide",0);
+    chainEvents.newChainEvent('#part_3',"start_part3",0);
 
+    chainEvents.reverse();
+    this.chainTimingEvents(chainEvents);
+  }
+  startPart3(){
+    document.getElementById('part_3').removeEventListener('start_part3',this.startPart3,false);
+
+    var chainEvents = [];
     chainEvents.newChainEvent('#part_3',"reveal",500);
     chainEvents.newChainEvent('#part_3 a-entity > .part3-text',"reveal",1000);
     chainEvents.newChainEvent('#part_3','hide',2000);
+    chainEvents.newChainEvent('#part_4',"start_part4",0);
+
+    chainEvents.reverse();
+    this.chainTimingEvents(chainEvents);
+  }
+
+  startPart4(){
+    document.getElementById('part_4').removeEventListener('start_part4',this.startPart4,false);
+
+    var chainEvents = [];
+
     chainEvents.newChainEvent('#part_4','reveal_part4',0);
-    chainEvents.newChainEvent("#camera","part_4",0);
+    // chainEvents.newChainEvent("#camera","part_4",0);
 
     chainEvents.newChainEvent("#scene","change_white",0);
-    chainEvents.newChainEvent("#part_4 .group_1 > a-entity:nth-child(2) > a-entity","reveal",40000);
+    chainEvents.newChainEvent("#part_4 .group_1 > a-entity:nth-child(2) > a-entity","reveal",41000);
     chainEvents.newChainEvent("#part_4 .group_1 > a-entity:nth-child(3) > a-entity","reveal",2000);
     chainEvents.newChainEvent("#part_4 .group_1 > a-entity:nth-child(4) > a-entity","reveal",2000);
-    chainEvents.newChainEvent("#part_4 .group_1","hide",1000);
+    chainEvents.newChainEvent("#part_4 .group_1","hide",2000);
 
     chainEvents.newChainEvent("#part_4 .group_2 > a-entity:nth-child(2) > a-entity","reveal",1000);
     chainEvents.newChainEvent("#part_4 .group_2 > a-entity:nth-child(3) > a-entity","reveal",2000);
@@ -202,47 +229,63 @@ class PortRob extends React.Component{
     chainEvents.newChainEvent("#part_4 .group_4","hide",2000);
 
     chainEvents.newChainEvent("#part_4","hide_part4",0);
-
-
-    chainEvents.newChainEvent("#part_5","reveal_part5",0);
-    chainEvents.newChainEvent("#camera","part_5",0);
-
-    chainEvents.newChainEvent("#scene","change_black",0);
-    chainEvents.newChainEvent("#moon","move_moon",0);
-    chainEvents.newChainEvent("#part_5 .group_1 > a-entity:nth-child(2) > a-entity","reveal",20000);
-    chainEvents.newChainEvent("#part_5 .group_1 > a-entity:nth-child(3) > a-entity","reveal",3000);
-
-    chainEvents.newChainEvent("#part_5 .group_1","hide_group_1",1000);
-    chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(2) > a-entity","reveal",1000);
-    chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(3) > a-entity","reveal",2000);
-    chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(4) > a-entity","reveal",3000);
-    chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(5) > a-entity","reveal",2000);
-    chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(6) > a-entity","reveal",2000);
-
-    chainEvents.newChainEvent("#part_5 .group_2","hide_group_2",2000);
-    chainEvents.newChainEvent("#part_5 .group_3 > a-entity:nth-child(2) > a-entity","reveal",1000);
-    chainEvents.newChainEvent("#part_5 .group_3 > a-entity:nth-child(3) > a-entity","reveal",2000);
-    chainEvents.newChainEvent("#part_5 .group_3","hide_group_3",2000);
-    chainEvents.newChainEvent("#part_5 .group_4 > a-entity:nth-child(2) > a-entity","reveal",1000);
-    chainEvents.newChainEvent("#part_5 .group_4 > a-entity:nth-child(3) > a-entity","reveal",2000);
-    chainEvents.newChainEvent("#part_5 .group_4","hide_group_4",2000);
-
-    chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(2) > a-entity","reveal",1000);
-    chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(3) > a-entity","reveal",2000);
-    chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(4) > a-entity","reveal",2000);
-    chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(5) > a-entity","reveal",2000);
-    chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(6) > a-entity","reveal",2000);
-
-    chainEvents.newChainEvent("#part_5 .group_5","hide_group_5",3000);
-    chainEvents.newChainEvent("#part_5 .group_6 > a-entity:nth-child(2) > a-entity","reveal",1000);
-    chainEvents.newChainEvent("#part_5 .group_6 > a-entity:nth-child(3) > a-entity","reveal",2000);
-    chainEvents.newChainEvent("#part_5 .group_6","hide_group_6",2000);
-
-    chainEvents.newChainEvent("#part_6","show",2000);
+    // chainEvents.newChainEvent('#part_5',"start_part5",0);
+    chainEvents.newChainEvent("#scene","song_finished",10000);
 
     chainEvents.reverse();
     this.chainTimingEvents(chainEvents);
+  }
 
+  startPart5(){
+    /*    chainEvents.newChainEvent("#part_5","reveal_part5",0);
+        // chainEvents.newChainEvent("#camera","part_5",0);
+
+        chainEvents.newChainEvent("#scene","change_black",0);
+        chainEvents.newChainEvent("#moon","move_moon",0);
+        chainEvents.newChainEvent("#part_5 .group_1 > a-entity:nth-child(2) > a-entity","reveal",20000);
+        chainEvents.newChainEvent("#part_5 .group_1 > a-entity:nth-child(3) > a-entity","reveal",3000);
+
+        chainEvents.newChainEvent("#part_5 .group_1","hide_group_1",1000);
+        chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(2) > a-entity","reveal",1000);
+        chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(3) > a-entity","reveal",2000);
+        chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(4) > a-entity","reveal",3000);
+        chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(5) > a-entity","reveal",2000);
+        chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(6) > a-entity","reveal",2000);
+
+        chainEvents.newChainEvent("#part_5 .group_2","hide_group_2",2000);
+        chainEvents.newChainEvent("#part_5 .group_3 > a-entity:nth-child(2) > a-entity","reveal",1000);
+        chainEvents.newChainEvent("#part_5 .group_3 > a-entity:nth-child(3) > a-entity","reveal",2000);
+        chainEvents.newChainEvent("#part_5 .group_3","hide_group_3",2000);
+        chainEvents.newChainEvent("#part_5 .group_4 > a-entity:nth-child(2) > a-entity","reveal",1000);
+        chainEvents.newChainEvent("#part_5 .group_4 > a-entity:nth-child(3) > a-entity","reveal",2000);
+        chainEvents.newChainEvent("#part_5 .group_4","hide_group_4",2000);
+
+        chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(2) > a-entity","reveal",1000);
+        chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(3) > a-entity","reveal",2000);
+        chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(4) > a-entity","reveal",2000);
+        chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(5) > a-entity","reveal",2000);
+        chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(6) > a-entity","reveal",2000);
+
+        chainEvents.newChainEvent("#part_5 .group_5","hide_group_5",3000);
+        chainEvents.newChainEvent("#part_5 .group_6 > a-entity:nth-child(2) > a-entity","reveal",1000);
+        chainEvents.newChainEvent("#part_5 .group_6 > a-entity:nth-child(3) > a-entity","reveal",2000);
+        chainEvents.newChainEvent("#part_5 .group_6","hide_group_6",2000);
+
+        chainEvents.newChainEvent("#part_6","show",2000);*/
+  }
+
+
+
+
+
+  endSong(){
+    document.getElementById('scene').removeEventListener('song_finished',this.endSong,false);
+    this.setState({shouldPlay: false});
+
+    var chainEvents = [];
+    chainEvents.newChainEvent("#scene","change_black",0);
+    chainEvents.reverse();
+    this.chainTimingEvents(chainEvents);
   }
 
   chainTimingEvents(chainEvents){
@@ -260,61 +303,71 @@ class PortRob extends React.Component{
     document.getElementById('intro').addEventListener('start_intro',this.startIntro.bind(this),false);
     document.getElementById('part_1').addEventListener('start_part1',this.startPart1.bind(this),false);
     document.getElementById('part_2').addEventListener('start_part2',this.startPart2.bind(this),false);
-
+    document.getElementById('part_3').addEventListener('start_part3',this.startPart3.bind(this),false);
+    document.getElementById('part_4').addEventListener('start_part4',this.startPart4.bind(this),false);
+    document.getElementById('scene').addEventListener('song_finished',this.endSong.bind(this),false);
   }
 
   render(){
     return(
-    <Scene id="scene" fog={{color: this.state.fogColour}} canvas={{width: screen.width/2}}>
+    <Scene id="scene" stats fog={{color: this.state.fogColour}} canvas={{width: screen.width/2}}>
       {this.getAssets()}
       <Camera id="camera" position={[0,10,0]} wasd-controls={{enabled: false}} >
         <Cursor />
-        <Animation attribute="position" to="0 0 -200" dur="160000" ease="ease-in-out" begin="part_1"/>
-        <Animation attribute="position" to="0 0 -400" dur="100000" eaase="ease-in-out" begin="part_4"/>
-        <Animation attribute="position" to="0 0 -600" dur="100000" eaase="ease-in-out" begin="part_5"/>
+        <Animation attribute="position" to="0 0 -400" dur="260000" ease="ease-in-out" begin="part_1"/>
+        {/*<Animation attribute="position" to="0 0 -400" dur="100000" eaase="ease-in-out" begin="part_4"/>
+        <Animation attribute="position" to="0 0 -600" dur="100000" eaase="ease-in-out" begin="part_5"/>*/}
         <Hand/>
       </Camera>
-      <Audio  audioSrc={this.state.song} frequencySize={this.props.frequencySize} refreshRate={this.props.refreshRate} shouldUpdateFrequencies={this.shouldUpdateFrequencies.bind(this)}/>
+      <Audio  audioSrc={this.state.song} shouldUpdateFrequencies="false" shouldPlay={this.state.shouldPlay}/>
       <Sky id="sky"/>
-      <Intro/>
-      <Part1/>
-      <Part2/>
+      {this.state.stage == 0 ? <Intro/> : ''}
+      {this.state.stage  <= 2 ? <Part1/> : ''}
+      {this.state.stage <=2 ? <Part2/> : ''}}
       <Part3/>
       <Part4/>
-      <Part5/>
-      <Part6/>
+      <Ending/>
+{/*      <Part5/>
+      <Part6/>*/}
     </Scene>);
   }
 }
 
 class Intro extends React.Component{
   shouldComponentUpdate(nextProps,nextState){
-    return false;
+    return true;
   }
+
+  constructor(props){
+    super(props);
+    this.state = {
+    };
+  }
+
   render(){
     return(
     <Entity id="intro">
       <Entity position="-30 40 -70">
         <Entity position="-2 -10 0">
-          <Entity class="intro-text" text={{text: "IS ANYONE THERE?",height: 0.5, size: 5}}  material={{color:'white'}} visible="false">
+          <Entity class="intro-text" mixin="font" text={{text: "IS ANYONE THERE?"}}  material={{color:'white'}} visible="false">
           <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
           </Entity>
         </Entity>
         <Entity position="-2 -20 0">
-          <Entity class="intro-text" text={{text: "OH - ",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+          <Entity class="intro-text" mixin="font" text={{text: "OH - "}} material={{color:'white'}} visible="false">
           <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
           </Entity>
         </Entity>
         <Entity position="-2 -30 0">
-          <Entity class="intro-text" text={{text: "HI!",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+          <Entity class="intro-text" mixin="font" text={{text: "HI!"}} material={{color:'white'}} visible="false">
           <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
           </Entity>
         </Entity>
         <Entity position="-40 0 0">
-          <Entity class="intro-text" text={{text: "Porter Robinson - Sad Machine",height: 0.5, size: 8}} material={{color:'white'}}/>
+          <Entity class="intro-text" text={{text: "Porter Robinson - Sad Machine", size: 8}} material={{color:'white'}}/>
         </Entity>
         <Entity position="-2 -30 0">
-          <Entity class="loading" text={{text: "Loading...",height: 0.5, size: 5}} material={{color:'white'}} visible="true">
+          <Entity class="loading" mixin="font" text={{text: "Loading..."}} material={{color:'white'}} visible="true">
           <Animation attribute="visible" dur="400" to="false" begin="hide"/>
           </Entity>
         </Entity>
@@ -355,37 +408,37 @@ class Part2 extends React.Component{
         <Entity position="-35 70 -165" rotation="0 0 0" class="group_1">
           <Animation attribute="visible" to="false" dur="5000" begin="hide_group_1"/>
           <Entity position="0 0 0">
-            <Entity class="part2-text" text={{text: ">WHO SURVIVED?",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: ">WHO SURVIVED?",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -10 0">
-            <Entity class="part2-text" text={{text: ">SOMEBODY NEW?",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: ">SOMEBODY NEW?",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -20 0">
-            <Entity class="part2-text" text={{text: ">ANYONE ELSE BUT YOU?",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: ">ANYONE ELSE BUT YOU?",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -30 0">
-            <Entity class="part2-text" text={{text: ">ON A LONELY NIGHT",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: ">ON A LONELY NIGHT",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -40 0">
-            <Entity class="part2-text" text={{text: ">WAS A BLINDING LIGHT.",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: ">WAS A BLINDING LIGHT.",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -50 0">
-            <Entity class="part2-text" text={{text: ">A HUNDRED LEADERS",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: ">A HUNDRED LEADERS",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -60 0">
-            <Entity class="part2-text" text={{text: ">WOULD BE BORNE OF YOU.",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: ">WOULD BE BORNE OF YOU.",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
@@ -393,12 +446,12 @@ class Part2 extends React.Component{
         <Entity position="-35 70 -185" class="group_2">
           <Animation attribute="visible" to="false" dur="5000" begin="hide_group_2"/>
           <Entity position="0 0 0">
-            <Entity class="part2-text" text={{text: "AND THOUGH I KNOW",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: "AND THOUGH I KNOW",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -10 0">
-            <Entity class="part2-text" text={{text: "SINCE YOU'VE AWAKENED HER AGAIN",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: "SINCE YOU'VE AWAKENED HER AGAIN",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
@@ -406,27 +459,27 @@ class Part2 extends React.Component{
         <Entity position="-35 70 -205" rotation="0 0 0" class="group_3">
           <Animation attribute="visible" to="false" dur="5000" begin="hide_group_3"/>
           <Entity position="0 0 0">
-            <Entity class="part2-text" text={{text: "SHE DEPENDS ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: "SHE DEPENDS ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -10 0">
-            <Entity class="part2-text" text={{text: "SHE DEPENDS ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: "SHE DEPENDS ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -20 0">
-            <Entity class="part2-text" text={{text: "SHE'LL GO ALONE",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: "SHE'LL GO ALONE",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -30 0">
-            <Entity class="part2-text" text={{text: "AND NEVER SPEAK",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: "AND NEVER SPEAK",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -40 0">
-            <Entity class="part2-text" text={{text: "OF THIS AGAIN",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: "OF THIS AGAIN",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
@@ -434,12 +487,12 @@ class Part2 extends React.Component{
         <Entity position="-35 70 -225" rotation="0 0 0" class="group_4">
           <Animation attribute="visible" to="false" dur="5000" begin="hide_group_4"/>
           <Entity position="0 0 0">
-            <Entity class="part2-text" text={{text: "WE DEPEND ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: "WE DEPEND ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -10 0">
-            <Entity class="part2-text" text={{text: "WE DEPEND ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: "WE DEPEND ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
@@ -447,12 +500,12 @@ class Part2 extends React.Component{
         <Entity position="-35 70 -245" class="group_5">
           <Animation attribute="visible" to="false" dur="5000" begin="hide_group_5"/>
           <Entity position="0 0 0">
-            <Entity class="part2-text" text={{text: "AND THOUGH I KNOW",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: "AND THOUGH I KNOW",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -10 0">
-            <Entity class="part2-text" text={{text: "SINCE YOU'VE AWAKENED HER AGAIN",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: "SINCE YOU'VE AWAKENED HER AGAIN",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
@@ -460,27 +513,27 @@ class Part2 extends React.Component{
         <Entity position="-35 70 -265" rotation="0 0 0" class="group_6">
           <Animation attribute="visible" to="false" dur="5000" begin="hide_group_6"/>
           <Entity position="0 0 0">
-            <Entity class="part2-text" text={{text: "SHE DEPENDS ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: "SHE DEPENDS ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -10 0">
-            <Entity class="part2-text" text={{text: "SHE DEPENDS ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: "SHE DEPENDS ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -20 0">
-            <Entity class="part2-text" text={{text: "SHE'LL GO ALONE",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: "SHE'LL GO ALONE",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -30 0">
-            <Entity class="part2-text" text={{text: "AND NEVER SPEAK",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: "AND NEVER SPEAK",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -40 0">
-            <Entity class="part2-text" text={{text: "OF THIS AGAIN",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: "OF THIS AGAIN",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
@@ -488,12 +541,12 @@ class Part2 extends React.Component{
         <Entity position="-35 70 -285" rotation="0 0 0" class="group_7">
           <Animation attribute="visible" to="false" dur="5000" begin="hide_group_7"/>
           <Entity position="0 0 0">
-            <Entity class="part2-text" text={{text: "WE DEPEND ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: "WE DEPEND ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -10 0">
-            <Entity class="part2-text" text={{text: "WE DEPEND ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part2-text" mixin="font" text={{text: "WE DEPEND ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
@@ -509,9 +562,9 @@ class Part3 extends React.Component{
       <Entity id="part_3" visible="false">
         <Animation attribute="visible" to="true" begin="reveal" dur="1000"/>
         <Animation attribute="visible" to="false" begin="hide" dur="1000"/>
-        <Entity position="-35 40 -285" rotation="0 0 0">
+        <Entity position="-55 40 -285" rotation="0 0 0">
           <Entity position="0 0 0">
-            <Entity class="part3-text" text={{text: ">I'LL DEPEND ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+            <Entity class="part3-text" text={{text: ">I'LL DEPEND ON YOU", size: 15}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
@@ -527,78 +580,78 @@ class Part4 extends React.Component{
       <Entity id="part_4" visible="false">
         <Animation attribute="visible" to="true" begin="reveal_part4"/>
         <Animation attribute="visible" to="false" begin="hide_part4"/>
-        <Entity collada-model="#valley-asset" position="0 -5 -100" rotation="0 0 0">
+        <Entity collada-model="#valley-asset" position="0 -5 200" rotation="0 0 90">
           <Animation attribute="rotation" to="0 0 360" from="0 0 0" repeat="indefinite" dur="120000" ease="linear"/>
         </Entity>
-        <Entity position="-35 40 -350" rotation="0 0 0" class="group_1">
+        <Entity position="-35 40 -360" rotation="0 0 0" class="group_1">
           <Animation attribute="visible" to="false" dur="5000" begin="hide"/>
 
           <Entity position="0 0 0">
-            <Entity class="part4-text" text={{text: ">I DON'T KNOW MUCH",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+            <Entity class="part4-text" mixin="font" text={{text: ">I DON'T KNOW MUCH",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -10 0">
-            <Entity class="part4-text" text={{text: "ABOUT YOUR LIFE",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+            <Entity class="part4-text" mixin="font" text={{text: "ABOUT YOUR LIFE",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -20 0">
-            <Entity class="part4-text" text={{text: "BEYOND THESE WALLS",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+            <Entity class="part4-text" mixin="font" text={{text: "BEYOND THESE WALLS",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
         </Entity>
-        <Entity position="-35 40 -380" rotation="0 0 0" class="group_2">
+        <Entity position="-35 40 -390" rotation="0 0 0" class="group_2">
           <Animation attribute="visible" to="false" dur="5000" begin="hide"/>
           <Entity position="0 0 0">
-            <Entity class="part4-text" text={{text: "THE FLEETING SENSE",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+            <Entity class="part4-text" mixin="font" text={{text: "THE FLEETING SENSE",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -10 0">
-            <Entity class="part4-text" text={{text: "OF LOVE WITHIN THESE",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+            <Entity class="part4-text" mixin="font" text={{text: "OF LOVE WITHIN THESE",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -20 0">
-            <Entity class="part4-text" text={{text: "GODFORSAKEN WALLS",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+            <Entity class="part4-text" mixin="font" text={{text: "GODFORSAKEN WALLS",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
         </Entity>
-        <Entity position="-35 40 -410" rotation="0 0 0" class="group_3">
+        <Entity position="-35 40 -420" rotation="0 0 0" class="group_3">
           <Animation attribute="visible" to="false" dur="5000" begin="hide"/>
           <Entity position="0 0 0">
-            <Entity class="part4-text" text={{text: "AND YOU CAN HEAR IT",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+            <Entity class="part4-text" mixin="font" text={{text: "AND YOU CAN HEAR IT",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -10 0">
-            <Entity class="part4-text" text={{text: "IN HIS VOICE IN",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+            <Entity class="part4-text" mixin="font" text={{text: "IN HIS VOICE IN",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -20 0">
-            <Entity class="part4-text" text={{text: "EVERY CALL",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+            <Entity class="part4-text" mixin="font" text={{text: "EVERY CALL",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
         </Entity>
-        <Entity position="-35 40 -440" rotation="0 0 0" class="group_4">
+        <Entity position="-35 40 -450" rotation="0 0 0" class="group_4">
           <Animation attribute="visible" to="false" dur="5000" begin="hide"/>
           <Entity position="0 0 0">
-            <Entity class="part4-text" text={{text: "THIS GIRL WHO'S SLEPT",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+            <Entity class="part4-text" mixin="font" text={{text: "THIS GIRL WHO'S SLEPT",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -10 0">
-            <Entity class="part4-text" text={{text: "A HUNDRED YEARS HAS ",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+            <Entity class="part4-text" mixin="font" text={{text: "A HUNDRED YEARS HAS ",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
           <Entity position="0 -20 0">
-            <Entity class="part4-text" text={{text: "SOMETHING AFTER ALL",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+            <Entity class="part4-text" mixin="font" text={{text: "SOMETHING AFTER ALL",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
           </Entity>
@@ -818,6 +871,14 @@ class Fog extends React.Component{
         <Entity geometry={{primitive: 'box', width: 800, height: 100, depth: 2}} position="0 10 4" material={{color: '#A86B9F', opacity: 0.6}}/>
         <Entity geometry={{primitive: 'box', width: 800, height: 100, depth: 2}} position="0 0 6" material={{color: '#93639F', opacity: 0.8}}/>
       </Entity>
+    );
+  }
+}
+
+class Ending extends React.Component{
+  render(){
+    return(
+      <Entity></Entity>
     );
   }
 }

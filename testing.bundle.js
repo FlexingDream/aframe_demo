@@ -80,7 +80,7 @@
 
 	__webpack_require__(520);
 
-	__webpack_require__(525);
+	__webpack_require__(526);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -99427,7 +99427,8 @@
 /* 522 */,
 /* 523 */,
 /* 524 */,
-/* 525 */
+/* 525 */,
+/* 526 */
 /***/ function(module, exports) {
 
 	'use strict';
