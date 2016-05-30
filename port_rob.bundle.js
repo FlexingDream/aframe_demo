@@ -122720,8 +122720,8 @@
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      this.setupAudioElement();
-	      // this.setupAudioBuffer();
+	      // this.setupAudioElement();
+	      this.setupAudioBuffer();
 
 	      if (this.props.shouldUpdateFrequencies) {
 	        var that = this;
@@ -122831,6 +122831,8 @@
 	  }, {
 	    key: 'setupAudioElement',
 	    value: function setupAudioElement() {
+	      // NOTE: if you want an audio element to work on mobile, need to have a touch event first
+
 	      var audioElement = document.createElement('audio');
 	      audioElement.setAttribute('src', this.props.audioSrc);
 	      audioElement.setAttribute('loop', false);
@@ -122844,7 +122846,7 @@
 	      var that = this;
 	      setTimeout(function () {
 	        that.startAudioElement();
-	      }, 2000);
+	      }, 4000);
 	      // this.setupAudioVisualizers(audioElement);
 	    }
 	  }, {

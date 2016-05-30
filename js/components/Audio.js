@@ -30,8 +30,8 @@ class Audio extends React.Component{
   }
 
   componentDidMount(){
-    this.setupAudioElement();
-    // this.setupAudioBuffer();
+    // this.setupAudioElement();
+    this.setupAudioBuffer();
 
     if (this.props.shouldUpdateFrequencies){
       var that = this;
@@ -142,6 +142,8 @@ class Audio extends React.Component{
   }
 
   setupAudioElement() {
+    // NOTE: if you want an audio element to work on mobile, need to have a touch event first
+
     var audioElement =  document.createElement('audio');
     audioElement.setAttribute('src',this.props.audioSrc);
     audioElement.setAttribute('loop',false);
@@ -155,7 +157,7 @@ class Audio extends React.Component{
     var that = this;
     setTimeout(function(){
       that.startAudioElement();
-  },2000);
+    },4000);
     // this.setupAudioVisualizers(audioElement);
   }
 
