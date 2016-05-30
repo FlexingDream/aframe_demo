@@ -8,25 +8,36 @@ class Audio extends React.Component{
     audioSrc : {default: ''},
     heights: '',
     refreshRate: 50,
-    frequencySize: {default: 512}
+    frequencySize: {default: 512},
+    shouldPlay: {default: false},
+    shouldUpdateFrequencies: {default: false}
   };
   constructor(props){
     super(props);
     this.state = {
       frequencyData: [],
-      analyzer: ''
+      analyzer: '',
+      node: ''
     };
   }
 
+  componentWillReceiveProps(nextProps){
+    if (nextProps.shouldPlay == false){
+      var node = this.state.node;
+      node.stop(0);
+    }
+  }
 
   componentDidMount(){
     // this.setupAudioElement();
     this.setupAudioBuffer();
 
-    var that = this;
-    setInterval(function(){
-      that.updateAudio();
-    },that.props.refreshRate);
+    if (this.props.shouldUpdateFrequencies){
+      var that = this;
+      setInterval(function(){
+        that.updateAudio();
+      },that.props.refreshRate);
+    }
   }
   setupAudioBuffer(){
     var AudioContext = AudioContext || webkitAudioContext || mozAudioContext;
@@ -35,7 +46,7 @@ class Audio extends React.Component{
       // createBuffer(channels, samples, sampleRate)
     var buffer = audioCtx.createBuffer(1, 4096, audioCtx.sampleRate);
     var data = buffer.getChannelData(0);
-  var that = this;
+    var that = this;
 
     // 
    var request = new XMLHttpRequest();
@@ -43,7 +54,6 @@ class Audio extends React.Component{
   request.open('GET', this.props.audioSrc, true);
 
   request.responseType = 'arraybuffer';
-
   request.onload = function() {
     var audioData = request.response;
 
@@ -57,20 +67,21 @@ class Audio extends React.Component{
         $(element).data('audio-node',node);
         document.getElementsByClassName('audio')[0].appendChild(element);
 
-        var analyzer = audioCtx.createAnalyser();
+        if (that.props.shouldUpdateFrequencies){
+          var analyzer = audioCtx.createAnalyser();
 
-        node.connect(analyzer);
-        analyzer.connect(audioCtx.destination);
+          node.connect(analyzer);
+          analyzer.connect(audioCtx.destination);
 
 
-        analyzer.fftSize = that.props.fastFourierTransform;
+          analyzer.fftSize = that.props.fastFourierTransform;
 
-        // FrequencyBinCount is unsigned long value HALF That of the FFT size
-        // that.state.frequencyData = new Uint8Array(analyzer.frequencyBinCount);
-        that.state.frequencyData = new Uint8Array(that.props.frequencySize);
-        analyzer.getByteFrequencyData(that.state.frequencyData);
-        that.state.analyzer = analyzer;
-
+          // FrequencyBinCount is unsigned long value HALF That of the FFT size
+          // that.state.frequencyData = new Uint8Array(analyzer.frequencyBinCount);
+          that.state.frequencyData = new Uint8Array(that.props.frequencySize);
+          analyzer.getByteFrequencyData(that.state.frequencyData);
+          that.state.analyzer = analyzer;
+        }
         var animationLoadIn = document.createElement('a-animation');
         animationLoadIn.setAttribute('attribute','visible');
         animationLoadIn.setAttribute('to',true);
@@ -96,6 +107,7 @@ class Audio extends React.Component{
         else{
           node.start(0);
         }
+        that.setState({node: node});
       },
 
       function(e){"Error with decoding audio data" + e.err});
