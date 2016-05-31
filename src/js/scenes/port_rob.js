@@ -95,9 +95,9 @@ class PortRob extends React.Component{
 
   componentDidMount(){
     this.captureSongStart();
-    // this.showTimer();
+    this.showTimer();
     // document.querySelector("#scene").setAttribute("canvas",{width: 50});
-    $("#scene").css('width','%');
+    // $("#scene").css('width','%');
     var that = this;
     document.getElementById('scene').addEventListener('change_black',function(){
       that.setState({fogColour:'#1A1D23'});
@@ -247,12 +247,12 @@ class PortRob extends React.Component{
     chainEvents.newChainEvent("#part_4 .group_2","hide",1000);
 
     chainEvents.newChainEvent("#part_4 .group_3 > a-entity:nth-child(2) > a-entity","reveal",1000);
-    chainEvents.newChainEvent("#part_4 .group_3 > a-entity:nth-child(3) > a-entity","reveal",2000);
-    chainEvents.newChainEvent("#part_4 .group_3 > a-entity:nth-child(4) > a-entity","reveal",2000);
-    chainEvents.newChainEvent("#part_4 .group_3","hide",1000);
+    chainEvents.newChainEvent("#part_4 .group_3 > a-entity:nth-child(3) > a-entity","reveal",1000);
+    chainEvents.newChainEvent("#part_4 .group_3 > a-entity:nth-child(4) > a-entity","reveal",1000);
+    chainEvents.newChainEvent("#part_4 .group_3","hide",2000);
 
     chainEvents.newChainEvent("#part_4 .group_4 > a-entity:nth-child(2) > a-entity","reveal",1000);
-    chainEvents.newChainEvent("#part_4 .group_4 > a-entity:nth-child(3) > a-entity","reveal",2000);
+    chainEvents.newChainEvent("#part_4 .group_4 > a-entity:nth-child(3) > a-entity","reveal",1500);
     chainEvents.newChainEvent("#part_4 .group_4 > a-entity:nth-child(4) > a-entity","reveal",1000);
     chainEvents.newChainEvent("#part_4 .group_4","hide",2000);
 
@@ -578,7 +578,7 @@ class Part2 extends React.Component{
             </Entity>
           </Entity>
         </Entity>
-        <Entity position="-35 70 -265" rotation="0 0 0" class="group_6">
+        <Entity position="-35 70 -285" rotation="0 0 0" class="group_6">
           <Animation attribute="visible" to="false" dur="5000" begin="hide_group_6"/>
           <Entity position="0 0 0">
             <Entity class="part2-text" mixin="font" text={{text: "SHE DEPENDS ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
@@ -606,7 +606,7 @@ class Part2 extends React.Component{
             </Entity>
           </Entity>
         </Entity>
-        <Entity position="-35 70 -285" rotation="0 0 0" class="group_7">
+        <Entity position="-35 70 -325" rotation="0 0 0" class="group_7">
           <Animation attribute="visible" to="false" dur="5000" begin="hide_group_7"/>
           <Entity position="0 0 0">
             <Entity class="part2-text" mixin="font" text={{text: "WE DEPEND ON YOU",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
@@ -630,7 +630,7 @@ class Part3 extends React.Component{
       <Entity id="part_3" visible="false">
         <Animation attribute="visible" to="true" begin="reveal" dur="1000"/>
         <Animation attribute="visible" to="false" begin="hide" dur="1000"/>
-        <Entity position="-55 40 -285" rotation="0 0 0">
+        <Entity position="-75 40 -355" rotation="0 0 0">
           <Entity position="0 0 0">
             <Entity class="part3-text" text={{text: ">I'LL DEPEND ON YOU", size: 15}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
@@ -651,76 +651,78 @@ class Part4 extends React.Component{
         <Entity collada-model="#valley-asset" position="0 -5 200" rotation="0 0 90">
           <Animation attribute="rotation" to="0 0 360" from="0 0 0" repeat="indefinite" dur="120000" ease="linear"/>
         </Entity>
-        <Entity position="-35 40 -360" rotation="0 0 0" class="group_1">
-          <Animation attribute="visible" to="false" dur="5000" begin="hide"/>
+        <Entity position="-35 40 -450">
+          <Entity position="0 0 -20" rotation="0 0 0" class="group_1">
+            <Animation attribute="visible" to="false" dur="5000" begin="hide"/>
 
-          <Entity position="0 0 0">
-            <Entity class="part4-text" mixin="font" text={{text: ">I DON'T KNOW MUCH",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
-              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            <Entity position="0 0 0">
+              <Entity class="part4-text" mixin="font" text={{text: ">I DON'T KNOW MUCH",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+                <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+              </Entity>
+            </Entity>
+            <Entity position="0 -10 0">
+              <Entity class="part4-text" mixin="font" text={{text: "ABOUT YOUR LIFE",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+                <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+              </Entity>
+            </Entity>
+            <Entity position="0 -20 0">
+              <Entity class="part4-text" mixin="font" text={{text: "BEYOND THESE WALLS",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+                <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+              </Entity>
             </Entity>
           </Entity>
-          <Entity position="0 -10 0">
-            <Entity class="part4-text" mixin="font" text={{text: "ABOUT YOUR LIFE",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
-              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+          <Entity position="0 0 -40" rotation="0 0 0" class="group_2">
+            <Animation attribute="visible" to="false" dur="5000" begin="hide"/>
+            <Entity position="0 0 0">
+              <Entity class="part4-text" mixin="font" text={{text: "THE FLEETING SENSE",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+                <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+              </Entity>
+            </Entity>
+            <Entity position="0 -10 0">
+              <Entity class="part4-text" mixin="font" text={{text: "OF LOVE WITHIN THESE",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+                <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+              </Entity>
+            </Entity>
+            <Entity position="0 -20 0">
+              <Entity class="part4-text" mixin="font" text={{text: "GODFORSAKEN WALLS",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+                <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+              </Entity>
             </Entity>
           </Entity>
-          <Entity position="0 -20 0">
-            <Entity class="part4-text" mixin="font" text={{text: "BEYOND THESE WALLS",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
-              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+          <Entity position="0 0 -60" rotation="0 0 0" class="group_3">
+            <Animation attribute="visible" to="false" dur="5000" begin="hide"/>
+            <Entity position="0 0 0">
+              <Entity class="part4-text" mixin="font" text={{text: "AND YOU CAN HEAR IT",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+                <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+              </Entity>
+            </Entity>
+            <Entity position="0 -10 0">
+              <Entity class="part4-text" mixin="font" text={{text: "IN HIS VOICE IN",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+                <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+              </Entity>
+            </Entity>
+            <Entity position="0 -20 0">
+              <Entity class="part4-text" mixin="font" text={{text: "EVERY CALL",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+                <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+              </Entity>
             </Entity>
           </Entity>
-        </Entity>
-        <Entity position="-35 40 -390" rotation="0 0 0" class="group_2">
-          <Animation attribute="visible" to="false" dur="5000" begin="hide"/>
-          <Entity position="0 0 0">
-            <Entity class="part4-text" mixin="font" text={{text: "THE FLEETING SENSE",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
-              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+          <Entity position="0 0 -80" rotation="0 0 0" class="group_4">
+            <Animation attribute="visible" to="false" dur="5000" begin="hide"/>
+            <Entity position="0 0 0">
+              <Entity class="part4-text" mixin="font" text={{text: "THIS GIRL WHO'S SLEPT",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+                <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+              </Entity>
             </Entity>
-          </Entity>
-          <Entity position="0 -10 0">
-            <Entity class="part4-text" mixin="font" text={{text: "OF LOVE WITHIN THESE",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
-              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            <Entity position="0 -10 0">
+              <Entity class="part4-text" mixin="font" text={{text: "A HUNDRED YEARS HAS ",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+                <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+              </Entity>
             </Entity>
-          </Entity>
-          <Entity position="0 -20 0">
-            <Entity class="part4-text" mixin="font" text={{text: "GODFORSAKEN WALLS",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
-              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
-            </Entity>
-          </Entity>
-        </Entity>
-        <Entity position="-35 40 -420" rotation="0 0 0" class="group_3">
-          <Animation attribute="visible" to="false" dur="5000" begin="hide"/>
-          <Entity position="0 0 0">
-            <Entity class="part4-text" mixin="font" text={{text: "AND YOU CAN HEAR IT",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
-              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
-            </Entity>
-          </Entity>
-          <Entity position="0 -10 0">
-            <Entity class="part4-text" mixin="font" text={{text: "IN HIS VOICE IN",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
-              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
-            </Entity>
-          </Entity>
-          <Entity position="0 -20 0">
-            <Entity class="part4-text" mixin="font" text={{text: "EVERY CALL",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
-              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
-            </Entity>
-          </Entity>
-        </Entity>
-        <Entity position="-35 40 -450" rotation="0 0 0" class="group_4">
-          <Animation attribute="visible" to="false" dur="5000" begin="hide"/>
-          <Entity position="0 0 0">
-            <Entity class="part4-text" mixin="font" text={{text: "THIS GIRL WHO'S SLEPT",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
-              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
-            </Entity>
-          </Entity>
-          <Entity position="0 -10 0">
-            <Entity class="part4-text" mixin="font" text={{text: "A HUNDRED YEARS HAS ",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
-              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
-            </Entity>
-          </Entity>
-          <Entity position="0 -20 0">
-            <Entity class="part4-text" mixin="font" text={{text: "SOMETHING AFTER ALL",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
-              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            <Entity position="0 -20 0">
+              <Entity class="part4-text" mixin="font" text={{text: "SOMETHING AFTER ALL",height: 0.5, size: 5}} material={{color:'black'}} visible="false">
+                <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+              </Entity>
             </Entity>
           </Entity>
         </Entity>
