@@ -1,0 +1,1 @@
+https://github.com/ngokevin/aframe-text-component
