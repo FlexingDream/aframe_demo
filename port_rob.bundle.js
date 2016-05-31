@@ -455,7 +455,7 @@
 	        this.getAssets(),
 	        _react2.default.createElement(
 	          _Camera2.default,
-	          { id: 'camera', position: [0, 10, 0], 'wasd-controls': { enabled: true } },
+	          { id: 'camera', position: [0, 10, 0], 'wasd-controls': { enabled: false } },
 	          _react2.default.createElement(_Cursor2.default, { cursor: { fuse: true, timeout: 2000 } }),
 	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 -400', dur: '200000', ease: 'linear', begin: 'part_1' }),
 	          _react2.default.createElement(Hand, null)
@@ -565,16 +565,16 @@
 	          ),
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
-	            { position: '-50 -40 0' },
+	            { position: '-50 -60 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { id: 'loaded-msg', mixin: 'font', text: { text: "Hover on the button to start" }, material: { color: 'white' }, visible: 'false' },
+	              { id: 'loaded-msg', mixin: 'font', text: { text: "Click the button to start" }, material: { color: 'white' }, visible: 'false' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'false', begin: 'hide' }),
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '0', to: 'true', begin: 'show' })
 	            ),
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'ready-btn', 'collada-model': '#ready-btn-asset', position: '77 9 68', scale: '0.25 0.25 0.25', visible: 'false', onClick: this.props.startSong },
+	              { 'class': 'ready-btn', 'collada-model': '#ready-btn-asset', position: '77 28 68', scale: '0.25 0.25 0.25', visible: 'false', onClick: this.props.startSong },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'false', begin: 'click' }),
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '0', to: 'true', begin: 'show' })
 	            )
@@ -122679,7 +122679,7 @@
 	  };
 	  return _react2.default.createElement(
 	    _aframeReact.Entity,
-	    { cursor: props, geometry: geometry, material: material, position: '0 0 -1' },
+	    { raycaster: { maxDistance: 100000 }, cursor: props, geometry: geometry, material: material, position: '0 0 -1' },
 	    _react2.default.createElement(_aframeReact.Animation, { attribute: 'scale', begin: 'click', dur: '150', fill: 'backwards', to: '0 0 0' }),
 	    _react2.default.createElement(_aframeReact.Animation, { attribute: 'scale', begin: 'fusing', easing: 'ease-in', fill: 'backwards', from: '1 1 1', to: '0.1 0.1 0.1',
 	      dur: '1500' })

@@ -100756,7 +100756,7 @@
 	  };
 	  return _react2.default.createElement(
 	    _aframeReact.Entity,
-	    { cursor: props, geometry: geometry, material: material, position: '0 0 -1' },
+	    { raycaster: { maxDistance: 100000 }, cursor: props, geometry: geometry, material: material, position: '0 0 -1' },
 	    _react2.default.createElement(_aframeReact.Animation, { attribute: 'scale', begin: 'click', dur: '150', fill: 'backwards', to: '0 0 0' }),
 	    _react2.default.createElement(_aframeReact.Animation, { attribute: 'scale', begin: 'fusing', easing: 'ease-in', fill: 'backwards', from: '1 1 1', to: '0.1 0.1 0.1',
 	      dur: '1500' })
