@@ -175,6 +175,7 @@
 	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-x', src: MODEL_LOCATION + "terrain_x.dae" }),
 	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-y', src: MODEL_LOCATION + "terrain_y.dae" }),
 	        _react2.default.createElement('a-asset-item', { id: 'ready-btn-asset', src: MODEL_LOCATION + "readybtn.dae" }),
+	        _react2.default.createElement('a-asset-item', { id: 'thanks-btn-asset', src: MODEL_LOCATION + "thanks-btn.dae" }),
 	        _react2.default.createElement('a-asset-item', { id: 'hand-asset', src: MODEL_LOCATION + "hand.dae" }),
 	        _react2.default.createElement('a-asset-item', { id: 'valley-asset', src: MODEL_LOCATION + "valley.dae" })
 	      );
@@ -204,9 +205,9 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.captureSongStart();
-	      // this.showTimer();
+	      this.showTimer();
 	      // document.querySelector("#scene").setAttribute("canvas",{width: 50});
-	      (0, _jquery2.default)("#scene").css('width', '%');
+	      // $("#scene").css('width','%');
 	      var that = this;
 	      document.getElementById('scene').addEventListener('change_black', function () {
 	        that.setState({ fogColour: '#1A1D23' });
@@ -363,18 +364,18 @@
 	      chainEvents.newChainEvent("#part_4 .group_2", "hide", 1000);
 
 	      chainEvents.newChainEvent("#part_4 .group_3 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
-	      chainEvents.newChainEvent("#part_4 .group_3 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_4 .group_3 > a-entity:nth-child(4) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_4 .group_3", "hide", 1000);
+	      chainEvents.newChainEvent("#part_4 .group_3 > a-entity:nth-child(3) > a-entity", "reveal", 1000);
+	      chainEvents.newChainEvent("#part_4 .group_3 > a-entity:nth-child(4) > a-entity", "reveal", 1000);
+	      chainEvents.newChainEvent("#part_4 .group_3", "hide", 2000);
 
 	      chainEvents.newChainEvent("#part_4 .group_4 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
-	      chainEvents.newChainEvent("#part_4 .group_4 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
+	      chainEvents.newChainEvent("#part_4 .group_4 > a-entity:nth-child(3) > a-entity", "reveal", 1500);
 	      chainEvents.newChainEvent("#part_4 .group_4 > a-entity:nth-child(4) > a-entity", "reveal", 1000);
 	      chainEvents.newChainEvent("#part_4 .group_4", "hide", 2000);
 
 	      chainEvents.newChainEvent("#part_4", "hide_part4", 0);
 	      // chainEvents.newChainEvent('#part_5',"start_part5",0);
-	      chainEvents.newChainEvent("#scene", "song_finished", 10000);
+	      chainEvents.newChainEvent("#scene", "song_finished", 11000);
 
 	      chainEvents.reverse();
 	      this.chainTimingEvents(chainEvents);
@@ -419,7 +420,7 @@
 	      this.setState({ shouldPlay: false });
 
 	      var chainEvents = [];
-	      chainEvents.newChainEvent("#scene", "change_black", 0);
+	      chainEvents.newChainEvent("#ending", "show", 0);
 	      chainEvents.reverse();
 	      this.chainTimingEvents(chainEvents);
 	    }
@@ -877,7 +878,7 @@
 	        ),
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
-	          { position: '-35 70 -265', rotation: '0 0 0', 'class': 'group_6' },
+	          { position: '-35 70 -285', rotation: '0 0 0', 'class': 'group_6' },
 	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_6' }),
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
@@ -927,7 +928,7 @@
 	        ),
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
-	          { position: '-35 70 -285', rotation: '0 0 0', 'class': 'group_7' },
+	          { position: '-35 70 -325', rotation: '0 0 0', 'class': 'group_7' },
 	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_7' }),
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
@@ -974,7 +975,7 @@
 	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', begin: 'hide', dur: '1000' }),
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
-	          { position: '-55 40 -285', rotation: '0 0 0' },
+	          { position: '-75 40 -355', rotation: '0 0 0' },
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
 	            { position: '0 0 0' },
@@ -1011,134 +1012,138 @@
 	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', begin: 'hide_part4' }),
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
-	          { 'collada-model': '#valley-asset', position: '0 -5 200', rotation: '0 0 90' },
+	          { 'collada-model': '#valley-asset', position: '0 -5 200', rotation: '0 0 0' },
 	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '0 0 360', from: '0 0 0', repeat: 'indefinite', dur: '120000', ease: 'linear' })
 	        ),
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
-	          { position: '-35 40 -360', rotation: '0 0 0', 'class': 'group_1' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide' }),
+	          { position: '-35 40 -450' },
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
-	            { position: '0 0 0' },
+	            { position: '0 0 -20', rotation: '0 0 0', 'class': 'group_1' },
+	            _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide' }),
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part4-text', mixin: 'font', text: { text: ">I DON'T KNOW MUCH", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	              { position: '0 0 0' },
+	              _react2.default.createElement(
+	                _aframeReact.Entity,
+	                { 'class': 'part4-text', mixin: 'font', text: { text: ">I DON'T KNOW MUCH", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	              )
+	            ),
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { position: '0 -10 0' },
+	              _react2.default.createElement(
+	                _aframeReact.Entity,
+	                { 'class': 'part4-text', mixin: 'font', text: { text: "ABOUT YOUR LIFE", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	              )
+	            ),
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { position: '0 -20 0' },
+	              _react2.default.createElement(
+	                _aframeReact.Entity,
+	                { 'class': 'part4-text', mixin: 'font', text: { text: "BEYOND THESE WALLS", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	              )
 	            )
 	          ),
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
-	            { position: '0 -10 0' },
+	            { position: '0 0 -40', rotation: '0 0 0', 'class': 'group_2' },
+	            _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide' }),
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part4-text', mixin: 'font', text: { text: "ABOUT YOUR LIFE", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	              { position: '0 0 0' },
+	              _react2.default.createElement(
+	                _aframeReact.Entity,
+	                { 'class': 'part4-text', mixin: 'font', text: { text: "THE FLEETING SENSE", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	              )
+	            ),
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { position: '0 -10 0' },
+	              _react2.default.createElement(
+	                _aframeReact.Entity,
+	                { 'class': 'part4-text', mixin: 'font', text: { text: "OF LOVE WITHIN THESE", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	              )
+	            ),
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { position: '0 -20 0' },
+	              _react2.default.createElement(
+	                _aframeReact.Entity,
+	                { 'class': 'part4-text', mixin: 'font', text: { text: "GODFORSAKEN WALLS", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	              )
 	            )
 	          ),
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
-	            { position: '0 -20 0' },
+	            { position: '0 0 -60', rotation: '0 0 0', 'class': 'group_3' },
+	            _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide' }),
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part4-text', mixin: 'font', text: { text: "BEYOND THESE WALLS", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { position: '-35 40 -390', rotation: '0 0 0', 'class': 'group_2' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide' }),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 0 0' },
+	              { position: '0 0 0' },
+	              _react2.default.createElement(
+	                _aframeReact.Entity,
+	                { 'class': 'part4-text', mixin: 'font', text: { text: "AND YOU CAN HEAR IT", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	              )
+	            ),
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part4-text', mixin: 'font', text: { text: "THE FLEETING SENSE", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -10 0' },
+	              { position: '0 -10 0' },
+	              _react2.default.createElement(
+	                _aframeReact.Entity,
+	                { 'class': 'part4-text', mixin: 'font', text: { text: "IN HIS VOICE IN", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	              )
+	            ),
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part4-text', mixin: 'font', text: { text: "OF LOVE WITHIN THESE", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -20 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part4-text', mixin: 'font', text: { text: "GODFORSAKEN WALLS", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { position: '-35 40 -420', rotation: '0 0 0', 'class': 'group_3' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide' }),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 0 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part4-text', mixin: 'font', text: { text: "AND YOU CAN HEAR IT", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	              { position: '0 -20 0' },
+	              _react2.default.createElement(
+	                _aframeReact.Entity,
+	                { 'class': 'part4-text', mixin: 'font', text: { text: "EVERY CALL", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	              )
 	            )
 	          ),
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
-	            { position: '0 -10 0' },
+	            { position: '0 0 -80', rotation: '0 0 0', 'class': 'group_4' },
+	            _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide' }),
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part4-text', mixin: 'font', text: { text: "IN HIS VOICE IN", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -20 0' },
+	              { position: '0 0 0' },
+	              _react2.default.createElement(
+	                _aframeReact.Entity,
+	                { 'class': 'part4-text', mixin: 'font', text: { text: "THIS GIRL WHO'S SLEPT", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	              )
+	            ),
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part4-text', mixin: 'font', text: { text: "EVERY CALL", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { position: '-35 40 -450', rotation: '0 0 0', 'class': 'group_4' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide' }),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 0 0' },
+	              { position: '0 -10 0' },
+	              _react2.default.createElement(
+	                _aframeReact.Entity,
+	                { 'class': 'part4-text', mixin: 'font', text: { text: "A HUNDRED YEARS HAS ", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	              )
+	            ),
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
-	              { 'class': 'part4-text', mixin: 'font', text: { text: "THIS GIRL WHO'S SLEPT", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -10 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part4-text', mixin: 'font', text: { text: "A HUNDRED YEARS HAS ", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -20 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part4-text', mixin: 'font', text: { text: "SOMETHING AFTER ALL", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	              { position: '0 -20 0' },
+	              _react2.default.createElement(
+	                _aframeReact.Entity,
+	                { 'class': 'part4-text', mixin: 'font', text: { text: "SOMETHING AFTER ALL", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
+	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	              )
 	            )
 	          )
 	        )
@@ -1548,7 +1553,13 @@
 	  _createClass(Ending, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_aframeReact.Entity, null);
+	      return _react2.default.createElement(
+	        _aframeReact.Entity,
+	        { id: 'ending', position: '-60 10 -505', visible: 'false' },
+	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', begin: 'hide' }),
+	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'true', begin: 'show' }),
+	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#thanks-btn-asset', scale: ' 8 8 8' })
+	      );
 	    }
 	  }]);
 
