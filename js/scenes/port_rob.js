@@ -67,8 +67,9 @@ class PortRob extends React.Component{
         <a-asset-item id="terrain-asset-d" src={MODEL_LOCATION+"terrain_d.dae"}></a-asset-item>
         <a-asset-item id="terrain-asset-e" src={MODEL_LOCATION+"terrain_e.dae"}></a-asset-item>
         <a-asset-item id="terrain-asset-x" src={MODEL_LOCATION+"terrain_x.dae"}></a-asset-item>
+        <a-asset-item id="terrain-asset-y" src={MODEL_LOCATION+"terrain_y.dae"}></a-asset-item>
 
-
+        <a-asset-item id="ready-btn-asset" src={MODEL_LOCATION+"readybtn.dae"}></a-asset-item>
         <a-asset-item id="hand-asset" src={MODEL_LOCATION+"hand.dae"}></a-asset-item>
         <a-asset-item id="valley-asset" src={MODEL_LOCATION+"valley.dae"}></a-asset-item>
       </Entity>
@@ -97,19 +98,34 @@ class PortRob extends React.Component{
     // this.showTimer();
     // document.querySelector("#scene").setAttribute("canvas",{width: 50});
     $("#scene").css('width','%');
-  }
 
-  startSong(){
-    document.getElementById('scene').removeEventListener('song_loaded',this.startSong,false);
-
-    document.getElementById('intro').emit('start_intro');
-    var that = this;
     document.getElementById('scene').addEventListener('change_black',function(){
       that.setState({fogColour:'#1A1D23'});
     },false);
     document.getElementById('scene').addEventListener('change_white',function(){
       that.setState({fogColour:'white'});
     },false);
+  }
+  songLoaded(){
+    document.getElementById('scene').removeEventListener('song_loaded',this.startSong,false);
+
+    var chainEvents= [] ;
+    // document.getElementsByClassName("loading")[0].emit('hide');
+    chainEvents.newChainEvent(".loading","hide",0);
+    chainEvents.newChainEvent("#loaded-msg","show",0);
+    chainEvents.newChainEvent(".ready-btn","show",0);
+
+    chainEvents.reverse();
+    this.chainTimingEvents(chainEvents);
+
+  }
+
+  startSong(){
+    document.getElementById('scene').removeEventListener('start_song',this.startSong,false);
+    document.getElementById('loaded-msg').emit('hide');
+    var node = $(".audio-player").data("node");
+    node.start(0);
+    document.getElementById('intro').emit('start_intro');
   }
 
   startIntro(){
@@ -158,8 +174,8 @@ class PortRob extends React.Component{
     chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(2) > a-entity","reveal",2000);
     chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(3) > a-entity","reveal",3000);
     chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(4) > a-entity","reveal",3000);
-    chainEvents.newChainEvent("#part_2 .group_1","hide_group_1",2000);
-    chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(2) > a-entity","reveal",4000);
+    chainEvents.newChainEvent("#part_2 .group_1","hide_group_1",4000);
+    chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(2) > a-entity","reveal",2000);
     chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(3) > a-entity","reveal",2000);
     chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(4) > a-entity","reveal",4000);
     chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(5) > a-entity","reveal",1000);
@@ -287,9 +303,6 @@ class PortRob extends React.Component{
   }
 
 
-
-
-
   endSong(){
     document.getElementById('scene').removeEventListener('song_finished',this.endSong,false);
     this.setState({shouldPlay: false});
@@ -311,7 +324,8 @@ class PortRob extends React.Component{
   }
 
   captureSongStart(){
-    document.getElementById('scene').addEventListener('song_loaded',this.startSong.bind(this),false);
+    document.getElementById('scene').addEventListener('song_loaded',this.songLoaded.bind(this),false);
+    document.getElementById('scene').addEventListener('start_song',this.startSong.bind(this),false);
     document.getElementById('intro').addEventListener('start_intro',this.startIntro.bind(this),false);
     document.getElementById('part_1').addEventListener('start_part1',this.startPart1.bind(this),false);
     document.getElementById('part_2').addEventListener('start_part2',this.startPart2.bind(this),false);
@@ -324,16 +338,14 @@ class PortRob extends React.Component{
     return(
     <Scene id="scene" stats fog={{color: this.state.fogColour}} canvas="width: 50; height: 10;">
       {this.getAssets()}
-      <Camera id="camera" position={[0,10,0]} wasd-controls={{enabled: false}} >
-        <Cursor />
-        <Animation attribute="position" to="0 0 -400" dur="260000" ease="linear" begin="part_1"/>
-        {/*<Animation attribute="position" to="0 0 -400" dur="100000" eaase="ease-in-out" begin="part_4"/>
-        <Animation attribute="position" to="0 0 -600" dur="100000" eaase="ease-in-out" begin="part_5"/>*/}
+      <Camera id="camera" position={[0,10,0]} wasd-controls={{enabled: true}} >
+        <Cursor cursor={{fuse: true, timeout: 2000}}/>
+        <Animation attribute="position" to="0 0 -400" dur="200000" ease="linear" begin="part_1"/>
         <Hand/>
       </Camera>
       <Audio  audioSrc={this.state.song} shouldUpdateFrequencies="false" shouldPlay={this.state.shouldPlay}/>
       <Sky id="sky"/>
-      {this.state.stage == 0 ? <Intro/> : ''}
+      {this.state.stage == 0 ? <Intro startSong={this.startSong}/> : ''}
       {this.state.stage  <= 2 ? <Part1/> : ''}
       {this.state.stage <=2 ? <Part2/> : ''}}
       {this.state.stage <=3 ? <Part3/> : ''}}
@@ -353,8 +365,16 @@ class Intro extends React.Component{
   constructor(props){
     super(props);
     this.state = {
+      color: 'red'
+
     };
   }
+  changeColor()  {
+    const colors = ['red', 'orange', 'yellow', 'green', 'blue'];
+    this.setState({
+      color: colors[Math.floor(Math.random() * colors.length)],
+    });
+  };
 
   render(){
     return(
@@ -384,6 +404,16 @@ class Intro extends React.Component{
           <Animation attribute="visible" dur="400" to="false" begin="hide"/>
           </Entity>
         </Entity>
+        <Entity position="-50 -40 0">
+          <Entity  id="loaded-msg" mixin="font" text={{text: "Hover on the button to start"}} material={{color:'white'}} visible="false">
+            <Animation attribute="visible" dur="400" to="false" begin="hide"/>
+            <Animation attribute="visible" dur="0" to="true" begin="show"/>
+          </Entity>
+          <Entity  class="ready-btn" collada-model="#ready-btn-asset" position="77 9 68" scale="0.25 0.25 0.25" visible="false" onClick={this.props.startSong}>
+            <Animation attribute="visible" dur="400" to="false" begin="click"/>
+            <Animation attribute="visible" dur="0" to="true" begin="show"/>
+          </Entity>
+        </Entity>
       </Entity>
     </Entity>
     );
@@ -399,17 +429,10 @@ class Part1 extends React.Component{
       <Entity id="part_1" visible="false">
         <Animation attribute="visible" to="false" begin="hide"/>
         <Animation attribute="visible" to="true" begin="start_part1"/>
-{/*        <Entity collada-model="#terrain-asset-0" position="0 -5 0" rotation="0 0 0"/>
-        <Entity collada-model="#terrain-asset-1" position="0 -5 -100" rotation="0 0 0"/>*/}
-        <Entity collada-model="#terrain-asset-a" position="0 -5 0" rotation="0 0 0" scale="1 1 1"/>
-        {/*<Entity collada-model="#terrain-asset-b" position="-80 -5 0" rotation="0 0 0" scale="1 1 2"/>*/}
-        {/*<Entity collada-model="#terrain-asset-c" position="80 -5 0" rotation="0 0 0" scale="1 1 2"/>*/}
-        <Entity collada-model="#terrain-asset-x" position="-80 -10 0" rotation="0 0 0" scale="1 1 2"/>
-        <Entity collada-model="#terrain-asset-x" position="140 -10 -1000" rotation="0 180 0" scale="1 1 2"/>
+        <Entity collada-model="#terrain-asset-y" position="0 -10 0" rotation="0 0 0" scale="1 1 1"/>
+        <Entity collada-model="#terrain-asset-x" position="-80 -11 0" rotation="0 0 0" scale="1 1 2"/>
+        <Entity collada-model="#terrain-asset-x" position="140 -11 -1000" rotation="0 180 0" scale="1 1 2"/>
         <Entity collada-model="#terrain-asset-e" position="0 -5 5" rotation="0 0 0" scale="2 1 2"/>
-{/*        <Entity collada-model="#terrain-asset-e" position="0 -5 -50" rotation="0 0 0"/>
-        <Entity collada-model="#terrain-asset-f" position="100 -5 -100" rotation="0 0 0"/>
-        <Entity collada-model="#terrain-asset-g" position="100 -5 -100" rotation="0 0 0"/>*/}
       </Entity>
     );
   }

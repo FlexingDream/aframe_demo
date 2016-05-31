@@ -173,6 +173,8 @@
 	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-d', src: MODEL_LOCATION + "terrain_d.dae" }),
 	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-e', src: MODEL_LOCATION + "terrain_e.dae" }),
 	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-x', src: MODEL_LOCATION + "terrain_x.dae" }),
+	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-y', src: MODEL_LOCATION + "terrain_y.dae" }),
+	        _react2.default.createElement('a-asset-item', { id: 'ready-btn-asset', src: MODEL_LOCATION + "readybtn.dae" }),
 	        _react2.default.createElement('a-asset-item', { id: 'hand-asset', src: MODEL_LOCATION + "hand.dae" }),
 	        _react2.default.createElement('a-asset-item', { id: 'valley-asset', src: MODEL_LOCATION + "valley.dae" })
 	      );
@@ -205,20 +207,36 @@
 	      // this.showTimer();
 	      // document.querySelector("#scene").setAttribute("canvas",{width: 50});
 	      (0, _jquery2.default)("#scene").css('width', '%');
-	    }
-	  }, {
-	    key: 'startSong',
-	    value: function startSong() {
-	      document.getElementById('scene').removeEventListener('song_loaded', this.startSong, false);
 
-	      document.getElementById('intro').emit('start_intro');
-	      var that = this;
 	      document.getElementById('scene').addEventListener('change_black', function () {
 	        that.setState({ fogColour: '#1A1D23' });
 	      }, false);
 	      document.getElementById('scene').addEventListener('change_white', function () {
 	        that.setState({ fogColour: 'white' });
 	      }, false);
+	    }
+	  }, {
+	    key: 'songLoaded',
+	    value: function songLoaded() {
+	      document.getElementById('scene').removeEventListener('song_loaded', this.startSong, false);
+
+	      var chainEvents = [];
+	      // document.getElementsByClassName("loading")[0].emit('hide');
+	      chainEvents.newChainEvent(".loading", "hide", 0);
+	      chainEvents.newChainEvent("#loaded-msg", "show", 0);
+	      chainEvents.newChainEvent(".ready-btn", "show", 0);
+
+	      chainEvents.reverse();
+	      this.chainTimingEvents(chainEvents);
+	    }
+	  }, {
+	    key: 'startSong',
+	    value: function startSong() {
+	      document.getElementById('scene').removeEventListener('start_song', this.startSong, false);
+	      document.getElementById('loaded-msg').emit('hide');
+	      var node = (0, _jquery2.default)(".audio-player").data("node");
+	      node.start(0);
+	      document.getElementById('intro').emit('start_intro');
 	    }
 	  }, {
 	    key: 'startIntro',
@@ -269,8 +287,8 @@
 	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(2) > a-entity", "reveal", 2000);
 	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(3) > a-entity", "reveal", 3000);
 	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(4) > a-entity", "reveal", 3000);
-	      chainEvents.newChainEvent("#part_2 .group_1", "hide_group_1", 2000);
-	      chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(2) > a-entity", "reveal", 4000);
+	      chainEvents.newChainEvent("#part_2 .group_1", "hide_group_1", 4000);
+	      chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(2) > a-entity", "reveal", 2000);
 	      chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
 	      chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(4) > a-entity", "reveal", 4000);
 	      chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(5) > a-entity", "reveal", 1000);
@@ -419,7 +437,8 @@
 	  }, {
 	    key: 'captureSongStart',
 	    value: function captureSongStart() {
-	      document.getElementById('scene').addEventListener('song_loaded', this.startSong.bind(this), false);
+	      document.getElementById('scene').addEventListener('song_loaded', this.songLoaded.bind(this), false);
+	      document.getElementById('scene').addEventListener('start_song', this.startSong.bind(this), false);
 	      document.getElementById('intro').addEventListener('start_intro', this.startIntro.bind(this), false);
 	      document.getElementById('part_1').addEventListener('start_part1', this.startPart1.bind(this), false);
 	      document.getElementById('part_2').addEventListener('start_part2', this.startPart2.bind(this), false);
@@ -436,14 +455,14 @@
 	        this.getAssets(),
 	        _react2.default.createElement(
 	          _Camera2.default,
-	          { id: 'camera', position: [0, 10, 0], 'wasd-controls': { enabled: false } },
-	          _react2.default.createElement(_Cursor2.default, null),
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 -400', dur: '260000', ease: 'linear', begin: 'part_1' }),
+	          { id: 'camera', position: [0, 10, 0], 'wasd-controls': { enabled: true } },
+	          _react2.default.createElement(_Cursor2.default, { cursor: { fuse: true, timeout: 2000 } }),
+	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 -400', dur: '200000', ease: 'linear', begin: 'part_1' }),
 	          _react2.default.createElement(Hand, null)
 	        ),
 	        _react2.default.createElement(_Audio2.default, { audioSrc: this.state.song, shouldUpdateFrequencies: 'false', shouldPlay: this.state.shouldPlay }),
 	        _react2.default.createElement(_Sky2.default, { id: 'sky' }),
-	        this.state.stage == 0 ? _react2.default.createElement(Intro, null) : '',
+	        this.state.stage == 0 ? _react2.default.createElement(Intro, { startSong: this.startSong }) : '',
 	        this.state.stage <= 2 ? _react2.default.createElement(Part1, null) : '',
 	        this.state.stage <= 2 ? _react2.default.createElement(Part2, null) : '',
 	        '}',
@@ -479,11 +498,22 @@
 
 	    var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Intro).call(this, props));
 
-	    _this2.state = {};
+	    _this2.state = {
+	      color: 'red'
+
+	    };
 	    return _this2;
 	  }
 
 	  _createClass(Intro, [{
+	    key: 'changeColor',
+	    value: function changeColor() {
+	      var colors = ['red', 'orange', 'yellow', 'green', 'blue'];
+	      this.setState({
+	        color: colors[Math.floor(Math.random() * colors.length)]
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -532,6 +562,22 @@
 	              { 'class': 'loading', mixin: 'font', text: { text: "Loading..." }, material: { color: 'white' }, visible: 'true' },
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'false', begin: 'hide' })
 	            )
+	          ),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '-50 -40 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { id: 'loaded-msg', mixin: 'font', text: { text: "Hover on the button to start" }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'false', begin: 'hide' }),
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '0', to: 'true', begin: 'show' })
+	            ),
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'ready-btn', 'collada-model': '#ready-btn-asset', position: '77 9 68', scale: '0.25 0.25 0.25', visible: 'false', onClick: this.props.startSong },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'false', begin: 'click' }),
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '0', to: 'true', begin: 'show' })
+	            )
 	          )
 	        )
 	      );
@@ -563,9 +609,9 @@
 	        { id: 'part_1', visible: 'false' },
 	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', begin: 'hide' }),
 	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'true', begin: 'start_part1' }),
-	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-a', position: '0 -5 0', rotation: '0 0 0', scale: '1 1 1' }),
-	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-x', position: '-80 -10 0', rotation: '0 0 0', scale: '1 1 2' }),
-	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-x', position: '140 -10 -1000', rotation: '0 180 0', scale: '1 1 2' }),
+	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-y', position: '0 -10 0', rotation: '0 0 0', scale: '1 1 1' }),
+	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-x', position: '-80 -11 0', rotation: '0 0 0', scale: '1 1 2' }),
+	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-x', position: '140 -11 -1000', rotation: '0 180 0', scale: '1 1 2' }),
 	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-e', position: '0 -5 5', rotation: '0 0 0', scale: '2 1 2' })
 	      );
 	    }
@@ -122626,24 +122672,17 @@
 	    // height: 1
 	  };
 	  var material = {
-	    color: props.color,
+	    color: props.color || 'white',
 	    shader: 'flat',
 	    opacity: props.opacity || 0.9,
 	    transparent: true
 	  };
-	  var cursor = {
-	    fuse: true,
-	    timeout: 2000
-	  };
-	  var raycaster = {
-	    objects: "[mixin~='rain']",
-	    far: 1000
-	  };
 	  return _react2.default.createElement(
 	    _aframeReact.Entity,
-	    { 'raycaster-helper': true, raycaster: raycaster, cursor: cursor, geometry: geometry, material: material, position: '0 0 -1', 'cursor-interaction': true },
-	    _react2.default.createElement(_aframeReact.Animation, { begin: 'cursor-fusing', easing: 'ease-in', attribute: 'scale', fill: 'forwards', from: '1 1 1', to: '0.1 0.1 0.1' }),
-	    _react2.default.createElement(_aframeReact.Animation, { begin: 'cursor-click', easing: 'ease-in', attribute: 'scale', fill: 'fowards', from: '0.1 0.1 0.1', to: '1 1 1' })
+	    { cursor: props, geometry: geometry, material: material, position: '0 0 -1' },
+	    _react2.default.createElement(_aframeReact.Animation, { attribute: 'scale', begin: 'click', dur: '150', fill: 'backwards', to: '0 0 0' }),
+	    _react2.default.createElement(_aframeReact.Animation, { attribute: 'scale', begin: 'fusing', easing: 'ease-in', fill: 'backwards', from: '1 1 1', to: '0.1 0.1 0.1',
+	      dur: '1500' })
 	  );
 	};
 
@@ -122689,6 +122728,7 @@
 	    startPlay: { default: false }
 	  },
 
+	  // FOR TOUCH EVENTS ON MOBILE
 	  init: function init() {
 	    var el = this.el;
 	    var data = this;data;
@@ -122850,10 +122890,11 @@
 	            });
 	          } else if (document.getElementById('scene')) {
 	            document.getElementById('scene').emit('song_loaded');
-	            node.start(0);
+	            (0, _jquery2.default)(".audio-player").data('node', node);
+	            // node.start(0);
 	          } else {
-	            node.start(0);
-	          }
+	              node.start(0);
+	            }
 	          that.setState({ node: node });
 	        }, function (e) {
 	          "Error with decoding audio data" + e.err;
@@ -123003,7 +123044,7 @@
 	  _createClass(Sky, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_aframeReact.Entity, { geometry: { primitive: 'box', height: 5000, width: 5000, depth: 5000, radius: 5000 },
+	      return _react2.default.createElement(_aframeReact.Entity, { geometry: { primitive: 'box', height: 2000, width: 2000, depth: 2000, radius: 2000 },
 	        material: { color: this.props.color, shader: 'flat' },
 	        scale: '1 1 -1'
 	      });

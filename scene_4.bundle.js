@@ -100779,24 +100779,17 @@
 	    // height: 1
 	  };
 	  var material = {
-	    color: props.color,
+	    color: props.color || 'white',
 	    shader: 'flat',
 	    opacity: props.opacity || 0.9,
 	    transparent: true
 	  };
-	  var cursor = {
-	    fuse: true,
-	    timeout: 2000
-	  };
-	  var raycaster = {
-	    objects: "[mixin~='rain']",
-	    far: 1000
-	  };
 	  return _react2.default.createElement(
 	    _aframeReact.Entity,
-	    { 'raycaster-helper': true, raycaster: raycaster, cursor: cursor, geometry: geometry, material: material, position: '0 0 -1', 'cursor-interaction': true },
-	    _react2.default.createElement(_aframeReact.Animation, { begin: 'cursor-fusing', easing: 'ease-in', attribute: 'scale', fill: 'forwards', from: '1 1 1', to: '0.1 0.1 0.1' }),
-	    _react2.default.createElement(_aframeReact.Animation, { begin: 'cursor-click', easing: 'ease-in', attribute: 'scale', fill: 'fowards', from: '0.1 0.1 0.1', to: '1 1 1' })
+	    { cursor: props, geometry: geometry, material: material, position: '0 0 -1' },
+	    _react2.default.createElement(_aframeReact.Animation, { attribute: 'scale', begin: 'click', dur: '150', fill: 'backwards', to: '0 0 0' }),
+	    _react2.default.createElement(_aframeReact.Animation, { attribute: 'scale', begin: 'fusing', easing: 'ease-in', fill: 'backwards', from: '1 1 1', to: '0.1 0.1 0.1',
+	      dur: '1500' })
 	  );
 	};
 
@@ -100842,6 +100835,7 @@
 	    startPlay: { default: false }
 	  },
 
+	  // FOR TOUCH EVENTS ON MOBILE
 	  init: function init() {
 	    var el = this.el;
 	    var data = this;data;
@@ -101003,10 +100997,11 @@
 	            });
 	          } else if (document.getElementById('scene')) {
 	            document.getElementById('scene').emit('song_loaded');
-	            node.start(0);
+	            (0, _jquery2.default)(".audio-player").data('node', node);
+	            // node.start(0);
 	          } else {
-	            node.start(0);
-	          }
+	              node.start(0);
+	            }
 	          that.setState({ node: node });
 	        }, function (e) {
 	          "Error with decoding audio data" + e.err;
