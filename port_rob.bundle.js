@@ -438,7 +438,7 @@
 	          _Camera2.default,
 	          { id: 'camera', position: [0, 10, 0], 'wasd-controls': { enabled: false } },
 	          _react2.default.createElement(_Cursor2.default, null),
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 -400', dur: '260000', ease: 'ease-in-out', begin: 'part_1' }),
+	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 -400', dur: '260000', ease: 'linear', begin: 'part_1' }),
 	          _react2.default.createElement(Hand, null)
 	        ),
 	        _react2.default.createElement(_Audio2.default, { audioSrc: this.state.song, shouldUpdateFrequencies: 'false', shouldPlay: this.state.shouldPlay }),
@@ -447,9 +447,9 @@
 	        this.state.stage <= 2 ? _react2.default.createElement(Part1, null) : '',
 	        this.state.stage <= 2 ? _react2.default.createElement(Part2, null) : '',
 	        '}',
-	        this.state.stage <= 2 ? _react2.default.createElement(Part3, null) : '',
+	        this.state.stage <= 3 ? _react2.default.createElement(Part3, null) : '',
 	        '}',
-	        this.state.stage <= 2 ? _react2.default.createElement(Part4, null) : '',
+	        this.state.stage <= 4 ? _react2.default.createElement(Part4, null) : '',
 	        '}',
 	        _react2.default.createElement(Ending, null)
 	      );
@@ -1423,7 +1423,7 @@
 	        { id: 'hand', 'collada-model': '#hand-asset', scale: '0.1 0.1 0.1', position: '0 -1.4 -1.5', rotation: '180 105 180', visible: 'false' },
 	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', from: '0 -2.5 -1.5', to: '0 -1.6 -1.5', dur: '8000', ease: 'linear', begin: 'show_hand' }),
 	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'true', dur: '8000', ease: 'linear', begin: 'show_hand' }),
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 -1.6 -1.5', dur: '10000', repeat: 'indefinite', direction: 'alternate', from: '0 -1.4 -1.5', ease: 'ease-in-out', begin: 'start_movement' }),
+	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 -1.6 -1.5', dur: '10000', repeat: 'indefinite', direction: 'alternate', from: '0 -1.4 -1.5', ease: 'linear', begin: 'start_movement' }),
 	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '180 270 90', from: '180 105 180', direction: 'alternate', repeat: '1', dur: '15000', begin: 'rotate_hand', ease: 'linear' })
 	      );
 	    }
