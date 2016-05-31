@@ -98,7 +98,7 @@ class PortRob extends React.Component{
     // this.showTimer();
     // document.querySelector("#scene").setAttribute("canvas",{width: 50});
     $("#scene").css('width','%');
-
+    var that = this;
     document.getElementById('scene').addEventListener('change_black',function(){
       that.setState({fogColour:'#1A1D23'});
     },false);
