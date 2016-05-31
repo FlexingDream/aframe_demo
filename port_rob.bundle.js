@@ -248,7 +248,7 @@
 	      chainEvents.newChainEvent("#camera", "part_1", 0);
 	      chainEvents.newChainEvent("#hand", "show_hand", 4000);
 	      chainEvents.newChainEvent("#hand", "rotate_hand", 8000);
-	      chainEvents.newChainEvent("#hand", "start_movement", 4000);
+	      // chainEvents.newChainEvent("#hand","start_movement",4000);
 	      chainEvents.reverse();
 	      var that = this;
 	      this.chainTimingEvents(chainEvents);
