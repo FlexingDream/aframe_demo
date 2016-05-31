@@ -166,6 +166,13 @@
 	        _react2.default.createElement('a-asset-item', { id: 'moon-asset', src: MODEL_LOCATION + "moon.dae" }),
 	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-0', src: MODEL_LOCATION + "terrain_0.dae" }),
 	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-1', src: MODEL_LOCATION + "terrain_1.dae" }),
+	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-a', src: MODEL_LOCATION + "terrain_a.dae" }),
+	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-b', src: MODEL_LOCATION + "terrain_b.dae" }),
+	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-c', src: MODEL_LOCATION + "terrain_c.dae" }),
+	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-d', src: MODEL_LOCATION + "terrain_d.dae" }),
+	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-e', src: MODEL_LOCATION + "terrain_e.dae" }),
+	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-f', src: MODEL_LOCATION + "terrain_f.dae" }),
+	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-g', src: MODEL_LOCATION + "terrain_g.dae" }),
 	        _react2.default.createElement('a-asset-item', { id: 'hand-asset', src: MODEL_LOCATION + "hand.dae" }),
 	        _react2.default.createElement('a-asset-item', { id: 'valley-asset', src: MODEL_LOCATION + "valley.dae" })
 	      );
@@ -550,8 +557,10 @@
 	        { id: 'part_1', visible: 'false' },
 	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', begin: 'hide' }),
 	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'true', begin: 'start_part1' }),
-	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-0', position: '0 -5 0', rotation: '0 0 0' }),
-	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-1', position: '0 -5 -100', rotation: '0 0 0' })
+	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-a', position: '0 -5 0', rotation: '0 0 0', scale: '1 1 1' }),
+	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-b', position: '-80 -5 0', rotation: '0 0 0', scale: '1 1 2' }),
+	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-c', position: '80 -5 0', rotation: '0 0 0', scale: '1 1 2' }),
+	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-d', position: '0 -5 5', rotation: '0 0 0', scale: '2 1 2' })
 	      );
 	    }
 	  }]);
