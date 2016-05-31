@@ -32,7 +32,8 @@ class PortRob extends React.Component{
     this.state = {
       heights: heights,
       // song: 'https://cdn.rawgit.com/FlexingDream/aframe_demo/pua/src/audio/port_rob_full.mp3',
-      song: 'audio/port_rob_full.mp3',
+      // song: 'audio/port_rob_full.mp3',
+      song: 'https://res.cloudinary.com/dtniqc2hg/video/upload/q_63/v1464656484/port_rob_full_kzzetz.mp3',
       fogColour: '#F97B8E',
       shouldPlay: true,
       stage: 0
