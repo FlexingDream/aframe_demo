@@ -136,7 +136,8 @@ class PortRob extends React.Component{
     var chainEvents = [];
     chainEvents.newChainEvent("#camera","part_1",0);
     chainEvents.newChainEvent("#hand","show_hand",4000);
-    chainEvents.newChainEvent("#hand","rotate_hand",4000);
+    chainEvents.newChainEvent("#hand","rotate_hand",8000);
+    chainEvents.newChainEvent("#hand","start_movement",4000);
     chainEvents.reverse();
     var that = this;
     this.chainTimingEvents(chainEvents);
@@ -158,12 +159,13 @@ class PortRob extends React.Component{
     chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(2) > a-entity","reveal",2000);
     chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(3) > a-entity","reveal",3000);
     chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(4) > a-entity","reveal",3000);
-    chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(5) > a-entity","reveal",6000);
-    chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(6) > a-entity","reveal",2000);
-    chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(7) > a-entity","reveal",4000);
-    chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(8) > a-entity","reveal",1000);
-
     chainEvents.newChainEvent("#part_2 .group_1","hide_group_1",2000);
+    chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(2) > a-entity","reveal",4000);
+    chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(3) > a-entity","reveal",2000);
+    chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(4) > a-entity","reveal",4000);
+    chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(5) > a-entity","reveal",1000);
+
+    chainEvents.newChainEvent("#part_2 .group_1_5","hide_group_1_5",2000);
     chainEvents.newChainEvent("#part_2 .group_2 > a-entity:nth-child(2) > a-entity","reveal",1000);
     chainEvents.newChainEvent("#part_2 .group_2 > a-entity:nth-child(3) > a-entity","reveal",2000);
     chainEvents.newChainEvent("#part_2 .group_2","hide_group_2",3000);
@@ -357,7 +359,7 @@ class Intro extends React.Component{
   render(){
     return(
     <Entity id="intro">
-      
+
       <Entity position="-30 40 -70">
         <Entity position="-2 -10 0">
           <Entity class="intro-text" mixin="font" text={{text: "IS ANYONE THERE?"}}  material={{color:'white'}} visible="false">
@@ -456,6 +458,29 @@ class Part2 extends React.Component{
             </Entity>
           </Entity>
           <Entity position="0 -60 0">
+            <Entity class="part2-text" mixin="font" text={{text: ">WOULD BE BORNE OF YOU.",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+        </Entity>
+        <Entity position="-35 70 -175" rotation="0 0 0" class="group_1_5">
+          <Animation attribute="visible" to="false" dur="5000" begin="hide_group_1_5"/>
+          <Entity position="0 -10 0">
+            <Entity class="part2-text" mixin="font" text={{text: ">ON A LONELY NIGHT",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -20 0">
+            <Entity class="part2-text" mixin="font" text={{text: ">WAS A BLINDING LIGHT.",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -30 0">
+            <Entity class="part2-text" mixin="font" text={{text: ">A HUNDRED LEADERS",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
+              <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
+            </Entity>
+          </Entity>
+          <Entity position="0 -40 0">
             <Entity class="part2-text" mixin="font" text={{text: ">WOULD BE BORNE OF YOU.",height: 0.5, size: 5}} material={{color:'white'}} visible="false">
               <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
             </Entity>
@@ -853,11 +878,11 @@ class Hand extends React.Component{
 
   render(){
     return(        
-      <Entity id="hand" collada-model="#hand-asset" scale="0.1 0.1 0.1" position="0 -1.4 -1.5" rotation="0 105 15" visible="false">
+      <Entity id="hand" collada-model="#hand-asset" scale="0.1 0.1 0.1" position="0 -1.4 -1.5" rotation="180 105 180" visible="false">
         <Animation attribute="position" from="0 -2.5 -1.5" to="0 -1.6 -1.5" dur="8000" ease="linear" begin="show_hand"/>
         <Animation attribute="visible" to="true" dur="8000" ease="linear" begin="show_hand"/>
-        <Animation attribute="position" to="0 -1.6 -1.5" dur="10000" repeat="indefinite" direction="alternate" from="0 -1.4 -1.5" ease="ease-in-out"/>
-        <Animation attribute="rotation" to ="45 270 90" from="0 105 15" direction="alternate" repeat="1" dur="15000" begin="rotate_hand" ease="linear"/>
+        <Animation attribute="position" to="0 -1.6 -1.5" dur="10000" repeat="indefinite" direction="alternate" from="0 -1.4 -1.5" ease="ease-in-out" begin="start_movement"/>
+        <Animation attribute="rotation" to ="180 270 90" from="180 105 180" direction="alternate" repeat="1" dur="15000" begin="rotate_hand" ease="linear"/>
       </Entity>
     );
   }

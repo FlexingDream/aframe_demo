@@ -3,4 +3,4 @@ npm-debug.log
 *.sw[ponm]
 gh-pages
 build
-src/3d_models/Auto*
+src/3d_models/sketchup/Auto*
