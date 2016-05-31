@@ -70,6 +70,7 @@ class PortRob extends React.Component{
         <a-asset-item id="terrain-asset-y" src={MODEL_LOCATION+"terrain_y.dae"}></a-asset-item>
 
         <a-asset-item id="ready-btn-asset" src={MODEL_LOCATION+"readybtn.dae"}></a-asset-item>
+        <a-asset-item id="thanks-btn-asset" src={MODEL_LOCATION+"thanks-btn.dae"}></a-asset-item>
         <a-asset-item id="hand-asset" src={MODEL_LOCATION+"hand.dae"}></a-asset-item>
         <a-asset-item id="valley-asset" src={MODEL_LOCATION+"valley.dae"}></a-asset-item>
       </Entity>
@@ -258,7 +259,7 @@ class PortRob extends React.Component{
 
     chainEvents.newChainEvent("#part_4","hide_part4",0);
     // chainEvents.newChainEvent('#part_5',"start_part5",0);
-    chainEvents.newChainEvent("#scene","song_finished",10000);
+    chainEvents.newChainEvent("#scene","song_finished",11000);
 
     chainEvents.reverse();
     this.chainTimingEvents(chainEvents);
@@ -308,7 +309,7 @@ class PortRob extends React.Component{
     this.setState({shouldPlay: false});
 
     var chainEvents = [];
-    chainEvents.newChainEvent("#scene","change_black",0);
+    chainEvents.newChainEvent("#ending","show",0);
     chainEvents.reverse();
     this.chainTimingEvents(chainEvents);
   }
@@ -648,7 +649,7 @@ class Part4 extends React.Component{
       <Entity id="part_4" visible="false">
         <Animation attribute="visible" to="true" begin="reveal_part4"/>
         <Animation attribute="visible" to="false" begin="hide_part4"/>
-        <Entity collada-model="#valley-asset" position="0 -5 200" rotation="0 0 90">
+        <Entity collada-model="#valley-asset" position="0 -5 200" rotation="0 0 0">
           <Animation attribute="rotation" to="0 0 360" from="0 0 0" repeat="indefinite" dur="120000" ease="linear"/>
         </Entity>
         <Entity position="-35 40 -450">
@@ -948,7 +949,11 @@ class Fog extends React.Component{
 class Ending extends React.Component{
   render(){
     return(
-      <Entity></Entity>
+      <Entity id="ending" position="-60 10 -505" visible="false">
+        <Animation attribute="visible" to="false" begin="hide"/>
+        <Animation attribute="visible" to="true" begin="show"/>
+        <Entity collada-model="#thanks-btn-asset" scale=" 8 8 8"/>
+      </Entity>
     );
   }
 }
