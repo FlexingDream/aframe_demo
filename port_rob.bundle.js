@@ -133,8 +133,8 @@
 	    _this.state = {
 	      heights: heights,
 	      // song: 'https://cdn.rawgit.com/FlexingDream/aframe_demo/pua/src/audio/port_rob_full.mp3',
-	      // song: 'audio/port_rob_full.mp3',
-	      song: 'https://res.cloudinary.com/dtniqc2hg/video/upload/q_63/v1464656484/port_rob_full_kzzetz.mp3',
+	      song: 'audio/port_rob_full.mp3',
+	      // song: 'https://res.cloudinary.com/dtniqc2hg/video/upload/q_63/v1464656484/port_rob_full_kzzetz.mp3',
 	      fogColour: '#F97B8E',
 	      shouldPlay: true,
 	      stage: 0
@@ -203,8 +203,9 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.captureSongStart();
-	      this.showTimer();
-	      (0, _jquery2.default)("#scene").css('width', '100%');
+	      // this.showTimer();
+	      // document.querySelector("#scene").setAttribute("canvas",{width: 50});
+	      (0, _jquery2.default)("#scene").css('width', '%');
 	    }
 	  }, {
 	    key: 'startSong',
@@ -246,7 +247,8 @@
 	      var chainEvents = [];
 	      chainEvents.newChainEvent("#camera", "part_1", 0);
 	      chainEvents.newChainEvent("#hand", "show_hand", 4000);
-	      chainEvents.newChainEvent("#hand", "rotate_hand", 4000);
+	      chainEvents.newChainEvent("#hand", "rotate_hand", 8000);
+	      chainEvents.newChainEvent("#hand", "start_movement", 4000);
 	      chainEvents.reverse();
 	      var that = this;
 	      this.chainTimingEvents(chainEvents);
@@ -268,12 +270,13 @@
 	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(2) > a-entity", "reveal", 2000);
 	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(3) > a-entity", "reveal", 3000);
 	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(4) > a-entity", "reveal", 3000);
-	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(5) > a-entity", "reveal", 6000);
-	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(6) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(7) > a-entity", "reveal", 4000);
-	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(8) > a-entity", "reveal", 1000);
-
 	      chainEvents.newChainEvent("#part_2 .group_1", "hide_group_1", 2000);
+	      chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(2) > a-entity", "reveal", 4000);
+	      chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
+	      chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(4) > a-entity", "reveal", 4000);
+	      chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(5) > a-entity", "reveal", 1000);
+
+	      chainEvents.newChainEvent("#part_2 .group_1_5", "hide_group_1_5", 2000);
 	      chainEvents.newChainEvent("#part_2 .group_2 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
 	      chainEvents.newChainEvent("#part_2 .group_2 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
 	      chainEvents.newChainEvent("#part_2 .group_2", "hide_group_2", 3000);
@@ -429,7 +432,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _aframeReact.Scene,
-	        { id: 'scene', stats: true, fog: { color: this.state.fogColour }, canvas: { width: screen.width / 2 } },
+	        { id: 'scene', stats: true, fog: { color: this.state.fogColour }, canvas: 'width: 50; height: 10;' },
 	        this.getAssets(),
 	        _react2.default.createElement(
 	          _Camera2.default,
@@ -561,7 +564,7 @@
 	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-a', position: '0 -5 0', rotation: '0 0 0', scale: '1 1 1' }),
 	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-b', position: '-80 -5 0', rotation: '0 0 0', scale: '1 1 2' }),
 	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-c', position: '80 -5 0', rotation: '0 0 0', scale: '1 1 2' }),
-	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-d', position: '0 -5 5', rotation: '0 0 0', scale: '2 1 2' })
+	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-e', position: '0 -5 5', rotation: '0 0 0', scale: '2 1 2' })
 	      );
 	    }
 	  }]);
@@ -657,6 +660,47 @@
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
 	            { position: '0 -60 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', mixin: 'font', text: { text: ">WOULD BE BORNE OF YOU.", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _aframeReact.Entity,
+	          { position: '-35 70 -175', rotation: '0 0 0', 'class': 'group_1_5' },
+	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_1_5' }),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 -10 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', mixin: 'font', text: { text: ">ON A LONELY NIGHT", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 -20 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', mixin: 'font', text: { text: ">WAS A BLINDING LIGHT.", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 -30 0' },
+	            _react2.default.createElement(
+	              _aframeReact.Entity,
+	              { 'class': 'part2-text', mixin: 'font', text: { text: ">A HUNDRED LEADERS", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
+	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _aframeReact.Entity,
+	            { position: '0 -40 0' },
 	            _react2.default.createElement(
 	              _aframeReact.Entity,
 	              { 'class': 'part2-text', mixin: 'font', text: { text: ">WOULD BE BORNE OF YOU.", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
@@ -1374,11 +1418,11 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _aframeReact.Entity,
-	        { id: 'hand', 'collada-model': '#hand-asset', scale: '0.1 0.1 0.1', position: '0 -1.4 -1.5', rotation: '0 105 15', visible: 'false' },
+	        { id: 'hand', 'collada-model': '#hand-asset', scale: '0.1 0.1 0.1', position: '0 -1.4 -1.5', rotation: '180 105 180', visible: 'false' },
 	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', from: '0 -2.5 -1.5', to: '0 -1.6 -1.5', dur: '8000', ease: 'linear', begin: 'show_hand' }),
 	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'true', dur: '8000', ease: 'linear', begin: 'show_hand' }),
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 -1.6 -1.5', dur: '10000', repeat: 'indefinite', direction: 'alternate', from: '0 -1.4 -1.5', ease: 'ease-in-out' }),
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '45 270 90', from: '0 105 15', direction: 'alternate', repeat: '1', dur: '15000', begin: 'rotate_hand', ease: 'linear' })
+	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 -1.6 -1.5', dur: '10000', repeat: 'indefinite', direction: 'alternate', from: '0 -1.4 -1.5', ease: 'ease-in-out', begin: 'start_movement' }),
+	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '180 270 90', from: '180 105 180', direction: 'alternate', repeat: '1', dur: '15000', begin: 'rotate_hand', ease: 'linear' })
 	      );
 	    }
 	  }]);
