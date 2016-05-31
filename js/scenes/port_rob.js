@@ -66,8 +66,7 @@ class PortRob extends React.Component{
         <a-asset-item id="terrain-asset-c" src={MODEL_LOCATION+"terrain_c.dae"}></a-asset-item>
         <a-asset-item id="terrain-asset-d" src={MODEL_LOCATION+"terrain_d.dae"}></a-asset-item>
         <a-asset-item id="terrain-asset-e" src={MODEL_LOCATION+"terrain_e.dae"}></a-asset-item>
-        <a-asset-item id="terrain-asset-f" src={MODEL_LOCATION+"terrain_f.dae"}></a-asset-item>
-        <a-asset-item id="terrain-asset-g" src={MODEL_LOCATION+"terrain_g.dae"}></a-asset-item>
+        <a-asset-item id="terrain-asset-x" src={MODEL_LOCATION+"terrain_x.dae"}></a-asset-item>
 
 
         <a-asset-item id="hand-asset" src={MODEL_LOCATION+"hand.dae"}></a-asset-item>
@@ -200,7 +199,7 @@ class PortRob extends React.Component{
   }
   startPart3(){
     document.getElementById('part_3').removeEventListener('start_part3',this.startPart3,false);
-
+    this.setState({stage: 3});
     var chainEvents = [];
     chainEvents.newChainEvent('#part_3',"reveal",500);
     chainEvents.newChainEvent('#part_3 a-entity > .part3-text',"reveal",1000);
@@ -213,6 +212,7 @@ class PortRob extends React.Component{
 
   startPart4(){
     document.getElementById('part_4').removeEventListener('start_part4',this.startPart4,false);
+    this.setState({stage: 4});
 
     var chainEvents = [];
 
@@ -336,8 +336,8 @@ class PortRob extends React.Component{
       {this.state.stage == 0 ? <Intro/> : ''}
       {this.state.stage  <= 2 ? <Part1/> : ''}
       {this.state.stage <=2 ? <Part2/> : ''}}
-      <Part3/>
-      <Part4/>
+      {this.state.stage <=2 ? <Part3/> : ''}}
+      {this.state.stage <=2 ? <Part4/> : ''}}
       <Ending/>
 {/*      <Part5/>
       <Part6/>*/}
@@ -376,8 +376,8 @@ class Intro extends React.Component{
           <Animation attribute="visible" dur="400" to="true" begin="reveal"/>
           </Entity>
         </Entity>
-        <Entity position="-40 0 0">
-          <Entity class="intro-text" text={{text: "Porter Robinson - Sad Machine", size: 8}} material={{color:'white'}}/>
+        <Entity position="-80 10 -20">
+          <Entity class="intro-text" mixin="font" text={{text: "Porter Robinson - Sad Machine", size: 8}} material={{color:'white'}}/>
         </Entity>
         <Entity position="-2 -30 0">
           <Entity class="loading" mixin="font" text={{text: "Loading..."}} material={{color:'white'}} visible="true">
@@ -402,8 +402,10 @@ class Part1 extends React.Component{
 {/*        <Entity collada-model="#terrain-asset-0" position="0 -5 0" rotation="0 0 0"/>
         <Entity collada-model="#terrain-asset-1" position="0 -5 -100" rotation="0 0 0"/>*/}
         <Entity collada-model="#terrain-asset-a" position="0 -5 0" rotation="0 0 0" scale="1 1 1"/>
-        <Entity collada-model="#terrain-asset-b" position="-80 -5 0" rotation="0 0 0" scale="1 1 2"/>
-        <Entity collada-model="#terrain-asset-c" position="80 -5 0" rotation="0 0 0" scale="1 1 2"/>
+        {/*<Entity collada-model="#terrain-asset-b" position="-80 -5 0" rotation="0 0 0" scale="1 1 2"/>*/}
+        {/*<Entity collada-model="#terrain-asset-c" position="80 -5 0" rotation="0 0 0" scale="1 1 2"/>*/}
+        <Entity collada-model="#terrain-asset-x" position="-80 -10 0" rotation="0 0 0" scale="1 1 2"/>
+        <Entity collada-model="#terrain-asset-x" position="140 -10 -1000" rotation="0 180 0" scale="1 1 2"/>
         <Entity collada-model="#terrain-asset-e" position="0 -5 5" rotation="0 0 0" scale="2 1 2"/>
 {/*        <Entity collada-model="#terrain-asset-e" position="0 -5 -50" rotation="0 0 0"/>
         <Entity collada-model="#terrain-asset-f" position="100 -5 -100" rotation="0 0 0"/>

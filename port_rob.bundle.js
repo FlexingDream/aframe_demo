@@ -172,8 +172,7 @@
 	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-c', src: MODEL_LOCATION + "terrain_c.dae" }),
 	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-d', src: MODEL_LOCATION + "terrain_d.dae" }),
 	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-e', src: MODEL_LOCATION + "terrain_e.dae" }),
-	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-f', src: MODEL_LOCATION + "terrain_f.dae" }),
-	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-g', src: MODEL_LOCATION + "terrain_g.dae" }),
+	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-x', src: MODEL_LOCATION + "terrain_x.dae" }),
 	        _react2.default.createElement('a-asset-item', { id: 'hand-asset', src: MODEL_LOCATION + "hand.dae" }),
 	        _react2.default.createElement('a-asset-item', { id: 'valley-asset', src: MODEL_LOCATION + "valley.dae" })
 	      );
@@ -313,7 +312,7 @@
 	    key: 'startPart3',
 	    value: function startPart3() {
 	      document.getElementById('part_3').removeEventListener('start_part3', this.startPart3, false);
-
+	      this.setState({ stage: 3 });
 	      var chainEvents = [];
 	      chainEvents.newChainEvent('#part_3', "reveal", 500);
 	      chainEvents.newChainEvent('#part_3 a-entity > .part3-text', "reveal", 1000);
@@ -327,6 +326,7 @@
 	    key: 'startPart4',
 	    value: function startPart4() {
 	      document.getElementById('part_4').removeEventListener('start_part4', this.startPart4, false);
+	      this.setState({ stage: 4 });
 
 	      var chainEvents = [];
 
@@ -447,8 +447,10 @@
 	        this.state.stage <= 2 ? _react2.default.createElement(Part1, null) : '',
 	        this.state.stage <= 2 ? _react2.default.createElement(Part2, null) : '',
 	        '}',
-	        _react2.default.createElement(Part3, null),
-	        _react2.default.createElement(Part4, null),
+	        this.state.stage <= 2 ? _react2.default.createElement(Part3, null) : '',
+	        '}',
+	        this.state.stage <= 2 ? _react2.default.createElement(Part4, null) : '',
+	        '}',
 	        _react2.default.createElement(Ending, null)
 	      );
 	    }
@@ -519,8 +521,8 @@
 	          ),
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
-	            { position: '-40 0 0' },
-	            _react2.default.createElement(_aframeReact.Entity, { 'class': 'intro-text', text: { text: "Porter Robinson - Sad Machine", size: 8 }, material: { color: 'white' } })
+	            { position: '-80 10 -20' },
+	            _react2.default.createElement(_aframeReact.Entity, { 'class': 'intro-text', mixin: 'font', text: { text: "Porter Robinson - Sad Machine", size: 8 }, material: { color: 'white' } })
 	          ),
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
@@ -562,8 +564,8 @@
 	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', begin: 'hide' }),
 	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'true', begin: 'start_part1' }),
 	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-a', position: '0 -5 0', rotation: '0 0 0', scale: '1 1 1' }),
-	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-b', position: '-80 -5 0', rotation: '0 0 0', scale: '1 1 2' }),
-	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-c', position: '80 -5 0', rotation: '0 0 0', scale: '1 1 2' }),
+	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-x', position: '-80 -10 0', rotation: '0 0 0', scale: '1 1 2' }),
+	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-x', position: '140 -10 -1000', rotation: '0 180 0', scale: '1 1 2' }),
 	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-e', position: '0 -5 5', rotation: '0 0 0', scale: '2 1 2' })
 	      );
 	    }
