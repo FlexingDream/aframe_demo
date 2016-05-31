@@ -409,7 +409,7 @@ class Intro extends React.Component{
             <Animation attribute="visible" dur="400" to="false" begin="hide"/>
             <Animation attribute="visible" dur="0" to="true" begin="show"/>
           </Entity>
-          <Entity  class="ready-btn" collada-model="#ready-btn-asset" position="77 9 68" scale="0.25 0.25 0.25" visible="false" onClick={this.props.startSong}>
+          <Entity cursor-interaction class="ready-btn" collada-model="#ready-btn-asset" position="77 9 68" scale="0.25 0.25 0.25" visible="false" onClick={this.props.startSong}>
             <Animation attribute="visible" dur="400" to="false" begin="click"/>
             <Animation attribute="visible" dur="0" to="true" begin="show"/>
           </Entity>
@@ -887,7 +887,7 @@ class Stars extends React.Component{
   }
   render(){
     return(
-      <Entity entity-generator-primitive="mixin: starPrimitive; numElements: 200; spread: 500; minExclusion: 0;maxExclusion: 10;" >  
+      <Entity entity-generator-primitive="mixin: starPrimitive; numElements: 200; spread: 500; minExclusion: 0;maxExclusion: 10;" >
         <Animation attribute='rotation' to='0 90 0' ease='ease-linear' repeat='indefinite' dur="60000" direction='alternate'/>
       </Entity>
       );
@@ -902,7 +902,7 @@ class Hand extends React.Component{
   }
 
   render(){
-    return(        
+    return(
       <Entity id="hand" collada-model="#hand-asset" scale="0.1 0.1 0.1" position="0 -1.4 -1.5" rotation="180 105 180" visible="false">
         <Animation attribute="position" from="0 -2.5 -1.5" to="0 -1.6 -1.5" dur="8000" ease="linear" begin="show_hand"/>
         <Animation attribute="visible" to="true" dur="8000" ease="linear" begin="show_hand"/>
@@ -965,4 +965,3 @@ window.$ = $;
 // ONLY FOR DEV MODE OTHERWISE WONT WORK
 window.Perf = Perf;
 ReactDOM.render(<PortRob/>, document.querySelector('.scene-container'));
-
