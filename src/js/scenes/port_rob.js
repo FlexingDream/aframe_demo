@@ -338,7 +338,7 @@ class PortRob extends React.Component{
     return(
     <Scene id="scene" stats fog={{color: this.state.fogColour}} canvas="width: 50; height: 10;">
       {this.getAssets()}
-      <Camera id="camera" position={[0,10,0]} wasd-controls={{enabled: true}} >
+      <Camera id="camera" position={[0,10,0]} wasd-controls={{enabled: false}} >
         <Cursor cursor={{fuse: true, timeout: 2000}}/>
         <Animation attribute="position" to="0 0 -400" dur="200000" ease="linear" begin="part_1"/>
         <Hand/>
@@ -404,12 +404,12 @@ class Intro extends React.Component{
           <Animation attribute="visible" dur="400" to="false" begin="hide"/>
           </Entity>
         </Entity>
-        <Entity position="-50 -40 0">
-          <Entity  id="loaded-msg" mixin="font" text={{text: "Hover on the button to start"}} material={{color:'white'}} visible="false">
+        <Entity position="-50 -60 0">
+          <Entity  id="loaded-msg" mixin="font" text={{text: "Click the button to start"}} material={{color:'white'}} visible="false">
             <Animation attribute="visible" dur="400" to="false" begin="hide"/>
             <Animation attribute="visible" dur="0" to="true" begin="show"/>
           </Entity>
-          <Entity  class="ready-btn" collada-model="#ready-btn-asset" position="77 9 68" scale="0.25 0.25 0.25" visible="false" onClick={this.props.startSong}>
+          <Entity  class="ready-btn" collada-model="#ready-btn-asset" position="77 28 68" scale="0.25 0.25 0.25" visible="false" onClick={this.props.startSong}>
             <Animation attribute="visible" dur="400" to="false" begin="click"/>
             <Animation attribute="visible" dur="0" to="true" begin="show"/>
           </Entity>

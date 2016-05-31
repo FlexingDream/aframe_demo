@@ -17,7 +17,7 @@ export default props => {
     transparent: true
   };
   return (
-    <Entity  cursor={props}  geometry={geometry} material={material} position="0 0 -1">
+    <Entity  raycaster={{maxDistance: 100000}} cursor={props}  geometry={geometry} material={material} position="0 0 -1">
       <Animation attribute="scale" begin="click" dur="150" fill="backwards" to="0 0 0"/>
       <Animation attribute="scale" begin="fusing" easing="ease-in" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"
        dur="1500"/> 
