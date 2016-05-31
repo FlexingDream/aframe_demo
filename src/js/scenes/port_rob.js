@@ -404,7 +404,7 @@ class Part1 extends React.Component{
         <Entity collada-model="#terrain-asset-a" position="0 -5 0" rotation="0 0 0" scale="1 1 1"/>
         <Entity collada-model="#terrain-asset-b" position="-80 -5 0" rotation="0 0 0" scale="1 1 2"/>
         <Entity collada-model="#terrain-asset-c" position="80 -5 0" rotation="0 0 0" scale="1 1 2"/>
-        <Entity collada-model="#terrain-asset-d" position="0 -5 5" rotation="0 0 0" scale="2 1 2"/>
+        <Entity collada-model="#terrain-asset-e" position="0 -5 5" rotation="0 0 0" scale="2 1 2"/>
 {/*        <Entity collada-model="#terrain-asset-e" position="0 -5 -50" rotation="0 0 0"/>
         <Entity collada-model="#terrain-asset-f" position="100 -5 -100" rotation="0 0 0"/>
         <Entity collada-model="#terrain-asset-g" position="100 -5 -100" rotation="0 0 0"/>*/}
