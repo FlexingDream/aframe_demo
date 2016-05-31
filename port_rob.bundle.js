@@ -207,7 +207,7 @@
 	      // this.showTimer();
 	      // document.querySelector("#scene").setAttribute("canvas",{width: 50});
 	      (0, _jquery2.default)("#scene").css('width', '%');
-
+	      var that = this;
 	      document.getElementById('scene').addEventListener('change_black', function () {
 	        that.setState({ fogColour: '#1A1D23' });
 	      }, false);
