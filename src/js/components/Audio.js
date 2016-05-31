@@ -17,7 +17,8 @@ class Audio extends React.Component{
     this.state = {
       frequencyData: [],
       analyzer: '',
-      node: ''
+      node: '',
+      audioElement: []
     };
   }
 
@@ -45,16 +46,17 @@ class Audio extends React.Component{
     var node = audioCtx.createBufferSource();
       // createBuffer(channels, samples, sampleRate)
     var buffer = audioCtx.createBuffer(1, 4096, audioCtx.sampleRate);
+
     var data = buffer.getChannelData(0);
     var that = this;
 
     // 
-   var request = new XMLHttpRequest();
+    var request = new XMLHttpRequest();
 
-  request.open('GET', this.props.audioSrc, true);
+    request.open('GET', this.props.audioSrc, true);
 
-  request.responseType = 'arraybuffer';
-  request.onload = function() {
+    request.responseType = 'arraybuffer';
+    request.onload = function() {
     var audioData = request.response;
 
     audioCtx.decodeAudioData(audioData, function(buffer) {
@@ -140,16 +142,30 @@ class Audio extends React.Component{
   }
 
   setupAudioElement() {
+    // NOTE: if you want an audio element to work on mobile, need to have a touch event first
+
     var audioElement =  document.createElement('audio');
     audioElement.setAttribute('src',this.props.audioSrc);
-    audioElement.setAttribute('loop',true);
+    audioElement.setAttribute('loop',false);
     audioElement.setAttribute('crossOrigin',"anonymous");
 
     var element = document.createElement('div');
     element.setAttribute('class','audio-player');
     element.appendChild(audioElement);
-    // document.getElementsByClassName('audio')[0].appendChild(element);
+    document.getElementsByClassName('audio')[0].appendChild(element);
+    this.setState({audioElement: audioElement});
+    var that = this;
+    setTimeout(function(){
+      that.startAudioElement();
+    },4000);
     // this.setupAudioVisualizers(audioElement);
+  }
+
+  startAudioElement(){
+    if (document.getElementById('scene')){
+      document.getElementById('scene').emit('song_loaded');
+      document.querySelector('audio').play();
+    }
   }
 
   updateAudio(){
@@ -159,7 +175,6 @@ class Audio extends React.Component{
     this.state.analyzer.getByteFrequencyData(frequencyData);
     var y = [];
 
-    // TODO: maybe change this to just be based off frequencySize
     for (var i =0;i<this.props.frequencySize;i++){
       y[i] = frequencyData[i];
     }
