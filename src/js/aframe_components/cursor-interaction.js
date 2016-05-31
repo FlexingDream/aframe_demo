@@ -3,6 +3,7 @@ AFRAME.registerComponent('cursor-interaction', {
     startPlay: {default: false}
   },
 
+  // FOR TOUCH EVENTS ON MOBILE
   init: function () {
     var el = this.el;
     var data = this;data

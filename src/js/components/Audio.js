@@ -104,6 +104,7 @@ class Audio extends React.Component{
         }
         else if (document.getElementById('scene')){
           document.getElementById('scene').emit('song_loaded');
+          $(".audio-player").data('node',node);
           // node.start(0);
         }
         else{

@@ -112,7 +112,7 @@ class PortRob extends React.Component{
     var chainEvents= [] ;
     // document.getElementsByClassName("loading")[0].emit('hide');
     chainEvents.newChainEvent(".loading","hide",0);
-    chainEvents.newChainEvent(".loaded-msg","show",0);
+    chainEvents.newChainEvent("#loaded-msg","show",0);
     chainEvents.newChainEvent(".ready-btn","show",0);
 
     chainEvents.reverse();
@@ -122,7 +122,9 @@ class PortRob extends React.Component{
 
   startSong(){
     document.getElementById('scene').removeEventListener('start_song',this.startSong,false);
-
+    document.getElementById('loaded-msg').emit('hide');
+    var node = $(".audio-player").data("node");
+    node.start(0);
     document.getElementById('intro').emit('start_intro');
   }
 
@@ -336,16 +338,14 @@ class PortRob extends React.Component{
     return(
     <Scene id="scene" stats fog={{color: this.state.fogColour}} canvas="width: 50; height: 10;">
       {this.getAssets()}
-      <Camera id="camera" position={[0,10,0]} wasd-controls={{enabled: false}} >
-        <Cursor cursor="fuse: true;timeout: 1000" />
+      <Camera id="camera" position={[0,10,0]} wasd-controls={{enabled: true}} >
+        <Cursor cursor={{fuse: true, timeout: 2000}}/>
         <Animation attribute="position" to="0 0 -400" dur="200000" ease="linear" begin="part_1"/>
-        {/*<Animation attribute="position" to="0 0 -400" dur="100000" eaase="ease-in-out" begin="part_4"/>
-        <Animation attribute="position" to="0 0 -600" dur="100000" eaase="ease-in-out" begin="part_5"/>*/}
         <Hand/>
       </Camera>
       <Audio  audioSrc={this.state.song} shouldUpdateFrequencies="false" shouldPlay={this.state.shouldPlay}/>
       <Sky id="sky"/>
-      {this.state.stage == 0 ? <Intro/> : ''}
+      {this.state.stage == 0 ? <Intro startSong={this.startSong}/> : ''}
       {this.state.stage  <= 2 ? <Part1/> : ''}
       {this.state.stage <=2 ? <Part2/> : ''}}
       {this.state.stage <=3 ? <Part3/> : ''}}
@@ -365,11 +365,16 @@ class Intro extends React.Component{
   constructor(props){
     super(props);
     this.state = {
+      color: 'red'
+
     };
   }
-  onClick(){
-    console.log('mouse entered');
-  }
+  changeColor()  {
+    const colors = ['red', 'orange', 'yellow', 'green', 'blue'];
+    this.setState({
+      color: colors[Math.floor(Math.random() * colors.length)],
+    });
+  };
 
   render(){
     return(
@@ -400,18 +405,13 @@ class Intro extends React.Component{
           </Entity>
         </Entity>
         <Entity position="-50 -40 0">
-          <Entity  class="loaded-msg" mixin="font" text={{text: "Hover on the button to start"}} material={{color:'white'}} visible="false">
+          <Entity  id="loaded-msg" mixin="font" text={{text: "Hover on the button to start"}} material={{color:'white'}} visible="false">
             <Animation attribute="visible" dur="400" to="false" begin="hide"/>
             <Animation attribute="visible" dur="0" to="true" begin="show"/>
           </Entity>
-          <Entity cursor-listener class="ready-btn" collada-model="#ready-btn-asset" position="50 10 0" scale="1.5 1.5 1.5" visible="false" >
-            <Animation attribute="visible" dur="400" to="false" begin="hide"/>
+          <Entity  class="ready-btn" collada-model="#ready-btn-asset" position="77 9 68" scale="0.25 0.25 0.25" visible="false" onClick={this.props.startSong}>
+            <Animation attribute="visible" dur="400" to="false" begin="click"/>
             <Animation attribute="visible" dur="0" to="true" begin="show"/>
-            <Animation begin="click" attribute="scale" to="1 1 1" easing="linear" dur="2000"/>
-          </Entity>
-          <Entity cursor-listener geometry="primitive: box; depth: 2; width: 10;height: 10;" onClick={this.onClick()}>
-            <Animation begin="click" attribute="scale" to="5 5 5" easing="linear" dur="2000"/>
-
           </Entity>
         </Entity>
       </Entity>
@@ -429,19 +429,10 @@ class Part1 extends React.Component{
       <Entity id="part_1" visible="false">
         <Animation attribute="visible" to="false" begin="hide"/>
         <Animation attribute="visible" to="true" begin="start_part1"/>
-{/*        <Entity collada-model="#terrain-asset-0" position="0 -5 0" rotation="0 0 0"/>
-        <Entity collada-model="#terrain-asset-1" position="0 -5 -100" rotation="0 0 0"/>*/}
-        {/*<Entity collada-model="#terrain-asset-a" position="0 -5 0" rotation="0 0 0" scale="1 1 1"/>*/}
         <Entity collada-model="#terrain-asset-y" position="0 -10 0" rotation="0 0 0" scale="1 1 1"/>
-
-        {/*<Entity collada-model="#terrain-asset-b" position="-80 -5 0" rotation="0 0 0" scale="1 1 2"/>*/}
-        {/*<Entity collada-model="#terrain-asset-c" position="80 -5 0" rotation="0 0 0" scale="1 1 2"/>*/}
         <Entity collada-model="#terrain-asset-x" position="-80 -11 0" rotation="0 0 0" scale="1 1 2"/>
         <Entity collada-model="#terrain-asset-x" position="140 -11 -1000" rotation="0 180 0" scale="1 1 2"/>
         <Entity collada-model="#terrain-asset-e" position="0 -5 5" rotation="0 0 0" scale="2 1 2"/>
-{/*        <Entity collada-model="#terrain-asset-e" position="0 -5 -50" rotation="0 0 0"/>
-        <Entity collada-model="#terrain-asset-f" position="100 -5 -100" rotation="0 0 0"/>
-        <Entity collada-model="#terrain-asset-g" position="100 -5 -100" rotation="0 0 0"/>*/}
       </Entity>
     );
   }

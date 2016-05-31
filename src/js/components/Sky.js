@@ -9,7 +9,7 @@ class Sky extends React.Component{
     super(props);
   }
   render(){
-    return(<Entity geometry={{primitive: 'box',height: 5000,width:5000,depth:5000, radius: 5000}}
+    return(<Entity geometry={{primitive: 'box',height: 2000,width:2000,depth:2000, radius: 2000}}
           material={{color: this.props.color, shader: 'flat'}}
           scale="1 1 -1"
            />
