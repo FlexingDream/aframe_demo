@@ -326,7 +326,7 @@ class PortRob extends React.Component{
       {this.getAssets()}
       <Camera id="camera" position={[0,10,0]} wasd-controls={{enabled: false}} >
         <Cursor />
-        <Animation attribute="position" to="0 0 -400" dur="260000" ease="ease-in-out" begin="part_1"/>
+        <Animation attribute="position" to="0 0 -400" dur="260000" ease="linear" begin="part_1"/>
         {/*<Animation attribute="position" to="0 0 -400" dur="100000" eaase="ease-in-out" begin="part_4"/>
         <Animation attribute="position" to="0 0 -600" dur="100000" eaase="ease-in-out" begin="part_5"/>*/}
         <Hand/>
@@ -336,8 +336,8 @@ class PortRob extends React.Component{
       {this.state.stage == 0 ? <Intro/> : ''}
       {this.state.stage  <= 2 ? <Part1/> : ''}
       {this.state.stage <=2 ? <Part2/> : ''}}
-      {this.state.stage <=2 ? <Part3/> : ''}}
-      {this.state.stage <=2 ? <Part4/> : ''}}
+      {this.state.stage <=3 ? <Part3/> : ''}}
+      {this.state.stage <=4 ? <Part4/> : ''}}
       <Ending/>
 {/*      <Part5/>
       <Part6/>*/}
@@ -883,7 +883,7 @@ class Hand extends React.Component{
       <Entity id="hand" collada-model="#hand-asset" scale="0.1 0.1 0.1" position="0 -1.4 -1.5" rotation="180 105 180" visible="false">
         <Animation attribute="position" from="0 -2.5 -1.5" to="0 -1.6 -1.5" dur="8000" ease="linear" begin="show_hand"/>
         <Animation attribute="visible" to="true" dur="8000" ease="linear" begin="show_hand"/>
-        <Animation attribute="position" to="0 -1.6 -1.5" dur="10000" repeat="indefinite" direction="alternate" from="0 -1.4 -1.5" ease="ease-in-out" begin="start_movement"/>
+        <Animation attribute="position" to="0 -1.6 -1.5" dur="10000" repeat="indefinite" direction="alternate" from="0 -1.4 -1.5" ease="linear" begin="start_movement"/>
         <Animation attribute="rotation" to ="180 270 90" from="180 105 180" direction="alternate" repeat="1" dur="15000" begin="rotate_hand" ease="linear"/>
       </Entity>
     );
