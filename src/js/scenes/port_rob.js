@@ -67,6 +67,7 @@ class PortRob extends React.Component{
         <a-asset-item id="terrain-asset-d" src={MODEL_LOCATION+"terrain_d.dae"}></a-asset-item>
         <a-asset-item id="terrain-asset-e" src={MODEL_LOCATION+"terrain_e.dae"}></a-asset-item>
         <a-asset-item id="terrain-asset-x" src={MODEL_LOCATION+"terrain_x.dae"}></a-asset-item>
+        <a-asset-item id="terrain-asset-y" src={MODEL_LOCATION+"terrain_y.dae"}></a-asset-item>
 
 
         <a-asset-item id="hand-asset" src={MODEL_LOCATION+"hand.dae"}></a-asset-item>
@@ -158,8 +159,8 @@ class PortRob extends React.Component{
     chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(2) > a-entity","reveal",2000);
     chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(3) > a-entity","reveal",3000);
     chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(4) > a-entity","reveal",3000);
-    chainEvents.newChainEvent("#part_2 .group_1","hide_group_1",2000);
-    chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(2) > a-entity","reveal",4000);
+    chainEvents.newChainEvent("#part_2 .group_1","hide_group_1",3000);
+    chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(2) > a-entity","reveal",3000);
     chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(3) > a-entity","reveal",2000);
     chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(4) > a-entity","reveal",4000);
     chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(5) > a-entity","reveal",1000);
@@ -326,7 +327,7 @@ class PortRob extends React.Component{
       {this.getAssets()}
       <Camera id="camera" position={[0,10,0]} wasd-controls={{enabled: false}} >
         <Cursor />
-        <Animation attribute="position" to="0 0 -400" dur="260000" ease="linear" begin="part_1"/>
+        <Animation attribute="position" to="0 0 -400" dur="200000" ease="linear" begin="part_1"/>
         {/*<Animation attribute="position" to="0 0 -400" dur="100000" eaase="ease-in-out" begin="part_4"/>
         <Animation attribute="position" to="0 0 -600" dur="100000" eaase="ease-in-out" begin="part_5"/>*/}
         <Hand/>
@@ -401,11 +402,13 @@ class Part1 extends React.Component{
         <Animation attribute="visible" to="true" begin="start_part1"/>
 {/*        <Entity collada-model="#terrain-asset-0" position="0 -5 0" rotation="0 0 0"/>
         <Entity collada-model="#terrain-asset-1" position="0 -5 -100" rotation="0 0 0"/>*/}
-        <Entity collada-model="#terrain-asset-a" position="0 -5 0" rotation="0 0 0" scale="1 1 1"/>
+        {/*<Entity collada-model="#terrain-asset-a" position="0 -5 0" rotation="0 0 0" scale="1 1 1"/>*/}
+        <Entity collada-model="#terrain-asset-y" position="0 -10 0" rotation="0 0 0" scale="1 1 1"/>
+
         {/*<Entity collada-model="#terrain-asset-b" position="-80 -5 0" rotation="0 0 0" scale="1 1 2"/>*/}
         {/*<Entity collada-model="#terrain-asset-c" position="80 -5 0" rotation="0 0 0" scale="1 1 2"/>*/}
-        <Entity collada-model="#terrain-asset-x" position="-80 -10 0" rotation="0 0 0" scale="1 1 2"/>
-        <Entity collada-model="#terrain-asset-x" position="140 -10 -1000" rotation="0 180 0" scale="1 1 2"/>
+        <Entity collada-model="#terrain-asset-x" position="-80 -11 0" rotation="0 0 0" scale="1 1 2"/>
+        <Entity collada-model="#terrain-asset-x" position="140 -11 -1000" rotation="0 180 0" scale="1 1 2"/>
         <Entity collada-model="#terrain-asset-e" position="0 -5 5" rotation="0 0 0" scale="2 1 2"/>
 {/*        <Entity collada-model="#terrain-asset-e" position="0 -5 -50" rotation="0 0 0"/>
         <Entity collada-model="#terrain-asset-f" position="100 -5 -100" rotation="0 0 0"/>
