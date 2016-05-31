@@ -32,8 +32,8 @@ class PortRob extends React.Component{
     this.state = {
       heights: heights,
       // song: 'https://cdn.rawgit.com/FlexingDream/aframe_demo/pua/src/audio/port_rob_full.mp3',
-      // song: 'audio/port_rob_full.mp3',
-      song: 'https://res.cloudinary.com/dtniqc2hg/video/upload/q_63/v1464656484/port_rob_full_kzzetz.mp3',
+      song: 'audio/port_rob_full.mp3',
+      // song: 'https://res.cloudinary.com/dtniqc2hg/video/upload/q_63/v1464656484/port_rob_full_kzzetz.mp3',
       fogColour: '#F97B8E',
       shouldPlay: true,
       stage: 0
@@ -95,8 +95,9 @@ class PortRob extends React.Component{
 
   componentDidMount(){
     this.captureSongStart();
-    this.showTimer();
-    $("#scene").css('width','100%');
+    // this.showTimer();
+    // document.querySelector("#scene").setAttribute("canvas",{width: 50});
+    $("#scene").css('width','%');
   }
 
   startSong(){
@@ -319,7 +320,7 @@ class PortRob extends React.Component{
 
   render(){
     return(
-    <Scene id="scene" stats fog={{color: this.state.fogColour}} canvas={{width: screen.width/2}}>
+    <Scene id="scene" stats fog={{color: this.state.fogColour}} canvas="width: 50; height: 10;">
       {this.getAssets()}
       <Camera id="camera" position={[0,10,0]} wasd-controls={{enabled: false}} >
         <Cursor />
@@ -356,6 +357,7 @@ class Intro extends React.Component{
   render(){
     return(
     <Entity id="intro">
+      
       <Entity position="-30 40 -70">
         <Entity position="-2 -10 0">
           <Entity class="intro-text" mixin="font" text={{text: "IS ANYONE THERE?"}}  material={{color:'white'}} visible="false">
