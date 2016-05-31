@@ -36,11 +36,12 @@ AFRAME.registerComponent('cursor-interaction', {
         return;
       }
 
+      document.removeEventListener('touchstart',start,false);
       document.getElementById('scene').removeEventListener('start_song',this.startSong,false);
       document.getElementById('loaded-msg').emit('hide');
       node.start(0);
       document.getElementById('intro').emit('start_intro');
-      
+
     },false);
 
 
