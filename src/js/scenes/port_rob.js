@@ -73,6 +73,7 @@ class PortRob extends React.Component{
         <a-asset-item id="thanks-btn-asset" src={MODEL_LOCATION+"thanks-btn.dae"}></a-asset-item>
         <a-asset-item id="hand-asset" src={MODEL_LOCATION+"hand.dae"}></a-asset-item>
         <a-asset-item id="valley-asset" src={MODEL_LOCATION+"valley.dae"}></a-asset-item>
+        <a-asset-item id="cloud-asset" src={MODEL_LOCATION+"cloud.dae"}></a-asset-item>
       </Entity>
     );
   }
@@ -96,7 +97,7 @@ class PortRob extends React.Component{
 
   componentDidMount(){
     this.captureSongStart();
-    this.showTimer();
+    // this.showTimer();
     // document.querySelector("#scene").setAttribute("canvas",{width: 50});
     // $("#scene").css('width','%');
     var that = this;
@@ -151,8 +152,8 @@ class PortRob extends React.Component{
     this.setState({stage: 1});
     var chainEvents = [];
     chainEvents.newChainEvent("#camera","part_1",0);
-    chainEvents.newChainEvent("#hand","show_hand",4000);
-    chainEvents.newChainEvent("#hand","rotate_hand",8000);
+    chainEvents.newChainEvent(".hand","show_hand",4000);
+    chainEvents.newChainEvent(".hand","rotate_hand",8000);
     // chainEvents.newChainEvent("#hand","start_movement",4000);
     chainEvents.reverse();
     var that = this;
@@ -235,7 +236,8 @@ class PortRob extends React.Component{
 
     chainEvents.newChainEvent('#part_4','reveal_part4',0);
     // chainEvents.newChainEvent("#camera","part_4",0);
-
+    chainEvents.newChainEvent("#part_4 .hand","show",0);
+    chainEvents.newChainEvent("#part_4 .hand","start_other_hand",0);
     chainEvents.newChainEvent("#scene","change_white",0);
     chainEvents.newChainEvent("#part_4 .group_1 > a-entity:nth-child(2) > a-entity","reveal",41000);
     chainEvents.newChainEvent("#part_4 .group_1 > a-entity:nth-child(3) > a-entity","reveal",2000);
@@ -309,7 +311,7 @@ class PortRob extends React.Component{
     this.setState({shouldPlay: false});
 
     var chainEvents = [];
-    chainEvents.newChainEvent("#ending","show",0);
+    chainEvents.newChainEvent("#ending #thanks-btn","show",0);
     chainEvents.reverse();
     this.chainTimingEvents(chainEvents);
   }
@@ -337,12 +339,12 @@ class PortRob extends React.Component{
 
   render(){
     return(
-    <Scene id="scene" stats fog={{color: this.state.fogColour}} canvas="width: 50; height: 10;">
+    <Scene id="scene" fog={{color: this.state.fogColour}} canvas="width: 50; height: 10;">
       {this.getAssets()}
       <Camera id="camera" position={[0,10,0]} wasd-controls={{enabled: false}} >
         <Cursor cursor={{fuse: true, timeout: 2000}}/>
         <Animation attribute="position" to="0 0 -400" dur="200000" ease="linear" begin="part_1"/>
-        <Hand/>
+        <Hand position="0 -1.4 -1.5" rotation="180 105 180"/>
       </Camera>
       <Audio  audioSrc={this.state.song} shouldUpdateFrequencies="false" shouldPlay={this.state.shouldPlay}/>
       <Sky id="sky"/>
@@ -450,7 +452,7 @@ class Part2 extends React.Component{
         <Entity id="moon" collada-model='#moon-asset' position="-25 -80 -1050" scale="75 75 75" rotation="180 180 140" material="fog: false">
           <Animation attribute="position" to="-25 150 -600" dur="75000" ease="ease-in-out" begin="move_moon"/>
         </Entity>
-        <Stars/>
+        <Stars position="0 20 0"/>
         <Entity position="-35 70 -165" rotation="0 0 0" class="group_1">
           <Animation attribute="visible" to="false" dur="5000" begin="hide_group_1"/>
           <Entity position="0 0 0">
@@ -620,6 +622,7 @@ class Part2 extends React.Component{
             </Entity>
           </Entity>
         </Entity>
+        <Clouds number="20" position="0 100 -100" spread="500"/>
       </Entity>
     );
   }
@@ -652,7 +655,7 @@ class Part4 extends React.Component{
         <Entity collada-model="#valley-asset" position="0 -5 200" rotation="0 0 0">
           <Animation attribute="rotation" to="0 0 360" from="0 0 0" repeat="indefinite" dur="120000" ease="linear"/>
         </Entity>
-        <Entity position="-35 40 -450">
+        <Entity position="-55 40 -450">
           <Entity position="0 0 -20" rotation="0 0 0" class="group_1">
             <Animation attribute="visible" to="false" dur="5000" begin="hide"/>
 
@@ -727,6 +730,7 @@ class Part4 extends React.Component{
             </Entity>
           </Entity>
         </Entity>
+        <Hand position="0 0 -470" rotation="135 135 135" scale=" 0.2 0.2 0.2"/>
       </Entity>
     );
   }
@@ -885,18 +889,26 @@ class Part6 extends React.Component{
 }
 
 class Stars extends React.Component{
+  static defaultProps = {
+    position: "0 0 0"
+  };
   shouldComponentUpdate(nextProps,nextState){
     return false;
   }
   render(){
     return(
-      <Entity entity-generator-primitive="mixin: starPrimitive; numElements: 200; spread: 500; minExclusion: 0;maxExclusion: 10;" >
+      <Entity class="stars" entity-generator-primitive={{mixin: "starPrimitive", numElements: 200, spread: 500, minExclusion: 0,maxExclusion: 10,position: this.props.position}} >
         <Animation attribute='rotation' to='0 90 0' ease='ease-linear' repeat='indefinite' dur="60000" direction='alternate'/>
       </Entity>
       );
   }
 }
 class Hand extends React.Component{
+  static defaultProps = {
+    position: "0 0 0",
+    rotation: "0 0 0",
+    scale: "0.1 0.1 0.1"
+  }
   shouldComponentUpdate(nextProps,nextState){
     return false;
   }
@@ -906,11 +918,13 @@ class Hand extends React.Component{
 
   render(){
     return(
-      <Entity id="hand" collada-model="#hand-asset" scale="0.1 0.1 0.1" position="0 -1.4 -1.5" rotation="180 105 180" visible="false">
+      <Entity class="hand" collada-model="#hand-asset" position={this.props.position} rotation={this.props.rotation} visible="false" scale={this.props.scale}>
         <Animation attribute="position" from="0 -2.5 -1.5" to="0 -1.6 -1.5" dur="8000" ease="linear" begin="show_hand"/>
         <Animation attribute="visible" to="true" dur="8000" ease="linear" begin="show_hand"/>
+        <Animation attribute="visible" to="true" dur="0" ease="linear" begin="show"/>
         <Animation attribute="position" to="0 -1.6 -1.5" dur="10000" repeat="indefinite" direction="alternate" from="0 -1.4 -1.5" ease="linear" begin="start_movement"/>
         <Animation attribute="rotation" to ="180 270 90" from="180 105 180" direction="alternate" repeat="1" dur="15000" begin="rotate_hand" ease="linear"/>
+        <Animation attribute="position" to="0 8.6 -380" dur="45000" from={this.props.position} ease="linear" begin="start_other_hand"/>
       </Entity>
     );
   }
@@ -949,10 +963,69 @@ class Fog extends React.Component{
 class Ending extends React.Component{
   render(){
     return(
-      <Entity id="ending" position="-60 10 -505" visible="false">
-        <Animation attribute="visible" to="false" begin="hide"/>
-        <Animation attribute="visible" to="true" begin="show"/>
-        <Entity collada-model="#thanks-btn-asset" scale=" 8 8 8"/>
+      <Entity id="ending" position="-80 5 -545">
+        <Stars position="-80 5 -545">
+        </Stars>
+        <Entity id="thanks-btn" collada-model="#thanks-btn-asset" scale=" 8 8 8" visible="false">
+          <Animation attribute="visible" to="true" begin="show"/>
+        </Entity>
+      </Entity>
+    );
+  }
+}
+
+class Clouds extends React.Component{
+  constructor(props){
+    super(props);
+  }
+
+  getPosNegRandomPosition(start,spread){
+    var value = 0;
+    value = Math.floor(Math.random() * spread)+1;
+    value*=Math.floor(Math.random()*2) == 1 ? 1 : -1;
+    return parseInt(start) + (value);
+  }
+
+  getRandomPosPosition(start,spread){
+    var value = 0;
+    value = Math.floor(Math.random() * spread)+1;
+    return (parseInt(start) - (value * -1));
+  }
+
+  getRandomNegPosition(start,spread){
+    var value = 0;
+    value = Math.floor(Math.random() * spread)+1;
+    return (parseInt(start) - (value)) * 2;
+  }
+
+  shouldComponentUpdate(nextProps,nextState){
+    return false;
+  }
+  render(){
+    let clouds = [];
+    let index = 0;
+    let startPosition = this.props.position;
+    let startX = startPosition.split(' ')[0];
+    let startY = startPosition.split(' ')[1];
+    let startZ = startPosition.split(' ')[2];
+    console.log(startX + " " +startY + " " + startZ);
+    for (;index < this.props.number; index++){
+      let x = this.getPosNegRandomPosition(startX,this.props.spread);
+      let y = this.getRandomPosPosition(startY,this.props.spread);
+      let z = this.getRandomNegPosition(startZ,this.props.spread);
+      let position = "" + x + " " + y + "  " + z;
+      let animationEndPosition = "" + ( x * -1) + " " + y + " " + z;
+      console.log("starting position is : " + position + " and the animationEndPosition is " + animationEndPosition);
+      clouds.push(
+        <Entity collada-model="#cloud-asset" position={position} rotation="90 0 0" scale="8 8 8">
+          <Animation attribute="position" to={animationEndPosition} from={position} dur="64000" direction="alternate" repeat="indefinite" ease="linear" />
+        </Entity>
+      );
+    }
+
+    return(
+      <Entity class="clouds">
+        {clouds}
       </Entity>
     );
   }
