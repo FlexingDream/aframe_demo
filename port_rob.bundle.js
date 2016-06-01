@@ -133,8 +133,8 @@
 	    _this.state = {
 	      heights: heights,
 	      // song: 'https://cdn.rawgit.com/FlexingDream/aframe_demo/pua/src/audio/port_rob_full.mp3',
-	      song: 'audio/port_rob_full.mp3',
-	      // song: 'https://res.cloudinary.com/dtniqc2hg/video/upload/q_63/v1464656484/port_rob_full_kzzetz.mp3',
+	      // song: 'audio/port_rob_full.mp3',
+	      song: 'https://res.cloudinary.com/dtniqc2hg/video/upload/q_63/v1464656484/port_rob_full_kzzetz.mp3',
 	      fogColour: '#F97B8E',
 	      shouldPlay: true,
 	      stage: 0
@@ -454,7 +454,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _aframeReact.Scene,
-	        { id: 'scene', fog: { color: this.state.fogColour }, canvas: 'width: 50; height: 10;' },
+	        { stats: true, id: 'scene', fog: { color: this.state.fogColour }, canvas: 'width: 50; height: 10;' },
 	        this.getAssets(),
 	        _react2.default.createElement(
 	          _Camera2.default,
