@@ -951,7 +951,7 @@
 	            )
 	          )
 	        ),
-	        _react2.default.createElement(Clouds, { number: '20', position: '0 100 -100', spread: '500' })
+	        _react2.default.createElement(Clouds, { number: '8', position: '0 100 -100', spread: '300' })
 	      );
 	    }
 	  }]);

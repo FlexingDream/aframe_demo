@@ -622,7 +622,7 @@ class Part2 extends React.Component{
             </Entity>
           </Entity>
         </Entity>
-        <Clouds number="20" position="0 100 -100" spread="500"/>
+        <Clouds number="8" position="0 100 -100" spread="300"/>
       </Entity>
     );
   }
