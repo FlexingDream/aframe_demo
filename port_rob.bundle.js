@@ -177,7 +177,8 @@
 	        _react2.default.createElement('a-asset-item', { id: 'ready-btn-asset', src: MODEL_LOCATION + "readybtn.dae" }),
 	        _react2.default.createElement('a-asset-item', { id: 'thanks-btn-asset', src: MODEL_LOCATION + "thanks-btn.dae" }),
 	        _react2.default.createElement('a-asset-item', { id: 'hand-asset', src: MODEL_LOCATION + "hand.dae" }),
-	        _react2.default.createElement('a-asset-item', { id: 'valley-asset', src: MODEL_LOCATION + "valley.dae" })
+	        _react2.default.createElement('a-asset-item', { id: 'valley-asset', src: MODEL_LOCATION + "valley.dae" }),
+	        _react2.default.createElement('a-asset-item', { id: 'cloud-asset', src: MODEL_LOCATION + "cloud.dae" })
 	      );
 	    }
 	  }, {
@@ -205,7 +206,7 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.captureSongStart();
-	      this.showTimer();
+	      // this.showTimer();
 	      // document.querySelector("#scene").setAttribute("canvas",{width: 50});
 	      // $("#scene").css('width','%');
 	      var that = this;
@@ -264,8 +265,8 @@
 	      this.setState({ stage: 1 });
 	      var chainEvents = [];
 	      chainEvents.newChainEvent("#camera", "part_1", 0);
-	      chainEvents.newChainEvent("#hand", "show_hand", 4000);
-	      chainEvents.newChainEvent("#hand", "rotate_hand", 8000);
+	      chainEvents.newChainEvent(".hand", "show_hand", 4000);
+	      chainEvents.newChainEvent(".hand", "rotate_hand", 8000);
 	      // chainEvents.newChainEvent("#hand","start_movement",4000);
 	      chainEvents.reverse();
 	      var that = this;
@@ -351,7 +352,8 @@
 
 	      chainEvents.newChainEvent('#part_4', 'reveal_part4', 0);
 	      // chainEvents.newChainEvent("#camera","part_4",0);
-
+	      chainEvents.newChainEvent("#part_4 .hand", "show", 0);
+	      chainEvents.newChainEvent("#part_4 .hand", "start_other_hand", 0);
 	      chainEvents.newChainEvent("#scene", "change_white", 0);
 	      chainEvents.newChainEvent("#part_4 .group_1 > a-entity:nth-child(2) > a-entity", "reveal", 41000);
 	      chainEvents.newChainEvent("#part_4 .group_1 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
@@ -420,7 +422,7 @@
 	      this.setState({ shouldPlay: false });
 
 	      var chainEvents = [];
-	      chainEvents.newChainEvent("#ending", "show", 0);
+	      chainEvents.newChainEvent("#ending #thanks-btn", "show", 0);
 	      chainEvents.reverse();
 	      this.chainTimingEvents(chainEvents);
 	    }
@@ -452,14 +454,14 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _aframeReact.Scene,
-	        { id: 'scene', stats: true, fog: { color: this.state.fogColour }, canvas: 'width: 50; height: 10;' },
+	        { id: 'scene', fog: { color: this.state.fogColour }, canvas: 'width: 50; height: 10;' },
 	        this.getAssets(),
 	        _react2.default.createElement(
 	          _Camera2.default,
 	          { id: 'camera', position: [0, 10, 0], 'wasd-controls': { enabled: false } },
 	          _react2.default.createElement(_Cursor2.default, { cursor: { fuse: true, timeout: 2000 } }),
 	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 -400', dur: '200000', ease: 'linear', begin: 'part_1' }),
-	          _react2.default.createElement(Hand, null)
+	          _react2.default.createElement(Hand, { position: '0 -1.4 -1.5', rotation: '180 105 180' })
 	        ),
 	        _react2.default.createElement(_Audio2.default, { audioSrc: this.state.song, shouldUpdateFrequencies: 'false', shouldPlay: this.state.shouldPlay }),
 	        _react2.default.createElement(_Sky2.default, { id: 'sky' }),
@@ -647,7 +649,7 @@
 	          { id: 'moon', 'collada-model': '#moon-asset', position: '-25 -80 -1050', scale: '75 75 75', rotation: '180 180 140', material: 'fog: false' },
 	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '-25 150 -600', dur: '75000', ease: 'ease-in-out', begin: 'move_moon' })
 	        ),
-	        _react2.default.createElement(Stars, null),
+	        _react2.default.createElement(Stars, { position: '0 20 0' }),
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
 	          { position: '-35 70 -165', rotation: '0 0 0', 'class': 'group_1' },
@@ -948,7 +950,8 @@
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          )
-	        )
+	        ),
+	        _react2.default.createElement(Clouds, { number: '20', position: '0 100 -100', spread: '500' })
 	      );
 	    }
 	  }]);
@@ -1017,7 +1020,7 @@
 	        ),
 	        _react2.default.createElement(
 	          _aframeReact.Entity,
-	          { position: '-35 40 -450' },
+	          { position: '-55 40 -450' },
 	          _react2.default.createElement(
 	            _aframeReact.Entity,
 	            { position: '0 0 -20', rotation: '0 0 0', 'class': 'group_1' },
@@ -1146,7 +1149,8 @@
 	              )
 	            )
 	          )
-	        )
+	        ),
+	        _react2.default.createElement(Hand, { position: '0 0 -470', rotation: '135 135 135', scale: ' 0.2 0.2 0.2' })
 	      );
 	    }
 	  }]);
@@ -1441,7 +1445,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _aframeReact.Entity,
-	        { 'entity-generator-primitive': 'mixin: starPrimitive; numElements: 200; spread: 500; minExclusion: 0;maxExclusion: 10;' },
+	        { 'class': 'stars', 'entity-generator-primitive': { mixin: "starPrimitive", numElements: 200, spread: 500, minExclusion: 0, maxExclusion: 10, position: this.props.position } },
 	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '0 90 0', ease: 'ease-linear', repeat: 'indefinite', dur: '60000', direction: 'alternate' })
 	      );
 	    }
@@ -1449,6 +1453,10 @@
 
 	  return Stars;
 	}(_react2.default.Component);
+
+	Stars.defaultProps = {
+	  position: "0 0 0"
+	};
 
 	var Hand = function (_React$Component10) {
 	  _inherits(Hand, _React$Component10);
@@ -1471,17 +1479,25 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _aframeReact.Entity,
-	        { id: 'hand', 'collada-model': '#hand-asset', scale: '0.1 0.1 0.1', position: '0 -1.4 -1.5', rotation: '180 105 180', visible: 'false' },
+	        { 'class': 'hand', 'collada-model': '#hand-asset', position: this.props.position, rotation: this.props.rotation, visible: 'false', scale: this.props.scale },
 	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', from: '0 -2.5 -1.5', to: '0 -1.6 -1.5', dur: '8000', ease: 'linear', begin: 'show_hand' }),
 	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'true', dur: '8000', ease: 'linear', begin: 'show_hand' }),
+	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'true', dur: '0', ease: 'linear', begin: 'show' }),
 	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 -1.6 -1.5', dur: '10000', repeat: 'indefinite', direction: 'alternate', from: '0 -1.4 -1.5', ease: 'linear', begin: 'start_movement' }),
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '180 270 90', from: '180 105 180', direction: 'alternate', repeat: '1', dur: '15000', begin: 'rotate_hand', ease: 'linear' })
+	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '180 270 90', from: '180 105 180', direction: 'alternate', repeat: '1', dur: '15000', begin: 'rotate_hand', ease: 'linear' }),
+	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 8.6 -380', dur: '45000', from: this.props.position, ease: 'linear', begin: 'start_other_hand' })
 	      );
 	    }
 	  }]);
 
 	  return Hand;
 	}(_react2.default.Component);
+
+	Hand.defaultProps = {
+	  position: "0 0 0",
+	  rotation: "0 0 0",
+	  scale: "0.1 0.1 0.1"
+	};
 
 	var Valley = function (_React$Component11) {
 	  _inherits(Valley, _React$Component11);
@@ -1555,15 +1571,89 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _aframeReact.Entity,
-	        { id: 'ending', position: '-60 10 -505', visible: 'false' },
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', begin: 'hide' }),
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'true', begin: 'show' }),
-	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#thanks-btn-asset', scale: ' 8 8 8' })
+	        { id: 'ending', position: '-80 5 -545' },
+	        _react2.default.createElement(Stars, { position: '-80 5 -545' }),
+	        _react2.default.createElement(
+	          _aframeReact.Entity,
+	          { id: 'thanks-btn', 'collada-model': '#thanks-btn-asset', scale: ' 8 8 8', visible: 'false' },
+	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'true', begin: 'show' })
+	        )
 	      );
 	    }
 	  }]);
 
 	  return Ending;
+	}(_react2.default.Component);
+
+	var Clouds = function (_React$Component14) {
+	  _inherits(Clouds, _React$Component14);
+
+	  function Clouds(props) {
+	    _classCallCheck(this, Clouds);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Clouds).call(this, props));
+	  }
+
+	  _createClass(Clouds, [{
+	    key: 'getPosNegRandomPosition',
+	    value: function getPosNegRandomPosition(start, spread) {
+	      var value = 0;
+	      value = Math.floor(Math.random() * spread) + 1;
+	      value *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
+	      return parseInt(start) + value;
+	    }
+	  }, {
+	    key: 'getRandomPosPosition',
+	    value: function getRandomPosPosition(start, spread) {
+	      var value = 0;
+	      value = Math.floor(Math.random() * spread) + 1;
+	      return parseInt(start) - value * -1;
+	    }
+	  }, {
+	    key: 'getRandomNegPosition',
+	    value: function getRandomNegPosition(start, spread) {
+	      var value = 0;
+	      value = Math.floor(Math.random() * spread) + 1;
+	      return (parseInt(start) - value) * 2;
+	    }
+	  }, {
+	    key: 'shouldComponentUpdate',
+	    value: function shouldComponentUpdate(nextProps, nextState) {
+	      return false;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var clouds = [];
+	      var index = 0;
+	      var startPosition = this.props.position;
+	      var startX = startPosition.split(' ')[0];
+	      var startY = startPosition.split(' ')[1];
+	      var startZ = startPosition.split(' ')[2];
+	      console.log(startX + " " + startY + " " + startZ);
+	      for (; index < this.props.number; index++) {
+	        var x = this.getPosNegRandomPosition(startX, this.props.spread);
+	        var y = this.getRandomPosPosition(startY, this.props.spread);
+	        var z = this.getRandomNegPosition(startZ, this.props.spread);
+	        var position = "" + x + " " + y + "  " + z;
+	        var animationEndPosition = "" + x * -1 + " " + y + " " + z;
+	        console.log("starting position is : " + position + " and the animationEndPosition is " + animationEndPosition);
+	        clouds.push(_react2.default.createElement(
+	          _aframeReact.Entity,
+	          { 'collada-model': '#cloud-asset', position: position, rotation: '90 0 0', scale: '8 8 8' },
+	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: animationEndPosition, from: position, dur: '64000', direction: 'alternate', repeat: 'indefinite', ease: 'linear' })
+	        ));
+	      }
+
+	      return _react2.default.createElement(
+	        _aframeReact.Entity,
+	        { 'class': 'clouds' },
+	        clouds
+	      );
+	    }
+	  }]);
+
+	  return Clouds;
 	}(_react2.default.Component);
 
 	Array.prototype.newChainEvent = function (selector, emitEvent, delay) {
@@ -123068,7 +123158,7 @@
 	  _createClass(Sky, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_aframeReact.Entity, { geometry: { primitive: 'box', height: 2000, width: 2000, depth: 2000, radius: 2000 },
+	      return _react2.default.createElement(_aframeReact.Entity, { geometry: { primitive: 'box', height: 3000, width: 3000, depth: 3000, radius: 3000 },
 	        material: { color: this.props.color, shader: 'flat' },
 	        scale: '1 1 -1'
 	      });
