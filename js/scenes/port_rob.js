@@ -339,7 +339,7 @@ class PortRob extends React.Component{
 
   render(){
     return(
-    <Scene stats id="scene" fog={{color: this.state.fogColour}} canvas="width: 50; height: 10;">
+    <Scene  id="scene" fog={{color: this.state.fogColour}} canvas="width: 50; height: 10;">
       {this.getAssets()}
       <Camera id="camera" position={[0,10,0]} wasd-controls={{enabled: false}} >
         <Cursor cursor={{fuse: true, timeout: 2000}}/>
@@ -622,7 +622,7 @@ class Part2 extends React.Component{
             </Entity>
           </Entity>
         </Entity>
-        <Clouds number="8" position="0 100 -100" spread="300"/>
+        {/*<Clouds number="8" position="0 100 -100" spread="300"/>*/}
       </Entity>
     );
   }

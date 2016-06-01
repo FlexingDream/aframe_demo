@@ -454,7 +454,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _aframeReact.Scene,
-	        { stats: true, id: 'scene', fog: { color: this.state.fogColour }, canvas: 'width: 50; height: 10;' },
+	        { id: 'scene', fog: { color: this.state.fogColour }, canvas: 'width: 50; height: 10;' },
 	        this.getAssets(),
 	        _react2.default.createElement(
 	          _Camera2.default,
@@ -950,8 +950,7 @@
 	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
 	            )
 	          )
-	        ),
-	        _react2.default.createElement(Clouds, { number: '8', position: '0 100 -100', spread: '300' })
+	        )
 	      );
 	    }
 	  }]);
