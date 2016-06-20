@@ -1,5 +1,4 @@
 import {Entity} from 'aframe-react';
-import React from 'react';
 
 
 class Camera extends React.Component{
