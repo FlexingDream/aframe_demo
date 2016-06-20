@@ -18,7 +18,13 @@ var PLUGINS = [
   new webpack.DefinePlugin({
     'process.env': {
       'NODE_ENV': '"development"'
-  }})
+  }}),
+  new webpack.ProvidePlugin({
+    Aframe: 'aframe',
+    AFRAME: 'aframe',
+    aframe: 'aframe',
+    React: 'react'
+  }),
 ];
 if (IS_PRODUCTION) {
   // Uglify in production.
@@ -34,6 +40,7 @@ if (IS_PRODUCTION) {
 
 module.exports = {
   entry: {
+    lion_wild: './src/js/scenes/lion_wild',
     port_rob: './src/js/scenes/port_rob',
     testing: './src/js/scenes/testing',
     scene_5: './src/js/scenes/scene_5',
