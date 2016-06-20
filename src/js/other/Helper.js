@@ -1,4 +1,6 @@
 class Helper{
+  static MODEL_LOCATION = "3d_models/";
+
   static chainTimingEvents(chainEventsArray){
     if (chainEventsArray<=0) return;
     var that = this;

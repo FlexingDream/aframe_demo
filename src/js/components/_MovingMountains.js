@@ -7,9 +7,22 @@ import SequencedLasers from './SequencedLasers';
 import MovingSpheres from './MovingSpheres';
 import RotatingSun from './RotatingSun';
 import RotatingMoon from './RotatingMoon';
+import Helper from '../other/Helper';
+
 class MovingMountains extends React.Component{
   constructor(props){
     super(props);
+  }
+
+  static getModels(){
+    return[
+      <a-asset-item id="mountains-1-collada" src={Helper.MODEL_LOCATION+"mountains_1.dae"}></a-asset-item>,
+      <a-asset-item id="mountains-2-collada" src={Helper.MODEL_LOCATION+"mountains_2.dae"}></a-asset-item>,
+      <a-asset-item id="mountains-3-collada" src={Helper.MODEL_LOCATION+"mountains_3.dae"}></a-asset-item>,
+      <a-asset-item id="mountains-4-collada" src={Helper.MODEL_LOCATION+"mountains_4.dae"}></a-asset-item>,
+      <a-asset-item id="sun-collada" src={Helper.MODEL_LOCATION+"sun.dae"}></a-asset-item>,
+      <a-asset-item id="moon-collada" src={Helper.MODEL_LOCATION+"moon-2.dae"}></a-asset-item>
+    ];
   }
 
   render(){

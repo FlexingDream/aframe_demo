@@ -11,11 +11,13 @@ class RotatingSun extends React.Component{
 
   render(){
     return(
-    <Entity position={this.props.position}>
+    <Entity>
       {this.props.children}
-      <ColladaModel asset="#sun-collada" >
-        <Animation attribute="rotation" to="0 360 0 " from ="0 0 0" dur="15000" direction="forward" repeat="indefinite" easing="ease-in-out"/>
-      </ColladaModel>
+      <Entity position={this.props.position}>
+        <ColladaModel asset="#sun-collada" >
+          <Animation attribute="rotation" to="0 360 0 " from ="0 0 0" dur="30000" direction="forward" repeat="indefinite" easing="linear"/>
+        </ColladaModel>
+      </Entity>
     </Entity>
     );
   }

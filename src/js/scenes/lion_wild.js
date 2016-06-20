@@ -11,7 +11,7 @@ import Cursor from '../components/Cursor';
 import Helper from '../other/Helper';
 import ColladaModel from '../components/ColladaModel';
 import MovingMountains from '../components/_MovingMountains';
-var MODEL_LOCATION = "3d_models/";
+import Space from '../components/_Space';
 
 class LionWild extends React.Component{
   constructor(props){
@@ -33,12 +33,8 @@ class LionWild extends React.Component{
   getModels(){
     return(
       <Entity>
-        <a-asset-item id="mountains-1-collada" src={MODEL_LOCATION+"mountains_1.dae"}></a-asset-item>
-        <a-asset-item id="mountains-2-collada" src={MODEL_LOCATION+"mountains_2.dae"}></a-asset-item>
-        <a-asset-item id="mountains-3-collada" src={MODEL_LOCATION+"mountains_3.dae"}></a-asset-item>
-        <a-asset-item id="mountains-4-collada" src={MODEL_LOCATION+"mountains_4.dae"}></a-asset-item>
-        <a-asset-item id="sun-collada" src={MODEL_LOCATION+"sun.dae"}></a-asset-item>
-        <a-asset-item id="moon-collada" src={MODEL_LOCATION+"moon-2.dae"}></a-asset-item>
+        {MovingMountains.getModels()}
+        {Space.getModels()}
       </Entity>
     );
   }
@@ -56,11 +52,11 @@ class LionWild extends React.Component{
 
   render(){
     return(
-      <Scene stats fog id="scene">
+      <Scene stats id="scene">
         {this.getAssets()}
         <Audio  audioSrc={this.props.song} shouldUpdateFrequencies="false" shouldPlay={this.state.shouldPlay}/>
-        <MovingMountains/>
-
+        {/*<MovingMountains/>*/}
+        <Space/>
       </Scene>
     );
   }
