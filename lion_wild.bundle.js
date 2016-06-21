@@ -101652,8 +101652,7 @@
 	          React.createElement(
 	            _ColladaModel2.default,
 	            { asset: '#moon-collada' },
-	            React.createElement('a-entity', { light: 'type: hemisphere; color: #ffff; groundColor:  #000; intensity: 2' }),
-	            React.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '0 360 0 ', from: '0 0 0', dur: '30000', direction: 'forward', repeat: 'indefinite', easing: 'linear' })
+	            React.createElement('a-entity', { light: 'type: hemisphere; color: #ffff; groundColor:  #000; intensity: 2' })
 	          )
 	        )
 	      );
@@ -101761,32 +101760,15 @@
 	          ),
 	          React.createElement(_Sky2.default, { color: 'black' })
 	        ),
-	        React.createElement(
-	          _RotatingMoon2.default,
-	          { position: '0 150 -300', rotation: '0 0 0' },
-	          React.createElement(_Animation2.default, { attribute: 'rotation', to: '0 360 0', from: '0 0 0', dur: '60000', repeat: 'indefinite', ease: 'linear' })
-	        ),
+	        React.createElement(_RotatingMoon2.default, { position: '0 150 -300', rotation: '0 0 0' }),
 	        React.createElement(_Rings2.default, null),
 	        React.createElement(_RandomStars2.default, null),
-	        React.createElement(
-	          _Planet2.default,
-	          { asset: '#neptune-collada', position: '100 100 100' },
-	          React.createElement(_Animation2.default, { attribute: 'rotation', to: '0 360 0', ease: 'linear', dur: '60000', repeat: 'indefinite' })
-	        ),
-	        React.createElement(
-	          _Planet2.default,
-	          { asset: '#saturn-collada', position: '-300 100 -300' },
-	          React.createElement(_Animation2.default, { attribute: 'rotation', to: '0 360 0', ease: 'linear', dur: '90000', repeat: 'indefinite' })
-	        ),
+	        React.createElement(_Planet2.default, { asset: '#neptune-collada', position: '100 100 100' }),
+	        React.createElement(_Planet2.default, { asset: '#saturn-collada', position: '-300 100 -300' }),
 	        React.createElement(
 	          _ColladaModel2.default,
 	          { asset: '#rocket-collada', position: '-200 -200 -200', scale: '0.5 0.5 0.5', rotation: '45 0 0' },
-	          React.createElement(_Animation2.default, { attribute: 'position', to: '300 300 300', dur: '60000', ease: 'linear' }),
-	          React.createElement(
-	            _ColladaModel2.default,
-	            { asset: '#rocket-flames-collada', position: '0 0 0', scale: '1 1 1' },
-	            React.createElement(_Animation2.default, { attribute: 'rotation', to: '0 360 0', ease: 'linear', dur: '200', repeat: 'indefinite', from: '0 0 0' })
-	          )
+	          React.createElement(_ColladaModel2.default, { asset: '#rocket-flames-collada', position: '0 0 0', scale: '1 1 1' })
 	        )
 	      );
 	    }
@@ -102140,11 +102122,7 @@
 	        React.createElement(
 	          _aframeReact.Entity,
 	          { position: this.props.position },
-	          React.createElement(
-	            _ColladaModel2.default,
-	            { asset: this.props.asset, scale: this.props.scale },
-	            React.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '0 360 0', ease: 'linear', dur: '30000', repeat: 'indefinite' })
-	          )
+	          React.createElement(_ColladaModel2.default, { asset: this.props.asset, scale: this.props.scale })
 	        )
 	      );
 	    }

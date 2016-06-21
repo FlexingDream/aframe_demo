@@ -14,7 +14,7 @@ class Planet extends React.Component{
         {this.props.children}
         <Entity position={this.props.position}>
           <ColladaModel asset={this.props.asset} scale={this.props.scale}>
-            <Animation attribute="rotation" to="0 360 0" ease="linear" dur="30000" repeat="indefinite" />
+            {/*<Animation attribute="rotation" to="0 360 0" ease="linear" dur="30000" repeat="indefinite" />*/}
           </ColladaModel>
 
         </Entity>

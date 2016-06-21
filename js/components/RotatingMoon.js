@@ -14,7 +14,7 @@ class RotatingMoon extends React.Component{
       <Entity position={this.props.position} >
         <ColladaModel asset="#moon-collada" >
           <a-entity light="type: hemisphere; color: #ffff; groundColor:  #000; intensity: 2"></a-entity>
-          <Animation attribute="rotation" to="0 360 0 " from ="0 0 0" dur="30000" direction="forward" repeat="indefinite" easing="linear"/>
+          {/*<Animation attribute="rotation" to="0 360 0 " from ="0 0 0" dur="30000" direction="forward" repeat="indefinite" easing="linear"/>*/}
         </ColladaModel>
       </Entity>
     </Entity>
