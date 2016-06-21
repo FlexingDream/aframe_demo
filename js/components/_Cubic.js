@@ -23,6 +23,7 @@ class Cubic extends React.Component{
           <Camera id="camera" wasd-controls={{enabled: true}} active position="0 5 0" >
             <Cursor />
           </Camera>
+          <Sky color='black'/>
         </Entity>
         <CubicWalkyway position="0 0 -4"/>
 {/*        <CubicWalkyway position="50 15 -8" length="10"/>

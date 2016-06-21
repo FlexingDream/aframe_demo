@@ -102248,7 +102248,8 @@
 	            _Camera2.default,
 	            { id: 'camera', 'wasd-controls': { enabled: true }, active: true, position: '0 5 0' },
 	            React.createElement(_Cursor2.default, null)
-	          )
+	          ),
+	          React.createElement(_Sky2.default, { color: 'black' })
 	        ),
 	        React.createElement(_CubicWalkway2.default, { position: '0 0 -4' }),
 	        React.createElement(_CubicRainbow2.default, { position: '0 0 -50' })
