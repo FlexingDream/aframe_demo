@@ -29,7 +29,7 @@ class Cubic extends React.Component{
 {/*        <CubicWalkyway position="50 15 -8" length="10"/>
         <CubicWalkyway position="-76 -12 12" length="8"/>*/}
 
-{/*        {CubicSnake.getRandomSnakes(10)}*/}
+        {CubicSnake.getRandomSnakes(10)}
         <CubicRainbow position="0 0 -50"/>
       </Entity>
 

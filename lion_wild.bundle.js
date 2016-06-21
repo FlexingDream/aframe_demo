@@ -102252,6 +102252,7 @@
 	          React.createElement(_Sky2.default, { color: 'black' })
 	        ),
 	        React.createElement(_CubicWalkway2.default, { position: '0 0 -4' }),
+	        _CubicSnake2.default.getRandomSnakes(10),
 	        React.createElement(_CubicRainbow2.default, { position: '0 0 -50' })
 	      );
 	    }
