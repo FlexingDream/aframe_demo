@@ -102040,7 +102040,12 @@
 	      for (var i = 0; i < this.props.numStars; i++) {
 	        var position = this.getPosition();
 	        var rotation = this.getRotation();
-	        stars.push(React.createElement(_ColladaModel2.default, { asset: '#star-collada', scale: '2 2 2', position: position, rotation: rotation }));
+	        /*      stars.push(
+	                <ColladaModel asset="#star-collada" scale="2 2 2" position={position} rotation={rotation}>
+	                  {<Animation attribute="rotation" to="0 360 0"  dur="30000" repeat="indefinite" begin={i* 500}/>}
+	                </ColladaModel>
+	              );*/
+	        stars.push(React.createElement(_aframeReact.Entity, { geometry: { primitive: 'box' }, position: position, rotation: rotation }));
 	      }
 	      return React.createElement(
 	        _aframeReact.Entity,
