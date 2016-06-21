@@ -76,11 +76,11 @@
 
 	var _Cursor2 = _interopRequireDefault(_Cursor);
 
-	__webpack_require__(526);
+	__webpack_require__(528);
 
-	__webpack_require__(532);
+	__webpack_require__(534);
 
-	__webpack_require__(538);
+	__webpack_require__(540);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -99179,7 +99179,9 @@
 /* 523 */,
 /* 524 */,
 /* 525 */,
-/* 526 */
+/* 526 */,
+/* 527 */,
+/* 528 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';
@@ -99412,12 +99414,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(161)))
 
 /***/ },
-/* 527 */,
-/* 528 */,
 /* 529 */,
 /* 530 */,
 /* 531 */,
-/* 532 */
+/* 532 */,
+/* 533 */,
+/* 534 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';
@@ -99442,12 +99444,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(161)))
 
 /***/ },
-/* 533 */,
-/* 534 */,
 /* 535 */,
 /* 536 */,
 /* 537 */,
-/* 538 */
+/* 538 */,
+/* 539 */,
+/* 540 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';

@@ -1,4 +1,5 @@
-import {Animation, Entity} from 'aframe-react';
+import {Entity} from 'aframe-react';
+import Animation from '../components/Animation';
 import Camera from '../components/Camera';
 import Cursor from '../components/Cursor';
 import Sky from '../components/Sky';

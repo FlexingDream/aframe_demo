@@ -101684,6 +101684,10 @@
 
 	var _aframeReact = __webpack_require__(157);
 
+	var _Animation = __webpack_require__(481);
+
+	var _Animation2 = _interopRequireDefault(_Animation);
+
 	var _Camera = __webpack_require__(464);
 
 	var _Camera2 = _interopRequireDefault(_Camera);
@@ -101712,15 +101716,15 @@
 
 	var _ColladaModel2 = _interopRequireDefault(_ColladaModel);
 
-	var _Rings = __webpack_require__(481);
+	var _Rings = __webpack_require__(483);
 
 	var _Rings2 = _interopRequireDefault(_Rings);
 
-	var _RandomStars = __webpack_require__(482);
+	var _RandomStars = __webpack_require__(484);
 
 	var _RandomStars2 = _interopRequireDefault(_RandomStars);
 
-	var _Planet = __webpack_require__(483);
+	var _Planet = __webpack_require__(485);
 
 	var _Planet2 = _interopRequireDefault(_Planet);
 
@@ -101761,28 +101765,28 @@
 	        React.createElement(
 	          _RotatingMoon2.default,
 	          { position: '0 150 -300', rotation: '0 0 0' },
-	          React.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '0 360 0', from: '0 0 0', dur: '60000', repeat: 'indefinite', ease: 'linear' })
+	          React.createElement(_Animation2.default, { attribute: 'rotation', to: '0 360 0', from: '0 0 0', dur: '60000', repeat: 'indefinite', ease: 'linear' })
 	        ),
 	        React.createElement(_Rings2.default, null),
 	        React.createElement(_RandomStars2.default, null),
 	        React.createElement(
 	          _Planet2.default,
 	          { asset: '#neptune-collada', position: '100 100 100' },
-	          React.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '0 360 0', ease: 'linear', dur: '60000', repeat: 'indefinite' })
+	          React.createElement(_Animation2.default, { attribute: 'rotation', to: '0 360 0', ease: 'linear', dur: '60000', repeat: 'indefinite' })
 	        ),
 	        React.createElement(
 	          _Planet2.default,
 	          { asset: '#saturn-collada', position: '-300 100 -300' },
-	          React.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '0 360 0', ease: 'linear', dur: '90000', repeat: 'indefinite' })
+	          React.createElement(_Animation2.default, { attribute: 'rotation', to: '0 360 0', ease: 'linear', dur: '90000', repeat: 'indefinite' })
 	        ),
 	        React.createElement(
 	          _ColladaModel2.default,
 	          { asset: '#rocket-collada', position: '-200 -200 -200', scale: '0.5 0.5 0.5', rotation: '45 0 0' },
-	          React.createElement(_aframeReact.Animation, { attribute: 'position', to: '300 300 300', dur: '60000', ease: 'linear' }),
+	          React.createElement(_Animation2.default, { attribute: 'position', to: '300 300 300', dur: '60000', ease: 'linear' }),
 	          React.createElement(
 	            _ColladaModel2.default,
 	            { asset: '#rocket-flames-collada', position: '0 0 0', scale: '1 1 1' },
-	            React.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '0 360 0', ease: 'linear', dur: '200', repeat: 'indefinite', from: '0 0 0' })
+	            React.createElement(_Animation2.default, { attribute: 'rotation', to: '0 360 0', ease: 'linear', dur: '200', repeat: 'indefinite', from: '0 0 0' })
 	          )
 	        )
 	      );
@@ -101806,6 +101810,126 @@
 
 /***/ },
 /* 481 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	__webpack_require__(482);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Animation = function (_React$Component) {
+	  _inherits(Animation, _React$Component);
+
+	  function Animation() {
+	    var _Object$getPrototypeO;
+
+	    var _temp, _this, _ret;
+
+	    _classCallCheck(this, Animation);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Animation)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.attachEvents = function (el) {
+	      if (el) {
+	        el.addEventListener('animationend', function (event) {
+	          _this.props.onAnimationEnd(event);
+	        });
+	        el.addEventListener('animationstart', function (event) {
+	          _this.props.onAnimationStart(event);
+	        });
+	      }
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+
+	  _createClass(Animation, [{
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement('a-animation', _extends({ ref: this.attachEvents }, serializeComponents(this.props)));
+	    }
+	  }]);
+
+	  return Animation;
+	}(React.Component);
+
+	/**
+	 * Stringify components passed as an object.
+	 *
+	 * {primitive: box; width: 10} to 'primitive: box; width: 10'
+	 */
+
+
+	function serializeComponents(props) {
+	  var serialProps = {};
+	  Object.keys(props).forEach(function (component) {
+	    if (['children', 'mixin'].indexOf(component) !== -1) {
+	      return;
+	    }
+
+	    if (props[component].constructor === Function) {
+	      return;
+	    }
+
+	    if (props[component].constructor === Array) {
+	      //Stringify components passed as array.
+	      serialProps[component] = props[component].join(' ');
+	    } else if (props[component].constructor === Object) {
+	      // Stringify components passed as object.
+	      serialProps[component] = styleParser.stringify(props[component]);
+	    } else {
+	      // Do nothing for components otherwise.
+	      serialProps[component] = props[component];
+	    }
+	  });
+	  return serialProps;
+	};
+
+	Animation.propTypes = {
+	  onAnimationEnd: React.PropTypes.func,
+	  onAnimationStart: React.PropTypes.func
+	};
+
+	Animation.defaultProps = {
+	  onAnimationEnd: function onAnimationEnd() {},
+	  onAnimationStart: function onAnimationStart() {}
+	};
+
+	exports.default = Animation;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ },
+/* 482 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';
+
+	/* global AFRAME */
+
+	AFRAME.registerComponent('chain-events', {
+	  init: function init() {
+	    var el = this.el;
+	    console.log(el);
+	    el.addEventListener('animationend', function (e) {});
+	  }
+	});
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(161)))
+
+/***/ },
+/* 483 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -101873,7 +101997,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 482 */
+/* 484 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -101940,16 +102064,11 @@
 	      for (var i = 0; i < this.props.numStars; i++) {
 	        var position = this.getPosition();
 	        var rotation = this.getRotation();
-	        stars.push(React.createElement(
-	          _ColladaModel2.default,
-	          { asset: '#star-collada', scale: '2 2 2', position: position, rotation: rotation },
-	          React.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '0 360 0', dur: '30000', repeat: 'indefinite', begin: i * 500 })
-	        ));
+	        stars.push(React.createElement(_ColladaModel2.default, { asset: '#star-collada', scale: '2 2 2', position: position, rotation: rotation }));
 	      }
 	      return React.createElement(
 	        _aframeReact.Entity,
 	        null,
-	        React.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '360 0 0', dur: '60000', repeat: 'indefinite', ease: 'linear' }),
 	        React.createElement(
 	          _aframeReact.Entity,
 	          { position: this.props.position },
@@ -101972,7 +102091,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 483 */
+/* 485 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';

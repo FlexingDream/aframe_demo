@@ -52,11 +52,11 @@
 
 	__webpack_require__(160);
 
-	__webpack_require__(532);
+	__webpack_require__(534);
 
 	__webpack_require__(466);
 
-	__webpack_require__(526);
+	__webpack_require__(528);
 
 	var _aframeReact = __webpack_require__(157);
 
@@ -84,11 +84,11 @@
 
 	var _Sky2 = _interopRequireDefault(_Sky);
 
-	var _Floor = __webpack_require__(535);
+	var _Floor = __webpack_require__(537);
 
 	var _Floor2 = _interopRequireDefault(_Floor);
 
-	var _RainingObjects = __webpack_require__(531);
+	var _RainingObjects = __webpack_require__(533);
 
 	var _RainingObjects2 = _interopRequireDefault(_RainingObjects);
 
@@ -96,7 +96,7 @@
 
 	var _Audio2 = _interopRequireDefault(_Audio);
 
-	var _Waveform = __webpack_require__(536);
+	var _Waveform = __webpack_require__(538);
 
 	var _Waveform2 = _interopRequireDefault(_Waveform);
 
@@ -101253,7 +101253,9 @@
 /* 523 */,
 /* 524 */,
 /* 525 */,
-/* 526 */
+/* 526 */,
+/* 527 */,
+/* 528 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';
@@ -101486,11 +101488,11 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(161)))
 
 /***/ },
-/* 527 */,
-/* 528 */,
 /* 529 */,
 /* 530 */,
-/* 531 */
+/* 531 */,
+/* 532 */,
+/* 533 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -101507,7 +101509,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	__webpack_require__(532);
+	__webpack_require__(534);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -101575,7 +101577,7 @@
 	exports.default = RainingObjects;
 
 /***/ },
-/* 532 */
+/* 534 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';
@@ -101600,9 +101602,9 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(161)))
 
 /***/ },
-/* 533 */,
-/* 534 */,
-/* 535 */
+/* 535 */,
+/* 536 */,
+/* 537 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -101651,7 +101653,7 @@
 	exports.default = Floor;
 
 /***/ },
-/* 536 */
+/* 538 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

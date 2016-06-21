@@ -50,7 +50,7 @@
 
 	var _aframeReact = __webpack_require__(157);
 
-	var _scene_template = __webpack_require__(537);
+	var _scene_template = __webpack_require__(539);
 
 	var _scene_template2 = _interopRequireDefault(_scene_template);
 
@@ -82,9 +82,9 @@
 
 	var _Audio2 = _interopRequireDefault(_Audio);
 
-	__webpack_require__(526);
+	__webpack_require__(528);
 
-	var _Laser = __webpack_require__(534);
+	var _Laser = __webpack_require__(536);
 
 	var _Laser2 = _interopRequireDefault(_Laser);
 
@@ -101182,7 +101182,9 @@
 /* 523 */,
 /* 524 */,
 /* 525 */,
-/* 526 */
+/* 526 */,
+/* 527 */,
+/* 528 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';
@@ -101415,14 +101417,14 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(161)))
 
 /***/ },
-/* 527 */,
-/* 528 */,
 /* 529 */,
 /* 530 */,
 /* 531 */,
 /* 532 */,
 /* 533 */,
-/* 534 */
+/* 534 */,
+/* 535 */,
+/* 536 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -101557,9 +101559,9 @@
 	exports.default = Lasers;
 
 /***/ },
-/* 535 */,
-/* 536 */,
-/* 537 */
+/* 537 */,
+/* 538 */,
+/* 539 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
