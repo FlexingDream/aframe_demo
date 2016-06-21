@@ -41,7 +41,7 @@ class RandomStars extends React.Component{
     }
     return(
       <Entity>
-        {/*<Animation attribute="rotation" to="360 0 0"  dur="60000" repeat="indefinite" ease="linear"/>*/}
+        <Animation attribute="rotation" to="360 0 0"  dur="60000" repeat="indefinite" ease="linear"/>
         <Entity position={this.props.position}>
           {stars}
         </Entity>

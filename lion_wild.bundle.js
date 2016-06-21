@@ -102074,6 +102074,7 @@
 	      return React.createElement(
 	        _aframeReact.Entity,
 	        null,
+	        React.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '360 0 0', dur: '60000', repeat: 'indefinite', ease: 'linear' }),
 	        React.createElement(
 	          _aframeReact.Entity,
 	          { position: this.props.position },
