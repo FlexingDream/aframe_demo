@@ -48,13 +48,13 @@ class Space extends React.Component{
         <Planet asset="#saturn-collada" position="-300 100 -300">
           {/*<Animation attribute="rotation" to="0 360 0" ease="linear" dur="90000" repeat="indefinite" />*/}
         </Planet>
-        <ColladaModel asset="#rocket-collada" position="-200 -200 -200" scale="0.5 0.5 0.5" rotation="45 0 0">
-          {/*<Animation attribute="position" to="300 300 300" dur="60000" ease="linear"/>*/}
+{/*        <ColladaModel asset="#rocket-collada" position="-200 -200 -200" scale="0.5 0.5 0.5" rotation="45 0 0">
+          <Animation attribute="position" to="300 300 300" dur="60000" ease="linear"/>
           <ColladaModel asset="#rocket-flames-collada" position="0 0 0" scale="1 1 1">
-            {/*<Animation attribute="rotation" to="0 360 0" ease="linear" dur="200" repeat="indefinite" from="0 0 0" />*/}
+            <Animation attribute="rotation" to="0 360 0" ease="linear" dur="200" repeat="indefinite" from="0 0 0" />
           </ColladaModel>
 
-        </ColladaModel>
+        </ColladaModel>*/}
       </Entity>
     );
   }

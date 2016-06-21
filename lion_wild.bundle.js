@@ -101764,12 +101764,7 @@
 	        React.createElement(_Rings2.default, null),
 	        React.createElement(_RandomStars2.default, null),
 	        React.createElement(_Planet2.default, { asset: '#neptune-collada', position: '100 100 100' }),
-	        React.createElement(_Planet2.default, { asset: '#saturn-collada', position: '-300 100 -300' }),
-	        React.createElement(
-	          _ColladaModel2.default,
-	          { asset: '#rocket-collada', position: '-200 -200 -200', scale: '0.5 0.5 0.5', rotation: '45 0 0' },
-	          React.createElement(_ColladaModel2.default, { asset: '#rocket-flames-collada', position: '0 0 0', scale: '1 1 1' })
-	        )
+	        React.createElement(_Planet2.default, { asset: '#saturn-collada', position: '-300 100 -300' })
 	      );
 	    }
 	  }], [{
