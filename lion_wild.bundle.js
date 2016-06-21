@@ -102253,6 +102253,9 @@
 	          React.createElement(_Sky2.default, { color: 'black' })
 	        ),
 	        React.createElement(_CubicWalkway2.default, { position: '0 0 -4' }),
+	        React.createElement(_CubicWalkway2.default, { position: '50 15 -8', length: '10' }),
+	        React.createElement(_CubicWalkway2.default, { position: '-76 -12 12', length: '8' }),
+	        _CubicSnake2.default.getRandomSnakes(4),
 	        React.createElement(_CubicRainbow2.default, { position: '0 0 -50' })
 	      );
 	    }
@@ -102368,12 +102371,7 @@
 	        var endPosition = position.slice(0);
 	        endPosition[2] = _Helper2.default.getRandWithMargin(400);
 	        var randScale = CubicSnake.getRandWithMargin(1);
-	        snakes.push(React.createElement(
-	          CubicSnake,
-	          { position: position },
-	          React.createElement(_aframeReact.Animation, { attribute: 'scale', to: randScale, dur: '10000', repeat: 'indefinite', ease: 'linear', from: '1 1 1', direction: 'alternate' }),
-	          React.createElement(_aframeReact.Animation, { attribute: 'position', to: endPosition, dur: '60000', ease: 'linear', direction: 'alternate', repeat: 'indefinite', from: position })
-	        ));
+	        snakes.push(React.createElement(CubicSnake, { position: position }));
 	      }
 	      return snakes;
 	    }
