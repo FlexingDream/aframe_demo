@@ -21,6 +21,7 @@ class Cubic extends React.Component{
       <Entity position={this.props.position}>
         <Entity>
           <Camera id="camera" wasd-controls={{enabled: true}} active position="0 5 0" >
+            <Animation attribute='position' to='0 5 200' dur='30000' ease='linear' begin='5000' /> 
             <Cursor />
           </Camera>
           <Sky color='black'/>

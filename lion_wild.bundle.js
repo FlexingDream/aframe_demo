@@ -102247,6 +102247,7 @@
 	          React.createElement(
 	            _Camera2.default,
 	            { id: 'camera', 'wasd-controls': { enabled: true }, active: true, position: '0 5 0' },
+	            React.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 5 200', dur: '30000', ease: 'linear', begin: '5000' }),
 	            React.createElement(_Cursor2.default, null)
 	          ),
 	          React.createElement(_Sky2.default, { color: 'black' })
