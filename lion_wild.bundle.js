@@ -70,29 +70,21 @@
 
 	var _Audio2 = _interopRequireDefault(_Audio);
 
-	var _Camera = __webpack_require__(464);
-
-	var _Camera2 = _interopRequireDefault(_Camera);
-
-	var _Cursor = __webpack_require__(465);
-
-	var _Cursor2 = _interopRequireDefault(_Cursor);
-
-	var _Helper = __webpack_require__(468);
+	var _Helper = __webpack_require__(464);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
-	var _ColladaModel = __webpack_require__(469);
-
-	var _ColladaModel2 = _interopRequireDefault(_ColladaModel);
-
-	var _MovingMountains = __webpack_require__(470);
+	var _MovingMountains = __webpack_require__(465);
 
 	var _MovingMountains2 = _interopRequireDefault(_MovingMountains);
 
 	var _Space = __webpack_require__(480);
 
 	var _Space2 = _interopRequireDefault(_Space);
+
+	var _Cubic = __webpack_require__(486);
+
+	var _Cubic2 = _interopRequireDefault(_Cubic);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -136,7 +128,8 @@
 	        _aframeReact.Entity,
 	        null,
 	        _MovingMountains2.default.getModels(),
-	        _Space2.default.getModels()
+	        _Space2.default.getModels(),
+	        _Cubic2.default.getModels()
 	      );
 	    }
 	  }, {
@@ -162,7 +155,7 @@
 	        { stats: true, id: 'scene' },
 	        this.getAssets(),
 	        React.createElement(_Audio2.default, { audioSrc: this.props.song, shouldUpdateFrequencies: 'false', shouldPlay: this.state.shouldPlay }),
-	        React.createElement(_Space2.default, null)
+	        React.createElement(_Cubic2.default, null)
 	      );
 	    }
 	  }]);
@@ -100700,185 +100693,6 @@
 
 /***/ },
 /* 464 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(React) {"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _aframeReact = __webpack_require__(157);
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Camera = function (_React$Component) {
-	  _inherits(Camera, _React$Component);
-
-	  function Camera(props) {
-	    _classCallCheck(this, Camera);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Camera).call(this, props));
-	  }
-
-	  _createClass(Camera, [{
-	    key: "render",
-	    value: function render() {
-	      return React.createElement(_aframeReact.Entity, _extends({ "class": "camera", camera: "", "look-controls": "", "wasd-controls": "" }, this.props));
-	    }
-	  }, {
-	    key: "shouldComponentUpdate",
-	    value: function shouldComponentUpdate(nextProps, nextState) {
-	      return false;
-	    }
-	  }]);
-
-	  return Camera;
-	}(React.Component);
-
-	;
-
-	exports.default = Camera;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ },
-/* 465 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _aframeReact = __webpack_require__(157);
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	__webpack_require__(466);
-
-	__webpack_require__(467);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = function (props) {
-	  var geometry = {
-	    primitive: 'ring',
-	    radiusInner: 0.01,
-	    radiusOuter: 0.016
-	    // radius: 0.5,
-	    // height: 1
-	  };
-	  var material = {
-	    color: props.color || 'white',
-	    shader: 'flat',
-	    opacity: props.opacity || 0.9,
-	    transparent: true
-	  };
-	  return _react2.default.createElement(
-	    _aframeReact.Entity,
-	    { raycaster: { maxDistance: 100000 }, cursor: props, geometry: geometry, material: material, position: '0 0 -1' },
-	    _react2.default.createElement(_aframeReact.Animation, { attribute: 'scale', begin: 'click', dur: '150', fill: 'backwards', to: '0 0 0' }),
-	    _react2.default.createElement(_aframeReact.Animation, { attribute: 'scale', begin: 'fusing', easing: 'ease-in', fill: 'backwards', from: '1 1 1', to: '0.1 0.1 0.1',
-	      dur: '1500' })
-	  );
-	};
-
-/***/ },
-/* 466 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';
-
-	/* global AFRAME, THREE */
-	var originVector = new THREE.Vector3(0, 0, 0);
-
-	/**
-	 * Draw raycaster ray.
-	 */
-	AFRAME.registerComponent('raycaster-helper', {
-	  dependencies: ['material', 'raycaster'],
-
-	  init: function init() {
-	    var el = this.el;
-	    var geometry = new THREE.Geometry();
-	    var material = new THREE.LineBasicMaterial({
-	      color: el.getComputedAttribute('material').color
-	    });
-	    var raycaster = el.components.raycaster.raycaster;
-	    var length = raycaster.far === Infinity ? 1000 : raycaster.far;
-
-	    geometry.vertices.push(originVector, raycaster.ray.direction.clone().multiplyScalar(length));
-	    material.opacity = el.getComputedAttribute('material').opacity;
-	    material.transparent = true;
-	    el.setObject3D('line', new THREE.Line(geometry, material));
-	  }
-	});
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(161)))
-
-/***/ },
-/* 467 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';
-
-	AFRAME.registerComponent('cursor-interaction', {
-	  schema: {
-	    startPlay: { default: false }
-	  },
-
-	  // FOR TOUCH EVENTS ON MOBILE
-	  init: function init() {
-	    var el = this.el;
-	    var data = this;data;
-	    // Set color using raycaster parent color.
-	    /*8
-	    el.addEventListener('click', function (evt) {
-	      console.log(evt);
-	        var node = $(".audio-player").data("audio-node");
-	      if (node){
-	        node.start(0);
-	      }
-	    });
-	    */
-
-	    document.addEventListener('touchstart', function start(e) {
-	      /**
-	      var node = $(".audio-player").data("audio-node");
-	        document.removeEventListener('touchstart',start,false);
-	      // document.getElementsByTagName('audio')[0].play();
-	      // document.getElementsByTagName('audio')[0].pause();
-	      node.start(0);
-	      node.stop(0);
-	        */
-	      var node = $('.audio-player').data('node');
-	      if (!node) {
-	        return;
-	      }
-
-	      document.removeEventListener('touchstart', start, false);
-	      document.getElementById('scene').removeEventListener('start_song', this.startSong, false);
-	      document.getElementById('loaded-msg').emit('hide');
-	      node.start(0);
-	      document.getElementById('intro').emit('start_intro');
-	    }, false);
-	  }
-
-	});
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(161)))
-
-/***/ },
-/* 468 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -100933,6 +100747,20 @@
 	      value *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
 	      return value;
 	    }
+	  }, {
+	    key: 'getRandArrayWithMargin',
+	    value: function getRandArrayWithMargin(margin) {
+	      var posOnly = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+
+	      var array = [0, 0, 0];
+	      for (var i = 0; i < 3; i++) {
+	        var value = 0;
+	        value = Math.floor(Math.random() * margin) + 1;
+	        if (!posOnly) value *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
+	        array[i] = value;
+	      }
+	      return array;
+	    }
 	  }]);
 
 	  return Helper;
@@ -100942,60 +100770,7 @@
 	exports.default = Helper;
 
 /***/ },
-/* 469 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var ColladaModel = function (_React$Component) {
-	  _inherits(ColladaModel, _React$Component);
-
-	  function ColladaModel(props) {
-	    _classCallCheck(this, ColladaModel);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(ColladaModel).call(this, props));
-	  }
-
-	  _createClass(ColladaModel, [{
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'a-entity',
-	        { className: this.props.className, 'collada-model': this.props.asset, position: this.props.position, scale: this.props.scale, rotation: this.props.rotation, 'look-at': this.props.lookAt },
-	        this.props.children
-	      );
-	    }
-	  }]);
-
-	  return ColladaModel;
-	}(React.Component);
-
-	ColladaModel.defaultProps = {
-	  className: '',
-	  asset: '',
-	  position: "0 0 0",
-	  scale: '1 1 1',
-	  rotation: '0 0 0',
-	  lookAt: ''
-	};
-
-	exports.default = ColladaModel;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ },
-/* 470 */
+/* 465 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -101008,15 +100783,15 @@
 
 	var _aframeReact = __webpack_require__(157);
 
-	var _MountainRange = __webpack_require__(471);
+	var _MountainRange = __webpack_require__(466);
 
 	var _MountainRange2 = _interopRequireDefault(_MountainRange);
 
-	var _Camera = __webpack_require__(464);
+	var _Camera = __webpack_require__(469);
 
 	var _Camera2 = _interopRequireDefault(_Camera);
 
-	var _Cursor = __webpack_require__(465);
+	var _Cursor = __webpack_require__(470);
 
 	var _Cursor2 = _interopRequireDefault(_Cursor);
 
@@ -101024,7 +100799,7 @@
 
 	var _Sky2 = _interopRequireDefault(_Sky);
 
-	var _SequencedLasers = __webpack_require__(472);
+	var _SequencedLasers = __webpack_require__(468);
 
 	var _SequencedLasers2 = _interopRequireDefault(_SequencedLasers);
 
@@ -101040,7 +100815,7 @@
 
 	var _RotatingMoon2 = _interopRequireDefault(_RotatingMoon);
 
-	var _Helper = __webpack_require__(468);
+	var _Helper = __webpack_require__(464);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
@@ -101125,7 +100900,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 471 */
+/* 466 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -101138,11 +100913,11 @@
 
 	var _aframeReact = __webpack_require__(157);
 
-	var _ColladaModel = __webpack_require__(469);
+	var _ColladaModel = __webpack_require__(467);
 
 	var _ColladaModel2 = _interopRequireDefault(_ColladaModel);
 
-	var _SequencedLasers = __webpack_require__(472);
+	var _SequencedLasers = __webpack_require__(468);
 
 	var _SequencedLasers2 = _interopRequireDefault(_SequencedLasers);
 
@@ -101196,7 +100971,60 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 472 */
+/* 467 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ColladaModel = function (_React$Component) {
+	  _inherits(ColladaModel, _React$Component);
+
+	  function ColladaModel(props) {
+	    _classCallCheck(this, ColladaModel);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(ColladaModel).call(this, props));
+	  }
+
+	  _createClass(ColladaModel, [{
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        'a-entity',
+	        { className: this.props.className, 'collada-model': this.props.asset, position: this.props.position, scale: this.props.scale, rotation: this.props.rotation, 'look-at': this.props.lookAt },
+	        this.props.children
+	      );
+	    }
+	  }]);
+
+	  return ColladaModel;
+	}(React.Component);
+
+	ColladaModel.defaultProps = {
+	  className: '',
+	  asset: '',
+	  position: "0 0 0",
+	  scale: '1 1 1',
+	  rotation: '0 0 0',
+	  lookAt: ''
+	};
+
+	exports.default = ColladaModel;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ },
+/* 468 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -101211,7 +101039,7 @@
 
 	__webpack_require__(160);
 
-	var _Helper = __webpack_require__(468);
+	var _Helper = __webpack_require__(464);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
@@ -101298,6 +101126,185 @@
 
 	exports.default = SequencedLasers;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ },
+/* 469 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(React) {"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _aframeReact = __webpack_require__(157);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Camera = function (_React$Component) {
+	  _inherits(Camera, _React$Component);
+
+	  function Camera(props) {
+	    _classCallCheck(this, Camera);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Camera).call(this, props));
+	  }
+
+	  _createClass(Camera, [{
+	    key: "render",
+	    value: function render() {
+	      return React.createElement(_aframeReact.Entity, _extends({ "class": "camera", camera: "", "look-controls": "", "wasd-controls": "" }, this.props));
+	    }
+	  }, {
+	    key: "shouldComponentUpdate",
+	    value: function shouldComponentUpdate(nextProps, nextState) {
+	      return false;
+	    }
+	  }]);
+
+	  return Camera;
+	}(React.Component);
+
+	;
+
+	exports.default = Camera;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ },
+/* 470 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _aframeReact = __webpack_require__(157);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	__webpack_require__(471);
+
+	__webpack_require__(472);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (props) {
+	  var geometry = {
+	    primitive: 'ring',
+	    radiusInner: 0.01,
+	    radiusOuter: 0.016
+	    // radius: 0.5,
+	    // height: 1
+	  };
+	  var material = {
+	    color: props.color || 'white',
+	    shader: 'flat',
+	    opacity: props.opacity || 0.9,
+	    transparent: true
+	  };
+	  return _react2.default.createElement(
+	    _aframeReact.Entity,
+	    { raycaster: { maxDistance: 100000 }, cursor: props, geometry: geometry, material: material, position: '0 0 -1' },
+	    _react2.default.createElement(_aframeReact.Animation, { attribute: 'scale', begin: 'click', dur: '150', fill: 'backwards', to: '0 0 0' }),
+	    _react2.default.createElement(_aframeReact.Animation, { attribute: 'scale', begin: 'fusing', easing: 'ease-in', fill: 'backwards', from: '1 1 1', to: '0.1 0.1 0.1',
+	      dur: '1500' })
+	  );
+	};
+
+/***/ },
+/* 471 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';
+
+	/* global AFRAME, THREE */
+	var originVector = new THREE.Vector3(0, 0, 0);
+
+	/**
+	 * Draw raycaster ray.
+	 */
+	AFRAME.registerComponent('raycaster-helper', {
+	  dependencies: ['material', 'raycaster'],
+
+	  init: function init() {
+	    var el = this.el;
+	    var geometry = new THREE.Geometry();
+	    var material = new THREE.LineBasicMaterial({
+	      color: el.getComputedAttribute('material').color
+	    });
+	    var raycaster = el.components.raycaster.raycaster;
+	    var length = raycaster.far === Infinity ? 1000 : raycaster.far;
+
+	    geometry.vertices.push(originVector, raycaster.ray.direction.clone().multiplyScalar(length));
+	    material.opacity = el.getComputedAttribute('material').opacity;
+	    material.transparent = true;
+	    el.setObject3D('line', new THREE.Line(geometry, material));
+	  }
+	});
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(161)))
+
+/***/ },
+/* 472 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';
+
+	AFRAME.registerComponent('cursor-interaction', {
+	  schema: {
+	    startPlay: { default: false }
+	  },
+
+	  // FOR TOUCH EVENTS ON MOBILE
+	  init: function init() {
+	    var el = this.el;
+	    var data = this;data;
+	    // Set color using raycaster parent color.
+	    /*8
+	    el.addEventListener('click', function (evt) {
+	      console.log(evt);
+	        var node = $(".audio-player").data("audio-node");
+	      if (node){
+	        node.start(0);
+	      }
+	    });
+	    */
+
+	    document.addEventListener('touchstart', function start(e) {
+	      /**
+	      var node = $(".audio-player").data("audio-node");
+	        document.removeEventListener('touchstart',start,false);
+	      // document.getElementsByTagName('audio')[0].play();
+	      // document.getElementsByTagName('audio')[0].pause();
+	      node.start(0);
+	      node.stop(0);
+	        */
+	      var node = $('.audio-player').data('node');
+	      if (!node) {
+	        return;
+	      }
+
+	      document.removeEventListener('touchstart', start, false);
+	      document.getElementById('scene').removeEventListener('start_song', this.startSong, false);
+	      document.getElementById('loaded-msg').emit('hide');
+	      node.start(0);
+	      document.getElementById('intro').emit('start_intro');
+	    }, false);
+	  }
+
+	});
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(161)))
 
 /***/ },
 /* 473 */
@@ -101467,7 +101474,7 @@
 
 	__webpack_require__(160);
 
-	var _Helper = __webpack_require__(468);
+	var _Helper = __webpack_require__(464);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
@@ -101544,11 +101551,11 @@
 
 	__webpack_require__(160);
 
-	var _Helper = __webpack_require__(468);
+	var _Helper = __webpack_require__(464);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
-	var _ColladaModel = __webpack_require__(469);
+	var _ColladaModel = __webpack_require__(467);
 
 	var _ColladaModel2 = _interopRequireDefault(_ColladaModel);
 
@@ -101614,11 +101621,11 @@
 
 	__webpack_require__(160);
 
-	var _Helper = __webpack_require__(468);
+	var _Helper = __webpack_require__(464);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
-	var _ColladaModel = __webpack_require__(469);
+	var _ColladaModel = __webpack_require__(467);
 
 	var _ColladaModel2 = _interopRequireDefault(_ColladaModel);
 
@@ -101688,11 +101695,11 @@
 
 	var _Animation2 = _interopRequireDefault(_Animation);
 
-	var _Camera = __webpack_require__(464);
+	var _Camera = __webpack_require__(469);
 
 	var _Camera2 = _interopRequireDefault(_Camera);
 
-	var _Cursor = __webpack_require__(465);
+	var _Cursor = __webpack_require__(470);
 
 	var _Cursor2 = _interopRequireDefault(_Cursor);
 
@@ -101708,11 +101715,11 @@
 
 	var _RotatingMoon2 = _interopRequireDefault(_RotatingMoon);
 
-	var _Helper = __webpack_require__(468);
+	var _Helper = __webpack_require__(464);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
-	var _ColladaModel = __webpack_require__(469);
+	var _ColladaModel = __webpack_require__(467);
 
 	var _ColladaModel2 = _interopRequireDefault(_ColladaModel);
 
@@ -101944,11 +101951,11 @@
 
 	__webpack_require__(160);
 
-	var _Helper = __webpack_require__(468);
+	var _Helper = __webpack_require__(464);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
-	var _ColladaModel = __webpack_require__(469);
+	var _ColladaModel = __webpack_require__(467);
 
 	var _ColladaModel2 = _interopRequireDefault(_ColladaModel);
 
@@ -102012,11 +102019,11 @@
 
 	__webpack_require__(160);
 
-	var _Helper = __webpack_require__(468);
+	var _Helper = __webpack_require__(464);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
-	var _ColladaModel = __webpack_require__(469);
+	var _ColladaModel = __webpack_require__(467);
 
 	var _ColladaModel2 = _interopRequireDefault(_ColladaModel);
 
@@ -102112,11 +102119,11 @@
 
 	__webpack_require__(160);
 
-	var _Helper = __webpack_require__(468);
+	var _Helper = __webpack_require__(464);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
-	var _ColladaModel = __webpack_require__(469);
+	var _ColladaModel = __webpack_require__(467);
 
 	var _ColladaModel2 = _interopRequireDefault(_ColladaModel);
 
@@ -102167,6 +102174,378 @@
 	};
 
 	exports.default = Planet;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ },
+/* 486 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _aframeReact = __webpack_require__(157);
+
+	var _Camera = __webpack_require__(469);
+
+	var _Camera2 = _interopRequireDefault(_Camera);
+
+	var _Cursor = __webpack_require__(470);
+
+	var _Cursor2 = _interopRequireDefault(_Cursor);
+
+	var _Sky = __webpack_require__(473);
+
+	var _Sky2 = _interopRequireDefault(_Sky);
+
+	var _Helper = __webpack_require__(464);
+
+	var _Helper2 = _interopRequireDefault(_Helper);
+
+	var _CubicSnake = __webpack_require__(487);
+
+	var _CubicSnake2 = _interopRequireDefault(_CubicSnake);
+
+	var _CubicWalkway = __webpack_require__(488);
+
+	var _CubicWalkway2 = _interopRequireDefault(_CubicWalkway);
+
+	var _CubicRainbow = __webpack_require__(489);
+
+	var _CubicRainbow2 = _interopRequireDefault(_CubicRainbow);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Cubic = function (_React$Component) {
+	  _inherits(Cubic, _React$Component);
+
+	  function Cubic(props) {
+	    _classCallCheck(this, Cubic);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Cubic).call(this, props));
+	  }
+
+	  _createClass(Cubic, [{
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        _aframeReact.Entity,
+	        { position: this.props.position },
+	        React.createElement(
+	          _aframeReact.Entity,
+	          null,
+	          React.createElement(
+	            _Camera2.default,
+	            { id: 'camera', 'wasd-controls': { enabled: true }, active: true, position: '0 5 0' },
+	            React.createElement(_Cursor2.default, null)
+	          )
+	        ),
+	        React.createElement(_CubicWalkway2.default, { position: '0 0 -4' }),
+	        React.createElement(_CubicWalkway2.default, { position: '30 4 -4' }),
+	        React.createElement(_CubicWalkway2.default, { position: '-35 -7 -4' }),
+	        _CubicSnake2.default.getRandomSnakes(10),
+	        React.createElement(_CubicRainbow2.default, { position: '0 0 -50' })
+	      );
+	    }
+	  }], [{
+	    key: 'getModels',
+	    value: function getModels() {
+	      return [];
+	    }
+	  }]);
+
+	  return Cubic;
+	}(React.Component);
+
+	Cubic.defaultProps = {
+	  position: "0 0 0"
+	};
+
+	exports.default = Cubic;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ },
+/* 487 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _aframeReact = __webpack_require__(157);
+
+	var _Helper = __webpack_require__(464);
+
+	var _Helper2 = _interopRequireDefault(_Helper);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CubicSnake = function (_React$Component) {
+	  _inherits(CubicSnake, _React$Component);
+
+	  function CubicSnake(props) {
+	    _classCallCheck(this, CubicSnake);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(CubicSnake).call(this, props));
+	  }
+
+	  _createClass(CubicSnake, [{
+	    key: 'getSnake',
+	    value: function getSnake() {
+
+	      var snakes = [];
+	      var index = 1;
+	      var dir = 1;
+	      var blockLength = 1;
+	      for (var i = 0; i < this.props.length; i++) {
+	        var position = [0, 0, 0];
+	        if (index % 3 == 0) position[1] = 1;else if (index % 2 == 0) position[1] = 0.5;else position[1] = 0;
+
+	        position[2] = i * blockLength;
+	        var endPosition = position.slice(0);
+	        endPosition[1] *= -1;
+	        snakes.push(React.createElement(
+	          _aframeReact.Entity,
+	          { geometry: { primitive: 'box', height: 1, width: 1, depth: blockLength }, position: position, material: { color: _Helper2.default.getRandomColor() }, rotation: '0 0 0' },
+	          React.createElement(_aframeReact.Animation, { attribute: 'position', to: endPosition, from: position, repeat: 'indefinite', dur: '10000', ease: 'linear', direction: 'alternate' })
+	        ));
+	        if (index == 3) dir = 0;
+	        if (index == 1) dir = 1;
+	        if (dir) index++;else index--;
+	      }
+	      return snakes;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        _aframeReact.Entity,
+	        null,
+	        this.props.children,
+	        React.createElement(
+	          _aframeReact.Entity,
+	          { position: this.props.position },
+	          this.getSnake()
+	        )
+	      );
+	    }
+	  }], [{
+	    key: 'getRandWithMargin',
+	    value: function getRandWithMargin(margin) {
+	      var array = [0, 0, 0];
+	      for (var i = 0; i < 3; i++) {
+	        var value = 0;
+	        value = Math.random() * margin + 1;
+	        array[i] = value;
+	      }
+	      return array;
+	    }
+	  }, {
+	    key: 'getRandomSnakes',
+	    value: function getRandomSnakes(numSnakes) {
+	      var snakes = [];
+	      for (var i = 0; i < numSnakes; i++) {
+	        var position = _Helper2.default.getRandArrayWithMargin(25);
+	        var endPosition = position.slice(0);
+	        endPosition[2] = _Helper2.default.getRandWithMargin(400);
+	        var randScale = CubicSnake.getRandWithMargin(1);
+	        snakes.push(React.createElement(
+	          CubicSnake,
+	          { position: position },
+	          React.createElement(_aframeReact.Animation, { attribute: 'scale', to: randScale, dur: '10000', repeat: 'indefinite', ease: 'linear', from: '1 1 1', direction: 'alternate' }),
+	          React.createElement(_aframeReact.Animation, { attribute: 'position', to: endPosition, dur: '60000', ease: 'linear', direction: 'alternate', repeat: 'indefinite', from: position })
+	        ));
+	      }
+	      return snakes;
+	    }
+	  }]);
+
+	  return CubicSnake;
+	}(React.Component);
+
+	CubicSnake.defaultProps = {
+	  position: '0 0 0',
+	  length: 12
+	};
+
+	exports.default = CubicSnake;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ },
+/* 488 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _aframeReact = __webpack_require__(157);
+
+	var _Helper = __webpack_require__(464);
+
+	var _Helper2 = _interopRequireDefault(_Helper);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CubicWalkway = function (_React$Component) {
+	  _inherits(CubicWalkway, _React$Component);
+
+	  function CubicWalkway(props) {
+	    _classCallCheck(this, CubicWalkway);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(CubicWalkway).call(this, props));
+	  }
+
+	  _createClass(CubicWalkway, [{
+	    key: 'getWalkway',
+	    value: function getWalkway() {
+	      var blocks = [];
+	      var blockLength = 10;
+	      for (var i = 0; i < this.props.length; i++) {
+	        var position = [0, 0, 0];
+	        position[2] = i * blockLength;
+	        var startPosition = position.slice(0);
+	        if (i != 0) startPosition[1] = -50;
+	        blocks.push(React.createElement(
+	          _aframeReact.Entity,
+	          { position: startPosition, geometry: { primitive: 'box', width: 4, depth: blockLength }, material: { opacity: i == 0 ? 1 : 0, color: _Helper2.default.getRandomColor() } },
+	          i == 0 ? '' : React.createElement(_aframeReact.Animation, { attribute: 'position', to: position, from: startPosition, ease: 'linear', dur: '20000', begin: i * 1000 }),
+	          i == 0 ? '' : React.createElement(_aframeReact.Animation, { attribute: 'material.opacity', to: '1', from: '0', ease: 'linear', dur: '20000', begin: i * 1000 })
+	        ));
+	      }
+	      return blocks;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        _aframeReact.Entity,
+	        null,
+	        this.props.children,
+	        React.createElement(
+	          _aframeReact.Entity,
+	          { position: this.props.position },
+	          this.getWalkway()
+	        )
+	      );
+	    }
+	  }]);
+
+	  return CubicWalkway;
+	}(React.Component);
+
+	CubicWalkway.defaultProps = {
+	  position: '0 0 0',
+	  length: 25
+	};
+
+	exports.default = CubicWalkway;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ },
+/* 489 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _aframeReact = __webpack_require__(157);
+
+	var _Helper = __webpack_require__(464);
+
+	var _Helper2 = _interopRequireDefault(_Helper);
+
+	__webpack_require__(160);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CubicRainbow = function (_React$Component) {
+	  _inherits(CubicRainbow, _React$Component);
+
+	  function CubicRainbow(props) {
+	    _classCallCheck(this, CubicRainbow);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(CubicRainbow).call(this, props));
+	  }
+
+	  _createClass(CubicRainbow, [{
+	    key: 'getRainbow',
+	    value: function getRainbow() {
+	      var rainbow = [];
+	      for (var i = 0, count = 0; i < 8; i++) {
+	        var position = [0, 0, 0];
+	        position[1] = count;
+	        position[0] = i;
+	        rainbow.push(React.createElement(_aframeReact.Entity, { geometry: { primitive: 'box', width: 4, height: 4, depth: 2 } }));
+	        if (count == 3) count--;else if (count == 0) count++;
+	      }
+	      return rainbow;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        _aframeReact.Entity,
+	        null,
+	        this.props.children,
+	        React.createElement(
+	          _aframeReact.Entity,
+	          { position: this.props.position, layout: { type: 'circle', radius: 10 } },
+	          this.getRainbow()
+	        )
+	      );
+	    }
+	  }]);
+
+	  return CubicRainbow;
+	}(React.Component);
+
+	CubicRainbow.defaultProps = {
+	  position: '0 0 0'
+	};
+
+	exports.default = CubicRainbow;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }

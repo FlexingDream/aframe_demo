@@ -52,11 +52,11 @@
 
 	__webpack_require__(160);
 
-	__webpack_require__(534);
+	__webpack_require__(538);
 
-	__webpack_require__(466);
+	__webpack_require__(471);
 
-	__webpack_require__(528);
+	__webpack_require__(532);
 
 	var _aframeReact = __webpack_require__(157);
 
@@ -72,11 +72,11 @@
 
 	var _reactAddonsPerf2 = _interopRequireDefault(_reactAddonsPerf);
 
-	var _Camera = __webpack_require__(464);
+	var _Camera = __webpack_require__(469);
 
 	var _Camera2 = _interopRequireDefault(_Camera);
 
-	var _Cursor = __webpack_require__(465);
+	var _Cursor = __webpack_require__(470);
 
 	var _Cursor2 = _interopRequireDefault(_Cursor);
 
@@ -84,7 +84,7 @@
 
 	var _Sky2 = _interopRequireDefault(_Sky);
 
-	var _RainingObjects = __webpack_require__(533);
+	var _RainingObjects = __webpack_require__(537);
 
 	var _RainingObjects2 = _interopRequireDefault(_RainingObjects);
 
@@ -92,7 +92,7 @@
 
 	var _Audio2 = _interopRequireDefault(_Audio);
 
-	var _Laser = __webpack_require__(536);
+	var _Laser = __webpack_require__(540);
 
 	var _Laser2 = _interopRequireDefault(_Laser);
 
@@ -100934,7 +100934,12 @@
 
 
 /***/ },
-/* 464 */
+/* 464 */,
+/* 465 */,
+/* 466 */,
+/* 467 */,
+/* 468 */,
+/* 469 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {"use strict";
@@ -100985,7 +100990,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 465 */
+/* 470 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -101000,9 +101005,9 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	__webpack_require__(466);
+	__webpack_require__(471);
 
-	__webpack_require__(467);
+	__webpack_require__(472);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -101030,7 +101035,7 @@
 	};
 
 /***/ },
-/* 466 */
+/* 471 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';
@@ -101062,7 +101067,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(161)))
 
 /***/ },
-/* 467 */
+/* 472 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';
@@ -101113,11 +101118,6 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(161)))
 
 /***/ },
-/* 468 */,
-/* 469 */,
-/* 470 */,
-/* 471 */,
-/* 472 */,
 /* 473 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -101321,7 +101321,11 @@
 /* 525 */,
 /* 526 */,
 /* 527 */,
-/* 528 */
+/* 528 */,
+/* 529 */,
+/* 530 */,
+/* 531 */,
+/* 532 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';
@@ -101554,11 +101558,11 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(161)))
 
 /***/ },
-/* 529 */,
-/* 530 */,
-/* 531 */,
-/* 532 */,
-/* 533 */
+/* 533 */,
+/* 534 */,
+/* 535 */,
+/* 536 */,
+/* 537 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -101575,7 +101579,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	__webpack_require__(534);
+	__webpack_require__(538);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -101643,7 +101647,7 @@
 	exports.default = RainingObjects;
 
 /***/ },
-/* 534 */
+/* 538 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';
@@ -101668,8 +101672,8 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(161)))
 
 /***/ },
-/* 535 */,
-/* 536 */
+/* 539 */,
+/* 540 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

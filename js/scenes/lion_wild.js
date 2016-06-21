@@ -6,13 +6,10 @@ import Perf from 'react-addons-perf';
 import 'babel-polyfill';
 import $ from 'jquery';
 import Audio from '../components/Audio';
-import Camera from '../components/Camera';
-import Cursor from '../components/Cursor';
 import Helper from '../other/Helper';
-import ColladaModel from '../components/ColladaModel';
 import MovingMountains from '../components/_MovingMountains';
 import Space from '../components/_Space';
-
+import Cubic from '../components/_Cubic';
 class LionWild extends React.Component{
   constructor(props){
     super(props);
@@ -35,6 +32,7 @@ class LionWild extends React.Component{
       <Entity>
         {MovingMountains.getModels()}
         {Space.getModels()}
+        {Cubic.getModels()}
       </Entity>
     );
   }
@@ -56,7 +54,8 @@ class LionWild extends React.Component{
         {this.getAssets()}
         <Audio  audioSrc={this.props.song} shouldUpdateFrequencies="false" shouldPlay={this.state.shouldPlay}/>
         {/*<MovingMountains/>*/}
-        <Space/>
+        {/*<Space/>*/}
+        <Cubic/>
       </Scene>
     );
   }

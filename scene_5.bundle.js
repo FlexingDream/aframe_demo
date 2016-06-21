@@ -54,7 +54,7 @@
 
 	__webpack_require__(160);
 
-	var _aframeExtras = __webpack_require__(486);
+	var _aframeExtras = __webpack_require__(490);
 
 	var _aframeExtras2 = _interopRequireDefault(_aframeExtras);
 
@@ -80,11 +80,11 @@
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _Camera = __webpack_require__(464);
+	var _Camera = __webpack_require__(469);
 
 	var _Camera2 = _interopRequireDefault(_Camera);
 
-	var _Cursor = __webpack_require__(465);
+	var _Cursor = __webpack_require__(470);
 
 	var _Cursor2 = _interopRequireDefault(_Cursor);
 
@@ -100732,7 +100732,12 @@
 
 
 /***/ },
-/* 464 */
+/* 464 */,
+/* 465 */,
+/* 466 */,
+/* 467 */,
+/* 468 */,
+/* 469 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {"use strict";
@@ -100783,7 +100788,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 465 */
+/* 470 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -100798,9 +100803,9 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	__webpack_require__(466);
+	__webpack_require__(471);
 
-	__webpack_require__(467);
+	__webpack_require__(472);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -100828,7 +100833,7 @@
 	};
 
 /***/ },
-/* 466 */
+/* 471 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';
@@ -100860,7 +100865,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(161)))
 
 /***/ },
-/* 467 */
+/* 472 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';
@@ -100911,11 +100916,6 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(161)))
 
 /***/ },
-/* 468 */,
-/* 469 */,
-/* 470 */,
-/* 471 */,
-/* 472 */,
 /* 473 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -101077,17 +101077,21 @@
 /* 483 */,
 /* 484 */,
 /* 485 */,
-/* 486 */
+/* 486 */,
+/* 487 */,
+/* 488 */,
+/* 489 */,
+/* 490 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  controls:   __webpack_require__(487),
-	  loaders:    __webpack_require__(501),
-	  math:       __webpack_require__(488),
-	  misc:       __webpack_require__(507),
-	  physics:    __webpack_require__(508),
-	  primitives: __webpack_require__(521),
-	  shadows:    __webpack_require__(525),
+	  controls:   __webpack_require__(491),
+	  loaders:    __webpack_require__(505),
+	  math:       __webpack_require__(492),
+	  misc:       __webpack_require__(511),
+	  physics:    __webpack_require__(512),
+	  primitives: __webpack_require__(525),
+	  shadows:    __webpack_require__(529),
 
 	  registerAll: function () {
 	    this.controls.registerAll();
@@ -101102,19 +101106,19 @@
 
 
 /***/ },
-/* 487 */
+/* 491 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var math = __webpack_require__(488);
+	var math = __webpack_require__(492);
 
 	module.exports = {
-	  'checkpoint-controls': __webpack_require__(491),
-	  'gamepad-controls':    __webpack_require__(492),
-	  'hmd-controls':        __webpack_require__(495),
-	  'keyboard-controls':   __webpack_require__(496),
-	  'mouse-controls':      __webpack_require__(498),
-	  'touch-controls':      __webpack_require__(499),
-	  'universal-controls':  __webpack_require__(500),
+	  'checkpoint-controls': __webpack_require__(495),
+	  'gamepad-controls':    __webpack_require__(496),
+	  'hmd-controls':        __webpack_require__(499),
+	  'keyboard-controls':   __webpack_require__(500),
+	  'mouse-controls':      __webpack_require__(502),
+	  'touch-controls':      __webpack_require__(503),
+	  'universal-controls':  __webpack_require__(504),
 
 	  registerAll: function (AFRAME) {
 	    if (this._registered) return;
@@ -101137,12 +101141,12 @@
 
 
 /***/ },
-/* 488 */
+/* 492 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  'velocity':   __webpack_require__(489),
-	  'quaternion': __webpack_require__(490),
+	  'velocity':   __webpack_require__(493),
+	  'quaternion': __webpack_require__(494),
 
 	  registerAll: function (AFRAME) {
 	    if (this._registered) return;
@@ -101158,7 +101162,7 @@
 
 
 /***/ },
-/* 489 */
+/* 493 */
 /***/ function(module, exports) {
 
 	/**
@@ -101208,7 +101212,7 @@
 
 
 /***/ },
-/* 490 */
+/* 494 */
 /***/ function(module, exports) {
 
 	/**
@@ -101229,7 +101233,7 @@
 
 
 /***/ },
-/* 491 */
+/* 495 */
 /***/ function(module, exports) {
 
 	var EPS = 0.1;
@@ -101299,7 +101303,7 @@
 
 
 /***/ },
-/* 492 */
+/* 496 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -101311,8 +101315,8 @@
 	 * https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API/Using_the_Gamepad_API
 	 */
 
-	var GamepadButton = __webpack_require__(493),
-	    GamepadButtonEvent = __webpack_require__(494);
+	var GamepadButton = __webpack_require__(497),
+	    GamepadButtonEvent = __webpack_require__(498);
 
 	var JOYSTICK_EPS = 0.2;
 
@@ -101559,7 +101563,7 @@
 
 
 /***/ },
-/* 493 */
+/* 497 */
 /***/ function(module, exports) {
 
 	module.exports = Object.assign(function GamepadButton () {}, {
@@ -101586,7 +101590,7 @@
 
 
 /***/ },
-/* 494 */
+/* 498 */
 /***/ function(module, exports) {
 
 	function GamepadButtonEvent (type, index, details) {
@@ -101600,7 +101604,7 @@
 
 
 /***/ },
-/* 495 */
+/* 499 */
 /***/ function(module, exports) {
 
 	var TICK_DEBOUNCE = 4; // ms
@@ -101691,10 +101695,10 @@
 
 
 /***/ },
-/* 496 */
+/* 500 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(497);
+	__webpack_require__(501);
 
 	var MAX_DELTA = 0.2,
 	    PROXY_FLAG = '__keyboard-controls-proxy';
@@ -101846,7 +101850,7 @@
 
 
 /***/ },
-/* 497 */
+/* 501 */
 /***/ function(module, exports) {
 
 	/**
@@ -102583,7 +102587,7 @@
 
 
 /***/ },
-/* 498 */
+/* 502 */
 /***/ function(module, exports) {
 
 	/**
@@ -102727,7 +102731,7 @@
 
 
 /***/ },
-/* 499 */
+/* 503 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -102801,7 +102805,7 @@
 
 
 /***/ },
-/* 500 */
+/* 504 */
 /***/ function(module, exports) {
 
 	/**
@@ -102994,13 +102998,13 @@
 
 
 /***/ },
-/* 501 */
+/* 505 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  'fbx-model':   __webpack_require__(502),
-	  'ply-model': __webpack_require__(504),
-	  'three-model': __webpack_require__(506),
+	  'fbx-model':   __webpack_require__(506),
+	  'ply-model': __webpack_require__(508),
+	  'three-model': __webpack_require__(510),
 
 	  registerAll: function (AFRAME) {
 	    if (this._registered) return;
@@ -103017,7 +103021,7 @@
 
 
 /***/ },
-/* 502 */
+/* 506 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -103037,7 +103041,7 @@
 	 *  - texture
 	 *  - morph
 	 */
-	THREE.FBXLoader = __webpack_require__(503);
+	THREE.FBXLoader = __webpack_require__(507);
 
 	module.exports = {
 	  schema: {src: { type: 'src' }},
@@ -103070,7 +103074,7 @@
 
 
 /***/ },
-/* 503 */
+/* 507 */
 /***/ function(module, exports) {
 
 	/**
@@ -105838,7 +105842,7 @@
 
 
 /***/ },
-/* 504 */
+/* 508 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -105846,7 +105850,7 @@
 	 *
 	 * Wraps THREE.PLYLoader.
 	 */
-	THREE.PLYLoader = __webpack_require__(505);
+	THREE.PLYLoader = __webpack_require__(509);
 
 	module.exports = {
 	  schema: {src: { type: 'src' }},
@@ -105884,7 +105888,7 @@
 
 
 /***/ },
-/* 505 */
+/* 509 */
 /***/ function(module, exports) {
 
 	/**
@@ -106368,7 +106372,7 @@
 
 
 /***/ },
-/* 506 */
+/* 510 */
 /***/ function(module, exports) {
 
 	/**
@@ -106444,16 +106448,16 @@
 
 
 /***/ },
-/* 507 */
+/* 511 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var math = __webpack_require__(488),
-	    physics = __webpack_require__(508);
+	var math = __webpack_require__(492),
+	    physics = __webpack_require__(512);
 
 	module.exports = {
-	  'checkpoint':      __webpack_require__(518),
-	  'jump-ability':      __webpack_require__(519),
-	  'toggle-velocity':   __webpack_require__(520),
+	  'checkpoint':      __webpack_require__(522),
+	  'jump-ability':      __webpack_require__(523),
+	  'toggle-velocity':   __webpack_require__(524),
 
 	  registerAll: function (AFRAME) {
 	    if (this._registered) return;
@@ -106473,19 +106477,19 @@
 
 
 /***/ },
-/* 508 */
+/* 512 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var CANNON = __webpack_require__(509),
-	    math = __webpack_require__(488);
+	var CANNON = __webpack_require__(513),
+	    math = __webpack_require__(492);
 
 	module.exports = {
-	  'physics':        __webpack_require__(510),
-	  'dynamic-body':   __webpack_require__(511),
-	  'kinematic-body': __webpack_require__(515),
-	  'static-body':    __webpack_require__(516),
+	  'physics':        __webpack_require__(514),
+	  'dynamic-body':   __webpack_require__(515),
+	  'kinematic-body': __webpack_require__(519),
+	  'static-body':    __webpack_require__(520),
 	  'system': {
-	    'physics': __webpack_require__(517)
+	    'physics': __webpack_require__(521)
 	  },
 
 	  registerAll: function (AFRAME) {
@@ -106510,7 +106514,7 @@
 
 
 /***/ },
-/* 509 */
+/* 513 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var require;var require;/*
@@ -120202,7 +120206,7 @@
 	});
 
 /***/ },
-/* 510 */
+/* 514 */
 /***/ function(module, exports) {
 
 	
@@ -120231,10 +120235,10 @@
 
 
 /***/ },
-/* 511 */
+/* 515 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(AFRAME) {var Body = __webpack_require__(512);
+	/* WEBPACK VAR INJECTION */(function(AFRAME) {var Body = __webpack_require__(516);
 
 	/**
 	 * Dynamic body.
@@ -120259,13 +120263,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(161)))
 
 /***/ },
-/* 512 */
+/* 516 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var CANNON = __webpack_require__(509),
-	    mesh2shape = __webpack_require__(513);
+	var CANNON = __webpack_require__(513),
+	    mesh2shape = __webpack_require__(517);
 
-	__webpack_require__(514);
+	__webpack_require__(518);
 
 	module.exports = {
 	  dependencies: ['position'],
@@ -120449,10 +120453,10 @@
 
 
 /***/ },
-/* 513 */
+/* 517 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var CANNON = __webpack_require__(509);
+	var CANNON = __webpack_require__(513);
 
 	/**
 	 * Given a THREE.Object3D instance, creates a corresponding CANNON shape.
@@ -120715,7 +120719,7 @@
 
 
 /***/ },
-/* 514 */
+/* 518 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -120724,7 +120728,7 @@
 	 * Source: http://schteppe.github.io/cannon.js/build/cannon.demo.js
 	 * Author: @schteppe
 	 */
-	var CANNON = __webpack_require__(509);
+	var CANNON = __webpack_require__(513);
 
 	CANNON.shape2mesh = function(body){
 	    var obj = new THREE.Object3D();
@@ -120879,7 +120883,7 @@
 
 
 /***/ },
-/* 515 */
+/* 519 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -120898,7 +120902,7 @@
 	 * See: http://www.learn-cocos2d.com/2013/08/physics-engine-platformer-terrible-idea/
 	 * And: http://oxleygamedev.blogspot.com/2011/04/player-physics-part-2.html
 	 */
-	var CANNON = __webpack_require__(509);
+	var CANNON = __webpack_require__(513);
 
 	var EPS = 0.000001;
 
@@ -121081,10 +121085,10 @@
 
 
 /***/ },
-/* 516 */
+/* 520 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(AFRAME) {var Body = __webpack_require__(512);
+	/* WEBPACK VAR INJECTION */(function(AFRAME) {var Body = __webpack_require__(516);
 
 	/**
 	 * Static body.
@@ -121104,10 +121108,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(161)))
 
 /***/ },
-/* 517 */
+/* 521 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(AFRAME) {var CANNON = __webpack_require__(509);
+	/* WEBPACK VAR INJECTION */(function(AFRAME) {var CANNON = __webpack_require__(513);
 
 	var OPTIONS = {
 	  friction:     0.01,
@@ -121261,7 +121265,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(161)))
 
 /***/ },
-/* 518 */
+/* 522 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -121291,7 +121295,7 @@
 
 
 /***/ },
-/* 519 */
+/* 523 */
 /***/ function(module, exports) {
 
 	var ACCEL_G = -9.8, // m/s^2
@@ -121352,7 +121356,7 @@
 
 
 /***/ },
-/* 520 */
+/* 524 */
 /***/ function(module, exports) {
 
 	/**
@@ -121393,13 +121397,13 @@
 
 
 /***/ },
-/* 521 */
+/* 525 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  'a-grid':        __webpack_require__(522),
-	  'a-ocean':        __webpack_require__(523),
-	  'a-tube':        __webpack_require__(524),
+	  'a-grid':        __webpack_require__(526),
+	  'a-ocean':        __webpack_require__(527),
+	  'a-tube':        __webpack_require__(528),
 
 	  registerAll: function (AFRAME) {
 	    if (this._registered) return;
@@ -121421,7 +121425,7 @@
 
 
 /***/ },
-/* 522 */
+/* 526 */
 /***/ function(module, exports) {
 
 	/**
@@ -121451,7 +121455,7 @@
 
 
 /***/ },
-/* 523 */
+/* 527 */
 /***/ function(module, exports) {
 
 	/**
@@ -121547,7 +121551,7 @@
 
 
 /***/ },
-/* 524 */
+/* 528 */
 /***/ function(module, exports) {
 
 	/**
@@ -121615,12 +121619,12 @@
 
 
 /***/ },
-/* 525 */
+/* 529 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  'shadow':       __webpack_require__(526),
-	  'shadow-light': __webpack_require__(527),
+	  'shadow':       __webpack_require__(530),
+	  'shadow-light': __webpack_require__(531),
 
 	  registerAll: function (AFRAME) {
 	    if (this._registered) return;
@@ -121636,7 +121640,7 @@
 
 
 /***/ },
-/* 526 */
+/* 530 */
 /***/ function(module, exports) {
 
 	/**
@@ -121681,7 +121685,7 @@
 
 
 /***/ },
-/* 527 */
+/* 531 */
 /***/ function(module, exports) {
 
 	/**
