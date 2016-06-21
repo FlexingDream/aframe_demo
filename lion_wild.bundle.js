@@ -101761,7 +101761,6 @@
 	          ),
 	          React.createElement(_Sky2.default, { color: 'black' })
 	        ),
-	        React.createElement(_RotatingSun2.default, { position: '0 0 0' }),
 	        React.createElement(
 	          _RotatingMoon2.default,
 	          { position: '0 150 -300', rotation: '0 0 0' },
