@@ -102252,7 +102252,7 @@
 	          React.createElement(_Sky2.default, { color: 'black' })
 	        ),
 	        React.createElement(_CubicWalkway2.default, { position: '0 0 -4' }),
-	        _CubicSnake2.default.getRandomSnakes(10),
+	        _CubicSnake2.default.getRandomSnakes(5),
 	        React.createElement(_CubicRainbow2.default, { position: '0 0 -50' })
 	      );
 	    }
@@ -102437,8 +102437,8 @@
 	        if (i != 0) startPosition[1] = -50;
 	        blocks.push(React.createElement(
 	          _aframeReact.Entity,
-	          { position: startPosition, geometry: { primitive: 'box', width: 4, depth: blockLength }, material: { opacity: 1, color: _Helper2.default.getRandomColor() } },
-	          i == 0 ? '' : React.createElement(_aframeReact.Animation, { attribute: 'position', to: position, from: startPosition, ease: 'linear', dur: '10000', begin: i * 1000 })
+	          { position: position, geometry: { primitive: 'box', width: 4, depth: blockLength }, material: { opacity: i == 0 ? 1 : 0, color: _Helper2.default.getRandomColor() } },
+	          i == 0 ? '' : React.createElement(_aframeReact.Animation, { attribute: 'material.opacity', to: '1', from: '0', ease: 'linear', dur: '5000', begin: i * 1000 })
 	        ));
 	      }
 	      return blocks;
