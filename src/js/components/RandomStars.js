@@ -30,10 +30,13 @@ class RandomStars extends React.Component{
     for (let i = 0;i <this.props.numStars; i++){
       let position = this.getPosition();
       let rotation = this.getRotation();
-      stars.push(
+/*      stars.push(
         <ColladaModel asset="#star-collada" scale="2 2 2" position={position} rotation={rotation}>
-          <Animation attribute="rotation" to="0 360 0"  dur="30000" repeat="indefinite" begin={i* 500}/>
+          {<Animation attribute="rotation" to="0 360 0"  dur="30000" repeat="indefinite" begin={i* 500}/>}
         </ColladaModel>
+      );*/
+      stars.push(
+        <Entity geometry={{primitive: 'box'}} position={position} rotation={rotation} />
       );
     }
     return(
@@ -49,7 +52,7 @@ class RandomStars extends React.Component{
 
 RandomStars.defaultProps = {
   position: "0 0 0",
-  numStars: 150,
+  numStars: 75,
   margin: 600,
 };
 
