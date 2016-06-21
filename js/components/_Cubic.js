@@ -25,8 +25,8 @@ class Cubic extends React.Component{
           </Camera>
         </Entity>
         <CubicWalkyway position="0 0 -4"/>
-        <CubicWalkyway position="30 4 -4"/>
-        <CubicWalkyway position="-35 -7 -4"/>
+        <CubicWalkyway position="50 15 -8" length="10"/>
+        <CubicWalkyway position="-76 -12 12" length="8"/>
 
         {CubicSnake.getRandomSnakes(10)}
         <CubicRainbow position="0 0 -50"/>
