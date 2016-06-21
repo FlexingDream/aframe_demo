@@ -102253,7 +102253,6 @@
 	          React.createElement(_Sky2.default, { color: 'black' })
 	        ),
 	        React.createElement(_CubicWalkway2.default, { position: '0 0 -4' }),
-	        React.createElement(_CubicWalkway2.default, { position: '50 15 -8', length: '10' }),
 	        React.createElement(_CubicRainbow2.default, { position: '0 0 -50' })
 	      );
 	    }
