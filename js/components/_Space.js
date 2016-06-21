@@ -36,25 +36,25 @@ class Space extends React.Component{
           </Camera>
           <Sky color="black"/>
         </Entity>
-        {/*<RotatingSun position="0 0 0"></RotatingSun>*/}
+        <RotatingSun position="0 0 0"></RotatingSun>
         <RotatingMoon position="0 150 -300" rotation="0 0 0">
-          {/*<Animation attribute="rotation" to="0 360 0" from="0 0 0" dur="60000" repeat="indefinite"  ease="linear"/>*/}
+          <Animation attribute="rotation" to="0 360 0" from="0 0 0" dur="60000" repeat="indefinite"  ease="linear"/>
         </RotatingMoon>
         <Rings />
         <RandomStars />
         <Planet asset="#neptune-collada" position="100 100 100">
-          {/*<Animation attribute="rotation" to="0 360 0" ease="linear" dur="60000" repeat="indefinite" />*/}
+          <Animation attribute="rotation" to="0 360 0" ease="linear" dur="60000" repeat="indefinite" />
         </Planet>
         <Planet asset="#saturn-collada" position="-300 100 -300">
-          {/*<Animation attribute="rotation" to="0 360 0" ease="linear" dur="90000" repeat="indefinite" />*/}
+          <Animation attribute="rotation" to="0 360 0" ease="linear" dur="90000" repeat="indefinite" />
         </Planet>
-{/*        <ColladaModel asset="#rocket-collada" position="-200 -200 -200" scale="0.5 0.5 0.5" rotation="45 0 0">
+        <ColladaModel asset="#rocket-collada" position="-200 -200 -200" scale="0.5 0.5 0.5" rotation="45 0 0">
           <Animation attribute="position" to="300 300 300" dur="60000" ease="linear"/>
           <ColladaModel asset="#rocket-flames-collada" position="0 0 0" scale="1 1 1">
             <Animation attribute="rotation" to="0 360 0" ease="linear" dur="200" repeat="indefinite" from="0 0 0" />
           </ColladaModel>
 
-        </ColladaModel>*/}
+        </ColladaModel>
       </Entity>
     );
   }
