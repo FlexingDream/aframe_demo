@@ -49,7 +49,7 @@ class RandomStars extends React.Component{
 
 RandomStars.defaultProps = {
   position: "0 0 0",
-  numStars: 150,
+  numStars: 75,
   margin: 600,
 };
 
