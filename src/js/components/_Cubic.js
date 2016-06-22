@@ -22,7 +22,7 @@ class Cubic extends React.Component{
         <Entity>
           <Camera id="camera" wasd-controls={{enabled: true}} active position="0 5 0" >
             <Animation attribute='position' to='0 5 200' dur='40000' ease='linear' begin='5000' /> 
-            <Cursor />
+            <Cursor cursor="timeout: 1; fuse: true; maxDistance: 1000;"/>
           </Camera>
           <Sky color='black'/>
         </Entity>
@@ -35,11 +35,14 @@ class Cubic extends React.Component{
           <Animation attribute="rotation" to="0 0 360" fill="both" repeat="indefinite" dur="20000" ease='linear'/>
         </CubicRainbow>
         <CubicRainbow position="0 0 60" depth={6} height={3} width={5}>
-          <Animation attribute="scale" to="0.5 0.5 0.5" fill="both" repeat="indefinite" dur="20000" ease='linear'/>
         </CubicRainbow> 
-        <CubicRainbow position="0 0 90" />
+        <CubicRainbow position="0 0 90">
+          <Animation attribute="rotation" to="0 0 -360" fill="both" repeat="indefinite" dur="30000" ease='linear'/>
+        </CubicRainbow>
         <CubicRainbow position="0 0 120" height={6}/>
-        <CubicRainbow position="0 0 150" width={12}/>
+        <CubicRainbow position="0 0 150" width={8}>
+          <Animation attribute="rotation" to="0 0 -720" fill="both" repeat="indefinite" dur="40000" ease='linear'/>
+        </CubicRainbow>
 
       </Entity>
 
