@@ -24,7 +24,9 @@ class LionWild extends React.Component{
   }
   getMixins(){
     return(
-      <Entity/>
+      <Entity>
+        {Cubic.getMixins()}
+      </Entity>
     );
   }
   getModels(){

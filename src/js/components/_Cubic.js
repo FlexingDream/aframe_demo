@@ -6,11 +6,17 @@ import Helper from '../other/Helper';
 import CubicSnake from '../components/CubicSnake';
 import CubicWalkway from '../components/CubicWalkway';
 import CubicRainbow from '../components/CubicRainbow';
+import CubicFoldable from '../components/CubicFoldable';
 class Cubic extends React.Component{
   constructor(props){
     super(props);
   }
 
+  static getMixins(){
+    return[
+      CubicFoldable.getMixins(),
+    ];
+  }
   static getModels(){
     return[
     ];
@@ -26,10 +32,8 @@ class Cubic extends React.Component{
           </Camera>
           <Sky color='black'/>
         </Entity>
+        <CubicFoldable position="0 45 -20" numFolds={30} width={80}/>
         <CubicWalkway position="0 0 -4"/>
-        {CubicWalkway.getRandomWalkways(5)}
-
-        {CubicSnake.getRandomSnakes(10)}
         <CubicRainbow position="0 0 0" height={3} width={4} depth={10}/>
         <CubicRainbow position="0 0 30" width={5} depth={6} height={2}>
           <Animation attribute="rotation" to="0 0 360" fill="both" repeat="indefinite" dur="20000" ease='linear'/>
