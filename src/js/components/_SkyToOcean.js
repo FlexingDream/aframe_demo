@@ -6,6 +6,7 @@ import {Entity,Animation} from 'aframe-react';
 import WalkableCameraCursor from './WalkableCameraCursor';
 import Sky from './Sky';
 import Ocean from './Ocean';
+import Rain from './Rain';
 
 class SkyToOcean extends React.Component{
   constructor(props){
@@ -15,11 +16,10 @@ class SkyToOcean extends React.Component{
   render(){
     return(
       <Entity>
-
-        <a-entity position="0 2.25 -15" particle-system="preset: rain"></a-entity>
+        <Rain position={[0, 500, 0]}/>
 
         <Entity>
-          <WalkableCameraCursor/>
+          <WalkableCameraCursor position={[0, 500, 0]}/>
         </Entity>
 
         <Entity

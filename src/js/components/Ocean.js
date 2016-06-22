@@ -22,7 +22,7 @@ class Ocean extends React.Component{
 
   render(){
     return(
-      <a-ocean position="0 -1 0" ></a-ocean>
+      <a-ocean position={this.props.position || "0 -1 0"}></a-ocean>
     );
   }
 
