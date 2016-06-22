@@ -1,6 +1,8 @@
-import {Animation, Entity, Scene} from 'aframe-react';
-import ReactDOM from 'react-dom';
 import 'babel-polyfill';
+
+import {Scene} from 'aframe-react';
+import ReactDOM from 'react-dom';
+import SkyToOcean from '../components/_SkyToOcean';
 
 
 class InsideOut extends React.Component{
@@ -10,10 +12,12 @@ class InsideOut extends React.Component{
 
   render(){
     return(
-      <Scene stats fog id="scene">
-
+      <Scene stats id="scene">
+        <SkyToOcean/>
       </Scene>
     );
   }
 
 }
+
+ReactDOM.render(<InsideOut/>, document.querySelector('.scene-container'));
