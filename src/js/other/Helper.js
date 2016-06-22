@@ -24,11 +24,24 @@ class Helper{
     return color;
   }
 
-  static getRandWithMargin(margin){
+  static getRandWithMargin(margin,posOnly=false){
     var value = 0;
     value = Math.floor(Math.random() * margin)+1;
-    value*=Math.floor(Math.random()*2) == 1 ? 1 : -1;
+    if (!posOnly)
+      value*=Math.floor(Math.random()*2) == 1 ? 1 : -1;
     return value;
+  }
+
+  static getRandArrayWithMargin(margin,posOnly=false){
+    let array = [0,0,0]
+    for (let i =0;i<3; i++){
+      var value = 0;
+      value = Math.floor(Math.random() * margin)+1;
+      if (!posOnly)
+        value*=Math.floor(Math.random()*2) == 1 ? 1 : -1;
+      array[i] = value;
+    }
+    return array;
   }
 }
 

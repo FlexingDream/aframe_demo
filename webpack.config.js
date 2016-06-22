@@ -42,12 +42,12 @@ module.exports = {
   entry: {
     lion_wild: './src/js/scenes/lion_wild',
     port_rob: './src/js/scenes/port_rob',
-    testing: './src/js/scenes/testing',
+/*    testing: './src/js/scenes/testing',
     scene_5: './src/js/scenes/scene_5',
     scene_4: './src/js/scenes/scene_4',
     scene_3: './src/js/scenes/scene_3',
     scene_2: './src/js/scenes/scene_2',
-    scene_1: './src/js/scenes/scene_1'
+    scene_1: './src/js/scenes/scene_1'*/
   },
   output: {
     // Bundle will be served at /bundle.js locally.
