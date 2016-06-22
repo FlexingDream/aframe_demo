@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+import 'aframe-particle-system-component';
 
 import {Scene} from 'aframe-react';
 import ReactDOM from 'react-dom';

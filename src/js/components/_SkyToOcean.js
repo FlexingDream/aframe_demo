@@ -16,9 +16,10 @@ class SkyToOcean extends React.Component{
     return(
       <Entity>
 
+        <a-entity position="0 2.25 -15" particle-system="preset: rain"></a-entity>
+
         <Entity>
           <WalkableCameraCursor/>
-          <Sky color="black"/>
         </Entity>
 
         <Entity
@@ -28,6 +29,7 @@ class SkyToOcean extends React.Component{
 
         <Ocean/>
 
+        <Sky color="black"/>
 
       </Entity>
     );

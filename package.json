@@ -6,6 +6,7 @@
     "aframe": "^0.2.0",
     "aframe-extras": "^1.15.1",
     "aframe-layout-component": "^1.1.0",
+    "aframe-particle-system-component": "git+ssh://git@github.com/IdeaSpaceVR/aframe-particle-system-component.git",
     "aframe-react": "^1.2.0",
     "aframe-template-component": "^1.3.1",
     "aframe-text-component": "^0.3.0",
