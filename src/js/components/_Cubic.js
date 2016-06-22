@@ -7,6 +7,7 @@ import CubicSnake from '../components/CubicSnake';
 import CubicWalkway from '../components/CubicWalkway';
 import CubicRainbow from '../components/CubicRainbow';
 import CubicFoldable from '../components/CubicFoldable';
+import RandomCubes from '../components/RandomCubes';
 class Cubic extends React.Component{
   constructor(props){
     super(props);
@@ -28,11 +29,13 @@ class Cubic extends React.Component{
         <Entity>
           <Camera id="camera" wasd-controls={{enabled: true}} active position="0 5 0" >
             <Animation attribute='position' to='0 5 200' dur='40000' ease='linear' begin='5000' /> 
-            <Cursor cursor="timeout: 1; fuse: true; maxDistance: 1000;"/>
+            <Cursor cursor="timeout: 1; fuse: true; maxDistance: 100000;"/>
           </Camera>
           <Sky color='black'/>
         </Entity>
-        <CubicFoldable position="0 45 -20" numFolds={30} width={80}/>
+        <CubicFoldable position="0 65 -40" numFolds={30} width={120}/>
+        <CubicFoldable position="10 5 40" numFolds={8} width={20} trigger={true} rotation="0 0 90"/>
+        <CubicFoldable position="-10 5 40" numFolds={8} width={20} trigger={true} rotation="0 0 90" direction="-"/>
         <CubicWalkway position="0 0 -4"/>
         <CubicRainbow position="0 0 0" height={3} width={4} depth={10}/>
         <CubicRainbow position="0 0 30" width={5} depth={6} height={2}>
@@ -47,6 +50,7 @@ class Cubic extends React.Component{
         <CubicRainbow position="0 0 150" width={8}>
           <Animation attribute="rotation" to="0 0 -720" fill="both" repeat="indefinite" dur="40000" ease='linear'/>
         </CubicRainbow>
+        <RandomCubes numBlocks={200} position="0 0 50"/>
 
       </Entity>
 
