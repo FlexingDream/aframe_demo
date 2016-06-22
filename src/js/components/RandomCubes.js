@@ -15,9 +15,11 @@ class RandomCubes extends React.Component{
       let depth = Helper.getRandWithMargin(8);
       let endPosition = Helper.getRandArrayWithMargin(600);
       let rotation = Helper.getRandArrayWithMargin(360);
+      let scale = Helper.getRandArrayWithMargin(3);
       blocks.push(
         <Entity geometry={{primitive: 'box',width: width, height: height, depth: depth}} position={position} rotation={rotation}>
           <Animation begin="click" to={endPosition} from={position} dur="5000" ease="linear" fill="forwards" attribute="position"/>
+          <Animation begin="click" to={scale} from="1 1 1" dur="5000" ease="linear" fill="forwards" attribute="scale"/>
         </Entity>
       );
     }
