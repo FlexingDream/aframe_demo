@@ -24,10 +24,11 @@ class Helper{
     return color;
   }
 
-  static getRandWithMargin(margin){
+  static getRandWithMargin(margin,posOnly=false){
     var value = 0;
     value = Math.floor(Math.random() * margin)+1;
-    value*=Math.floor(Math.random()*2) == 1 ? 1 : -1;
+    if (!posOnly)
+      value*=Math.floor(Math.random()*2) == 1 ? 1 : -1;
     return value;
   }
 

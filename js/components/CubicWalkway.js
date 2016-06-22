@@ -4,6 +4,16 @@ class CubicWalkway extends React.Component{
   constructor(props){
     super(props);
   }
+  static getRandomWalkways(numWalkways){
+    let walkways = [];
+    for (let i =0;i<numWalkways; i++){
+      let position = Helper.getRandArrayWithMargin(300);
+      walkways.push(
+        <CubicWalkway position={position} length={Helper.getRandWithMargin(40,true)}/>
+      );
+    }
+    return walkways;
+  }
 
   getWalkway(){
     let blocks = [];

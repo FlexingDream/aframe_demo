@@ -100742,9 +100742,11 @@
 	  }, {
 	    key: 'getRandWithMargin',
 	    value: function getRandWithMargin(margin) {
+	      var posOnly = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+
 	      var value = 0;
 	      value = Math.floor(Math.random() * margin) + 1;
-	      value *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
+	      if (!posOnly) value *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
 	      return value;
 	    }
 	  }, {
@@ -102253,7 +102255,9 @@
 	          React.createElement(_Sky2.default, { color: 'black' })
 	        ),
 	        React.createElement(_CubicWalkway2.default, { position: '0 0 -4' }),
-	        React.createElement(_CubicRainbow2.default, { position: '0 0 -50' })
+	        _CubicWalkway2.default.getRandomWalkways(5),
+	        _CubicSnake2.default.getRandomSnakes(10),
+	        React.createElement(_CubicRainbow2.default, { position: '0 0 30', rotation: '90 0 0' })
 	      );
 	    }
 	  }], [{
@@ -102368,7 +102372,12 @@
 	        var endPosition = position.slice(0);
 	        endPosition[2] = _Helper2.default.getRandWithMargin(400);
 	        var randScale = CubicSnake.getRandWithMargin(1);
-	        snakes.push(React.createElement(CubicSnake, { position: position }));
+	        snakes.push(React.createElement(
+	          CubicSnake,
+	          { position: position },
+	          React.createElement(_aframeReact.Animation, { attribute: 'scale', to: randScale, dur: '10000', repeat: 'indefinite', ease: 'linear', from: '1 1 1', direction: 'alternate' }),
+	          React.createElement(_aframeReact.Animation, { attribute: 'position', to: endPosition, dur: '60000', ease: 'linear', direction: 'alternate', repeat: 'indefinite', from: position })
+	        ));
 	      }
 	      return snakes;
 	    }
@@ -102452,6 +102461,16 @@
 	        )
 	      );
 	    }
+	  }], [{
+	    key: 'getRandomWalkways',
+	    value: function getRandomWalkways(numWalkways) {
+	      var walkways = [];
+	      for (var i = 0; i < numWalkways; i++) {
+	        var position = _Helper2.default.getRandArrayWithMargin(300);
+	        walkways.push(React.createElement(CubicWalkway, { position: position, length: _Helper2.default.getRandWithMargin(40, true) }));
+	      }
+	      return walkways;
+	    }
 	  }]);
 
 	  return CubicWalkway;
@@ -102506,12 +102525,14 @@
 	    key: 'getRainbow',
 	    value: function getRainbow() {
 	      var rainbow = [];
-	      for (var i = 0, count = 0; i < 8; i++) {
+	      var origPosition = this.props.position.split(' ');
+	      for (var i = 0, count = 0; i < this.props.numBlocks; i++) {
+	        var rad = i * (2 * Math.PI) / this.props.numBlocks / 2;
 	        var position = [0, 0, 0];
-	        position[1] = count;
-	        position[0] = i;
-	        rainbow.push(React.createElement(_aframeReact.Entity, { geometry: { primitive: 'box', width: 4, height: 4, depth: 2 } }));
-	        if (count == 3) count--;else if (count == 0) count++;
+	        position[0] = parseInt(origPosition[0]) + this.props.radius * Math.cos(rad);
+	        position[1] = parseInt(origPosition[1]);
+	        position[2] = parseInt(origPosition[2]) + this.props.radius * Math.sin(rad);
+	        rainbow.push(React.createElement(_aframeReact.Entity, { geometry: { primitive: 'box', width: 4, height: 4, depth: 2 }, position: position }));
 	      }
 	      return rainbow;
 	    }
@@ -102524,10 +102545,20 @@
 	        this.props.children,
 	        React.createElement(
 	          _aframeReact.Entity,
-	          { position: this.props.position, layout: { type: 'circle', radius: 10 } },
+	          { position: this.props.position, rotation: this.props.rotation },
 	          this.getRainbow()
 	        )
 	      );
+	    }
+	  }], [{
+	    key: 'getRandomRainbows',
+	    value: function getRandomRainbows(numRainbows) {
+	      var rainbows = [];
+	      for (var i = 0; i < numRainbows; i++) {
+	        var position = _Helper2.default.getRandArrayWithMargin(300);
+	        rainbows.push(React.createElement(CubicRainbow, { position: position }));
+	      }
+	      return rainbows;
 	    }
 	  }]);
 
@@ -102535,7 +102566,10 @@
 	}(React.Component);
 
 	CubicRainbow.defaultProps = {
-	  position: '0 0 0'
+	  position: '0 0 0',
+	  rotation: '0 0 0',
+	  numBlocks: 8,
+	  radius: 16
 	};
 
 	exports.default = CubicRainbow;

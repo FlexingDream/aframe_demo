@@ -4,7 +4,7 @@ import Cursor from '../components/Cursor';
 import Sky from '../components/Sky';
 import Helper from '../other/Helper';
 import CubicSnake from '../components/CubicSnake';
-import CubicWalkyway from '../components/CubicWalkway';
+import CubicWalkway from '../components/CubicWalkway';
 import CubicRainbow from '../components/CubicRainbow';
 class Cubic extends React.Component{
   constructor(props){
@@ -26,10 +26,11 @@ class Cubic extends React.Component{
           </Camera>
           <Sky color='black'/>
         </Entity>
-        <CubicWalkyway position="0 0 -4"/>
-{/*        <CubicWalkyway position="-76 -12 12" length="8"/>
-        {CubicSnake.getRandomSnakes(4)}*/}
-        <CubicRainbow position="0 0 -50"/>
+        <CubicWalkway position="0 0 -4"/>
+        {CubicWalkway.getRandomWalkways(5)}
+
+        {CubicSnake.getRandomSnakes(10)}
+        <CubicRainbow position="0 0 30" rotation="90 0 0"/>
       </Entity>
 
     );

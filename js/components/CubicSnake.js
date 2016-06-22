@@ -23,8 +23,8 @@ class CubicSnake extends React.Component{
       let randScale = CubicSnake.getRandWithMargin(1);
       snakes.push(
         <CubicSnake position={position}>
-{/*          <Animation attribute="scale" to={randScale} dur="10000" repeat="indefinite" ease="linear" from="1 1 1" direction="alternate" />
-          <Animation attribute="position" to={endPosition} dur="60000" ease="linear" direction="alternate" repeat="indefinite" from={position} />*/}
+          <Animation attribute="scale" to={randScale} dur="10000" repeat="indefinite" ease="linear" from="1 1 1" direction="alternate" />
+          <Animation attribute="position" to={endPosition} dur="60000" ease="linear" direction="alternate" repeat="indefinite" from={position} />
         </CubicSnake>
       );
     }
