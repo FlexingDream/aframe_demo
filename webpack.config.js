@@ -42,6 +42,7 @@ module.exports = {
   entry: {
     lion_wild: './src/js/scenes/lion_wild',
     port_rob: './src/js/scenes/port_rob',
+    inside_out: './src/js/scenes/inside_out'
 /*    testing: './src/js/scenes/testing',
     scene_5: './src/js/scenes/scene_5',
     scene_4: './src/js/scenes/scene_4',
