@@ -13,9 +13,11 @@ class Rain extends React.Component{
 
   render(){
     return(
-      <Entity particle-system={{preset: 'rain'}}
-              {...this.props}
-      />
+      <Entity
+        {...this.props}
+        particle-system={{preset: 'rain', particleCount: "20000",  maxAge: this.props.maxAge || "6"}}
+      >
+      </Entity>
     );
   }
 }

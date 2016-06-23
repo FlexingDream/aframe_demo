@@ -14,6 +14,7 @@ class WalkableCameraCursor extends React.Component{
   render(){
     return(
       <Camera id="camera" wasd-controls={{enabled: true}} active position={this.props.position || [0, 0, 0]}>
+        {this.props.children}
       </Camera>
     );
   }

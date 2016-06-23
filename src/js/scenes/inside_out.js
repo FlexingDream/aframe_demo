@@ -13,7 +13,7 @@ class InsideOut extends React.Component{
 
   render(){
     return(
-      <Scene stats id="scene">
+      <Scene stats fog id="scene">
         <SkyToOcean/>
       </Scene>
     );
