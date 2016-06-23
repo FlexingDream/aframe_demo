@@ -29,8 +29,8 @@ Cursor.defaultProps = {
   },
   cursor:{
     fuse: true,
-    timeout: 500,
-    maxDistance: 1000,
+    timeout: 1,
+    maxDistance: 100000,
   }
 }
 export default Cursor;
