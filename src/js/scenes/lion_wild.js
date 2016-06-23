@@ -52,6 +52,10 @@ class LionWild extends React.Component{
   }
   nextScene(){
     let currStage = this.state.stage;
+    if (currStage == 0){
+      var node = $(".audio-player").data("node");
+      node.start(0);
+    }
     let nextStage = currStage+1;
     let includeFog = false;
     this.setState({stage: nextStage,includeFog: includeFog});

@@ -8,6 +8,15 @@ class Loading extends React.Component{
   constructor(props){
     super(props);
   }
+  componentDidMount(){
+    let that = this;
+    document.getElementById('scene').addEventListener('song_loaded',function(){
+      setTimeout(function(){
+        that.props.nextScene();
+
+      },1000);
+    });
+  }
 
   static getMixins(){
   }
