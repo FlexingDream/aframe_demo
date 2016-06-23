@@ -119,7 +119,11 @@
 	  }, {
 	    key: 'getMixins',
 	    value: function getMixins() {
-	      return React.createElement(_aframeReact.Entity, null);
+	      return React.createElement(
+	        _aframeReact.Entity,
+	        null,
+	        _Cubic2.default.getMixins()
+	      );
 	    }
 	  }, {
 	    key: 'getModels',
@@ -155,7 +159,7 @@
 	        { stats: true, id: 'scene' },
 	        this.getAssets(),
 	        React.createElement(_Audio2.default, { audioSrc: this.props.song, shouldUpdateFrequencies: 'false', shouldPlay: this.state.shouldPlay }),
-	        React.createElement(_Cubic2.default, null)
+	        React.createElement(_Space2.default, null)
 	      );
 	    }
 	  }]);
@@ -101004,7 +101008,7 @@
 	    value: function render() {
 	      return React.createElement(
 	        'a-entity',
-	        { className: this.props.className, 'collada-model': this.props.asset, position: this.props.position, scale: this.props.scale, rotation: this.props.rotation, 'look-at': this.props.lookAt },
+	        { className: this.props.className, 'collada-model': this.props.asset, position: this.props.position, scale: this.props.scale, rotation: this.props.rotation, 'look-at': this.props.lookAt, ref: this.props.ref },
 	        this.props.children
 	      );
 	    }
@@ -101019,7 +101023,8 @@
 	  position: "0 0 0",
 	  scale: '1 1 1',
 	  rotation: '0 0 0',
-	  lookAt: ''
+	  lookAt: '',
+	  ref: ''
 	};
 
 	exports.default = ColladaModel;
@@ -101190,6 +101195,8 @@
 	  value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _aframeReact = __webpack_require__(157);
 
 	var _react = __webpack_require__(1);
@@ -101202,28 +101209,57 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = function (props) {
-	  var geometry = {
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Cursor = function (_React$Component) {
+	  _inherits(Cursor, _React$Component);
+
+	  function Cursor(props) {
+	    _classCallCheck(this, Cursor);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Cursor).call(this, props));
+	  }
+
+	  _createClass(Cursor, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _aframeReact.Entity,
+	        { cursor: this.props.cursor, geometry: this.props.geometry, material: this.props.material, position: '0 0 -1' },
+	        _react2.default.createElement('a-animation', { begin: 'click', easing: 'ease-in', attribute: 'scale', fill: 'backwards', from: '0.1 0.1 0.1', to: '1 1 1', dur: '300' }),
+	        _react2.default.createElement('a-animation', { begin: 'fusing', easing: 'ease-in', attribute: 'scale', fill: 'forwards', from: '1 1 1', to: '0.1 0.1 0.1', dur: '300' })
+	      );
+	    }
+	  }]);
+
+	  return Cursor;
+	}(_react2.default.Component);
+
+	Cursor.defaultProps = {
+	  geometry: {
 	    primitive: 'ring',
 	    radiusInner: 0.01,
 	    radiusOuter: 0.016
 	    // radius: 0.5,
 	    // height: 1
-	  };
-	  var material = {
-	    color: props.color || 'white',
+	  },
+	  material: {
+	    color: 'white',
 	    shader: 'flat',
-	    opacity: props.opacity || 0.9,
+	    opacity: 0.9,
 	    transparent: true
-	  };
-	  return _react2.default.createElement(
-	    _aframeReact.Entity,
-	    { raycaster: { maxDistance: 100000 }, cursor: props, geometry: geometry, material: material, position: '0 0 -1' },
-	    _react2.default.createElement(_aframeReact.Animation, { attribute: 'scale', begin: 'click', dur: '150', fill: 'backwards', to: '0 0 0' }),
-	    _react2.default.createElement(_aframeReact.Animation, { attribute: 'scale', begin: 'fusing', easing: 'ease-in', fill: 'backwards', from: '1 1 1', to: '0.1 0.1 0.1',
-	      dur: '1500' })
-	  );
+	  },
+	  cursor: {
+	    fuse: true,
+	    timeout: 1,
+	    maxDistance: 100000
+	  }
 	};
+	exports.default = Cursor;
 
 /***/ },
 /* 471 */
@@ -101561,6 +101597,18 @@
 
 	var _ColladaModel2 = _interopRequireDefault(_ColladaModel);
 
+	var _Camera = __webpack_require__(469);
+
+	var _Camera2 = _interopRequireDefault(_Camera);
+
+	var _Cursor = __webpack_require__(470);
+
+	var _Cursor2 = _interopRequireDefault(_Cursor);
+
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -101579,15 +101627,29 @@
 	  }
 
 	  _createClass(RotatingSun, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var node = _reactDom2.default.findDOMNode(this.refs.rotatingSun);
+	      node.addEventListener('click', function () {
+	        console.log(node.querySelector('.camera'));
+	        node.querySelector('.camera').setAttribute('camera', 'active', true);
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return React.createElement(
 	        _aframeReact.Entity,
-	        null,
+	        { 'class': 'rotating-sun', ref: 'rotatingSun' },
 	        this.props.children,
 	        React.createElement(
 	          _aframeReact.Entity,
 	          { position: this.props.position },
+	          React.createElement(
+	            _Camera2.default,
+	            { 'wasd-controls': { enabled: false }, position: '0 100 0' },
+	            React.createElement(_Cursor2.default, null)
+	          ),
 	          React.createElement(
 	            _ColladaModel2.default,
 	            { asset: '#sun-collada' },
@@ -101631,6 +101693,18 @@
 
 	var _ColladaModel2 = _interopRequireDefault(_ColladaModel);
 
+	var _Camera = __webpack_require__(469);
+
+	var _Camera2 = _interopRequireDefault(_Camera);
+
+	var _Cursor = __webpack_require__(470);
+
+	var _Cursor2 = _interopRequireDefault(_Cursor);
+
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -101649,15 +101723,29 @@
 	  }
 
 	  _createClass(RotatingMoon, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var node = _reactDom2.default.findDOMNode(this.refs.rotatingMoon);
+	      node.addEventListener('click', function () {
+	        console.log(node.querySelector('.camera'));
+	        node.querySelector('.camera').setAttribute('camera', 'active', true);
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return React.createElement(
 	        _aframeReact.Entity,
-	        null,
+	        { ref: 'rotatingMoon', 'class': 'rotating-moon' },
 	        this.props.children,
 	        React.createElement(
 	          _aframeReact.Entity,
 	          { position: this.props.position },
+	          React.createElement(
+	            _Camera2.default,
+	            { 'wasd-controls': { enabled: false }, position: '0 50 0' },
+	            React.createElement(_Cursor2.default, null)
+	          ),
 	          React.createElement(
 	            _ColladaModel2.default,
 	            { asset: '#moon-collada' },
@@ -101766,11 +101854,12 @@
 	          React.createElement(
 	            _Camera2.default,
 	            { id: 'camera', 'wasd-controls': { enabled: true }, active: true, position: '0 50 0' },
-	            React.createElement(_Cursor2.default, null)
+	            React.createElement(_Cursor2.default, { cursor: 'timeout: 1; fuse: true; maxDistance: 100000;' })
 	          ),
 	          React.createElement(_Sky2.default, { color: 'black' })
 	        ),
-	        React.createElement(_RotatingSun2.default, { position: '-300 -200 400' }),
+	        _Planet2.default.getRandomPlanets(8),
+	        React.createElement(_RotatingSun2.default, { position: '0 -100 0' }),
 	        React.createElement(
 	          _RotatingMoon2.default,
 	          { position: '0 150 -300', rotation: '0 0 0' },
@@ -101961,6 +102050,10 @@
 
 	var _ColladaModel2 = _interopRequireDefault(_ColladaModel);
 
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -101979,17 +102072,31 @@
 	  }
 
 	  _createClass(Rings, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var nodes = document.querySelectorAll('.ring');
+	      for (var i = 0; i < nodes.length; i++) {
+	        _reactDom2.default.findDOMNode(nodes[i]).addEventListener('click', function () {
+	          this.setAttribute('material', 'color', _Helper2.default.getRandomColor());
+	        });
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var rings = [];
 	      for (var i = 0; i < this.props.numRings; i++) {
-	        var radOut = (i + 2) * 150;
+	        var radOut = (i + 2) * 100;
 	        var radIn = radOut - 5;
-	        rings.push(React.createElement(_aframeReact.Entity, { geometry: { primitive: 'ring', radiusOuter: radOut, radiusInner: radIn }, position: '0 -100 0', rotation: '90 0 0', material: { color: 'white', side: 'back', opacity: 0.4, transparent: true } }));
+	        rings.push(React.createElement(
+	          _aframeReact.Entity,
+	          { 'class': 'ring', geometry: { primitive: 'ring', radiusOuter: radOut, radiusInner: radIn }, position: '0 -100 0', rotation: '90 0 0', material: { color: 'white', side: 'double', opacity: 0.4, transparent: true } },
+	          React.createElement(_aframeReact.Animation, { attribute: 'scale', to: '1.2 1.2 1.2', from: '1 1 1', begin: 'click', dur: '5000', ease: 'ease-in-out', fill: 'both', repeat: '1', direction: 'alternate' })
+	        ));
 	      }
 	      return React.createElement(
 	        _aframeReact.Entity,
-	        null,
+	        { 'class': 'rings' },
 	        rings
 	      );
 	    }
@@ -101999,7 +102106,7 @@
 	}(React.Component);
 
 	Rings.defaultProps = {
-	  numRings: 5
+	  numRings: 12
 	};
 
 	exports.default = Rings;
@@ -102029,6 +102136,10 @@
 
 	var _ColladaModel2 = _interopRequireDefault(_ColladaModel);
 
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -102047,6 +102158,17 @@
 	  }
 
 	  _createClass(RandomStars, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var node = _reactDom2.default.findDOMNode(this.refs.stars);
+	      var nodes = node.querySelectorAll('.star');
+	      for (var i = 0; i < nodes.length; i++) {
+	        nodes[i].addEventListener('click', function () {
+	          this.setAttribute('material', 'color', _Helper2.default.getRandomColor());
+	        });
+	      }
+	    }
+	  }, {
 	    key: 'getPosition',
 	    value: function getPosition() {
 	      var margin = parseInt(this.props.margin);
@@ -102078,12 +102200,17 @@
 	                  {<Animation attribute="rotation" to="0 360 0"  dur="30000" repeat="indefinite" begin={i* 500}/>}
 	                </ColladaModel>
 	              );*/
-	        stars.push(React.createElement(_aframeReact.Entity, { geometry: { primitive: 'box' }, position: position, rotation: rotation }));
+	        stars.push(React.createElement(
+	          _aframeReact.Entity,
+	          { 'class': 'star', geometry: { primitive: 'box' }, position: position, rotation: rotation },
+	          React.createElement(_aframeReact.Animation, { attribute: 'scale', to: _Helper2.default.getRandArrayWithMargin(8, true), from: '1 1 1', begin: 'click', dur: '4000', direction: 'alternate', fill: 'both', repeat: '1' }),
+	          React.createElement(_aframeReact.Animation, { attribute: 'rotation', to: _Helper2.default.getRandArrayWithMargin(360, true), from: rotation, begin: 'click', dur: '2000', direction: 'alternate', fill: 'both', repeat: '3' })
+	        ));
 	      }
 	      return React.createElement(
 	        _aframeReact.Entity,
-	        null,
-	        React.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '360 0 0', dur: '60000', repeat: 'indefinite', ease: 'linear' }),
+	        { 'class': 'stars', ref: 'stars' },
+	        React.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '360 0 0', dur: '80000', repeat: 'indefinite', ease: 'linear' }),
 	        React.createElement(
 	          _aframeReact.Entity,
 	          { position: this.props.position },
@@ -102098,7 +102225,7 @@
 
 	RandomStars.defaultProps = {
 	  position: "0 0 0",
-	  numStars: 75,
+	  numStars: 150,
 	  margin: 600
 	};
 
@@ -102129,6 +102256,18 @@
 
 	var _ColladaModel2 = _interopRequireDefault(_ColladaModel);
 
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _Camera = __webpack_require__(469);
+
+	var _Camera2 = _interopRequireDefault(_Camera);
+
+	var _Cursor = __webpack_require__(470);
+
+	var _Cursor2 = _interopRequireDefault(_Cursor);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -102147,21 +102286,69 @@
 	  }
 
 	  _createClass(Planet, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var node = _reactDom2.default.findDOMNode(this.refs.planet);
+	      node.addEventListener('click', function () {
+	        console.log(node.querySelector('.camera'));
+	        node.querySelector('.camera').setAttribute('camera', 'active', true);
+	      });
+	    }
+	  }, {
+	    key: 'getAnimations',
+	    value: function getAnimations() {
+	      return [React.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '0 360 0', ease: 'linear', dur: '30000', repeat: 'indefinite' }), React.createElement(_aframeReact.Animation, { attribute: 'scale', to: _Helper2.default.getRandArrayWithMargin(3, true), from: '1 1 1', ease: 'linear', dur: '5000', repeat: '1', direction: 'alternate', fill: 'both', begin: 'click' }), React.createElement(_aframeReact.Animation, { attribute: 'rotation', to: _Helper2.default.getRandArrayWithMargin(360, true), ease: 'linear', dur: '12000', repeat: '1', direction: 'alternate', fill: 'both', begin: 'click' })];
+	    }
+	  }, {
+	    key: 'getContent',
+	    value: function getContent() {
+	      if (this.props.asset != '') {
+	        return [React.createElement(
+	          _Camera2.default,
+	          { 'wasd-controls': { enabled: false }, position: '0 50 0' },
+	          React.createElement(_Cursor2.default, null)
+	        ), React.createElement(
+	          _ColladaModel2.default,
+	          { asset: this.props.asset, scale: this.props.scale },
+	          this.getAnimations()
+	        )];
+	      } else {
+	        var position = _Helper2.default.getRandArrayWithMargin(600, false);
+	        var cameraPosition = position.slice(0);
+	        cameraPosition[1] += 50;
+	        return [React.createElement(
+	          _Camera2.default,
+	          { 'wasd-controls': { enabled: false }, position: cameraPosition },
+	          React.createElement(_Cursor2.default, null)
+	        ), React.createElement(_aframeReact.Entity, { geometry: { primitive: 'sphere', radius: _Helper2.default.getRandWithMargin(100, true) }, position: position, rotation: _Helper2.default.getRandArrayWithMargin(360, true), material: { shader: 'standard', color: _Helper2.default.getRandomColor(), metalness: 0.8, roughness: 1 } })];
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return React.createElement(
 	        _aframeReact.Entity,
-	        null,
+	        { 'class': 'planet' },
 	        this.props.children,
 	        React.createElement(
 	          _aframeReact.Entity,
-	          { position: this.props.position },
-	          React.createElement(
-	            _ColladaModel2.default,
-	            { asset: this.props.asset, scale: this.props.scale },
-	            React.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '0 360 0', ease: 'linear', dur: '30000', repeat: 'indefinite' })
-	          )
+	          { position: this.props.position, ref: 'planet' },
+	          this.getContent()
 	        )
+	      );
+	    }
+	  }], [{
+	    key: 'getRandomPlanets',
+	    value: function getRandomPlanets(numPlanets) {
+	      var planets = [];
+	      for (var i = 0; i < numPlanets; i++) {
+	        planets.push(React.createElement(Planet, null));
+	      }
+	      return React.createElement(
+	        _aframeReact.Entity,
+	        { 'class': 'planets' },
+	        React.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '0 360 0', from: '0 0 0', ease: 'linear', dur: '60000', repeat: 'indefinite', direction: 'forward', fill: 'both' }),
+	        planets
 	      );
 	    }
 	  }]);
@@ -102220,6 +102407,14 @@
 
 	var _CubicRainbow2 = _interopRequireDefault(_CubicRainbow);
 
+	var _CubicFoldable = __webpack_require__(490);
+
+	var _CubicFoldable2 = _interopRequireDefault(_CubicFoldable);
+
+	var _RandomCubes = __webpack_require__(491);
+
+	var _RandomCubes2 = _interopRequireDefault(_RandomCubes);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -102249,18 +102444,45 @@
 	          React.createElement(
 	            _Camera2.default,
 	            { id: 'camera', 'wasd-controls': { enabled: true }, active: true, position: '0 5 0' },
-	            React.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 5 200', dur: '30000', ease: 'linear', begin: '5000' }),
-	            React.createElement(_Cursor2.default, null)
+	            React.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 5 200', dur: '40000', ease: 'linear', begin: '5000' }),
+	            React.createElement(_Cursor2.default, { cursor: 'timeout: 1; fuse: true; maxDistance: 100000;' })
 	          ),
-	          React.createElement(_Sky2.default, { color: 'black' })
+	          React.createElement(_Sky2.default, { color: 'green' })
 	        ),
+	        React.createElement(_CubicFoldable2.default, { position: '0 65 -40', numFolds: 30, width: 120 }),
+	        React.createElement(_CubicFoldable2.default, { position: '0 65 195', numFolds: 30, width: 120 }),
+	        React.createElement(_CubicFoldable2.default, { position: '10 5 40', numFolds: 8, width: 20, trigger: true, rotation: '0 0 90' }),
+	        React.createElement(_CubicFoldable2.default, { position: '-10 5 40', numFolds: 8, width: 20, trigger: true, rotation: '0 0 90', direction: '-' }),
 	        React.createElement(_CubicWalkway2.default, { position: '0 0 -4' }),
-	        _CubicWalkway2.default.getRandomWalkways(5),
-	        _CubicSnake2.default.getRandomSnakes(10),
-	        React.createElement(_CubicRainbow2.default, { position: '0 0 30', rotation: '90 0 0' })
+	        React.createElement(_CubicWalkway2.default, { position: '10 0 -4' }),
+	        React.createElement(_CubicWalkway2.default, { position: '-10 0 -4' }),
+	        React.createElement(_CubicRainbow2.default, { position: '0 0 0', height: 3, width: 4, depth: 10 }),
+	        React.createElement(
+	          _CubicRainbow2.default,
+	          { position: '0 0 30', width: 5, depth: 6, height: 2 },
+	          React.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '0 0 360', fill: 'both', repeat: 'indefinite', dur: '20000', ease: 'linear' })
+	        ),
+	        React.createElement(_CubicRainbow2.default, { position: '0 0 60', depth: 6, height: 3, width: 5 }),
+	        React.createElement(
+	          _CubicRainbow2.default,
+	          { position: '0 0 90' },
+	          React.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '0 0 -360', fill: 'both', repeat: 'indefinite', dur: '30000', ease: 'linear' })
+	        ),
+	        React.createElement(_CubicRainbow2.default, { position: '0 0 120', height: 6 }),
+	        React.createElement(
+	          _CubicRainbow2.default,
+	          { position: '0 0 150', width: 8 },
+	          React.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '0 0 -720', fill: 'both', repeat: 'indefinite', dur: '40000', ease: 'linear' })
+	        ),
+	        React.createElement(_RandomCubes2.default, { numBlocks: 200, position: '0 0 50' })
 	      );
 	    }
 	  }], [{
+	    key: 'getMixins',
+	    value: function getMixins() {
+	      return [_CubicFoldable2.default.getMixins()];
+	    }
+	  }, {
 	    key: 'getModels',
 	    value: function getModels() {
 	      return [];
@@ -102412,6 +102634,10 @@
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -102430,6 +102656,16 @@
 	  }
 
 	  _createClass(CubicWalkway, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var node = _reactDom2.default.findDOMNode(this.refs.walkway);
+	      for (var i = 0; i < node.childNodes.length; i++) {
+	        _reactDom2.default.findDOMNode(node.childNodes[i]).addEventListener('click', function () {
+	          this.setAttribute('material', 'color', _Helper2.default.getRandomColor());
+	        });
+	      }
+	    }
+	  }, {
 	    key: 'getWalkway',
 	    value: function getWalkway() {
 	      var blocks = [];
@@ -102456,7 +102692,7 @@
 	        this.props.children,
 	        React.createElement(
 	          _aframeReact.Entity,
-	          { position: this.props.position },
+	          { position: this.props.position, ref: 'walkway' },
 	          this.getWalkway()
 	        )
 	      );
@@ -102467,7 +102703,12 @@
 	      var walkways = [];
 	      for (var i = 0; i < numWalkways; i++) {
 	        var position = _Helper2.default.getRandArrayWithMargin(300);
-	        walkways.push(React.createElement(CubicWalkway, { position: position, length: _Helper2.default.getRandWithMargin(40, true) }));
+	        walkways.push(React.createElement(
+	          CubicWalkway,
+	          { position: position, length: _Helper2.default.getRandWithMargin(40, true) },
+	          React.createElement('a-event', { name: 'cursor-mouseenter', scale: '3 1 1', color: '#FFC65D' }),
+	          React.createElement('a-event', { name: 'cursor-mouseleave', scale: '1 1 1', color: '#F16745' })
+	        ));
 	      }
 	      return walkways;
 	    }
@@ -102504,6 +102745,10 @@
 
 	__webpack_require__(160);
 
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -102522,17 +102767,27 @@
 	  }
 
 	  _createClass(CubicRainbow, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var node = _reactDom2.default.findDOMNode(this.refs.rainbow);
+	      for (var i = 0; i < node.childNodes.length; i++) {
+	        _reactDom2.default.findDOMNode(node.childNodes[i]).addEventListener('click', function () {
+	          this.setAttribute('material', 'color', _Helper2.default.getRandomColor());
+	        });
+	      }
+	    }
+	  }, {
 	    key: 'getRainbow',
 	    value: function getRainbow() {
 	      var rainbow = [];
 	      var origPosition = this.props.position.split(' ');
 	      for (var i = 0, count = 0; i < this.props.numBlocks; i++) {
-	        var rad = i * (2 * Math.PI) / this.props.numBlocks / 2;
+	        var rad = i * (2 * Math.PI) / this.props.numBlocks;
 	        var position = [0, 0, 0];
 	        position[0] = parseInt(origPosition[0]) + this.props.radius * Math.cos(rad);
-	        position[1] = parseInt(origPosition[1]);
-	        position[2] = parseInt(origPosition[2]) + this.props.radius * Math.sin(rad);
-	        rainbow.push(React.createElement(_aframeReact.Entity, { geometry: { primitive: 'box', width: 4, height: 4, depth: 2 }, position: position }));
+	        position[2] = parseInt(origPosition[2]);
+	        position[1] = parseInt(origPosition[1]) + this.props.radius * Math.sin(rad);
+	        rainbow.push(React.createElement(_aframeReact.Entity, { geometry: { primitive: 'box', width: this.props.width, height: this.props.height, depth: this.props.depth }, position: position }));
 	      }
 	      return rainbow;
 	    }
@@ -102541,11 +102796,11 @@
 	    value: function render() {
 	      return React.createElement(
 	        _aframeReact.Entity,
-	        null,
+	        { rotation: this.props.rotation },
 	        this.props.children,
 	        React.createElement(
 	          _aframeReact.Entity,
-	          { position: this.props.position, rotation: this.props.rotation },
+	          { position: this.props.position, ref: 'rainbow' },
 	          this.getRainbow()
 	        )
 	      );
@@ -102556,7 +102811,7 @@
 	      var rainbows = [];
 	      for (var i = 0; i < numRainbows; i++) {
 	        var position = _Helper2.default.getRandArrayWithMargin(300);
-	        rainbows.push(React.createElement(CubicRainbow, { position: position }));
+	        rainbows.push(React.createElement(React.createElement(CubicRainbow, null), { position: position }, null));
 	      }
 	      return rainbows;
 	    }
@@ -102568,11 +102823,235 @@
 	CubicRainbow.defaultProps = {
 	  position: '0 0 0',
 	  rotation: '0 0 0',
-	  numBlocks: 8,
-	  radius: 16
+	  numBlocks: 10,
+	  radius: 16,
+	  height: 4,
+	  width: 4,
+	  depth: 2
 	};
 
 	exports.default = CubicRainbow;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ },
+/* 490 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _aframeReact = __webpack_require__(157);
+
+	var _Helper = __webpack_require__(464);
+
+	var _Helper2 = _interopRequireDefault(_Helper);
+
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CubicFoldable = function (_React$Component) {
+	  _inherits(CubicFoldable, _React$Component);
+
+	  function CubicFoldable(props) {
+	    _classCallCheck(this, CubicFoldable);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(CubicFoldable).call(this, props));
+	  }
+
+	  _createClass(CubicFoldable, [{
+	    key: 'triggerClick',
+	    value: function triggerClick() {
+	      var node = _reactDom2.default.findDOMNode(this.refs.firstBoard);
+	      var chainEvents = [];
+	      var that = this;
+	      var nodes = node.querySelectorAll('.cubic-fold');
+	      node.removeEventListener('click', this.triggerClick);
+	      for (var i = 0; i < nodes.length; i++) {
+	        chainEvents.push({
+	          querySelector: nodes[i],
+	          emitEvent: 'unfold',
+	          delay: 1
+	        });
+	      }
+	      that.chainTimingEvents(chainEvents);
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      if (this.props.trigger) {
+	        var that = this;
+	        var chainEvents = [];
+	        var node = _reactDom2.default.findDOMNode(this.refs.firstBoard);
+	        node.addEventListener('click', this.triggerClick.bind(this));
+	      }
+	    }
+	  }, {
+	    key: 'chainTimingEvents',
+	    value: function chainTimingEvents(chainEventsArray) {
+	      if (chainEventsArray <= 0) return;
+	      var that = this;
+	      var newEvent = chainEventsArray.pop();
+	      setTimeout(function () {
+	        newEvent.querySelector.emit(newEvent.emitEvent);
+	        that.chainTimingEvents(chainEventsArray);
+	      }, newEvent.delay);
+	    }
+	  }, {
+	    key: 'getFoldNumber',
+	    value: function getFoldNumber(index) {
+	      var ref = '';
+	      var position = [0, -4, 0];
+	      if (this.props.direction == "-") position[1] *= -1;
+	      if (index == 1) ref = 'firstBoard';
+	      if (index == this.props.numFolds) return React.createElement(
+	        _aframeReact.Entity,
+	        { 'class': 'cubic-fold', ref: ref, mixin: 'board', material: { color: _Helper2.default.getRandomColor() }, geometry: { width: this.props.width }, position: position },
+	        React.createElement(_aframeReact.Animation, { mixin: 'unhinge', to: '0 0 0', from: '-180 0 0', begin: this.props.trigger ? 'unfold' : 300 * index })
+	      );else return React.createElement(
+	        _aframeReact.Entity,
+	        { 'class': 'cubic-fold', ref: ref, mixin: 'board', material: { color: _Helper2.default.getRandomColor() }, geometry: { width: this.props.width }, position: position },
+	        React.createElement(_aframeReact.Animation, { mixin: 'unhinge', to: '0 0 0', from: '-180 0 0', begin: this.props.trigger ? 'unfold' : 300 * index }),
+	        this.getFoldNumber(++index)
+	      );
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        _aframeReact.Entity,
+	        null,
+	        this.props.children,
+	        React.createElement(
+	          _aframeReact.Entity,
+	          { position: this.props.position, rotation: this.props.rotation },
+	          this.getFoldNumber(1)
+	        )
+	      );
+	    }
+	  }], [{
+	    key: 'getMixins',
+	    value: function getMixins() {
+	      return [React.createElement('a-mixin', { id: 'board', geometry: 'depth: 0.01; height:4; width: 20;primitive:box', material: 'shader: flat',
+	        pivot: '0 0.5 0', position: '0 -4 0', rotation: '180 0 0' }), React.createElement('a-mixin', { id: 'unhinge', attribute: 'rotation', dur: '1000', fill: 'both' })];
+	    }
+	  }]);
+
+	  return CubicFoldable;
+	}(React.Component);
+
+	CubicFoldable.defaultProps = {
+	  numFolds: 5,
+	  position: '0 0 0',
+	  rotation: '0 0 0',
+	  width: 4,
+	  direction: "+",
+	  trigger: false
+	};
+
+	exports.default = CubicFoldable;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ },
+/* 491 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _aframeReact = __webpack_require__(157);
+
+	var _Helper = __webpack_require__(464);
+
+	var _Helper2 = _interopRequireDefault(_Helper);
+
+	__webpack_require__(160);
+
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var RandomCubes = function (_React$Component) {
+	  _inherits(RandomCubes, _React$Component);
+
+	  function RandomCubes(props) {
+	    _classCallCheck(this, RandomCubes);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(RandomCubes).call(this, props));
+	  }
+
+	  _createClass(RandomCubes, [{
+	    key: 'getRandomCubes',
+	    value: function getRandomCubes() {
+	      var blocks = [];
+	      for (var i = 0; i < this.props.numBlocks; i++) {
+	        var position = _Helper2.default.getRandArrayWithMargin(400);
+	        var width = _Helper2.default.getRandWithMargin(8);
+	        var height = _Helper2.default.getRandWithMargin(8);
+	        var depth = _Helper2.default.getRandWithMargin(8);
+	        var endPosition = _Helper2.default.getRandArrayWithMargin(600);
+	        var rotation = _Helper2.default.getRandArrayWithMargin(360);
+	        var scale = _Helper2.default.getRandArrayWithMargin(3);
+	        blocks.push(React.createElement(
+	          _aframeReact.Entity,
+	          { geometry: { primitive: 'box', width: width, height: height, depth: depth }, position: position, rotation: rotation },
+	          React.createElement(_aframeReact.Animation, { begin: 'click', to: endPosition, from: position, dur: '5000', ease: 'linear', fill: 'forwards', attribute: 'position' }),
+	          React.createElement(_aframeReact.Animation, { begin: 'click', to: scale, from: '1 1 1', dur: '5000', ease: 'linear', fill: 'forwards', attribute: 'scale' })
+	        ));
+	      }
+	      return blocks;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        _aframeReact.Entity,
+	        null,
+	        this.props.children,
+	        React.createElement(
+	          _aframeReact.Entity,
+	          { position: this.props.position },
+	          this.getRandomCubes()
+	        )
+	      );
+	    }
+	  }]);
+
+	  return RandomCubes;
+	}(React.Component);
+
+	RandomCubes.defaultProps = {
+	  position: "0 0 0",
+	  numBlocks: 50
+	};
+
+	exports.default = RandomCubes;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }

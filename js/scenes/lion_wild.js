@@ -24,7 +24,9 @@ class LionWild extends React.Component{
   }
   getMixins(){
     return(
-      <Entity/>
+      <Entity>
+        {Cubic.getMixins()}
+      </Entity>
     );
   }
   getModels(){
@@ -50,12 +52,12 @@ class LionWild extends React.Component{
 
   render(){
     return(
-      <Scene stats id="scene">
+      <Scene  stats id="scene">
         {this.getAssets()}
         <Audio  audioSrc={this.props.song} shouldUpdateFrequencies="false" shouldPlay={this.state.shouldPlay}/>
         {/*<MovingMountains/>*/}
-        {/*<Space/>*/}
-        <Cubic/>
+        <Space/>
+        {/*<Cubic/>*/}
       </Scene>
     );
   }

@@ -32,11 +32,13 @@ class Space extends React.Component{
       <Entity position={this.props.position}>
         <Entity>
           <Camera id="camera" wasd-controls={{enabled: true}} active position="0 50 0" >
-            <Cursor />
+            <Cursor cursor="timeout: 1; fuse: true; maxDistance: 100000;"/>
           </Camera>
           <Sky color="black"/>
         </Entity>
-        <RotatingSun position="-300 -200 400"></RotatingSun>
+        {Planet.getRandomPlanets(8)}
+
+        <RotatingSun position="0 -100 0"></RotatingSun>
         <RotatingMoon position="0 150 -300" rotation="0 0 0">
           <Animation attribute="rotation" to="0 360 0" from="0 0 0" dur="60000" repeat="indefinite"  ease="linear"/>
         </RotatingMoon>
