@@ -1,17 +1,26 @@
 import {Entity,Animation} from 'aframe-react';
 import Helper from '../other/Helper';
 import 'aframe-layout-component';
+import ReactDOM from 'react-dom';
 class CubicRainbow extends React.Component{
   constructor(props){
     super(props);
+  }
+  componentDidMount(){
+    let node = ReactDOM.findDOMNode(this.refs.rainbow);
+    for (let i =0;i<node.childNodes.length;i++){
+      ReactDOM.findDOMNode(node.childNodes[i]).addEventListener('click',function(){
+        this.setAttribute('material',
+          'color',Helper.getRandomColor());
+      });
+    }
+
   }
   static getRandomRainbows(numRainbows){
     let rainbows = [];
     for (let i =0;i<numRainbows; i++){
       let position = Helper.getRandArrayWithMargin(300);
-      rainbows.push(
-        <CubicRainbow position={position}>
-        </CubicRainbow>
+      rainbows.push(React.createElement(<CubicRainbow/>, {position: position},null)
       );
     }
     return rainbows;
@@ -38,7 +47,7 @@ class CubicRainbow extends React.Component{
     return(
       <Entity rotation={this.props.rotation}>
         {this.props.children}
-        <Entity position={this.props.position} >
+        <Entity position={this.props.position} ref="rainbow">
           {this.getRainbow()}
         </Entity>
 
