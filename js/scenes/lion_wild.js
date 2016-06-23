@@ -11,6 +11,7 @@ import Helper from '../other/Helper';
 import MovingMountains from '../components/_MovingMountains';
 import Space from '../components/_Space';
 import Cubic from '../components/_Cubic';
+import Loading from '../components/_Loading';
 class LionWild extends React.Component{
   constructor(props){
     super(props);
@@ -18,7 +19,7 @@ class LionWild extends React.Component{
     this.state = {
       heights: heights,
       shouldPlay: true,
-      stage: 1,
+      stage: 0,
       includeFog: false,
     }
   }
@@ -51,6 +52,10 @@ class LionWild extends React.Component{
   }
   nextScene(){
     let currStage = this.state.stage;
+    if (currStage == 0){
+      var node = $(".audio-player").data("node");
+      node.start(0);
+    }
     let nextStage = currStage+1;
     let includeFog = false;
     this.setState({stage: nextStage,includeFog: includeFog});
@@ -58,7 +63,7 @@ class LionWild extends React.Component{
 
   getScene(){
     if (this.state.stage == 0)
-      return <MovingMountains nextScene={this.nextScene.bind(this)}/>;
+      return <Loading nextScene={this.nextScene.bind(this)}/>;
     else if (this.state.stage == 1)
       return <Cubic nextScene={this.nextScene.bind(this)}/>;
     else if (this.state.stage == 2)
