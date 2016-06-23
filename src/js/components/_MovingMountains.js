@@ -30,7 +30,7 @@ class MovingMountains extends React.Component{
       <Entity position={this.props.position}>
         <Entity>
           <Camera id="camera" wasd-controls={{enabled: true}} active position="0 50 0" >
-            <Cursor />
+            <Cursor cursor={{timeout: 1000}}/>
           </Camera>
           <Sky color="black"/>
         </Entity>

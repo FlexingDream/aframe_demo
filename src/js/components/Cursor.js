@@ -17,7 +17,7 @@ Cursor.defaultProps = {
   geometry: {
     primitive: 'ring',
     radiusInner: 0.01,
-    radiusOuter: 0.016
+    radiusOuter: 0.014
     // radius: 0.5,
     // height: 1
   },

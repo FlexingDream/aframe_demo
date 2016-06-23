@@ -1,10 +1,11 @@
-import {Animation, Entity, Scene} from 'aframe-react';
+import {Animation, Entity} from 'aframe-react';
 import 'aframe-layout-component';
 import ReactDOM from 'react-dom';
 
 import Perf from 'react-addons-perf';
 import 'babel-polyfill';
 import $ from 'jquery';
+import Scene from '../components/Scene';
 import Audio from '../components/Audio';
 import Helper from '../other/Helper';
 import MovingMountains from '../components/_MovingMountains';
@@ -17,10 +18,9 @@ class LionWild extends React.Component{
     this.state = {
       heights: heights,
       shouldPlay: true,
-      stage: 0,
+      stage: 1,
+      includeFog: false,
     }
-  }
-  shouldComponentUpdate(nextProps,nextState){
   }
   getMixins(){
     return(
@@ -49,15 +49,28 @@ class LionWild extends React.Component{
   componentDidMount(){
     Helper.showTimer();
   }
+  nextScene(){
+    let currStage = this.state.stage;
+    let nextStage = currStage+1;
+    let includeFog = false;
+    this.setState({stage: nextStage,includeFog: includeFog});
+  }
+
+  getScene(){
+    if (this.state.stage == 0)
+      return <MovingMountains nextScene={this.nextScene.bind(this)}/>;
+    else if (this.state.stage == 1)
+      return <Cubic nextScene={this.nextScene.bind(this)}/>;
+    else if (this.state.stage == 2)
+      return <Space nextScene={this.nextScene.bind(this)}/>;
+  }
 
   render(){
     return(
-      <Scene  stats id="scene">
+      <Scene id="scene" includeFog={this.state.includeFog}>
         {this.getAssets()}
         <Audio  audioSrc={this.props.song} shouldUpdateFrequencies="false" shouldPlay={this.state.shouldPlay}/>
-        {/*<MovingMountains/>*/}
-        <Space/>
-        {/*<Cubic/>*/}
+        {this.getScene()}
       </Scene>
     );
   }
@@ -67,8 +80,5 @@ LionWild.defaultProps = {
 };
 
 window.$ = $;
-
-// ONLY FOR DEV MODE OTHERWISE WONT WORK
-window.Perf = Perf;
 
 ReactDOM.render(<LionWild/>, document.querySelector('.scene-container'));

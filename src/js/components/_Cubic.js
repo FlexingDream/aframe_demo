@@ -8,11 +8,19 @@ import CubicWalkway from '../components/CubicWalkway';
 import CubicRainbow from '../components/CubicRainbow';
 import CubicFoldable from '../components/CubicFoldable';
 import RandomCubes from '../components/RandomCubes';
+import ReactDOM from 'react-dom';
 class Cubic extends React.Component{
   constructor(props){
     super(props);
   }
-
+  componentDidMount(){
+    let that = this;
+    let node = ReactDOM.findDOMNode(this.refs.camera);
+    node.addEventListener('animationend',function(e){
+      if (e.target.attributes['attribute'].value == 'position')
+        that.props.nextScene();
+    });
+  }
   static getMixins(){
     return[
       CubicFoldable.getMixins(),
@@ -27,11 +35,11 @@ class Cubic extends React.Component{
     return(
       <Entity position={this.props.position}>
         <Entity>
-          <Camera id="camera" wasd-controls={{enabled: true}} active position="0 5 0" >
+          <Camera ref='camera' id="camera" wasd-controls={{enabled: true}} active position="0 5 0" >
             <Animation attribute='position' to='0 5 200' dur='40000' ease='linear' begin='5000' /> 
             <Cursor cursor="timeout: 1; fuse: true; maxDistance: 100000;"/>
           </Camera>
-          <Sky color='green'/>
+          <Sky color='black'/>
         </Entity>
         <CubicFoldable position="0 65 -40" numFolds={30} width={120}/>
         <CubicFoldable position="0 65 195" numFolds={30} width={120}/>
