@@ -8,6 +8,8 @@ import Sky from './Sky';
 import Ocean from './Ocean';
 import Rain from './Rain';
 import Box from './Box';
+import SequencedLasers from './SequencedLasers';
+import Lasers from './Laser';
 
 /**
 <Entity
@@ -34,7 +36,9 @@ class SkyToOcean extends React.Component{
           </WalkableCameraCursor>
         </Entity>
 
-
+        <SequencedLasers position={[0, -80, 0]}/>
+        <Lasers type='line' numBlocks="20" position="0 -100 0"/>
+        <Lasers type='line' numBlocks="20" position="0 -50 0"/>
 
         <Ocean/>
 
