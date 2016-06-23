@@ -36,8 +36,13 @@ class Space extends React.Component{
           </Camera>
           <Sky color="black"/>
         </Entity>
-
-        <RotatingSun position="-300 -200 400"></RotatingSun>
+        <Planet position="0 0 0"/>
+        <Planet position="0 0 0"/>
+        <Planet position="0 0 0"/>
+        <Planet position="0 0 0"/>
+        <Planet position="0 0 0"/>
+        
+        <RotatingSun position="0 -100 0"></RotatingSun>
         <RotatingMoon position="0 150 -300" rotation="0 0 0">
           <Animation attribute="rotation" to="0 360 0" from="0 0 0" dur="60000" repeat="indefinite"  ease="linear"/>
         </RotatingMoon>

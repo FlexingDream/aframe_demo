@@ -25,7 +25,7 @@ class RotatingSun extends React.Component{
     <Entity class='rotating-sun' ref="rotatingSun">
       {this.props.children}
       <Entity position={this.props.position}>
-        <Camera wasd-controls={{enabled: false}}  position="0 50 0" >
+        <Camera wasd-controls={{enabled: false}}  position="0 100 0" >
           <Cursor/>
         </Camera>
         <ColladaModel asset="#sun-collada" >
