@@ -66,23 +66,27 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _Audio = __webpack_require__(462);
+	var _Scene = __webpack_require__(462);
+
+	var _Scene2 = _interopRequireDefault(_Scene);
+
+	var _Audio = __webpack_require__(463);
 
 	var _Audio2 = _interopRequireDefault(_Audio);
 
-	var _Helper = __webpack_require__(464);
+	var _Helper = __webpack_require__(465);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
-	var _MovingMountains = __webpack_require__(465);
+	var _MovingMountains = __webpack_require__(466);
 
 	var _MovingMountains2 = _interopRequireDefault(_MovingMountains);
 
-	var _Space = __webpack_require__(480);
+	var _Space = __webpack_require__(481);
 
 	var _Space2 = _interopRequireDefault(_Space);
 
-	var _Cubic = __webpack_require__(486);
+	var _Cubic = __webpack_require__(487);
 
 	var _Cubic2 = _interopRequireDefault(_Cubic);
 
@@ -108,15 +112,13 @@
 	    _this.state = {
 	      heights: heights,
 	      shouldPlay: true,
-	      stage: 0
+	      stage: 1,
+	      includeFog: false
 	    };
 	    return _this;
 	  }
 
 	  _createClass(LionWild, [{
-	    key: 'shouldComponentUpdate',
-	    value: function shouldComponentUpdate(nextProps, nextState) {}
-	  }, {
 	    key: 'getMixins',
 	    value: function getMixins() {
 	      return React.createElement(
@@ -152,14 +154,27 @@
 	      _Helper2.default.showTimer();
 	    }
 	  }, {
+	    key: 'nextScene',
+	    value: function nextScene() {
+	      var currStage = this.state.stage;
+	      var nextStage = currStage + 1;
+	      var includeFog = false;
+	      this.setState({ stage: nextStage, includeFog: includeFog });
+	    }
+	  }, {
+	    key: 'getScene',
+	    value: function getScene() {
+	      if (this.state.stage == 0) return React.createElement(_MovingMountains2.default, { nextScene: this.nextScene.bind(this) });else if (this.state.stage == 1) return React.createElement(_Cubic2.default, { nextScene: this.nextScene.bind(this) });else if (this.state.stage == 2) return React.createElement(_Space2.default, { nextScene: this.nextScene.bind(this) });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return React.createElement(
-	        _aframeReact.Scene,
-	        { stats: true, id: 'scene' },
+	        _Scene2.default,
+	        { id: 'scene', includeFog: this.state.includeFog },
 	        this.getAssets(),
 	        React.createElement(_Audio2.default, { audioSrc: this.props.song, shouldUpdateFrequencies: 'false', shouldPlay: this.state.shouldPlay }),
-	        React.createElement(_Space2.default, null)
+	        this.getScene()
 	      );
 	    }
 	  }]);
@@ -172,9 +187,6 @@
 	};
 
 	window.$ = _jquery2.default;
-
-	// ONLY FOR DEV MODE OTHERWISE WONT WORK
-	window.Perf = _reactAddonsPerf2.default;
 
 	_reactDom2.default.render(React.createElement(LionWild, null), document.querySelector('.scene-container'));
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
@@ -98899,6 +98911,123 @@
 /* 462 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Scene = function (_React$Component) {
+	  _inherits(Scene, _React$Component);
+
+	  function Scene() {
+	    _classCallCheck(this, Scene);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Scene).apply(this, arguments));
+	  }
+
+	  _createClass(Scene, [{
+	    key: 'attachEvents',
+	    value: function attachEvents(el) {
+	      var _this2 = this;
+
+	      if (el) {
+	        el.addEventListener('enter-vr', function (event) {
+	          _this2.props.onEnterVR(event);
+	        });
+	        el.addEventListener('exit-vr', function (event) {
+	          _this2.props.onExitVR(event);
+	        });
+	        el.addEventListener('loaded', function (event) {
+	          _this2.props.onLoaded(event);
+	        });
+	        if (this.props.onTick) {
+	          setTimeout(function () {
+	            el.addBehavior({
+	              tick: _this2.props.onTick,
+	              el: el
+	            });
+	          });
+	        }
+	      }
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      if (this.props.includeFog) {
+	        document.querySelector("#scene").setAttribute('fog', true);
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        'a-scene',
+	        _extends({ ref: this.attachEvents.bind(this) }, serializeComponents(this.props)),
+	        this.props.children
+	      );
+	    }
+	  }]);
+
+	  return Scene;
+	}(React.Component);
+
+	Scene.propTypes = {
+	  onEnterVR: React.PropTypes.func,
+	  onExitVR: React.PropTypes.func,
+	  onLoaded: React.PropTypes.func,
+	  onTick: React.PropTypes.func
+	};
+
+	function serializeComponents(props) {
+	  var serialProps = {};
+	  Object.keys(props).forEach(function (component) {
+	    if (['children', 'mixin'].indexOf(component) !== -1) {
+	      return;
+	    }
+
+	    if (props[component].constructor === Function) {
+	      return;
+	    }
+
+	    if (props[component].constructor === Array) {
+	      //Stringify components passed as array.
+	      serialProps[component] = props[component].join(' ');
+	    } else if (props[component].constructor === Object) {
+	      // Stringify components passed as object.
+	      serialProps[component] = styleParser.stringify(props[component]);
+	    } else {
+	      // Do nothing for components otherwise.
+	      serialProps[component] = props[component];
+	    }
+	  });
+	  return serialProps;
+	};
+
+	Scene.defaultProps = {
+	  onEnterVR: function onEnterVR() {},
+	  onExitVR: function onExitVR() {},
+	  onLoaded: function onLoaded() {},
+	  includeFog: false
+	};
+
+	exports.default = Scene;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ },
+/* 463 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -98913,7 +99042,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _underscore = __webpack_require__(463);
+	var _underscore = __webpack_require__(464);
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
@@ -99142,7 +99271,7 @@
 	exports.default = Audio;
 
 /***/ },
-/* 463 */
+/* 464 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
@@ -100696,7 +100825,7 @@
 
 
 /***/ },
-/* 464 */
+/* 465 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -100776,7 +100905,7 @@
 	exports.default = Helper;
 
 /***/ },
-/* 465 */
+/* 466 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -100789,39 +100918,39 @@
 
 	var _aframeReact = __webpack_require__(157);
 
-	var _MountainRange = __webpack_require__(466);
+	var _MountainRange = __webpack_require__(467);
 
 	var _MountainRange2 = _interopRequireDefault(_MountainRange);
 
-	var _Camera = __webpack_require__(469);
+	var _Camera = __webpack_require__(470);
 
 	var _Camera2 = _interopRequireDefault(_Camera);
 
-	var _Cursor = __webpack_require__(470);
+	var _Cursor = __webpack_require__(471);
 
 	var _Cursor2 = _interopRequireDefault(_Cursor);
 
-	var _Sky = __webpack_require__(473);
+	var _Sky = __webpack_require__(474);
 
 	var _Sky2 = _interopRequireDefault(_Sky);
 
-	var _SequencedLasers = __webpack_require__(468);
+	var _SequencedLasers = __webpack_require__(469);
 
 	var _SequencedLasers2 = _interopRequireDefault(_SequencedLasers);
 
-	var _MovingSpheres = __webpack_require__(477);
+	var _MovingSpheres = __webpack_require__(478);
 
 	var _MovingSpheres2 = _interopRequireDefault(_MovingSpheres);
 
-	var _RotatingSun = __webpack_require__(478);
+	var _RotatingSun = __webpack_require__(479);
 
 	var _RotatingSun2 = _interopRequireDefault(_RotatingSun);
 
-	var _RotatingMoon = __webpack_require__(479);
+	var _RotatingMoon = __webpack_require__(480);
 
 	var _RotatingMoon2 = _interopRequireDefault(_RotatingMoon);
 
-	var _Helper = __webpack_require__(464);
+	var _Helper = __webpack_require__(465);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
@@ -100854,7 +100983,7 @@
 	          React.createElement(
 	            _Camera2.default,
 	            { id: 'camera', 'wasd-controls': { enabled: true }, active: true, position: '0 50 0' },
-	            React.createElement(_Cursor2.default, null)
+	            React.createElement(_Cursor2.default, { cursor: { timeout: 1000 } })
 	          ),
 	          React.createElement(_Sky2.default, { color: 'black' })
 	        ),
@@ -100906,7 +101035,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 466 */
+/* 467 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -100919,11 +101048,11 @@
 
 	var _aframeReact = __webpack_require__(157);
 
-	var _ColladaModel = __webpack_require__(467);
+	var _ColladaModel = __webpack_require__(468);
 
 	var _ColladaModel2 = _interopRequireDefault(_ColladaModel);
 
-	var _SequencedLasers = __webpack_require__(468);
+	var _SequencedLasers = __webpack_require__(469);
 
 	var _SequencedLasers2 = _interopRequireDefault(_SequencedLasers);
 
@@ -100977,7 +101106,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 467 */
+/* 468 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -101031,7 +101160,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 468 */
+/* 469 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -101046,7 +101175,7 @@
 
 	__webpack_require__(160);
 
-	var _Helper = __webpack_require__(464);
+	var _Helper = __webpack_require__(465);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
@@ -101135,7 +101264,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 469 */
+/* 470 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {"use strict";
@@ -101186,7 +101315,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 470 */
+/* 471 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -101203,9 +101332,9 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	__webpack_require__(471);
-
 	__webpack_require__(472);
+
+	__webpack_require__(473);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -101243,7 +101372,7 @@
 	  geometry: {
 	    primitive: 'ring',
 	    radiusInner: 0.01,
-	    radiusOuter: 0.016
+	    radiusOuter: 0.014
 	    // radius: 0.5,
 	    // height: 1
 	  },
@@ -101262,7 +101391,7 @@
 	exports.default = Cursor;
 
 /***/ },
-/* 471 */
+/* 472 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';
@@ -101294,7 +101423,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(161)))
 
 /***/ },
-/* 472 */
+/* 473 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';
@@ -101345,7 +101474,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(161)))
 
 /***/ },
-/* 473 */
+/* 474 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -101358,7 +101487,7 @@
 
 	var _aframeReact = __webpack_require__(157);
 
-	var _reactAddonsPureRenderMixin = __webpack_require__(474);
+	var _reactAddonsPureRenderMixin = __webpack_require__(475);
 
 	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
 
@@ -101411,13 +101540,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 474 */
+/* 475 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(475);
+	module.exports = __webpack_require__(476);
 
 /***/ },
-/* 475 */
+/* 476 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -101433,7 +101562,7 @@
 
 	'use strict';
 
-	var shallowCompare = __webpack_require__(476);
+	var shallowCompare = __webpack_require__(477);
 
 	/**
 	 * If your React component's render function is "pure", e.g. it will render the
@@ -101468,7 +101597,7 @@
 	module.exports = ReactComponentWithPureRenderMixin;
 
 /***/ },
-/* 476 */
+/* 477 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -101497,7 +101626,7 @@
 	module.exports = shallowCompare;
 
 /***/ },
-/* 477 */
+/* 478 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -101512,7 +101641,7 @@
 
 	__webpack_require__(160);
 
-	var _Helper = __webpack_require__(464);
+	var _Helper = __webpack_require__(465);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
@@ -101574,7 +101703,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 478 */
+/* 479 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -101589,19 +101718,19 @@
 
 	__webpack_require__(160);
 
-	var _Helper = __webpack_require__(464);
+	var _Helper = __webpack_require__(465);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
-	var _ColladaModel = __webpack_require__(467);
+	var _ColladaModel = __webpack_require__(468);
 
 	var _ColladaModel2 = _interopRequireDefault(_ColladaModel);
 
-	var _Camera = __webpack_require__(469);
+	var _Camera = __webpack_require__(470);
 
 	var _Camera2 = _interopRequireDefault(_Camera);
 
-	var _Cursor = __webpack_require__(470);
+	var _Cursor = __webpack_require__(471);
 
 	var _Cursor2 = _interopRequireDefault(_Cursor);
 
@@ -101670,7 +101799,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 479 */
+/* 480 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -101685,19 +101814,19 @@
 
 	__webpack_require__(160);
 
-	var _Helper = __webpack_require__(464);
+	var _Helper = __webpack_require__(465);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
-	var _ColladaModel = __webpack_require__(467);
+	var _ColladaModel = __webpack_require__(468);
 
 	var _ColladaModel2 = _interopRequireDefault(_ColladaModel);
 
-	var _Camera = __webpack_require__(469);
+	var _Camera = __webpack_require__(470);
 
 	var _Camera2 = _interopRequireDefault(_Camera);
 
-	var _Cursor = __webpack_require__(470);
+	var _Cursor = __webpack_require__(471);
 
 	var _Cursor2 = _interopRequireDefault(_Cursor);
 
@@ -101768,7 +101897,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 480 */
+/* 481 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -101781,47 +101910,47 @@
 
 	var _aframeReact = __webpack_require__(157);
 
-	var _Animation = __webpack_require__(481);
+	var _Animation = __webpack_require__(482);
 
 	var _Animation2 = _interopRequireDefault(_Animation);
 
-	var _Camera = __webpack_require__(469);
+	var _Camera = __webpack_require__(470);
 
 	var _Camera2 = _interopRequireDefault(_Camera);
 
-	var _Cursor = __webpack_require__(470);
+	var _Cursor = __webpack_require__(471);
 
 	var _Cursor2 = _interopRequireDefault(_Cursor);
 
-	var _Sky = __webpack_require__(473);
+	var _Sky = __webpack_require__(474);
 
 	var _Sky2 = _interopRequireDefault(_Sky);
 
-	var _RotatingSun = __webpack_require__(478);
+	var _RotatingSun = __webpack_require__(479);
 
 	var _RotatingSun2 = _interopRequireDefault(_RotatingSun);
 
-	var _RotatingMoon = __webpack_require__(479);
+	var _RotatingMoon = __webpack_require__(480);
 
 	var _RotatingMoon2 = _interopRequireDefault(_RotatingMoon);
 
-	var _Helper = __webpack_require__(464);
+	var _Helper = __webpack_require__(465);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
-	var _ColladaModel = __webpack_require__(467);
+	var _ColladaModel = __webpack_require__(468);
 
 	var _ColladaModel2 = _interopRequireDefault(_ColladaModel);
 
-	var _Rings = __webpack_require__(483);
+	var _Rings = __webpack_require__(484);
 
 	var _Rings2 = _interopRequireDefault(_Rings);
 
-	var _RandomStars = __webpack_require__(484);
+	var _RandomStars = __webpack_require__(485);
 
 	var _RandomStars2 = _interopRequireDefault(_RandomStars);
 
-	var _Planet = __webpack_require__(485);
+	var _Planet = __webpack_require__(486);
 
 	var _Planet2 = _interopRequireDefault(_Planet);
 
@@ -101907,7 +102036,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 481 */
+/* 482 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -101920,7 +102049,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(482);
+	__webpack_require__(483);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -102010,7 +102139,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 482 */
+/* 483 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';
@@ -102027,7 +102156,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(161)))
 
 /***/ },
-/* 483 */
+/* 484 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -102042,11 +102171,11 @@
 
 	__webpack_require__(160);
 
-	var _Helper = __webpack_require__(464);
+	var _Helper = __webpack_require__(465);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
-	var _ColladaModel = __webpack_require__(467);
+	var _ColladaModel = __webpack_require__(468);
 
 	var _ColladaModel2 = _interopRequireDefault(_ColladaModel);
 
@@ -102113,7 +102242,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 484 */
+/* 485 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -102128,11 +102257,11 @@
 
 	__webpack_require__(160);
 
-	var _Helper = __webpack_require__(464);
+	var _Helper = __webpack_require__(465);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
-	var _ColladaModel = __webpack_require__(467);
+	var _ColladaModel = __webpack_require__(468);
 
 	var _ColladaModel2 = _interopRequireDefault(_ColladaModel);
 
@@ -102233,7 +102362,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 485 */
+/* 486 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -102248,11 +102377,11 @@
 
 	__webpack_require__(160);
 
-	var _Helper = __webpack_require__(464);
+	var _Helper = __webpack_require__(465);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
-	var _ColladaModel = __webpack_require__(467);
+	var _ColladaModel = __webpack_require__(468);
 
 	var _ColladaModel2 = _interopRequireDefault(_ColladaModel);
 
@@ -102260,11 +102389,11 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _Camera = __webpack_require__(469);
+	var _Camera = __webpack_require__(470);
 
 	var _Camera2 = _interopRequireDefault(_Camera);
 
-	var _Cursor = __webpack_require__(470);
+	var _Cursor = __webpack_require__(471);
 
 	var _Cursor2 = _interopRequireDefault(_Cursor);
 
@@ -102366,7 +102495,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 486 */
+/* 487 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -102379,41 +102508,45 @@
 
 	var _aframeReact = __webpack_require__(157);
 
-	var _Camera = __webpack_require__(469);
+	var _Camera = __webpack_require__(470);
 
 	var _Camera2 = _interopRequireDefault(_Camera);
 
-	var _Cursor = __webpack_require__(470);
+	var _Cursor = __webpack_require__(471);
 
 	var _Cursor2 = _interopRequireDefault(_Cursor);
 
-	var _Sky = __webpack_require__(473);
+	var _Sky = __webpack_require__(474);
 
 	var _Sky2 = _interopRequireDefault(_Sky);
 
-	var _Helper = __webpack_require__(464);
+	var _Helper = __webpack_require__(465);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
-	var _CubicSnake = __webpack_require__(487);
+	var _CubicSnake = __webpack_require__(488);
 
 	var _CubicSnake2 = _interopRequireDefault(_CubicSnake);
 
-	var _CubicWalkway = __webpack_require__(488);
+	var _CubicWalkway = __webpack_require__(489);
 
 	var _CubicWalkway2 = _interopRequireDefault(_CubicWalkway);
 
-	var _CubicRainbow = __webpack_require__(489);
+	var _CubicRainbow = __webpack_require__(490);
 
 	var _CubicRainbow2 = _interopRequireDefault(_CubicRainbow);
 
-	var _CubicFoldable = __webpack_require__(490);
+	var _CubicFoldable = __webpack_require__(491);
 
 	var _CubicFoldable2 = _interopRequireDefault(_CubicFoldable);
 
-	var _RandomCubes = __webpack_require__(491);
+	var _RandomCubes = __webpack_require__(492);
 
 	var _RandomCubes2 = _interopRequireDefault(_RandomCubes);
+
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -102433,6 +102566,15 @@
 	  }
 
 	  _createClass(Cubic, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var that = this;
+	      var node = _reactDom2.default.findDOMNode(this.refs.camera);
+	      node.addEventListener('animationend', function (e) {
+	        if (e.target.attributes['attribute'].value == 'position') that.props.nextScene();
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return React.createElement(
@@ -102443,11 +102585,11 @@
 	          null,
 	          React.createElement(
 	            _Camera2.default,
-	            { id: 'camera', 'wasd-controls': { enabled: true }, active: true, position: '0 5 0' },
+	            { ref: 'camera', id: 'camera', 'wasd-controls': { enabled: true }, active: true, position: '0 5 0' },
 	            React.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 5 200', dur: '40000', ease: 'linear', begin: '5000' }),
 	            React.createElement(_Cursor2.default, { cursor: 'timeout: 1; fuse: true; maxDistance: 100000;' })
 	          ),
-	          React.createElement(_Sky2.default, { color: 'green' })
+	          React.createElement(_Sky2.default, { color: 'black' })
 	        ),
 	        React.createElement(_CubicFoldable2.default, { position: '0 65 -40', numFolds: 30, width: 120 }),
 	        React.createElement(_CubicFoldable2.default, { position: '0 65 195', numFolds: 30, width: 120 }),
@@ -102500,7 +102642,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 487 */
+/* 488 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -102513,7 +102655,7 @@
 
 	var _aframeReact = __webpack_require__(157);
 
-	var _Helper = __webpack_require__(464);
+	var _Helper = __webpack_require__(465);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
@@ -102617,7 +102759,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 488 */
+/* 489 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -102630,7 +102772,7 @@
 
 	var _aframeReact = __webpack_require__(157);
 
-	var _Helper = __webpack_require__(464);
+	var _Helper = __webpack_require__(465);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
@@ -102726,7 +102868,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 489 */
+/* 490 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -102739,7 +102881,7 @@
 
 	var _aframeReact = __webpack_require__(157);
 
-	var _Helper = __webpack_require__(464);
+	var _Helper = __webpack_require__(465);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
@@ -102834,7 +102976,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 490 */
+/* 491 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -102847,7 +102989,7 @@
 
 	var _aframeReact = __webpack_require__(157);
 
-	var _Helper = __webpack_require__(464);
+	var _Helper = __webpack_require__(465);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
@@ -102966,7 +103108,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 491 */
+/* 492 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
@@ -102979,7 +103121,7 @@
 
 	var _aframeReact = __webpack_require__(157);
 
-	var _Helper = __webpack_require__(464);
+	var _Helper = __webpack_require__(465);
 
 	var _Helper2 = _interopRequireDefault(_Helper);
 
