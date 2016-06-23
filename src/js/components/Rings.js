@@ -37,7 +37,7 @@ class Rings extends React.Component{
   }
 }
 Rings.defaultProps = {
-  numRings: 8,
+  numRings: 12,
 }
 
 export default Rings;

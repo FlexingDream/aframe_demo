@@ -36,12 +36,8 @@ class Space extends React.Component{
           </Camera>
           <Sky color="black"/>
         </Entity>
-        <Planet position="0 0 0"/>
-        <Planet position="0 0 0"/>
-        <Planet position="0 0 0"/>
-        <Planet position="0 0 0"/>
-        <Planet position="0 0 0"/>
-        
+        {Planet.getRandomPlanets(8)}
+
         <RotatingSun position="0 -100 0"></RotatingSun>
         <RotatingMoon position="0 150 -300" rotation="0 0 0">
           <Animation attribute="rotation" to="0 360 0" from="0 0 0" dur="60000" repeat="indefinite"  ease="linear"/>
