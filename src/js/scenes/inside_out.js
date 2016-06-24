@@ -48,7 +48,6 @@ class InsideOut extends React.Component{
         <Audio  audioSrc={'audio/inside_out.mp3'} shouldUpdateFrequencies="false" shouldPlay={true}/>
         {this.getScene()}
 
-
       </Scene>
     );
   }

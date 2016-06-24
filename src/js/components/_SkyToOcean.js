@@ -32,7 +32,7 @@ class SkyToOcean extends React.Component{
 
         <Entity>
           <WalkableCameraCursor position={[0, 100, 0]}>
-          <Animation attribute='position' to='0 -15 0' dur='10000' ease='linear' begin="2000"/>
+            <Animation attribute='position' to='0 -15 0' dur='15000' ease='linear' begin="2000"/>
           </WalkableCameraCursor>
         </Entity>
 
