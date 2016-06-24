@@ -20,6 +20,7 @@ import Lasers from './Laser';
 
 */
 class SkyToOcean extends React.Component{
+
   constructor(props){
     super(props);
   }
@@ -32,13 +33,13 @@ class SkyToOcean extends React.Component{
 
         <Entity>
           <WalkableCameraCursor position={[0, 100, 0]}>
-          <Animation attribute='position' to='0 -15 0' dur='10000' ease='linear' begin="2000"/>
+            <Animation attribute='position' to='0 -15 0' dur='15000' ease='linear' begin="2000"/>
           </WalkableCameraCursor>
         </Entity>
 
         <SequencedLasers position={[0, -80, 0]}/>
         <Lasers type='line' numBlocks="20" position="0 -100 0"/>
-        <Lasers type='line' numBlocks="20" position="0 -50 0"/>
+        <Lasers type='circle' numBlocks="20" position="0 -50 0"/>
 
         <Ocean/>
 

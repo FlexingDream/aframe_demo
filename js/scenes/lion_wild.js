@@ -57,6 +57,10 @@ class LionWild extends React.Component{
       that.nextScene();
     });*/
 
+    document.addEventListener('touchstart', () => {
+      document.querySelector('#ready-btn').emit('ios-click');
+    })
+
   }
   nextScene(){
     let currStage = this.state.stage;

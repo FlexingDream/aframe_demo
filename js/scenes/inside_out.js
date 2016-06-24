@@ -1,5 +1,6 @@
 import 'babel-polyfill';
 import 'aframe-particle-system-component';
+import '../aframe_components/mobile-touch-interaction';
 
 import $ from 'jquery';
 import {Scene, Entity} from 'aframe-react';
@@ -35,6 +36,13 @@ class InsideOut extends React.Component{
       return <SkyToOcean/>;
   }
 
+
+  componentDidMount(){
+    document.addEventListener('touchstart', () => {
+      document.querySelector('#ready-btn').emit('ios-click');
+    })
+  }
+
   render(){
     return(
       <Scene stats fog id="scene">
@@ -43,11 +51,13 @@ class InsideOut extends React.Component{
           <Entity>
             <a-mixin id="laser" geometry="primitive: box; depth: 0.5; width: 0.5;" material="opacity:0.3;shader:flat;"></a-mixin>
           </Entity>
+          <Entity>
+            {Loading.getModels()}
+          </Entity>
         </a-assets>
 
         <Audio  audioSrc={'audio/inside_out.mp3'} shouldUpdateFrequencies="false" shouldPlay={true}/>
         {this.getScene()}
-
 
       </Scene>
     );
