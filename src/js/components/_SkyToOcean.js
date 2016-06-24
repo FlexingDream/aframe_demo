@@ -20,6 +20,7 @@ import Lasers from './Laser';
 
 */
 class SkyToOcean extends React.Component{
+
   constructor(props){
     super(props);
   }

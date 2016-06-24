@@ -59,9 +59,11 @@ class Loading extends React.Component{
             </Text>
             </TextGroup>
           </Entity>
+
           <ColladaModel id='ready-btn' ref='readyBtn' asset='#ready-btn-collada' position='-5 3 -10' scale='0.6 0.6 0.6' visible='false'>
             <Animation attribute='visible' to='true' begin='show'/>
           </ColladaModel>
+          
         </Entity>
       </Entity>
     );

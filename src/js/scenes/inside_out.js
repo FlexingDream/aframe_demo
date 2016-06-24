@@ -43,6 +43,9 @@ class InsideOut extends React.Component{
           <Entity>
             <a-mixin id="laser" geometry="primitive: box; depth: 0.5; width: 0.5;" material="opacity:0.3;shader:flat;"></a-mixin>
           </Entity>
+          <Entity>
+            {Loading.getModels()}
+          </Entity>
         </a-assets>
 
         <Audio  audioSrc={'audio/inside_out.mp3'} shouldUpdateFrequencies="false" shouldPlay={true}/>
