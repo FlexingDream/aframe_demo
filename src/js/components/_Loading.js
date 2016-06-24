@@ -14,13 +14,19 @@ class Loading extends React.Component{
   componentDidMount(){
     let that = this;
 
-    document.querySelector('#ready-btn').addEventListener('click',function(){
-      that.props.nextScene();
-    });
+    let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
-    document.querySelector('#ready-btn').addEventListener('touchstart', () => {
-      that.props.nextScene();
-    })
+    if (iOS === false){
+      document.querySelector('#ready-btn').addEventListener('click',function(){
+        that.props.nextScene();
+      });
+    } else {
+      document.querySelector('#ready-btn').addEventListener('touchstart', () => {
+        that.props.nextScene();
+      });
+    }
+
+
 
     document.getElementById('scene').addEventListener('song_loaded',function(){
       setTimeout(function(){
