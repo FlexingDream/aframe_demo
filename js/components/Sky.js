@@ -10,19 +10,16 @@ class Sky extends React.Component{
   render(){
     return(
       <Entity geometry={{primitive: 'box',height: 3000,width:3000,depth:3000, radius: 3000}}
-          material={{color: this.props.color, shader: 'flat'}}
+          material={{color: this.props.color || 'white', shader: 'flat', fog: false}}
           scale="1 1 -1">
         {this.props.children}
       </Entity>
-          );
+    );
   }
   shouldComponentUpdate(nextProps,nextState){
     return false;
   }
 
-};
+}
 
-Sky.defaultProps = {
-  color: 'white',
-};
 export default Sky;

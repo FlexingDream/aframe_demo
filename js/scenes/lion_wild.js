@@ -12,6 +12,7 @@ import MovingMountains from '../components/_MovingMountains';
 import Space from '../components/_Space';
 import Cubic from '../components/_Cubic';
 import Loading from '../components/_Loading';
+import Ending from '../components/_Ending';
 class LionWild extends React.Component{
   constructor(props){
     super(props);
@@ -33,6 +34,7 @@ class LionWild extends React.Component{
   getModels(){
     return(
       <Entity>
+        {Loading.getModels()}
         {MovingMountains.getModels()}
         {Space.getModels()}
         {Cubic.getModels()}
@@ -49,6 +51,12 @@ class LionWild extends React.Component{
   }
   componentDidMount(){
     Helper.showTimer();
+    let that = this;
+/*    document.querySelector('.audio-player').addEventListener('ended',function(){
+      console.log('finished song');
+      that.nextScene();
+    });*/
+
   }
   nextScene(){
     let currStage = this.state.stage;
@@ -68,6 +76,8 @@ class LionWild extends React.Component{
       return <Cubic nextScene={this.nextScene.bind(this)}/>;
     else if (this.state.stage == 2)
       return <Space nextScene={this.nextScene.bind(this)}/>;
+    else if (this.state.stage == 3)
+      return <Ending/>;
   }
 
   render(){
