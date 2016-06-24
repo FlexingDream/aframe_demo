@@ -38,7 +38,7 @@ class SkyToOcean extends React.Component{
 
         <SequencedLasers position={[0, -80, 0]}/>
         <Lasers type='line' numBlocks="20" position="0 -100 0"/>
-        <Lasers type='line' numBlocks="20" position="0 -50 0"/>
+        <Lasers type='circle' numBlocks="20" position="0 -50 0"/>
 
         <Ocean/>
 
