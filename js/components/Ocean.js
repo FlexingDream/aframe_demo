@@ -28,7 +28,7 @@ class Ocean extends React.Component{
       <Entity>
         <a-ocean position={this.props.position || "0 -1 0"}></a-ocean>
         <a-box color="#12308D" position="0 -5 0" depth="50000" height="1" width="50000">
-          <Animation attribute="visible" begin="9000" to="false"/>
+          <Animation attribute="visible" begin="29000" to="false"/>
         </a-box>
         <Dust position={[0, -50, 0]} />
       </Entity>
