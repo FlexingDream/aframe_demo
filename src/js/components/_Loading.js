@@ -1,3 +1,5 @@
+import '../aframe_components/mobile-touch-interaction';
+
 import {Animation, Entity} from 'aframe-react';
 import Camera from '../components/Camera';
 import Cursor from '../components/Cursor';
@@ -20,10 +22,6 @@ class Loading extends React.Component{
       document.querySelector('#ready-btn').addEventListener('click',function(){
         that.props.nextScene();
       });
-    } else {
-      document.querySelector('#ready-btn').addEventListener('touchstart', () => {
-        that.props.nextScene();
-      });
     }
 
 
@@ -31,6 +29,16 @@ class Loading extends React.Component{
     document.getElementById('scene').addEventListener('song_loaded',function(){
       setTimeout(function(){
         ReactDOM.findDOMNode(that.refs.readyBtn).emit('show');
+
+        /**
+          Now start listening to touchstart
+        */
+        if (iOS){
+          document.querySelector('#ready-btn').addEventListener('ios-click', () => {
+            that.props.nextScene();
+          });
+        }
+
         ReactDOM.findDOMNode(that.refs.loading).emit('hide');
 
       },1000);
@@ -47,7 +55,7 @@ class Loading extends React.Component{
 
   render(){
     return(
-      <Entity class='loading'>
+      <Entity class='loading' mobile-touch-interaction={this.props.nextScene}>
         <Entity position={this.props.position}>
           <Entity>
             <Camera ref='camera' id="camera" wasd-controls={{enabled: false}} active position="0 0 10" >

@@ -1,5 +1,6 @@
 import 'babel-polyfill';
 import 'aframe-particle-system-component';
+import '../aframe_components/mobile-touch-interaction';
 
 import $ from 'jquery';
 import {Scene, Entity} from 'aframe-react';
@@ -33,6 +34,13 @@ class InsideOut extends React.Component{
       return <Loading nextScene={this.nextScene.bind(this)}/>;
     else
       return <SkyToOcean/>;
+  }
+
+
+  componentDidMount(){
+    document.addEventListener('touchstart', () => {
+      document.querySelector('#ready-btn').emit('ios-click');
+    })
   }
 
   render(){

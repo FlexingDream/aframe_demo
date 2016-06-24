@@ -12,12 +12,19 @@ AFRAME.registerComponent('mobile-touch-interaction', {
   // FOR TOUCH EVENTS ON MOBILE
   init: function () {
 
-    document.addEventListener('touchstart',function start(e){
+    let iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+    if (iOS){
 
       var node = $('.audio-player').data('node');
       if (!node){
         return;
       }
+      
+    }
+    document.addEventListener('touchstart',function start(e){
+
+
 
       document.removeEventListener('touchstart',start,false);
       document.getElementById('scene').removeEventListener('start_song',this.startSong,false);
