@@ -13,9 +13,14 @@ class Loading extends React.Component{
   }
   componentDidMount(){
     let that = this;
+
     document.querySelector('#ready-btn').addEventListener('click',function(){
-        that.props.nextScene();
+      that.props.nextScene();
     });
+
+    document.querySelector('#ready-btn').addEventListener('touchstart', () => {
+      that.props.nextScene();
+    })
 
     document.getElementById('scene').addEventListener('song_loaded',function(){
       setTimeout(function(){
@@ -63,7 +68,7 @@ class Loading extends React.Component{
           <ColladaModel id='ready-btn' ref='readyBtn' asset='#ready-btn-collada' position='-5 3 -10' scale='0.6 0.6 0.6' visible='false'>
             <Animation attribute='visible' to='true' begin='show'/>
           </ColladaModel>
-          
+
         </Entity>
       </Entity>
     );
