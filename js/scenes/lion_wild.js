@@ -1,6 +1,7 @@
 import {Animation, Entity} from 'aframe-react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import 'babel-polyfill';
 import Scene from '../components/Scene';
 import Audio from '../components/Audio';
 import Helper from '../other/Helper';
