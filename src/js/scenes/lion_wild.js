@@ -34,6 +34,7 @@ class LionWild extends React.Component{
   getModels(){
     return(
       <Entity>
+        {Loading.getModels()}
         {MovingMountains.getModels()}
         {Space.getModels()}
         {Cubic.getModels()}
@@ -51,10 +52,10 @@ class LionWild extends React.Component{
   componentDidMount(){
     Helper.showTimer();
     let that = this;
-    document.querySelector('.audio-player').addEventListener('ended',function(){
+/*    document.querySelector('.audio-player').addEventListener('ended',function(){
       console.log('finished song');
       that.nextScene();
-    });
+    });*/
 
   }
   nextScene(){

@@ -37,7 +37,7 @@ class TextGroup extends React.Component{
 
   render(){
     return(
-      <Entity class="text-group">
+      <Entity class="text-group" visible={this.props.visible}>
         <Entity position={this.props.position}>
           {this.getChildren()}
         </Entity>
@@ -50,6 +50,7 @@ TextGroup.defaultProps = {
   shouldCenter: true,
   axis: 'x',
   margin: 0,
+  visible: true,
 };
 TextGroup.propTypes = {
   children: React.PropTypes.instanceOf(Text),
