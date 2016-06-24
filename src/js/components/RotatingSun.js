@@ -14,7 +14,6 @@ class RotatingSun extends React.Component{
   componentDidMount(){
     let node = ReactDOM.findDOMNode(this.refs.rotatingSun);
       node.addEventListener('click',function(){
-        console.log(node.querySelector('.camera'));
         node.querySelector('.camera').setAttribute('camera','active',true);
     });
   }
