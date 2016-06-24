@@ -3,8 +3,12 @@ var webpack = require('webpack');
 require('babel-polyfill');
 
 
+<<<<<<< HEAD
 //var IS_PRODUCTION = process.env.NODE_ENV === 'development';
 var IS_PRODUCTION = true;
+=======
+var IS_PRODUCTION = true;//;process.env.NODE_ENV === 'development';
+>>>>>>> 985040c5099098d59a4a52813c3f1b37b7ed3904
 
 /*var ENTRY_POINTS = [
   './src/js/app',
@@ -35,7 +39,8 @@ if (IS_PRODUCTION) {
           except: ['$super', '$', 'exports', 'require']
       },
       sourcemap: false
-    })
+    }),
+    new webpack.optimize.OccurenceOrderPlugin()
   );
 }
 

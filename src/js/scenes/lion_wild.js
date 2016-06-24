@@ -1,9 +1,5 @@
 import {Animation, Entity} from 'aframe-react';
-import 'aframe-layout-component';
 import ReactDOM from 'react-dom';
-
-import Perf from 'react-addons-perf';
-import 'babel-polyfill';
 import $ from 'jquery';
 import Scene from '../components/Scene';
 import Audio from '../components/Audio';
