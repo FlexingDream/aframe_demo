@@ -10,6 +10,9 @@ import {Entity, Animation} from 'aframe-react';
 import WalkableCameraCursor from './WalkableCameraCursor';
 import Ocean from './Ocean';
 import Sky from './Sky';
+import SchoolOfFishes from './SchoolOfFishes';
+import HerdOfHorses from './HerdOfHorses';
+
 
 class AnimalFarm extends React.Component{
   constructor(props){
@@ -24,7 +27,10 @@ class AnimalFarm extends React.Component{
     extras.registerAll();
   }
 
-
+  /**
+    <HerdOfHorses position={[0, -100, -300]} rotation={[0, 90, 0]}/>
+    <SchoolOfFishes position={[0, -100, -300]} rotation={[0, 90, 0]}/>
+  */
   render(){
     return(
       <Entity>
@@ -34,29 +40,10 @@ class AnimalFarm extends React.Component{
           </WalkableCameraCursor>
         </Entity>
 
-        <Entity three-model="loader: json; animation: default; src: url(models/fish.js);"
-                position={[0, -100, -200]}
-                rotation={[0, 90, 0]}/>
-
-        <Entity three-model="loader: json; animation: default; src: url(models/fish.js);"
-                position={[10, -50, -300]}
-                rotation={[0, 90, 0]}/>
-
-        <Entity three-model="loader: json; animation: default; src: url(models/fish.js);"
-                position={[-50, -50, -350]}
-                rotation={[0, 90, 0]}/>
-
-        <Entity three-model="loader: json; animation: default; src: url(models/fish.js);"
-                position={[-50, -50, -200]}
-                rotation={[0, 90, 0]}/>
-        <Entity three-model="loader: json; animation: default; src: url(models/fish.js);"
-                position={[-50, -125, -200]}
-                rotation={[0, 90, 0]}/>
 
 
 
-
-        <Sky color='black'/>
+        <Sky/>
       </Entity>
 
 
