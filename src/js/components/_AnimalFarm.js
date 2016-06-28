@@ -29,7 +29,8 @@ class AnimalFarm extends React.Component{
 
   /**
     <HerdOfHorses position={[0, -100, -300]} rotation={[0, 90, 0]}/>
-    <SchoolOfFishes position={[0, -100, -300]} rotation={[0, 90, 0]}/>
+
+
   */
   render(){
     return(
@@ -40,7 +41,9 @@ class AnimalFarm extends React.Component{
           </WalkableCameraCursor>
         </Entity>
 
-
+          <SchoolOfFishes position={[-500, -100, -300]} rotation={[0, 90, 0]}>
+            <Animation attribute='position' to={[500, -100, -300]} dur="10000"/>
+          </SchoolOfFishes>
 
 
         <Sky/>
