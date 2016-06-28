@@ -13,7 +13,7 @@ import Sky from './Sky';
 import SchoolOfFishes from './SchoolOfFishes';
 import HerdOfHorses from './HerdOfHorses';
 import Butterflies from './Butterflies';
-
+import Eagle from './Eagle';
 
 class AnimalFarm extends React.Component{
   constructor(props){
@@ -45,8 +45,7 @@ class AnimalFarm extends React.Component{
           </WalkableCameraCursor>
         </Entity>
 
-          <Butterflies position={[0, 0, 0]}/>
-
+          <Eagle position={[0, 0, -300]} rotation={[0, 90, 0]}/>
 
         <Sky color='black'/>
       </Entity>
