@@ -77,10 +77,10 @@ class SkyToOcean extends React.Component{
         <Entity layout={{
           type: 'circle',
           radius: 400
-        }} position={[0, -100, -1000]}>
-          <Animation attribute='position' to={[0, -100, 1000]} dur='20000' begin='25000'/>
-          <Animation attribute='rotation' dur='20000' direction='reverse' to={[0, 360, 0]} begin='45000'/>
-          <Animation attribute='position' dur='20000' from={[0, -100, 1000]} to={[0, -100, 2000]} begin="65000"/>
+        }} position={[0, -100, 0]} visible='false'>
+          <Animation attribute='visible' to='true' begin='45000' />
+          <Animation attribute='rotation' dur='30000' direction='reverse' to={[0, 360, 0]} begin='45000'/>
+          <Animation attribute='position' dur='20000' from={[0, -100, 0]} to={[0, -100, 2000]} begin="75000"/>
           <HerdOfHorses rotation={[0, 0, 0]}>
 
           </HerdOfHorses>
