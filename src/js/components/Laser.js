@@ -58,7 +58,7 @@ class Lasers extends React.Component{
         var randomEasing = easings[ i%(easings.length)];
         var newElement = React.cloneElement(laser_1, {
           position: [x,y,z],
-          key: i, 
+          key: i,
           material:{color: this.getRandomColor()},
           rotation: [45,45,45]
         },React.cloneElement(anim,{
@@ -73,7 +73,7 @@ class Lasers extends React.Component{
       for (var i = 0;i < this.props.numBlocks; i++){
         var randomEasing = easings[ i%(easings.length)];
         var newElement = React.cloneElement(laser_1, {
-          key: i, 
+          key: i,
           material:{color: this.getRandomColor()},
           rotation: [90, 90, 90]
         },React.cloneElement(anim,{
@@ -86,7 +86,16 @@ class Lasers extends React.Component{
           </Entity>
         );*/
       }
-      return(<Entity layout={{type: 'dodecahedron', margin:20, radius:80}} position={this.props.position} >{elements}</Entity>);
+      return(
+        <Entity layout={{type: 'dodecahedron', margin:20, radius:80}}
+                position={this.props.position}
+                visible={this.props.visible || 'true'}>
+
+          {elements}
+          {this.props.children}
+          
+        </Entity>
+      );
     }
   }
 }

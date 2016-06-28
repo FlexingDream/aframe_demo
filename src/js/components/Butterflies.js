@@ -39,8 +39,8 @@ class Butterflies extends React.Component{
         type: 'dodecahedron',
         radius: 75
       }} {...this.props}>
-        {butterflyHolder}
         {this.props.children}
+        {butterflyHolder}
       </Entity>
     );
   }
