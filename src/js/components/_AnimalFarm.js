@@ -12,6 +12,7 @@ import Ocean from './Ocean';
 import Sky from './Sky';
 import SchoolOfFishes from './SchoolOfFishes';
 import HerdOfHorses from './HerdOfHorses';
+import Butterflies from './Butterflies';
 
 
 class AnimalFarm extends React.Component{
@@ -30,6 +31,9 @@ class AnimalFarm extends React.Component{
   /**
     <HerdOfHorses position={[0, -100, -300]} rotation={[0, 90, 0]}/>
 
+    <SchoolOfFishes position={[-500, -100, -300]} rotation={[0, 90, 0]}>
+      <Animation attribute='position' to={[500, -100, -300]} dur="10000"/>
+    </SchoolOfFishes>
 
   */
   render(){
@@ -41,12 +45,10 @@ class AnimalFarm extends React.Component{
           </WalkableCameraCursor>
         </Entity>
 
-          <SchoolOfFishes position={[-500, -100, -300]} rotation={[0, 90, 0]}>
-            <Animation attribute='position' to={[500, -100, -300]} dur="10000"/>
-          </SchoolOfFishes>
+          <Butterflies position={[0, 0, 0]}/>
 
 
-        <Sky/>
+        <Sky color='black'/>
       </Entity>
 
 
