@@ -3,7 +3,8 @@ var webpack = require('webpack');
 require('babel-polyfill');
 
 
-var IS_PRODUCTION = process.env.NODE_ENV === 'development';
+//var IS_PRODUCTION = process.env.NODE_ENV === 'development';
+var IS_PRODUCTION = true;
 
 /*var ENTRY_POINTS = [
   './src/js/app',
