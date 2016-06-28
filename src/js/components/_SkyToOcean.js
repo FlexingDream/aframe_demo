@@ -2,6 +2,8 @@
   _SkyToOcean
   Falling from sky to ocean. Mainly for InsideOut.
 */
+import 'aframe-layout-component';
+
 import {Entity, Animation} from 'aframe-react';
 import WalkableCameraCursor from './WalkableCameraCursor';
 import Sky from './Sky';
@@ -10,7 +12,8 @@ import Rain from './Rain';
 import Box from './Box';
 import SequencedLasers from './SequencedLasers';
 import Lasers from './Laser';
-
+import SchoolOfFishes from './SchoolOfFishes';
+import HerdOfHorses from './HerdOfHorses';
 /**
 <Entity
   geometry={{primitive: 'sphere', radius: 0.5}}
@@ -24,7 +27,11 @@ class SkyToOcean extends React.Component{
   constructor(props){
     super(props);
   }
-
+  /**
+  <WalkableCameraCursor position={[0, 100, 0]}>
+    <Animation attribute='position' to='0 -15 0' dur='30000' ease='linear' begin="2000"/>
+  </WalkableCameraCursor>
+  */
   render(){
     return(
       <Entity>
@@ -32,16 +39,33 @@ class SkyToOcean extends React.Component{
         </Rain>
 
         <Entity>
-          <WalkableCameraCursor position={[0, 100, 0]}>
-            <Animation attribute='position' to='0 -15 0' dur='30000' ease='linear' begin="2000"/>
+          <WalkableCameraCursor position={[0, -15, 0]}>
           </WalkableCameraCursor>
         </Entity>
 
         <SequencedLasers position={[0, -80, 0]}/>
         <Lasers type='line' numBlocks="20" position="0 -100 0"/>
-        <Lasers type='circle' numBlocks="20" position="0 -50 0"/>
 
         <Ocean/>
+
+        <SchoolOfFishes position={[500, -200, -2000]}>
+          <Animation attribute='position' to={[-500, -200, 2000]} dur="30000"/>
+        </SchoolOfFishes>
+
+        <Entity layout={{
+          type: 'circle',
+          radius: 500
+        }} position={[0, -100, 0]}>
+
+          <Animation attribute='rotation' dur='20000' direction='reverse' to={[0, 360, 0]}/>
+          <Animation attribute='position' dur='20000' to={[0, -100, 2000]} begin="20000"/>
+          <HerdOfHorses rotation={[0, 0, 0]}>
+
+          </HerdOfHorses>
+
+        </Entity>
+
+
 
         <Sky color="black"/>
 
