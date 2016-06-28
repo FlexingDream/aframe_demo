@@ -164,7 +164,7 @@
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      _Helper2.default.showTimer();
+	      /* Helper.showTimer();*/
 	      var that = this;
 	      /*    document.querySelector('.audio-player').addEventListener('ended',function(){
 	            console.log('finished song');

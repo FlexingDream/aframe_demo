@@ -51,7 +51,7 @@ class LionWild extends React.Component{
       );
   }
   componentDidMount(){
-    Helper.showTimer();
+   /* Helper.showTimer();*/
     let that = this;
 /*    document.querySelector('.audio-player').addEventListener('ended',function(){
       console.log('finished song');
