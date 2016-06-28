@@ -60,7 +60,7 @@ class SkyToOcean extends React.Component{
         </Eagle>
 
         <SequencedLasers visible='false' position={[0, -80, 0]}>
-          <Animation attribute='visible' to='true' begin='100000'/>
+          <Animation attribute='visible' to='true' begin='90000'/>
         </SequencedLasers>
 
         <Lasers type='line' visible='false' numBlocks="20" position="0 -100 0">
@@ -76,9 +76,8 @@ class SkyToOcean extends React.Component{
 
         <Entity layout={{
           type: 'circle',
-          radius: 300
-        }} position={[0, -100, -1000]} visible='false'>
-          <Animation attribute='visible' to='true' begin='25000'/>
+          radius: 400
+        }} position={[0, -100, -1000]}>
           <Animation attribute='position' to={[0, -100, 1000]} dur='20000' begin='25000'/>
           <Animation attribute='rotation' dur='20000' direction='reverse' to={[0, 360, 0]} begin='45000'/>
           <Animation attribute='position' dur='20000' from={[0, -100, 1000]} to={[0, -100, 2000]} begin="65000"/>
@@ -90,7 +89,7 @@ class SkyToOcean extends React.Component{
 
         <Butterflies position={[0, 0, -1000]}>
           <Animation attribute='position' dur='10000' to={[0, 0, 1000]} begin='25000'/>
-          <Animation attribute='rotation' dur='20000' repeat="indefinite" to={[0, 0, 360]} begin='45000'/>
+          <Animation attribute='rotation' dur='10000' repeat="indefinite" to={[0, 0, 360]} begin='45000'/>
         </Butterflies>
 
 
