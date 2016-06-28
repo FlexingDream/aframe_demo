@@ -3,8 +3,7 @@ var webpack = require('webpack');
 require('babel-polyfill');
 
 
-//var IS_PRODUCTION = process.env.NODE_ENV === 'development';
-var IS_PRODUCTION = true;
+var IS_PRODUCTION = process.env.NODE_ENV === 'development';
 
 /*var ENTRY_POINTS = [
   './src/js/app',
@@ -35,8 +34,7 @@ if (IS_PRODUCTION) {
           except: ['$super', '$', 'exports', 'require']
       },
       sourcemap: false
-    }),
-    new webpack.optimize.OccurenceOrderPlugin()
+    })
   );
 }
 
@@ -44,7 +42,8 @@ module.exports = {
   entry: {
     lion_wild: './src/js/scenes/lion_wild',
     port_rob: './src/js/scenes/port_rob',
-    inside_out: './src/js/scenes/inside_out'
+    inside_out: './src/js/scenes/inside_out',
+    try_animals: './src/js/scenes/try_animals'
 /*    testing: './src/js/scenes/testing',
     scene_5: './src/js/scenes/scene_5',
     scene_4: './src/js/scenes/scene_4',
