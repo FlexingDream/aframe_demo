@@ -7,8 +7,8 @@ class Cursor extends React.Component{
   render(){
     return (
       <Entity cursor={this.props.cursor}  geometry={this.props.geometry} material={this.props.material} position="0 0 -1">
-        <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="300"></a-animation>
-          <a-animation begin="fusing" easing="ease-in" attribute="scale" fill="forwards" from="1 1 1" to="0.1 0.1 0.1" dur="300"></a-animation>
+{/*        <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="300"></a-animation>
+          <a-animation begin="fusing" easing="ease-in" attribute="scale" fill="forwards" from="1 1 1" to="0.1 0.1 0.1" dur="300"></a-animation>*/}
       </Entity>
     );
   }

@@ -44,67 +44,29 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _aframeReact = __webpack_require__(460);
-
-	__webpack_require__(455);
-
-	__webpack_require__(464);
-
-	var _aframeExtras = __webpack_require__(475);
-
-	var _aframeExtras2 = _interopRequireDefault(_aframeExtras);
-
-	var _reactAddonsPerf = __webpack_require__(556);
-
-	var _reactAddonsPerf2 = _interopRequireDefault(_reactAddonsPerf);
-
 	__webpack_require__(157);
+
+	__webpack_require__(454);
+
+	__webpack_require__(458);
 
 	var _jquery = __webpack_require__(459);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
+	var _aframeReact = __webpack_require__(460);
 
 	var _reactDom = __webpack_require__(461);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _underscore = __webpack_require__(528);
+	var _AnimalFarm = __webpack_require__(561);
 
-	var _underscore2 = _interopRequireDefault(_underscore);
-
-	var _Camera = __webpack_require__(466);
-
-	var _Camera2 = _interopRequireDefault(_Camera);
-
-	var _Cursor = __webpack_require__(467);
-
-	var _Cursor2 = _interopRequireDefault(_Cursor);
-
-	var _Audio = __webpack_require__(527);
-
-	var _Audio2 = _interopRequireDefault(_Audio);
-
-	var _Sky = __webpack_require__(470);
-
-	var _Sky2 = _interopRequireDefault(_Sky);
-
-	__webpack_require__(557);
-
-	__webpack_require__(531);
-
-	var _RainingObjects = __webpack_require__(558);
-
-	var _RainingObjects2 = _interopRequireDefault(_RainingObjects);
-
-	__webpack_require__(560);
+	var _AnimalFarm2 = _interopRequireDefault(_AnimalFarm);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -114,1561 +76,33 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	// import '../aframe_components/three-model.js';
-	_aframeExtras2.default.loaders.registerAll();
+	var TryAnimals = function (_React$Component) {
+	  _inherits(TryAnimals, _React$Component);
 
-	var MODEL_LOCATION = "3d_models/";
+	  function TryAnimals(props) {
+	    _classCallCheck(this, TryAnimals);
 
-	var PortRob = function (_React$Component) {
-	  _inherits(PortRob, _React$Component);
-
-	  function PortRob(props) {
-	    _classCallCheck(this, PortRob);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PortRob).call(this, props));
-
-	    var heights = Array.apply(null, Array(_this.props.frequencySize)).map(function (x, i) {
-	      return 0;
-	    });
-	    _this.state = {
-	      heights: heights,
-	      // song: 'https://cdn.rawgit.com/FlexingDream/aframe_demo/pua/src/audio/port_rob_full.mp3',
-	      // song: 'audio/port_rob_full.mp3',
-	      song: 'https://res.cloudinary.com/dtniqc2hg/video/upload/q_63/v1464656484/port_rob_full_kzzetz.mp3',
-	      fogColour: '#F97B8E',
-	      shouldPlay: true,
-	      stage: 0
-	    };
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TryAnimals).call(this, props));
 	  }
 
-	  _createClass(PortRob, [{
-	    key: 'shouldComponentUpdate',
-	    value: function shouldComponentUpdate(nextProps, nextState) {
-	      if (nextState.fogColour != this.state.fogColour) return true;else if (nextState.shouldPlay == false) return true;else if (nextState.stage != this.state.stage) return true;else return false;
-	    }
-	  }, {
-	    key: 'getMixins',
-	    value: function getMixins() {
-	      return _react2.default.createElement(
-	        _aframeReact.Entity,
-	        null,
-	        _react2.default.createElement('a-mixin', { id: 'starPrimitive', geometry: 'primitive: circle; radius: 0.5;', material: 'color: #FFEE35;', 'look-at': '[camera]' }),
-	        _react2.default.createElement('a-mixin', { id: 'snow', geometry: 'primitive: box; depth: 0.02;height: 0.04; width: 0.04', material: 'color: #DDD; opacity: 0.4; shader: flat' }),
-	        _react2.default.createElement('a-mixin', { id: 'font', text: 'font: digital dream skew narrow; height: 0.5; size: 5' })
-	      );
-	    }
-	  }, {
-	    key: 'getModels',
-	    value: function getModels() {
-	      return _react2.default.createElement(
-	        _aframeReact.Entity,
-	        null,
-	        _react2.default.createElement('a-asset-item', { id: 'moon-asset', src: MODEL_LOCATION + "moon.dae" }),
-	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-0', src: MODEL_LOCATION + "terrain_0.dae" }),
-	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-1', src: MODEL_LOCATION + "terrain_1.dae" }),
-	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-a', src: MODEL_LOCATION + "terrain_a.dae" }),
-	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-b', src: MODEL_LOCATION + "terrain_b.dae" }),
-	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-c', src: MODEL_LOCATION + "terrain_c.dae" }),
-	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-d', src: MODEL_LOCATION + "terrain_d.dae" }),
-	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-e', src: MODEL_LOCATION + "terrain_e.dae" }),
-	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-x', src: MODEL_LOCATION + "terrain_x.dae" }),
-	        _react2.default.createElement('a-asset-item', { id: 'terrain-asset-y', src: MODEL_LOCATION + "terrain_y.dae" }),
-	        _react2.default.createElement('a-asset-item', { id: 'ready-btn-asset', src: MODEL_LOCATION + "readybtn.dae" }),
-	        _react2.default.createElement('a-asset-item', { id: 'thanks-btn-asset', src: MODEL_LOCATION + "thanks-btn.dae" }),
-	        _react2.default.createElement('a-asset-item', { id: 'hand-asset', src: MODEL_LOCATION + "hand.dae" }),
-	        _react2.default.createElement('a-asset-item', { id: 'valley-asset', src: MODEL_LOCATION + "valley.dae" }),
-	        _react2.default.createElement('a-asset-item', { id: 'cloud-asset', src: MODEL_LOCATION + "cloud.dae" })
-	      );
-	    }
-	  }, {
-	    key: 'getAssets',
-	    value: function getAssets() {
-
-	      var mixins = this.getMixins();
-	      var models = this.getModels();
-	      return _react2.default.createElement(
-	        'a-assets',
-	        null,
-	        models,
-	        mixins
-	      );
-	    }
-	  }, {
-	    key: 'showTimer',
-	    value: function showTimer() {
-	      var timestamp = document.createElement('span');document.body.appendChild(timestamp);timestamp.style.position = 'absolute';timestamp.style.top = '20px';timestamp.style.right = '20px';var ascene = document.querySelector('a-scene');
-	      window.setInterval(function () {
-	        timestamp.textContent = parseFloat(ascene.time / 1000).toFixed(2);
-	      }, 100);
-	    }
-	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.captureSongStart();
-	      // this.showTimer();
-	      // document.querySelector("#scene").setAttribute("canvas",{width: 50});
-	      // $("#scene").css('width','%');
-	      var that = this;
-	      document.getElementById('scene').addEventListener('change_black', function () {
-	        that.setState({ fogColour: '#1A1D23' });
-	      }, false);
-	      document.getElementById('scene').addEventListener('change_white', function () {
-	        that.setState({ fogColour: 'white' });
-	      }, false);
-	    }
-	  }, {
-	    key: 'songLoaded',
-	    value: function songLoaded() {
-	      document.getElementById('scene').removeEventListener('song_loaded', this.startSong, false);
-
-	      var chainEvents = [];
-	      // document.getElementsByClassName("loading")[0].emit('hide');
-	      chainEvents.newChainEvent(".loading", "hide", 0);
-	      chainEvents.newChainEvent("#loaded-msg", "show", 0);
-	      chainEvents.newChainEvent(".ready-btn", "show", 0);
-
-	      chainEvents.reverse();
-	      this.chainTimingEvents(chainEvents);
-	    }
-	  }, {
-	    key: 'startSong',
-	    value: function startSong() {
-	      document.getElementById('scene').removeEventListener('start_song', this.startSong, false);
-	      document.getElementById('loaded-msg').emit('hide');
-	      var node = (0, _jquery2.default)(".audio-player").data("node");
-	      node.start(0);
-	      document.getElementById('intro').emit('start_intro');
-	    }
-	  }, {
-	    key: 'startIntro',
-	    value: function startIntro() {
-	      var chainEvents = [];
-
-	      document.getElementById('intro').removeEventListener('start_intro', this.startIntro, false);
-	      document.getElementsByClassName("loading")[0].emit('hide');
-	      document.getElementsByClassName("intro-text")[0].emit("reveal");
-	      setTimeout(function () {
-	        document.getElementsByClassName("intro-text")[1].emit("reveal");
-	        setTimeout(function () {
-	          document.getElementsByClassName("intro-text")[2].emit("reveal");
-	          setTimeout(function () {
-	            document.getElementById('part_1').emit('start_part1');
-	          }, 1000);
-	        }, 600);
-	      }, 2000);
-	    }
-	  }, {
-	    key: 'startPart1',
-	    value: function startPart1() {
-	      document.getElementById('part_1').removeEventListener('start_part1', this.startPart1, false);
-	      this.setState({ stage: 1 });
-	      var chainEvents = [];
-	      chainEvents.newChainEvent("#camera", "part_1", 0);
-	      chainEvents.newChainEvent(".hand", "show_hand", 4000);
-	      chainEvents.newChainEvent(".hand", "rotate_hand", 8000);
-	      // chainEvents.newChainEvent("#hand","start_movement",4000);
-	      chainEvents.reverse();
-	      var that = this;
-	      this.chainTimingEvents(chainEvents);
-	      setTimeout(function () {
-	        document.getElementById("part_2").emit("start_part2");
-	        that.setState({ stage: 2 });
-	      }, 40000);
-	    }
-	  }, {
-	    key: 'startPart2',
-	    value: function startPart2() {
-	      document.getElementById('part_2').removeEventListener('start_part2', this.startPart2, false);
-	      document.getElementById('part_2').setAttribute('visible', true);
-	      document.getElementById('moon').emit("move_moon");
-
-	      var chainEvents = [];
-
-	      chainEvents.newChainEvent("#scene", "change_black", 0);
-	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(2) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(3) > a-entity", "reveal", 3000);
-	      chainEvents.newChainEvent("#part_2 .group_1 > a-entity:nth-child(4) > a-entity", "reveal", 3000);
-	      chainEvents.newChainEvent("#part_2 .group_1", "hide_group_1", 4000);
-	      chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(2) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(4) > a-entity", "reveal", 4000);
-	      chainEvents.newChainEvent("#part_2 .group_1_5 > a-entity:nth-child(5) > a-entity", "reveal", 1000);
-
-	      chainEvents.newChainEvent("#part_2 .group_1_5", "hide_group_1_5", 2000);
-	      chainEvents.newChainEvent("#part_2 .group_2 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
-	      chainEvents.newChainEvent("#part_2 .group_2 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_2 .group_2", "hide_group_2", 3000);
-	      chainEvents.newChainEvent("#part_2 .group_3 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
-	      chainEvents.newChainEvent("#part_2 .group_3 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_2 .group_3 > a-entity:nth-child(4) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_2 .group_3 > a-entity:nth-child(5) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_2 .group_3 > a-entity:nth-child(6) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_2 .group_3", "hide_group_3", 2000);
-	      chainEvents.newChainEvent("#part_2 .group_4 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
-	      chainEvents.newChainEvent("#part_2 .group_4 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_2 .group_4", "hide_group_4", 2000);
-
-	      chainEvents.newChainEvent("#part_2 .group_5 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
-	      chainEvents.newChainEvent("#part_2 .group_5 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_2 .group_5", "hide_group_5", 3000);
-	      chainEvents.newChainEvent("#part_2 .group_6 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
-	      chainEvents.newChainEvent("#part_2 .group_6 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_2 .group_6 > a-entity:nth-child(4) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_2 .group_6 > a-entity:nth-child(5) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_2 .group_6 > a-entity:nth-child(6) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_2 .group_6", "hide_group_6", 2000);
-	      chainEvents.newChainEvent("#part_2 .group_7 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
-	      chainEvents.newChainEvent("#part_2 .group_7 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
-
-	      chainEvents.newChainEvent("#part_1", "hide", 0);
-	      chainEvents.newChainEvent("#part_2", "hide", 0);
-	      chainEvents.newChainEvent('#part_3', "start_part3", 0);
-
-	      chainEvents.reverse();
-	      this.chainTimingEvents(chainEvents);
-	    }
-	  }, {
-	    key: 'startPart3',
-	    value: function startPart3() {
-	      document.getElementById('part_3').removeEventListener('start_part3', this.startPart3, false);
-	      this.setState({ stage: 3 });
-	      var chainEvents = [];
-	      chainEvents.newChainEvent('#part_3', "reveal", 500);
-	      chainEvents.newChainEvent('#part_3 a-entity > .part3-text', "reveal", 1000);
-	      chainEvents.newChainEvent('#part_3', 'hide', 2000);
-	      chainEvents.newChainEvent('#part_4', "start_part4", 0);
-
-	      chainEvents.reverse();
-	      this.chainTimingEvents(chainEvents);
-	    }
-	  }, {
-	    key: 'startPart4',
-	    value: function startPart4() {
-	      document.getElementById('part_4').removeEventListener('start_part4', this.startPart4, false);
-	      this.setState({ stage: 4 });
-
-	      var chainEvents = [];
-
-	      chainEvents.newChainEvent('#part_4', 'reveal_part4', 0);
-	      // chainEvents.newChainEvent("#camera","part_4",0);
-	      chainEvents.newChainEvent("#part_4 .hand", "show", 0);
-	      chainEvents.newChainEvent("#part_4 .hand", "start_other_hand", 0);
-	      chainEvents.newChainEvent("#scene", "change_white", 0);
-	      chainEvents.newChainEvent("#part_4 .group_1 > a-entity:nth-child(2) > a-entity", "reveal", 41000);
-	      chainEvents.newChainEvent("#part_4 .group_1 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_4 .group_1 > a-entity:nth-child(4) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_4 .group_1", "hide", 2000);
-
-	      chainEvents.newChainEvent("#part_4 .group_2 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
-	      chainEvents.newChainEvent("#part_4 .group_2 > a-entity:nth-child(3) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_4 .group_2 > a-entity:nth-child(4) > a-entity", "reveal", 2000);
-	      chainEvents.newChainEvent("#part_4 .group_2", "hide", 1000);
-
-	      chainEvents.newChainEvent("#part_4 .group_3 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
-	      chainEvents.newChainEvent("#part_4 .group_3 > a-entity:nth-child(3) > a-entity", "reveal", 1000);
-	      chainEvents.newChainEvent("#part_4 .group_3 > a-entity:nth-child(4) > a-entity", "reveal", 1000);
-	      chainEvents.newChainEvent("#part_4 .group_3", "hide", 2000);
-
-	      chainEvents.newChainEvent("#part_4 .group_4 > a-entity:nth-child(2) > a-entity", "reveal", 1000);
-	      chainEvents.newChainEvent("#part_4 .group_4 > a-entity:nth-child(3) > a-entity", "reveal", 1500);
-	      chainEvents.newChainEvent("#part_4 .group_4 > a-entity:nth-child(4) > a-entity", "reveal", 1000);
-	      chainEvents.newChainEvent("#part_4 .group_4", "hide", 2000);
-
-	      chainEvents.newChainEvent("#part_4", "hide_part4", 0);
-	      // chainEvents.newChainEvent('#part_5',"start_part5",0);
-	      chainEvents.newChainEvent("#scene", "song_finished", 11000);
-
-	      chainEvents.reverse();
-	      this.chainTimingEvents(chainEvents);
-	    }
-	  }, {
-	    key: 'startPart5',
-	    value: function startPart5() {
-	      /*    chainEvents.newChainEvent("#part_5","reveal_part5",0);
-	          // chainEvents.newChainEvent("#camera","part_5",0);
-	            chainEvents.newChainEvent("#scene","change_black",0);
-	          chainEvents.newChainEvent("#moon","move_moon",0);
-	          chainEvents.newChainEvent("#part_5 .group_1 > a-entity:nth-child(2) > a-entity","reveal",20000);
-	          chainEvents.newChainEvent("#part_5 .group_1 > a-entity:nth-child(3) > a-entity","reveal",3000);
-	            chainEvents.newChainEvent("#part_5 .group_1","hide_group_1",1000);
-	          chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(2) > a-entity","reveal",1000);
-	          chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(3) > a-entity","reveal",2000);
-	          chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(4) > a-entity","reveal",3000);
-	          chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(5) > a-entity","reveal",2000);
-	          chainEvents.newChainEvent("#part_5 .group_2 > a-entity:nth-child(6) > a-entity","reveal",2000);
-	            chainEvents.newChainEvent("#part_5 .group_2","hide_group_2",2000);
-	          chainEvents.newChainEvent("#part_5 .group_3 > a-entity:nth-child(2) > a-entity","reveal",1000);
-	          chainEvents.newChainEvent("#part_5 .group_3 > a-entity:nth-child(3) > a-entity","reveal",2000);
-	          chainEvents.newChainEvent("#part_5 .group_3","hide_group_3",2000);
-	          chainEvents.newChainEvent("#part_5 .group_4 > a-entity:nth-child(2) > a-entity","reveal",1000);
-	          chainEvents.newChainEvent("#part_5 .group_4 > a-entity:nth-child(3) > a-entity","reveal",2000);
-	          chainEvents.newChainEvent("#part_5 .group_4","hide_group_4",2000);
-	            chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(2) > a-entity","reveal",1000);
-	          chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(3) > a-entity","reveal",2000);
-	          chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(4) > a-entity","reveal",2000);
-	          chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(5) > a-entity","reveal",2000);
-	          chainEvents.newChainEvent("#part_5 .group_5 > a-entity:nth-child(6) > a-entity","reveal",2000);
-	            chainEvents.newChainEvent("#part_5 .group_5","hide_group_5",3000);
-	          chainEvents.newChainEvent("#part_5 .group_6 > a-entity:nth-child(2) > a-entity","reveal",1000);
-	          chainEvents.newChainEvent("#part_5 .group_6 > a-entity:nth-child(3) > a-entity","reveal",2000);
-	          chainEvents.newChainEvent("#part_5 .group_6","hide_group_6",2000);
-	            chainEvents.newChainEvent("#part_6","show",2000);*/
-	    }
-	  }, {
-	    key: 'endSong',
-	    value: function endSong() {
-	      document.getElementById('scene').removeEventListener('song_finished', this.endSong, false);
-	      this.setState({ shouldPlay: false });
-
-	      var chainEvents = [];
-	      chainEvents.newChainEvent("#ending #thanks-btn", "show", 0);
-	      chainEvents.reverse();
-	      this.chainTimingEvents(chainEvents);
-	    }
-	  }, {
-	    key: 'chainTimingEvents',
-	    value: function chainTimingEvents(chainEvents) {
-	      if (chainEvents <= 0) return;
-	      var that = this;
-	      var newEvent = chainEvents.pop();
-	      setTimeout(function () {
-	        document.querySelector(newEvent.querySelector).emit(newEvent.emitEvent);
-	        that.chainTimingEvents(chainEvents);
-	      }, newEvent.delay);
-	    }
-	  }, {
-	    key: 'captureSongStart',
-	    value: function captureSongStart() {
-	      document.getElementById('scene').addEventListener('song_loaded', this.songLoaded.bind(this), false);
-	      document.getElementById('scene').addEventListener('start_song', this.startSong.bind(this), false);
-	      document.getElementById('intro').addEventListener('start_intro', this.startIntro.bind(this), false);
-	      document.getElementById('part_1').addEventListener('start_part1', this.startPart1.bind(this), false);
-	      document.getElementById('part_2').addEventListener('start_part2', this.startPart2.bind(this), false);
-	      document.getElementById('part_3').addEventListener('start_part3', this.startPart3.bind(this), false);
-	      document.getElementById('part_4').addEventListener('start_part4', this.startPart4.bind(this), false);
-	      document.getElementById('scene').addEventListener('song_finished', this.endSong.bind(this), false);
-	    }
-	  }, {
+	  _createClass(TryAnimals, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(
+	      return React.createElement(
 	        _aframeReact.Scene,
-	        { id: 'scene', fog: { color: this.state.fogColour }, canvas: 'width: 50; height: 10;' },
-	        this.getAssets(),
-	        _react2.default.createElement(
-	          _Camera2.default,
-	          { id: 'camera', position: [0, 10, 0], 'wasd-controls': { enabled: false } },
-	          _react2.default.createElement(_Cursor2.default, { cursor: { fuse: true, timeout: 2000 } }),
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 -400', dur: '200000', ease: 'linear', begin: 'part_1' }),
-	          _react2.default.createElement(Hand, { position: '0 -1.4 -1.5', rotation: '180 105 180' })
-	        ),
-	        _react2.default.createElement(_Audio2.default, { audioSrc: this.state.song, shouldUpdateFrequencies: 'false', shouldPlay: this.state.shouldPlay }),
-	        _react2.default.createElement(_Sky2.default, { id: 'sky' }),
-	        this.state.stage == 0 ? _react2.default.createElement(Intro, { startSong: this.startSong }) : '',
-	        this.state.stage <= 2 ? _react2.default.createElement(Part1, null) : '',
-	        this.state.stage <= 2 ? _react2.default.createElement(Part2, null) : '',
-	        '}',
-	        this.state.stage <= 3 ? _react2.default.createElement(Part3, null) : '',
-	        '}',
-	        this.state.stage <= 4 ? _react2.default.createElement(Part4, null) : '',
-	        '}',
-	        _react2.default.createElement(Ending, null)
+	        { stats: true, id: 'scene' },
+	        React.createElement(_AnimalFarm2.default, null)
 	      );
 	    }
 	  }]);
 
-	  return PortRob;
-	}(_react2.default.Component);
-
-	PortRob.defaultProps = {
-	  frequencySize: 0,
-	  refreshRate: 0
-	};
-
-	var Intro = function (_React$Component2) {
-	  _inherits(Intro, _React$Component2);
-
-	  _createClass(Intro, [{
-	    key: 'shouldComponentUpdate',
-	    value: function shouldComponentUpdate(nextProps, nextState) {
-	      return true;
-	    }
-	  }]);
-
-	  function Intro(props) {
-	    _classCallCheck(this, Intro);
-
-	    var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Intro).call(this, props));
-
-	    _this2.state = {
-	      color: 'red'
-
-	    };
-	    return _this2;
-	  }
-
-	  _createClass(Intro, [{
-	    key: 'changeColor',
-	    value: function changeColor() {
-	      var colors = ['red', 'orange', 'yellow', 'green', 'blue'];
-	      this.setState({
-	        color: colors[Math.floor(Math.random() * colors.length)]
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        _aframeReact.Entity,
-	        { id: 'intro' },
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { position: '-30 40 -70' },
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '-2 -10 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'intro-text', mixin: 'font', text: { text: "IS ANYONE THERE?" }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '-2 -20 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'intro-text', mixin: 'font', text: { text: "OH - " }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '-2 -30 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'intro-text', mixin: 'font', text: { text: "HI!" }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '-80 10 -20' },
-	            _react2.default.createElement(_aframeReact.Entity, { 'class': 'intro-text', mixin: 'font', text: { text: "Porter Robinson - Sad Machine", size: 8 }, material: { color: 'white' } })
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '-2 -30 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'loading', mixin: 'font', text: { text: "Loading..." }, material: { color: 'white' }, visible: 'true' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'false', begin: 'hide' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '-50 -60 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { id: 'loaded-msg', mixin: 'font', text: { text: "Click the button to start" }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'false', begin: 'hide' }),
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '0', to: 'true', begin: 'show' })
-	            ),
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'ready-btn', 'collada-model': '#ready-btn-asset', position: '77 28 68', scale: '0.25 0.25 0.25', visible: 'false', onClick: this.props.startSong },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'false', begin: 'click' }),
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '0', to: 'true', begin: 'show' })
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Intro;
-	}(_react2.default.Component);
-
-	var Part1 = function (_React$Component3) {
-	  _inherits(Part1, _React$Component3);
-
-	  function Part1() {
-	    _classCallCheck(this, Part1);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Part1).apply(this, arguments));
-	  }
-
-	  _createClass(Part1, [{
-	    key: 'shouldComponentUpdate',
-	    value: function shouldComponentUpdate(nextProps, nextState) {
-	      return false;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        _aframeReact.Entity,
-	        { id: 'part_1', visible: 'false' },
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', begin: 'hide' }),
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'true', begin: 'start_part1' }),
-	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-y', position: '0 -10 0', rotation: '0 0 0', scale: '1 1 1' }),
-	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-x', position: '-80 -11 0', rotation: '0 0 0', scale: '1 1 2' }),
-	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-x', position: '140 -11 -1000', rotation: '0 180 0', scale: '1 1 2' }),
-	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-e', position: '0 -5 5', rotation: '0 0 0', scale: '2 1 2' })
-	      );
-	    }
-	  }]);
-
-	  return Part1;
-	}(_react2.default.Component);
-
-	var Part2 = function (_React$Component4) {
-	  _inherits(Part2, _React$Component4);
-
-	  function Part2() {
-	    _classCallCheck(this, Part2);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Part2).apply(this, arguments));
-	  }
-
-	  _createClass(Part2, [{
-	    key: 'shouldComponentUpdate',
-	    value: function shouldComponentUpdate(nextProps, nextState) {
-	      return false;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        _aframeReact.Entity,
-	        { id: 'part_2', visible: 'false' },
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', begin: 'hide' }),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { id: 'moon', 'collada-model': '#moon-asset', position: '-25 -80 -1050', scale: '75 75 75', rotation: '180 180 140', material: 'fog: false' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '-25 150 -600', dur: '75000', ease: 'ease-in-out', begin: 'move_moon' })
-	        ),
-	        _react2.default.createElement(Stars, { position: '0 20 0' }),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { position: '-35 70 -165', rotation: '0 0 0', 'class': 'group_1' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_1' }),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 0 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: ">WHO SURVIVED?", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -10 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: ">SOMEBODY NEW?", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -20 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: ">ANYONE ELSE BUT YOU?", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -30 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: ">ON A LONELY NIGHT", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -40 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: ">WAS A BLINDING LIGHT.", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -50 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: ">A HUNDRED LEADERS", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -60 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: ">WOULD BE BORNE OF YOU.", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { position: '-35 70 -175', rotation: '0 0 0', 'class': 'group_1_5' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_1_5' }),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -10 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: ">ON A LONELY NIGHT", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -20 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: ">WAS A BLINDING LIGHT.", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -30 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: ">A HUNDRED LEADERS", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -40 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: ">WOULD BE BORNE OF YOU.", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { position: '-35 70 -185', 'class': 'group_2' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_2' }),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 0 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: "AND THOUGH I KNOW", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -10 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: "SINCE YOU'VE AWAKENED HER AGAIN", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { position: '-35 70 -205', rotation: '0 0 0', 'class': 'group_3' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_3' }),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 0 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: "SHE DEPENDS ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -10 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: "SHE DEPENDS ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -20 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: "SHE'LL GO ALONE", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -30 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: "AND NEVER SPEAK", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -40 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: "OF THIS AGAIN", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { position: '-35 70 -225', rotation: '0 0 0', 'class': 'group_4' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_4' }),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 0 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: "WE DEPEND ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -10 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: "WE DEPEND ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { position: '-35 70 -245', 'class': 'group_5' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_5' }),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 0 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: "AND THOUGH I KNOW", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -10 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: "SINCE YOU'VE AWAKENED HER AGAIN", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { position: '-35 70 -285', rotation: '0 0 0', 'class': 'group_6' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_6' }),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 0 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: "SHE DEPENDS ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -10 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: "SHE DEPENDS ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -20 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: "SHE'LL GO ALONE", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -30 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: "AND NEVER SPEAK", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -40 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: "OF THIS AGAIN", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { position: '-35 70 -325', rotation: '0 0 0', 'class': 'group_7' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_7' }),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 0 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: "WE DEPEND ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -10 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part2-text', mixin: 'font', text: { text: "WE DEPEND ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Part2;
-	}(_react2.default.Component);
-
-	var Part3 = function (_React$Component5) {
-	  _inherits(Part3, _React$Component5);
-
-	  function Part3() {
-	    _classCallCheck(this, Part3);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Part3).apply(this, arguments));
-	  }
-
-	  _createClass(Part3, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        _aframeReact.Entity,
-	        { id: 'part_3', visible: 'false' },
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'true', begin: 'reveal', dur: '1000' }),
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', begin: 'hide', dur: '1000' }),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { position: '-75 40 -355', rotation: '0 0 0' },
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 0 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { 'class': 'part3-text', text: { text: ">I'LL DEPEND ON YOU", size: 15 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Part3;
-	}(_react2.default.Component);
-
-	var Part4 = function (_React$Component6) {
-	  _inherits(Part4, _React$Component6);
-
-	  function Part4() {
-	    _classCallCheck(this, Part4);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Part4).apply(this, arguments));
-	  }
-
-	  _createClass(Part4, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        _aframeReact.Entity,
-	        { id: 'part_4', visible: 'false' },
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'true', begin: 'reveal_part4' }),
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', begin: 'hide_part4' }),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { 'collada-model': '#valley-asset', position: '0 -5 200', rotation: '0 0 0' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '0 0 360', from: '0 0 0', repeat: 'indefinite', dur: '120000', ease: 'linear' })
-	        ),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { position: '-55 40 -450' },
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 0 -20', rotation: '0 0 0', 'class': 'group_1' },
-	            _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide' }),
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { position: '0 0 0' },
-	              _react2.default.createElement(
-	                _aframeReact.Entity,
-	                { 'class': 'part4-text', mixin: 'font', text: { text: ">I DON'T KNOW MUCH", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { position: '0 -10 0' },
-	              _react2.default.createElement(
-	                _aframeReact.Entity,
-	                { 'class': 'part4-text', mixin: 'font', text: { text: "ABOUT YOUR LIFE", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { position: '0 -20 0' },
-	              _react2.default.createElement(
-	                _aframeReact.Entity,
-	                { 'class': 'part4-text', mixin: 'font', text: { text: "BEYOND THESE WALLS", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 0 -40', rotation: '0 0 0', 'class': 'group_2' },
-	            _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide' }),
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { position: '0 0 0' },
-	              _react2.default.createElement(
-	                _aframeReact.Entity,
-	                { 'class': 'part4-text', mixin: 'font', text: { text: "THE FLEETING SENSE", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { position: '0 -10 0' },
-	              _react2.default.createElement(
-	                _aframeReact.Entity,
-	                { 'class': 'part4-text', mixin: 'font', text: { text: "OF LOVE WITHIN THESE", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { position: '0 -20 0' },
-	              _react2.default.createElement(
-	                _aframeReact.Entity,
-	                { 'class': 'part4-text', mixin: 'font', text: { text: "GODFORSAKEN WALLS", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 0 -60', rotation: '0 0 0', 'class': 'group_3' },
-	            _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide' }),
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { position: '0 0 0' },
-	              _react2.default.createElement(
-	                _aframeReact.Entity,
-	                { 'class': 'part4-text', mixin: 'font', text: { text: "AND YOU CAN HEAR IT", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { position: '0 -10 0' },
-	              _react2.default.createElement(
-	                _aframeReact.Entity,
-	                { 'class': 'part4-text', mixin: 'font', text: { text: "IN HIS VOICE IN", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { position: '0 -20 0' },
-	              _react2.default.createElement(
-	                _aframeReact.Entity,
-	                { 'class': 'part4-text', mixin: 'font', text: { text: "EVERY CALL", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 0 -80', rotation: '0 0 0', 'class': 'group_4' },
-	            _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide' }),
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { position: '0 0 0' },
-	              _react2.default.createElement(
-	                _aframeReact.Entity,
-	                { 'class': 'part4-text', mixin: 'font', text: { text: "THIS GIRL WHO'S SLEPT", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { position: '0 -10 0' },
-	              _react2.default.createElement(
-	                _aframeReact.Entity,
-	                { 'class': 'part4-text', mixin: 'font', text: { text: "A HUNDRED YEARS HAS ", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { position: '0 -20 0' },
-	              _react2.default.createElement(
-	                _aframeReact.Entity,
-	                { 'class': 'part4-text', mixin: 'font', text: { text: "SOMETHING AFTER ALL", height: 0.5, size: 5 }, material: { color: 'black' }, visible: 'false' },
-	                _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	              )
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(Hand, { position: '0 0 -470', rotation: '135 135 135', scale: ' 0.2 0.2 0.2' })
-	      );
-	    }
-	  }]);
-
-	  return Part4;
-	}(_react2.default.Component);
-
-	var Part5 = function (_React$Component7) {
-	  _inherits(Part5, _React$Component7);
-
-	  function Part5() {
-	    _classCallCheck(this, Part5);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Part5).apply(this, arguments));
-	  }
-
-	  _createClass(Part5, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        _aframeReact.Entity,
-	        { id: 'part_5', visible: 'false' },
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', begin: 'hide' }),
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'true', begin: 'reveal_part5' }),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { id: 'moon', 'collada-model': '#moon-asset', position: '-25 -80 -800', scale: '75 75 75', rotation: '180 180 140', material: 'fog: false' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '-25 150 -600', dur: '75000', ease: 'ease-in-out', begin: 'move_moon' })
-	        ),
-	        _react2.default.createElement(Stars, null),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { position: '-35 70 -485', 'class': 'group_1' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_1' }),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 0 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { text: { text: "AND THOUGH I KNOW", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -10 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { text: { text: "SINCE YOU'VE AWAKENED HER AGAIN", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { position: '-35 70 -505', rotation: '0 0 0', 'class': 'group_2' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_2' }),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 0 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { text: { text: "SHE DEPENDS ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -10 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { text: { text: "SHE DEPENDS ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -20 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { text: { text: "I'LL GO ALONE", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -30 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { text: { text: "AND NEVER SPEAK", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -40 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { text: { text: "OF YOU AGAIN", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { position: '-35 70 -525', rotation: '0 0 0', 'class': 'group_3' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_3' }),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 0 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { text: { text: "WE DEPEND ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -10 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { text: { text: "WE DEPEND ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { position: '-35 70 -565', 'class': 'group_4' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_4' }),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 0 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { text: { text: "AND THOUGH I KNOW", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -10 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { text: { text: "SINCE YOU'VE AWAKENED HER AGAIN", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { position: '-35 70 -585', rotation: '0 0 0', 'class': 'group_5' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_5' }),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 0 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { text: { text: "SHE DEPENDS ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -10 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { text: { text: "SHE DEPENDS ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -20 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { text: { text: "SHE'LL GO ALONE", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -30 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { text: { text: "AND NEVER SPEAK", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -40 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { text: { text: "OF THIS AGAIN", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { position: '-35 70 -605', rotation: '0 0 0', 'class': 'group_6' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', dur: '5000', begin: 'hide_group_6' }),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 0 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { text: { text: "WE DEPEND ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _aframeReact.Entity,
-	            { position: '0 -10 0' },
-	            _react2.default.createElement(
-	              _aframeReact.Entity,
-	              { text: { text: "WE DEPEND ON YOU", height: 0.5, size: 5 }, material: { color: 'white' }, visible: 'false' },
-	              _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', dur: '400', to: 'true', begin: 'reveal' })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-0', position: '0 -10 -450', rotation: '0 0 0' }),
-	        _react2.default.createElement(_aframeReact.Entity, { 'collada-model': '#terrain-asset-1', position: '0 -10 -550', rotation: '0 0 0' })
-	      );
-	    }
-	  }]);
-
-	  return Part5;
-	}(_react2.default.Component);
-
-	var Part6 = function (_React$Component8) {
-	  _inherits(Part6, _React$Component8);
-
-	  function Part6() {
-	    _classCallCheck(this, Part6);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Part6).apply(this, arguments));
-	  }
-
-	  _createClass(Part6, [{
-	    key: 'render',
-	    value: function render() {
-	      var primitives = ['box', 'cylinder', 'ring', 'sphere', 'torus', 'torusKnot', 'cone'];
-	      var shapes = [];
-	      var spread = 20;
-	      for (var i = 0; i < 6; i++) {
-	        var x,
-	            y,
-	            z = 0;
-	        x = Math.floor(Math.random() * spread) + 1;
-	        x *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
-	        y = Math.floor(Math.random() * spread) + 1;
-	        y *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
-	        z = Math.floor(Math.random() * spread) + 1;
-	        z *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
-	        shapes.push(_react2.default.createElement(
-	          _aframeReact.Entity,
-	          { geometry: { primitive: primitives[Math.floor(Math.random() * 7)] }, position: "" + x + " " + y + " " + z },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 0 0', dur: '180000', ease: 'linear', key: i })
-	        ));
-	      }
-	      return _react2.default.createElement(
-	        _aframeReact.Entity,
-	        { id: 'part_6', visible: 'false', position: '0 -5 -600' },
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'false', begin: 'hide' }),
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'true', begin: 'show' }),
-	        shapes
-	      );
-	    }
-	  }]);
-
-	  return Part6;
-	}(_react2.default.Component);
-
-	var Stars = function (_React$Component9) {
-	  _inherits(Stars, _React$Component9);
-
-	  function Stars() {
-	    _classCallCheck(this, Stars);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Stars).apply(this, arguments));
-	  }
-
-	  _createClass(Stars, [{
-	    key: 'shouldComponentUpdate',
-	    value: function shouldComponentUpdate(nextProps, nextState) {
-	      return false;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        _aframeReact.Entity,
-	        { 'class': 'stars', 'entity-generator-primitive': { mixin: "starPrimitive", numElements: 200, spread: 500, minExclusion: 0, maxExclusion: 10, position: this.props.position } },
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '0 90 0', ease: 'ease-linear', repeat: 'indefinite', dur: '60000', direction: 'alternate' })
-	      );
-	    }
-	  }]);
-
-	  return Stars;
-	}(_react2.default.Component);
-
-	Stars.defaultProps = {
-	  position: "0 0 0"
-	};
-
-	var Hand = function (_React$Component10) {
-	  _inherits(Hand, _React$Component10);
-
-	  _createClass(Hand, [{
-	    key: 'shouldComponentUpdate',
-	    value: function shouldComponentUpdate(nextProps, nextState) {
-	      return false;
-	    }
-	  }]);
-
-	  function Hand(props) {
-	    _classCallCheck(this, Hand);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Hand).call(this, props));
-	  }
-
-	  _createClass(Hand, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        _aframeReact.Entity,
-	        { 'class': 'hand', 'collada-model': '#hand-asset', position: this.props.position, rotation: this.props.rotation, visible: 'false', scale: this.props.scale },
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', from: '0 -2.5 -1.5', to: '0 -1.6 -1.5', dur: '8000', ease: 'linear', begin: 'show_hand' }),
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'true', dur: '8000', ease: 'linear', begin: 'show_hand' }),
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'true', dur: '0', ease: 'linear', begin: 'show' }),
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 -1.6 -1.5', dur: '10000', repeat: 'indefinite', direction: 'alternate', from: '0 -1.4 -1.5', ease: 'linear', begin: 'start_movement' }),
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'rotation', to: '180 270 90', from: '180 105 180', direction: 'alternate', repeat: '1', dur: '15000', begin: 'rotate_hand', ease: 'linear' }),
-	        _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: '0 8.6 -380', dur: '45000', from: this.props.position, ease: 'linear', begin: 'start_other_hand' })
-	      );
-	    }
-	  }]);
-
-	  return Hand;
-	}(_react2.default.Component);
-
-	Hand.defaultProps = {
-	  position: "0 0 0",
-	  rotation: "0 0 0",
-	  scale: "0.1 0.1 0.1"
-	};
-
-	var Valley = function (_React$Component11) {
-	  _inherits(Valley, _React$Component11);
-
-	  _createClass(Valley, [{
-	    key: 'shouldComponentUpdate',
-	    value: function shouldComponentUpdate(nextProps, nextState) {
-	      return false;
-	    }
-	  }]);
-
-	  function Valley(props) {
-	    _classCallCheck(this, Valley);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Valley).call(this, props));
-	  }
-
-	  _createClass(Valley, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(_aframeReact.Entity, { id: 'valley', 'collada-model': '#valley-asset', position: '0 -5 -300', rotation: '0 180 0', visible: 'false' });
-	    }
-	  }]);
-
-	  return Valley;
-	}(_react2.default.Component);
-
-	var Fog = function (_React$Component12) {
-	  _inherits(Fog, _React$Component12);
-
-	  function Fog() {
-	    _classCallCheck(this, Fog);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Fog).apply(this, arguments));
-	  }
-
-	  _createClass(Fog, [{
-	    key: 'shouldComponentUpdate',
-	    value: function shouldComponentUpdate(nextProps, nextState) {
-	      return false;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-
-	      return _react2.default.createElement(
-	        _aframeReact.Entity,
-	        { material: 'fog:false', position: '0 0 -1000' },
-	        _react2.default.createElement(_aframeReact.Entity, { geometry: { primitive: 'box', width: 800, height: 100, depth: 2 }, position: '0 20 0', material: { color: '#B38AAA', opacity: 0.2 } }),
-	        _react2.default.createElement(_aframeReact.Entity, { geometry: { primitive: 'box', width: 800, height: 60, depth: 2 }, position: '0 10 2', material: { color: '#673D68', opacity: 0.4 } }),
-	        _react2.default.createElement(_aframeReact.Entity, { geometry: { primitive: 'box', width: 800, height: 100, depth: 2 }, position: '0 10 4', material: { color: '#A86B9F', opacity: 0.6 } }),
-	        _react2.default.createElement(_aframeReact.Entity, { geometry: { primitive: 'box', width: 800, height: 100, depth: 2 }, position: '0 0 6', material: { color: '#93639F', opacity: 0.8 } })
-	      );
-	    }
-	  }]);
-
-	  return Fog;
-	}(_react2.default.Component);
-
-	var Ending = function (_React$Component13) {
-	  _inherits(Ending, _React$Component13);
-
-	  function Ending() {
-	    _classCallCheck(this, Ending);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Ending).apply(this, arguments));
-	  }
-
-	  _createClass(Ending, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        _aframeReact.Entity,
-	        { id: 'ending', position: '-80 5 -545' },
-	        _react2.default.createElement(Stars, { position: '-80 5 -545' }),
-	        _react2.default.createElement(
-	          _aframeReact.Entity,
-	          { id: 'thanks-btn', 'collada-model': '#thanks-btn-asset', scale: ' 8 8 8', visible: 'false' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'visible', to: 'true', begin: 'show' })
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Ending;
-	}(_react2.default.Component);
-
-	var Clouds = function (_React$Component14) {
-	  _inherits(Clouds, _React$Component14);
-
-	  function Clouds(props) {
-	    _classCallCheck(this, Clouds);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Clouds).call(this, props));
-	  }
-
-	  _createClass(Clouds, [{
-	    key: 'getPosNegRandomPosition',
-	    value: function getPosNegRandomPosition(start, spread) {
-	      var value = 0;
-	      value = Math.floor(Math.random() * spread) + 1;
-	      value *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
-	      return parseInt(start) + value;
-	    }
-	  }, {
-	    key: 'getRandomPosPosition',
-	    value: function getRandomPosPosition(start, spread) {
-	      var value = 0;
-	      value = Math.floor(Math.random() * spread) + 1;
-	      return parseInt(start) - value * -1;
-	    }
-	  }, {
-	    key: 'getRandomNegPosition',
-	    value: function getRandomNegPosition(start, spread) {
-	      var value = 0;
-	      value = Math.floor(Math.random() * spread) + 1;
-	      return (parseInt(start) - value) * 2;
-	    }
-	  }, {
-	    key: 'shouldComponentUpdate',
-	    value: function shouldComponentUpdate(nextProps, nextState) {
-	      return false;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var clouds = [];
-	      var index = 0;
-	      var startPosition = this.props.position;
-	      var startX = startPosition.split(' ')[0];
-	      var startY = startPosition.split(' ')[1];
-	      var startZ = startPosition.split(' ')[2];
-	      console.log(startX + " " + startY + " " + startZ);
-	      for (; index < this.props.number; index++) {
-	        var x = this.getPosNegRandomPosition(startX, this.props.spread);
-	        var y = this.getRandomPosPosition(startY, this.props.spread);
-	        var z = this.getRandomNegPosition(startZ, this.props.spread);
-	        var position = "" + x + " " + y + "  " + z;
-	        var animationEndPosition = "" + x * -1 + " " + y + " " + z;
-	        console.log("starting position is : " + position + " and the animationEndPosition is " + animationEndPosition);
-	        clouds.push(_react2.default.createElement(
-	          _aframeReact.Entity,
-	          { 'collada-model': '#cloud-asset', position: position, rotation: '90 0 0', scale: '8 8 8' },
-	          _react2.default.createElement(_aframeReact.Animation, { attribute: 'position', to: animationEndPosition, from: position, dur: '64000', direction: 'alternate', repeat: 'indefinite', ease: 'linear' })
-	        ));
-	      }
-
-	      return _react2.default.createElement(
-	        _aframeReact.Entity,
-	        { 'class': 'clouds' },
-	        clouds
-	      );
-	    }
-	  }]);
-
-	  return Clouds;
-	}(_react2.default.Component);
-
-	Array.prototype.newChainEvent = function (selector, emitEvent, delay) {
-	  if (selector == '') return;
-	  var x = {};
-	  x.querySelector = selector;
-	  x.emitEvent = emitEvent;
-	  x.delay = delay;
-	  this.push(x);
-	  return this;
-	};
+	  return TryAnimals;
+	}(React.Component);
 
 	window.$ = _jquery2.default;
-	// ONLY FOR DEV MODE OTHERWISE WONT WORK
-	window.Perf = _reactAddonsPerf2.default;
-	_reactDom2.default.render(_react2.default.createElement(PortRob, null), document.querySelector('.scene-container'));
+
+	_reactDom2.default.render(React.createElement(TryAnimals, null), document.querySelector('.scene-container'));
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
 /* 1 */
@@ -28923,7 +27357,303 @@
 	};
 
 /***/ },
-/* 454 */,
+/* 454 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(AFRAME) {/**
+	 * Particles component for A-Frame.
+	 *
+	 * ShaderParticleEngine by Squarefeet (https://github.com/squarefeet).
+	 */
+
+	var SPE = __webpack_require__(457);
+
+	if (typeof AFRAME === 'undefined') {
+	  throw new Error('Component attempted to register before AFRAME was available.');
+	}
+
+	AFRAME.registerComponent('particle-system', {
+
+	    schema: {
+	        preset: {
+	            type: 'string',
+	            default: ''
+	        }, 
+	        maxAge: {
+	            type: 'number'
+	        },
+	        positionSpread: {
+	            type: 'vec3'
+	        },
+	        type: {
+	            type: 'number'
+	        },
+	        rotationAxis: {
+	            type: 'string'
+	        },
+	        rotationAngle: {
+	            type: 'number'
+	        },
+	        accelerationValue: {
+	            type: 'vec3'
+	        },
+	        accelerationSpread: {
+	            type: 'vec3'
+	        },
+	        velocityValue: {
+	            type: 'vec3'
+	        },
+	        velocitySpread: {
+	            type: 'vec3'
+	        },
+	        color: {
+	            type: 'string'
+	        },
+	        size: {
+	            type: 'number'
+	        },
+	        direction: {
+	            type: 'number'
+	        },
+	        duration: {
+	            type: 'number'
+	        },
+	        particleCount: {
+	            type: 'number'
+	        }, 
+	        texture: {
+	            type: 'string'
+	        },
+	        randomize: {
+	            type: 'boolean'
+	        }, 
+	        opacity: {
+	          type: 'number',
+	        },
+	        maxParticleCount: {
+	            type: 'number',
+	            default: 250000
+	        }
+	    },
+
+
+	    init: function() {
+
+	        this.presets = [];
+
+	        /* preset settings can be overwritten */
+
+	        this.presets['default'] = {
+	            maxAge: (this.data.maxAge!==0?this.data.maxAge:6),
+	            positionSpread: (this.data.positionSpread.x!==0&&this.data.positionSpread.y!==0&&this.data.positionSpread.z!==0?this.data.positionSpread:{x:0,y:0,z:0}),
+	            type: (this.data.type!==0?this.data.type:SPE.distributions.BOX), /* SPE.distributions.SPHERE, SPE.distributions.DISC */
+	            rotationAxis: (this.data.rotationAxis!==''?this.data.rotationAxis:'x'), 
+	            rotationAngle: (this.data.rotationAngle!==0?this.data.rotationAngle:0), 
+	            accelerationValue: (this.data.accelerationValue.x!==0&&this.data.accelerationValue.y!==0&&this.data.accelerationValue.z!==0?this.data.accelerationValue:{x: 0, y: -10, z: 0}),
+	            accelerationSpread: (this.data.accelerationSpread.x!==0&&this.data.accelerationSpread.y!==0&&this.data.accelerationSpread.z!==0?this.data.accelerationSpread:{x: 10, y: 0, z: 10}), 
+	            velocityValue: (this.data.velocityValue.x!==0&&this.data.velocityValue.y!==0&&this.data.velocityValue.z!==0?this.data.velocityValue:{x: 0, y: 25, z: 0}),
+	            velocitySpread: (this.data.velocitySpread.x!==0&&this.data.velocitySpread.y!==0&&this.data.velocitySpread.z!==0?this.data.velocitySpread:{x: 10, y: 7.5, z: 10}), 
+	            color: (this.data.color!==''?this.data.color:'#0000FF,#FF0000'),
+	            size: (this.data.size!==0?this.data.size:1),
+	            opacity: { value: (this.data.opacity!=0?this.data.opacity:1) },
+	            direction: (this.data.direction!==0?this.data.direction:1),
+	            duration: (this.data.duration!=null?this.data.duration:null),
+	            particleCount: (this.data.particleCount!==0?this.data.particleCount:1000),
+	            texture: (this.data.texture!==''?this.data.texture:'./images/star2.png'),
+	            randomize: false
+	        };
+
+
+	        this.presets['dust'] = {
+	            maxAge: (this.data.maxAge!==0?this.data.maxAge:20),
+	            positionSpread: (this.data.positionSpread.x!==0&&this.data.positionSpread.y!==0&&this.data.positionSpread.z!==0?this.data.positionSpread:{x:100,y:100,z:100}),
+	            type: (this.data.type!==0?this.data.type:SPE.distributions.BOX), /* SPE.distributions.SPHERE, SPE.distributions.DISC */
+	            rotationAxis: (this.data.rotationAxis!==''?this.data.rotationAxis:'x'), 
+	            rotationAngle: (this.data.rotationAngle!==0?this.data.rotationAngle:3.14), 
+	            accelerationValue: (this.data.accelerationValue.x!==0&&this.data.accelerationValue.y!==0&&this.data.accelerationValue.z!==0?this.data.accelerationValue:{x: 0, y: 0, z: 0}),
+	            accelerationSpread: (this.data.accelerationSpread.x!==0&&this.data.accelerationSpread.y!==0&&this.data.accelerationSpread.z!==0?this.data.accelerationSpread:{x: 0, y: 0, z: 0}), 
+	            velocityValue: (this.data.velocityValue.x!==0&&this.data.velocityValue.y!==0&&this.data.velocityValue.z!==0?this.data.velocityValue:{x: 1, y: 0.3, z: 1}),
+	            velocitySpread: (this.data.velocitySpread.x!==0&&this.data.velocitySpread.y!==0&&this.data.velocitySpread.z!==0?this.data.velocitySpread:{x: 0.5, y: 1, z: 0.5}), 
+	            color: (this.data.color!==''?this.data.color:'#FFFFFF'),
+	            size: (this.data.size!==0?this.data.size:1),
+	            opacity: { value: (this.data.opacity!=0?this.data.opacity:1) },
+	            direction: (this.data.direction!==0?this.data.direction:1),
+	            duration: (this.data.duration!=null?this.data.duration:null),
+	            particleCount: (this.data.particleCount!==0?this.data.particleCount:100),
+	            texture: (this.data.texture!==''?this.data.texture:'./images/smokeparticle.png'),
+	            randomize: false
+	        };
+
+
+	        this.presets['snow'] = {
+	            maxAge: (this.data.maxAge!==0?this.data.maxAge:20),
+	            positionSpread: (this.data.positionSpread.x!==0&&this.data.positionSpread.y!==0&&this.data.positionSpread.z!==0?this.data.positionSpread:{x:100,y:100,z:100}),
+	            type: (this.data.type!==0?this.data.type:SPE.distributions.BOX), /* SPE.distributions.SPHERE, SPE.distributions.DISC */
+	            rotationAxis: (this.data.rotationAxis!==''?this.data.rotationAxis:'x'), 
+	            rotationAngle: (this.data.rotationAngle!==0?this.data.rotationAngle:3.14), 
+	            accelerationValue: (this.data.accelerationValue.x!==0&&this.data.accelerationValue.y!==0&&this.data.accelerationValue.z!==0?this.data.accelerationValue:{x: 0, y: 0, z: 0}),
+	            accelerationSpread: (this.data.accelerationSpread.x!==0&&this.data.accelerationSpread.y!==0&&this.data.accelerationSpread.z!==0?this.data.accelerationSpread:{x: 0.2, y: 0, z: 0.2}), 
+	            velocityValue: (this.data.velocityValue.x!==0&&this.data.velocityValue.y!==0&&this.data.velocityValue.z!==0?this.data.velocityValue:{x: 0, y: 8, z: 0}),
+	            velocitySpread: (this.data.velocitySpread.x!==0&&this.data.velocitySpread.y!==0&&this.data.velocitySpread.z!==0?this.data.velocitySpread:{x: 2, y: 0, z: 2}), 
+	            color: (this.data.color!==''?this.data.color:'#FFFFFF'),
+	            size: (this.data.size!==0?this.data.size:1),
+	            opacity: { value: (this.data.opacity!=0?this.data.opacity:1) },
+	            direction: (this.data.direction!==0?this.data.direction:1),
+	            duration: (this.data.duration!=null?this.data.duration:null),
+	            particleCount: (this.data.particleCount!==0?this.data.particleCount:200),
+	            texture: (this.data.texture!==''?this.data.texture:'./images/smokeparticle.png'),
+	            randomize: false
+	        };
+
+
+	        this.presets['rain'] = {
+	            maxAge: (this.data.maxAge!==0?this.data.maxAge:1),
+	            positionSpread: (this.data.positionSpread.x!==0&&this.data.positionSpread.y!==0&&this.data.positionSpread.z!==0?this.data.positionSpread:{x:100,y:100,z:100}),
+	            type: (this.data.type!==0?this.data.type:SPE.distributions.BOX), /* SPE.distributions.SPHERE, SPE.distributions.DISC */
+	            rotationAxis: (this.data.rotationAxis!==''?this.data.rotationAxis:'x'), 
+	            rotationAngle: (this.data.rotationAngle!==0?this.data.rotationAngle:3.14), 
+	            accelerationValue: (this.data.accelerationValue.x!==0&&this.data.accelerationValue.y!==0&&this.data.accelerationValue.z!==0?this.data.accelerationValue:{x: 0, y: 3, z: 0}),
+	            accelerationSpread: (this.data.accelerationSpread.x!==0&&this.data.accelerationSpread.y!==0&&this.data.accelerationSpread.z!==0?this.data.accelerationSpread:{x: 2, y: 1, z: 2}), 
+	            velocityValue: (this.data.velocityValue.x!==0&&this.data.velocityValue.y!==0&&this.data.velocityValue.z!==0?this.data.velocityValue:{x: 0, y: 75, z: 0}),
+	            velocitySpread: (this.data.velocitySpread.x!==0&&this.data.velocitySpread.y!==0&&this.data.velocitySpread.z!==0?this.data.velocitySpread:{x: 10, y: 50, z: 10}), 
+	            color: (this.data.color!==''?this.data.color:'#FFFFFF'),
+	            size: (this.data.size!==0?this.data.size:0.4),
+	            opacity: { value: (this.data.opacity!=0?this.data.opacity:1) },
+	            direction: (this.data.direction!==0?this.data.direction:1),
+	            duration: (this.data.duration!=null?this.data.duration:null),
+	            particleCount: (this.data.particleCount!==0?this.data.particleCount:1000),
+	            texture: (this.data.texture!==''?this.data.texture:'./images/raindrop.png'),
+	            randomize: false
+	        };
+
+
+	    },
+	 
+
+	    update: function (oldData) {
+
+	        this.clock = new THREE.Clock();
+
+	        if (this.data.preset != '' && this.data.preset in this.presets) {
+
+	            this.initParticleSystem(this.presets[this.data.preset]); 
+
+	        } else {
+
+	            this.initParticleSystem(this.presets['default']);
+	        }
+
+	    },
+
+
+	    tick: function(time) {
+
+	        this.particleGroup.tick(this.clock.getDelta());
+	    },
+
+
+	    remove: function() {},
+
+
+	    initParticleSystem: function(settings) {
+
+	        var loader = new THREE.TextureLoader();
+	        var particle_texture = loader.load(
+	            settings.texture,
+	            function (texture) {
+	                return texture;
+	            },
+	            function (xhr) {
+	              console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+	            },
+	            function (xhr) {
+	              console.log('An error occurred');
+	            }
+	        );
+
+	        this.particleGroup = new SPE.Group({
+	            texture: {
+	                value: particle_texture 
+	            },
+	            maxParticleCount: this.data.maxParticleCount
+	        });
+
+	        /* color */
+	        var color_arr = [];
+	        settings.color.split(',').forEach((function(c) {
+	            color_arr.push(new THREE.Color(this.hexToRgb(c).r, this.hexToRgb(c).g, this.hexToRgb(c).b));
+	        }).bind(this));
+
+	        var emitter = new SPE.Emitter({
+	            maxAge: {
+	                value: settings.maxAge
+	            },
+	            type: {
+	                value: settings.type
+	            },
+	            position: {
+	                value: this.el.object3D.position, 
+	                spread: new THREE.Vector3(settings.positionSpread.x, settings.positionSpread.y, settings.positionSpread.z),
+	                randomize: settings.randomize
+	                //spreadClamp: new THREE.Vector3( 2, 2, 2 ),
+	                //radius: 4
+	            },
+	            rotation: {
+	                axis: (settings.rotationAxis=='x'?new THREE.Vector3(1, 0, 0):(settings.rotationAxis=='y'?new THREE.Vector3(0, 1, 0):(settings.rotationAxis=='z'?new THREE.Vector3(0, 0, 1):new THREE.Vector3(0, 1, 0)))), 
+	                angle: settings.rotationAngle,
+	                static: true
+	            },
+	            acceleration: {
+	                value: new THREE.Vector3(settings.accelerationValue.x, settings.accelerationValue.y, settings.accelerationValue.z),
+	                spread: new THREE.Vector3(settings.accelerationSpread.x, settings.accelerationSpread.y, settings.accelerationSpread.z)
+	            },
+	            velocity: {
+	                value: new THREE.Vector3(settings.velocityValue.x, settings.velocityValue.y, settings.velocityValue.z), 
+	                spread: new THREE.Vector3(settings.velocitySpread.x, settings.velocitySpread.y, settings.velocitySpread.z)  
+	            },
+	            color: {
+	                value: color_arr 
+	            },
+	            size: {
+	                value: settings.size
+	            },
+	            /*wiggle: { value: 4, spread: 2 }, //settings.wiggle,*/
+	            /*drag: {
+	                value: settings.drag
+	            },*/
+	            direction: {
+	                value: settings.direction
+	            },
+	            duration: {
+	                value: settings.duration
+	            },
+	            opacity: settings.opacity,
+	            particleCount: settings.particleCount
+	        });
+
+	        this.particleGroup.addEmitter(emitter);
+	        this.el.sceneEl.object3D.add(this.particleGroup.mesh);
+	    },
+
+
+	    hexToRgb: function(hex) {
+
+	        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+	        return result ? {
+	            r: parseInt(result[1], 16),
+	            g: parseInt(result[2], 16),
+	            b: parseInt(result[3], 16)
+	        } : null;
+
+	    }
+
+	});
+
+
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(455)))
+
+/***/ },
 /* 455 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -89913,8 +88643,3577 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(456).setImmediate, __webpack_require__(456).clearImmediate))
 
 /***/ },
-/* 457 */,
-/* 458 */,
+/* 457 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* shader-particle-engine 1.0.4
+	 * 
+	 * (c) 2015 Luke Moody (http://www.github.com/squarefeet)
+	 *     Originally based on Lee Stemkoski's original work (https://github.com/stemkoski/stemkoski.github.com/blob/master/Three.js/js/ParticleEngine.js).
+	 *
+	 * shader-particle-engine may be freely distributed under the MIT license (See LICENSE at root of this repository.)
+	 */
+	/**
+	 * @typedef {Number} distribution
+	 * @property {Number} SPE.distributions.BOX Values will be distributed within a box.
+	 * @property {Number} SPE.distributions.SPHERE Values will be distributed within a sphere.
+	 * @property {Number} SPE.distributions.DISC Values will be distributed within a 2D disc.
+	 */
+
+	/**
+	 * Namespace for Shader Particle Engine.
+	 *
+	 * All SPE-related code sits under this namespace.
+	 *
+	 * @type {Object}
+	 * @namespace
+	 */
+	var SPE = {
+
+	    /**
+	     * A map of supported distribution types used
+	     * by SPE.Emitter instances.
+	     *
+	     * These distribution types can be applied to
+	     * an emitter globally, which will affect the
+	     * `position`, `velocity`, and `acceleration`
+	     * value calculations for an emitter, or they
+	     * can be applied on a per-property basis.
+	     *
+	     * @enum {Number}
+	     */
+	    distributions: {
+	        /**
+	         * Values will be distributed within a box.
+	         * @type {Number}
+	         */
+	        BOX: 1,
+
+	        /**
+	         * Values will be distributed on a sphere.
+	         * @type {Number}
+	         */
+	        SPHERE: 2,
+
+	        /**
+	         * Values will be distributed on a 2d-disc shape.
+	         * @type {Number}
+	         */
+	        DISC: 3,
+	    },
+
+
+	    /**
+	     * Set this value to however many 'steps' you
+	     * want value-over-lifetime properties to have.
+	     *
+	     * It's adjustable to fix an interpolation problem:
+	     *
+	     * Assuming you specify an opacity value as [0, 1, 0]
+	     *      and the `valueOverLifetimeLength` is 4, then the
+	     *      opacity value array will be reinterpolated to
+	     *      be [0, 0.66, 0.66, 0].
+	     *   This isn't ideal, as particles would never reach
+	     *   full opacity.
+	     *
+	     * NOTE:
+	     *     This property affects the length of ALL
+	     *       value-over-lifetime properties for ALL
+	     *       emitters and ALL groups.
+	     *
+	     *     Only values >= 3 && <= 4 are allowed.
+	     *
+	     * @type {Number}
+	     */
+	    valueOverLifetimeLength: 4
+	};
+
+	// Module loader support:
+	if ( true ) {
+	    !(__WEBPACK_AMD_DEFINE_FACTORY__ = (SPE), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	}
+	else if ( typeof exports !== 'undefined' && typeof module !== 'undefined' ) {
+	    module.exports = SPE;
+	}
+
+	/**
+	 * A helper class for TypedArrays.
+	 *
+	 * Allows for easy resizing, assignment of various component-based
+	 * types (Vector2s, Vector3s, Vector4s, Mat3s, Mat4s),
+	 * as well as Colors (where components are `r`, `g`, `b`),
+	 * Numbers, and setting from other TypedArrays.
+	 *
+	 * @author Luke Moody
+	 * @constructor
+	 * @param {Function} TypedArrayConstructor The constructor to use (Float32Array, Uint8Array, etc.)
+	 * @param {Number} size                 The size of the array to create
+	 * @param {Number} componentSize        The number of components per-value (ie. 3 for a vec3, 9 for a Mat3, etc.)
+	 * @param {Number} indexOffset          The index in the array from which to start assigning values. Default `0` if none provided
+	 */
+	SPE.TypedArrayHelper = function( TypedArrayConstructor, size, componentSize, indexOffset ) {
+	    'use strict';
+
+	    this.componentSize = componentSize || 1;
+	    this.size = ( size || 1 );
+	    this.TypedArrayConstructor = TypedArrayConstructor || Float32Array;
+	    this.array = new TypedArrayConstructor( size * this.componentSize );
+	    this.indexOffset = indexOffset || 0;
+	};
+
+	SPE.TypedArrayHelper.constructor = SPE.TypedArrayHelper;
+
+	/**
+	 * Sets the size of the internal array.
+	 *
+	 * Delegates to `this.shrink` or `this.grow` depending on size
+	 * argument's relation to the current size of the internal array.
+	 *
+	 * Note that if the array is to be shrunk, data will be lost.
+	 *
+	 * @param {Number} size The new size of the array.
+	 */
+	SPE.TypedArrayHelper.prototype.setSize = function( size, noComponentMultiply ) {
+	    'use strict';
+
+	    var currentArraySize = this.array.length;
+
+	    if ( !noComponentMultiply ) {
+	        size = size * this.componentSize;
+	    }
+
+	    if ( size < currentArraySize ) {
+	        return this.shrink( size );
+	    }
+	    else if ( size > currentArraySize ) {
+	        return this.grow( size );
+	    }
+	    else {
+	        console.info( 'TypedArray is already of size:', size + '.', 'Will not resize.' );
+	    }
+	};
+
+	/**
+	 * Shrinks the internal array.
+	 *
+	 * @param  {Number} size The new size of the typed array. Must be smaller than `this.array.length`.
+	 * @return {SPE.TypedArrayHelper}      Instance of this class.
+	 */
+	SPE.TypedArrayHelper.prototype.shrink = function( size ) {
+	    'use strict';
+
+	    this.array = this.array.subarray( 0, size );
+	    this.size = size;
+	    return this;
+	};
+
+	/**
+	 * Grows the internal array.
+	 * @param  {Number} size The new size of the typed array. Must be larger than `this.array.length`.
+	 * @return {SPE.TypedArrayHelper}      Instance of this class.
+	 */
+	SPE.TypedArrayHelper.prototype.grow = function( size ) {
+	    'use strict';
+
+	    var existingArray = this.array,
+	        newArray = new this.TypedArrayConstructor( size );
+
+	    newArray.set( existingArray );
+	    this.array = newArray;
+	    this.size = size;
+
+	    return this;
+	};
+
+
+	/**
+	 * Perform a splice operation on this array's buffer.
+	 * @param  {Number} start The start index of the splice. Will be multiplied by the number of components for this attribute.
+	 * @param  {Number} end The end index of the splice. Will be multiplied by the number of components for this attribute.
+	 * @returns {Object} The SPE.TypedArrayHelper instance.
+	 */
+	SPE.TypedArrayHelper.prototype.splice = function( start, end ) {
+	    'use strict';
+	    start *= this.componentSize;
+	    end *= this.componentSize;
+
+	    var data = [],
+	        array = this.array,
+	        size = array.length;
+
+	    for ( var i = 0; i < size; ++i ) {
+	        if ( i < start || i >= end ) {
+	            data.push( array[ i ] );
+	        }
+	        // array[ i ] = 0;
+	    }
+
+	    this.setFromArray( 0, data );
+
+	    return this;
+	};
+
+
+	/**
+	 * Copies from the given TypedArray into this one, using the index argument
+	 * as the start position. Alias for `TypedArray.set`. Will automatically resize
+	 * if the given source array is of a larger size than the internal array.
+	 *
+	 * @param {Number} index      The start position from which to copy into this array.
+	 * @param {TypedArray} array The array from which to copy; the source array.
+	 * @return {SPE.TypedArrayHelper} Instance of this class.
+	 */
+	SPE.TypedArrayHelper.prototype.setFromArray = function( index, array ) {
+	    'use strict';
+
+	    var sourceArraySize = array.length,
+	        newSize = index + sourceArraySize;
+
+	    if ( newSize > this.array.length ) {
+	        this.grow( newSize );
+	    }
+	    else if ( newSize < this.array.length ) {
+	        this.shrink( newSize );
+	    }
+
+	    this.array.set( array, this.indexOffset + index );
+
+	    return this;
+	};
+
+	/**
+	 * Set a Vector2 value at `index`.
+	 *
+	 * @param {Number} index The index at which to set the vec2 values from.
+	 * @param {Vector2} vec2  Any object that has `x` and `y` properties.
+	 * @return {SPE.TypedArrayHelper} Instance of this class.
+	 */
+	SPE.TypedArrayHelper.prototype.setVec2 = function( index, vec2 ) {
+	    'use strict';
+
+	    return this.setVec2Components( index, vec2.x, vec2.y );
+	};
+
+	/**
+	 * Set a Vector2 value using raw components.
+	 *
+	 * @param {Number} index The index at which to set the vec2 values from.
+	 * @param {Number} x     The Vec2's `x` component.
+	 * @param {Number} y     The Vec2's `y` component.
+	 * @return {SPE.TypedArrayHelper} Instance of this class.
+	 */
+	SPE.TypedArrayHelper.prototype.setVec2Components = function( index, x, y ) {
+	    'use strict';
+
+	    var array = this.array,
+	        i = this.indexOffset + ( index * this.componentSize );
+
+	    array[ i ] = x;
+	    array[ i + 1 ] = y;
+	    return this;
+	};
+
+	/**
+	 * Set a Vector3 value at `index`.
+	 *
+	 * @param {Number} index The index at which to set the vec3 values from.
+	 * @param {Vector3} vec2  Any object that has `x`, `y`, and `z` properties.
+	 * @return {SPE.TypedArrayHelper} Instance of this class.
+	 */
+	SPE.TypedArrayHelper.prototype.setVec3 = function( index, vec3 ) {
+	    'use strict';
+
+	    return this.setVec3Components( index, vec3.x, vec3.y, vec3.z );
+	};
+
+	/**
+	 * Set a Vector3 value using raw components.
+	 *
+	 * @param {Number} index The index at which to set the vec3 values from.
+	 * @param {Number} x     The Vec3's `x` component.
+	 * @param {Number} y     The Vec3's `y` component.
+	 * @param {Number} z     The Vec3's `z` component.
+	 * @return {SPE.TypedArrayHelper} Instance of this class.
+	 */
+	SPE.TypedArrayHelper.prototype.setVec3Components = function( index, x, y, z ) {
+	    'use strict';
+
+	    var array = this.array,
+	        i = this.indexOffset + ( index * this.componentSize );
+
+	    array[ i ] = x;
+	    array[ i + 1 ] = y;
+	    array[ i + 2 ] = z;
+	    return this;
+	};
+
+	/**
+	 * Set a Vector4 value at `index`.
+	 *
+	 * @param {Number} index The index at which to set the vec4 values from.
+	 * @param {Vector4} vec2  Any object that has `x`, `y`, `z`, and `w` properties.
+	 * @return {SPE.TypedArrayHelper} Instance of this class.
+	 */
+	SPE.TypedArrayHelper.prototype.setVec4 = function( index, vec4 ) {
+	    'use strict';
+
+	    return this.setVec4Components( index, vec4.x, vec4.y, vec4.z, vec4.w );
+	};
+
+	/**
+	 * Set a Vector4 value using raw components.
+	 *
+	 * @param {Number} index The index at which to set the vec4 values from.
+	 * @param {Number} x     The Vec4's `x` component.
+	 * @param {Number} y     The Vec4's `y` component.
+	 * @param {Number} z     The Vec4's `z` component.
+	 * @param {Number} w     The Vec4's `w` component.
+	 * @return {SPE.TypedArrayHelper} Instance of this class.
+	 */
+	SPE.TypedArrayHelper.prototype.setVec4Components = function( index, x, y, z, w ) {
+	    'use strict';
+
+	    var array = this.array,
+	        i = this.indexOffset + ( index * this.componentSize );
+
+	    array[ i ] = x;
+	    array[ i + 1 ] = y;
+	    array[ i + 2 ] = z;
+	    array[ i + 3 ] = w;
+	    return this;
+	};
+
+	/**
+	 * Set a Matrix3 value at `index`.
+	 *
+	 * @param {Number} index The index at which to set the matrix values from.
+	 * @param {Matrix3} mat3 The 3x3 matrix to set from. Must have a TypedArray property named `elements` to copy from.
+	 * @return {SPE.TypedArrayHelper} Instance of this class.
+	 */
+	SPE.TypedArrayHelper.prototype.setMat3 = function( index, mat3 ) {
+	    'use strict';
+
+	    return this.setFromArray( this.indexOffset + ( index * this.componentSize ), mat3.elements );
+	};
+
+	/**
+	 * Set a Matrix4 value at `index`.
+	 *
+	 * @param {Number} index The index at which to set the matrix values from.
+	 * @param {Matrix4} mat3 The 4x4 matrix to set from. Must have a TypedArray property named `elements` to copy from.
+	 * @return {SPE.TypedArrayHelper} Instance of this class.
+	 */
+	SPE.TypedArrayHelper.prototype.setMat4 = function( index, mat4 ) {
+	    'use strict';
+
+	    return this.setFromArray( this.indexOffset + ( index * this.componentSize ), mat4.elements );
+	};
+
+	/**
+	 * Set a Color value at `index`.
+	 *
+	 * @param {Number} index The index at which to set the vec3 values from.
+	 * @param {Color} color  Any object that has `r`, `g`, and `b` properties.
+	 * @return {SPE.TypedArrayHelper} Instance of this class.
+	 */
+	SPE.TypedArrayHelper.prototype.setColor = function( index, color ) {
+	    'use strict';
+
+	    return this.setVec3Components( index, color.r, color.g, color.b );
+	};
+
+	/**
+	 * Set a Number value at `index`.
+	 *
+	 * @param {Number} index The index at which to set the vec3 values from.
+	 * @param {Number} numericValue  The number to assign to this index in the array.
+	 * @return {SPE.TypedArrayHelper} Instance of this class.
+	 */
+	SPE.TypedArrayHelper.prototype.setNumber = function( index, numericValue ) {
+	    'use strict';
+
+	    this.array[ this.indexOffset + ( index * this.componentSize ) ] = numericValue;
+	    return this;
+	};
+
+	/**
+	 * Returns the value of the array at the given index, taking into account
+	 * the `indexOffset` property of this class.
+	 *
+	 * Note that this function ignores the component size and will just return a
+	 * single value.
+	 *
+	 * @param  {Number} index The index in the array to fetch.
+	 * @return {Number}       The value at the given index.
+	 */
+	SPE.TypedArrayHelper.prototype.getValueAtIndex = function( index ) {
+	    'use strict';
+
+	    return this.array[ this.indexOffset + index ];
+	};
+
+	/**
+	 * Returns the component value of the array at the given index, taking into account
+	 * the `indexOffset` property of this class.
+	 *
+	 * If the componentSize is set to 3, then it will return a new TypedArray
+	 * of length 3.
+	 *
+	 * @param  {Number} index The index in the array to fetch.
+	 * @return {TypedArray}       The component value at the given index.
+	 */
+	SPE.TypedArrayHelper.prototype.getComponentValueAtIndex = function( index ) {
+	    'use strict';
+
+	    return this.array.subarray( this.indexOffset + ( index * this.componentSize ) );
+	};
+
+	/**
+	 * A helper to handle creating and updating a THREE.BufferAttribute instance.
+	 *
+	 * @author  Luke Moody
+	 * @constructor
+	 * @param {String} type          The buffer attribute type. See SPE.ShaderAttribute.typeSizeMap for valid values.
+	 * @param {Boolean=} dynamicBuffer Whether this buffer attribute should be marked as dynamic or not.
+	 * @param {Function=} arrayType     A reference to a TypedArray constructor. Defaults to Float32Array if none provided.
+	 */
+	SPE.ShaderAttribute = function( type, dynamicBuffer, arrayType ) {
+	    'use strict';
+
+	    var typeMap = SPE.ShaderAttribute.typeSizeMap;
+
+	    this.type = typeof type === 'string' && typeMap.hasOwnProperty( type ) ? type : 'f';
+	    this.componentSize = typeMap[ this.type ];
+	    this.arrayType = arrayType || Float32Array;
+	    this.typedArray = null;
+	    this.bufferAttribute = null;
+	    this.dynamicBuffer = !!dynamicBuffer;
+
+	    this.updateMin = 0;
+	    this.updateMax = 0;
+	};
+
+	SPE.ShaderAttribute.constructor = SPE.ShaderAttribute;
+
+	/**
+	 * A map of uniform types to their component size.
+	 * @enum {Number}
+	 */
+	SPE.ShaderAttribute.typeSizeMap = {
+	    /**
+	     * Float
+	     * @type {Number}
+	     */
+	    f: 1,
+
+	    /**
+	     * Vec2
+	     * @type {Number}
+	     */
+	    v2: 2,
+
+	    /**
+	     * Vec3
+	     * @type {Number}
+	     */
+	    v3: 3,
+
+	    /**
+	     * Vec4
+	     * @type {Number}
+	     */
+	    v4: 4,
+
+	    /**
+	     * Color
+	     * @type {Number}
+	     */
+	    c: 3,
+
+	    /**
+	     * Mat3
+	     * @type {Number}
+	     */
+	    m3: 9,
+
+	    /**
+	     * Mat4
+	     * @type {Number}
+	     */
+	    m4: 16
+	};
+
+	/**
+	 * Calculate the minimum and maximum update range for this buffer attribute using
+	 * component size independant min and max values.
+	 *
+	 * @param {Number} min The start of the range to mark as needing an update.
+	 * @param {Number} max The end of the range to mark as needing an update.
+	 */
+	SPE.ShaderAttribute.prototype.setUpdateRange = function( min, max ) {
+	    'use strict';
+
+	    this.updateMin = Math.min( min * this.componentSize, this.updateMin * this.componentSize );
+	    this.updateMax = Math.max( max * this.componentSize, this.updateMax * this.componentSize );
+	};
+
+	/**
+	 * Calculate the number of indices that this attribute should mark as needing
+	 * updating. Also marks the attribute as needing an update.
+	 */
+	SPE.ShaderAttribute.prototype.flagUpdate = function() {
+	    'use strict';
+
+	    var attr = this.bufferAttribute,
+	        range = attr.updateRange;
+
+	    range.offset = this.updateMin;
+	    range.count = Math.min( ( this.updateMax - this.updateMin ) + this.componentSize, this.typedArray.array.length );
+	    // console.log( range.offset, range.count, this.typedArray.array.length );
+	    // console.log( 'flagUpdate:', range.offset, range.count );
+	    attr.needsUpdate = true;
+	};
+
+
+
+	/**
+	 * Reset the index update counts for this attribute
+	 */
+	SPE.ShaderAttribute.prototype.resetUpdateRange = function() {
+	    'use strict';
+
+	    this.updateMin = 0;
+	    this.updateMax = 0;
+	};
+
+	SPE.ShaderAttribute.prototype.resetDynamic = function() {
+	    'use strict';
+	    this.bufferAttribute.dynamic = this.dynamicBuffer;
+	};
+
+	/**
+	 * Perform a splice operation on this attribute's buffer.
+	 * @param  {Number} start The start index of the splice. Will be multiplied by the number of components for this attribute.
+	 * @param  {Number} end The end index of the splice. Will be multiplied by the number of components for this attribute.
+	 */
+	SPE.ShaderAttribute.prototype.splice = function( start, end ) {
+	    'use strict';
+
+	    this.typedArray.splice( start, end );
+
+	    // Reset the reference to the attribute's typed array
+	    // since it has probably changed.
+	    this.forceUpdateAll();
+	};
+
+	SPE.ShaderAttribute.prototype.forceUpdateAll = function() {
+	    'use strict';
+
+	    this.bufferAttribute.array = this.typedArray.array;
+	    this.bufferAttribute.updateRange.offset = 0;
+	    this.bufferAttribute.updateRange.count = -1;
+	    this.bufferAttribute.dynamic = false;
+	    this.bufferAttribute.needsUpdate = true;
+	};
+
+	/**
+	 * Make sure this attribute has a typed array associated with it.
+	 *
+	 * If it does, then it will ensure the typed array is of the correct size.
+	 *
+	 * If not, a new SPE.TypedArrayHelper instance will be created.
+	 *
+	 * @param  {Number} size The size of the typed array to create or update to.
+	 */
+	SPE.ShaderAttribute.prototype._ensureTypedArray = function( size ) {
+	    'use strict';
+
+	    // Condition that's most likely to be true at the top: no change.
+	    if ( this.typedArray !== null && this.typedArray.size === size * this.componentSize ) {
+	        return;
+	    }
+
+	    // Resize the array if we need to, telling the TypedArrayHelper to
+	    // ignore it's component size when evaluating size.
+	    else if ( this.typedArray !== null && this.typedArray.size !== size ) {
+	        this.typedArray.setSize( size );
+	    }
+
+	    // This condition should only occur once in an attribute's lifecycle.
+	    else if ( this.typedArray === null ) {
+	        this.typedArray = new SPE.TypedArrayHelper( this.arrayType, size, this.componentSize );
+	    }
+	};
+
+
+	/**
+	 * Creates a THREE.BufferAttribute instance if one doesn't exist already.
+	 *
+	 * Ensures a typed array is present by calling _ensureTypedArray() first.
+	 *
+	 * If a buffer attribute exists already, then it will be marked as needing an update.
+	 *
+	 * @param  {Number} size The size of the typed array to create if one doesn't exist, or resize existing array to.
+	 */
+	SPE.ShaderAttribute.prototype._createBufferAttribute = function( size ) {
+	    'use strict';
+
+	    // Make sure the typedArray is present and correct.
+	    this._ensureTypedArray( size );
+
+	    // Don't create it if it already exists, but do
+	    // flag that it needs updating on the next render
+	    // cycle.
+	    if ( this.bufferAttribute !== null ) {
+	        this.bufferAttribute.array = this.typedArray.array;
+	        this.bufferAttribute.needsUpdate = true;
+	        return;
+	    }
+
+	    this.bufferAttribute = new THREE.BufferAttribute( this.typedArray.array, this.componentSize );
+	    this.bufferAttribute.dynamic = this.dynamicBuffer;
+	};
+
+	/**
+	 * Returns the length of the typed array associated with this attribute.
+	 * @return {Number} The length of the typed array. Will be 0 if no typed array has been created yet.
+	 */
+	SPE.ShaderAttribute.prototype.getLength = function() {
+	    'use strict';
+
+	    if ( this.typedArray === null ) {
+	        return 0;
+	    }
+
+	    return this.typedArray.array.length;
+	};
+
+	SPE.shaderChunks = {
+	    // Register color-packing define statements.
+	    defines: [
+	        '#define PACKED_COLOR_SIZE 256.0',
+	        '#define PACKED_COLOR_DIVISOR 255.0'
+	    ].join( '\n' ),
+
+	    // All uniforms used by vertex / fragment shaders
+	    uniforms: [
+	        'uniform float deltaTime;',
+	        'uniform float runTime;',
+	        'uniform sampler2D texture;',
+	        'uniform vec4 textureAnimation;',
+	        'uniform float scale;',
+	    ].join( '\n' ),
+
+	    // All attributes used by the vertex shader.
+	    //
+	    // Note that some attributes are squashed into other ones:
+	    //
+	    // * Drag is acceleration.w
+	    attributes: [
+	        'attribute vec4 acceleration;',
+	        'attribute vec3 velocity;',
+	        'attribute vec4 rotation;',
+	        'attribute vec3 rotationCenter;',
+	        'attribute vec4 params;',
+	        'attribute vec4 size;',
+	        'attribute vec4 angle;',
+	        'attribute vec4 color;',
+	        'attribute vec4 opacity;'
+	    ].join( '\n' ),
+
+	    //
+	    varyings: [
+	        'varying vec4 vColor;',
+	        '#ifdef SHOULD_ROTATE_TEXTURE',
+	        '    varying float vAngle;',
+	        '#endif',
+
+	        '#ifdef SHOULD_CALCULATE_SPRITE',
+	        '    varying vec4 vSpriteSheet;',
+	        '#endif'
+	    ].join( '\n' ),
+
+
+	    // Branch-avoiding comparison fns
+	    // - http://theorangeduck.com/page/avoiding-shader-conditionals
+	    branchAvoidanceFunctions: [
+	        'float when_gt(float x, float y) {',
+	        '    return max(sign(x - y), 0.0);',
+	        '}',
+
+	        'float when_lt(float x, float y) {',
+	        '    return min( max(1.0 - sign(x - y), 0.0), 1.0 );',
+	        '}',
+
+	        'float when_eq( float x, float y ) {',
+	        '    return 1.0 - abs( sign( x - y ) );',
+	        '}',
+
+	        'float when_ge(float x, float y) {',
+	        '  return 1.0 - when_lt(x, y);',
+	        '}',
+
+	        'float when_le(float x, float y) {',
+	        '  return 1.0 - when_gt(x, y);',
+	        '}',
+
+	        // Branch-avoiding logical operators
+	        // (to be used with above comparison fns)
+	        'float and(float a, float b) {',
+	        '    return a * b;',
+	        '}',
+
+	        'float or(float a, float b) {',
+	        '    return min(a + b, 1.0);',
+	        '}',
+	    ].join( '\n' ),
+
+
+	    // From:
+	    // - http://stackoverflow.com/a/12553149
+	    // - https://stackoverflow.com/questions/22895237/hexadecimal-to-rgb-values-in-webgl-shader
+	    unpackColor: [
+	        'vec3 unpackColor( in float hex ) {',
+	        '   vec3 c = vec3( 0.0 );',
+
+	        '   float r = mod( (hex / PACKED_COLOR_SIZE / PACKED_COLOR_SIZE), PACKED_COLOR_SIZE );',
+	        '   float g = mod( (hex / PACKED_COLOR_SIZE), PACKED_COLOR_SIZE );',
+	        '   float b = mod( hex, PACKED_COLOR_SIZE );',
+
+	        '   c.r = r / PACKED_COLOR_DIVISOR;',
+	        '   c.g = g / PACKED_COLOR_DIVISOR;',
+	        '   c.b = b / PACKED_COLOR_DIVISOR;',
+
+	        '   return c;',
+	        '}',
+	    ].join( '\n' ),
+
+	    unpackRotationAxis: [
+	        'vec3 unpackRotationAxis( in float hex ) {',
+	        '   vec3 c = vec3( 0.0 );',
+
+	        '   float r = mod( (hex / PACKED_COLOR_SIZE / PACKED_COLOR_SIZE), PACKED_COLOR_SIZE );',
+	        '   float g = mod( (hex / PACKED_COLOR_SIZE), PACKED_COLOR_SIZE );',
+	        '   float b = mod( hex, PACKED_COLOR_SIZE );',
+
+	        '   c.r = r / PACKED_COLOR_DIVISOR;',
+	        '   c.g = g / PACKED_COLOR_DIVISOR;',
+	        '   c.b = b / PACKED_COLOR_DIVISOR;',
+
+	        '   c *= vec3( 2.0 );',
+	        '   c -= vec3( 1.0 );',
+
+	        '   return c;',
+	        '}',
+	    ].join( '\n' ),
+
+	    floatOverLifetime: [
+	        'float getFloatOverLifetime( in float positionInTime, in vec4 attr ) {',
+	        '    highp float value = 0.0;',
+	        '    float deltaAge = positionInTime * float( VALUE_OVER_LIFETIME_LENGTH - 1 );',
+	        '    float fIndex = 0.0;',
+	        '    float shouldApplyValue = 0.0;',
+
+	        // This might look a little odd, but it's faster in the testing I've done than using branches.
+	        // Uses basic maths to avoid branching.
+	        //
+	        // Take a look at the branch-avoidance functions defined above,
+	        // and be sure to check out The Orange Duck site where I got this
+	        // from (link above).
+
+	        // Fix for static emitters (age is always zero).
+	        '    value += attr[ 0 ] * when_eq( deltaAge, 0.0 );',
+	        '',
+	        '    for( int i = 0; i < VALUE_OVER_LIFETIME_LENGTH - 1; ++i ) {',
+	        '       fIndex = float( i );',
+	        '       shouldApplyValue = and( when_gt( deltaAge, fIndex ), when_le( deltaAge, fIndex + 1.0 ) );',
+	        '       value += shouldApplyValue * mix( attr[ i ], attr[ i + 1 ], deltaAge - fIndex );',
+	        '    }',
+	        '',
+	        '    return value;',
+	        '}',
+	    ].join( '\n' ),
+
+	    colorOverLifetime: [
+	        'vec3 getColorOverLifetime( in float positionInTime, in vec3 color1, in vec3 color2, in vec3 color3, in vec3 color4 ) {',
+	        '    vec3 value = vec3( 0.0 );',
+	        '    value.x = getFloatOverLifetime( positionInTime, vec4( color1.x, color2.x, color3.x, color4.x ) );',
+	        '    value.y = getFloatOverLifetime( positionInTime, vec4( color1.y, color2.y, color3.y, color4.y ) );',
+	        '    value.z = getFloatOverLifetime( positionInTime, vec4( color1.z, color2.z, color3.z, color4.z ) );',
+	        '    return value;',
+	        '}',
+	    ].join( '\n' ),
+
+	    paramFetchingFunctions: [
+	        'float getAlive() {',
+	        '   return params.x;',
+	        '}',
+
+	        'float getAge() {',
+	        '   return params.y;',
+	        '}',
+
+	        'float getMaxAge() {',
+	        '   return params.z;',
+	        '}',
+
+	        'float getWiggle() {',
+	        '   return params.w;',
+	        '}',
+	    ].join( '\n' ),
+
+	    forceFetchingFunctions: [
+	        'vec4 getPosition( in float age ) {',
+	        '   return modelViewMatrix * vec4( position, 1.0 );',
+	        '}',
+
+	        'vec3 getVelocity( in float age ) {',
+	        '   return velocity * age;',
+	        '}',
+
+	        'vec3 getAcceleration( in float age ) {',
+	        '   return acceleration.xyz * age;',
+	        '}',
+	    ].join( '\n' ),
+
+
+	    rotationFunctions: [
+	        // Huge thanks to:
+	        // - http://www.neilmendoza.com/glsl-rotation-about-an-arbitrary-axis/
+	        '#ifdef SHOULD_ROTATE_PARTICLES',
+	        '   mat4 getRotationMatrix( in vec3 axis, in float angle) {',
+	        '       axis = normalize(axis);',
+	        '       float s = sin(angle);',
+	        '       float c = cos(angle);',
+	        '       float oc = 1.0 - c;',
+	        '',
+	        '       return mat4(oc * axis.x * axis.x + c,           oc * axis.x * axis.y - axis.z * s,  oc * axis.z * axis.x + axis.y * s,  0.0,',
+	        '                   oc * axis.x * axis.y + axis.z * s,  oc * axis.y * axis.y + c,           oc * axis.y * axis.z - axis.x * s,  0.0,',
+	        '                   oc * axis.z * axis.x - axis.y * s,  oc * axis.y * axis.z + axis.x * s,  oc * axis.z * axis.z + c,           0.0,',
+	        '                   0.0,                                0.0,                                0.0,                                1.0);',
+	        '   }',
+	        '',
+	        '   vec3 getRotation( in vec3 pos, in float positionInTime ) {',
+	        '      if( rotation.y == 0.0 ) {',
+	        '           return pos;',
+	        '      }',
+	        '',
+	        '      vec3 axis = unpackRotationAxis( rotation.x );',
+	        '      vec3 center = rotationCenter;',
+	        '      vec3 translated;',
+	        '      mat4 rotationMatrix;',
+
+	        '      float angle = 0.0;',
+	        '      angle += when_eq( rotation.z, 0.0 ) * rotation.y;',
+	        '      angle += when_gt( rotation.z, 0.0 ) * mix( 0.0, rotation.y, positionInTime );',
+	        '      translated = rotationCenter - pos;',
+	        '      rotationMatrix = getRotationMatrix( axis, angle );',
+	        '      return center - vec3( rotationMatrix * vec4( translated, 0.0 ) );',
+	        '   }',
+	        '#endif'
+	    ].join( '\n' ),
+
+
+	    // Fragment chunks
+	    rotateTexture: [
+	        '    vec2 vUv = vec2( gl_PointCoord.x, 1.0 - gl_PointCoord.y );',
+	        '',
+	        '    #ifdef SHOULD_ROTATE_TEXTURE',
+	        '       float x = gl_PointCoord.x - 0.5;',
+	        '       float y = 1.0 - gl_PointCoord.y - 0.5;',
+	        '       float c = cos( -vAngle );',
+	        '       float s = sin( -vAngle );',
+
+	        '       vUv = vec2( c * x + s * y + 0.5, c * y - s * x + 0.5 );',
+	        '    #endif',
+	        '',
+
+	        // Spritesheets overwrite angle calculations.
+	        '    #ifdef SHOULD_CALCULATE_SPRITE',
+	        '        float framesX = vSpriteSheet.x;',
+	        '        float framesY = vSpriteSheet.y;',
+	        '        float columnNorm = vSpriteSheet.z;',
+	        '        float rowNorm = vSpriteSheet.w;',
+
+	        '        vUv.x = gl_PointCoord.x * framesX + columnNorm;',
+	        '        vUv.y = 1.0 - (gl_PointCoord.y * framesY + rowNorm);',
+	        '    #endif',
+
+	        '',
+	        '    vec4 rotatedTexture = texture2D( texture, vUv );',
+	    ].join( '\n' )
+	};
+
+	SPE.shaders = {
+	    vertex: [
+	        SPE.shaderChunks.defines,
+	        SPE.shaderChunks.uniforms,
+	        SPE.shaderChunks.attributes,
+	        SPE.shaderChunks.varyings,
+
+	        THREE.ShaderChunk.common,
+	        THREE.ShaderChunk.logdepthbuf_pars_vertex,
+
+	        SPE.shaderChunks.branchAvoidanceFunctions,
+	        SPE.shaderChunks.unpackColor,
+	        SPE.shaderChunks.unpackRotationAxis,
+	        SPE.shaderChunks.floatOverLifetime,
+	        SPE.shaderChunks.colorOverLifetime,
+	        SPE.shaderChunks.paramFetchingFunctions,
+	        SPE.shaderChunks.forceFetchingFunctions,
+	        SPE.shaderChunks.rotationFunctions,
+
+
+	        'void main() {',
+
+
+	        //
+	        // Setup...
+	        //
+	        '    highp float age = getAge();',
+	        '    highp float alive = getAlive();',
+	        '    highp float maxAge = getMaxAge();',
+	        '    highp float positionInTime = (age / maxAge);',
+	        '    highp float isAlive = when_gt( alive, 0.0 );',
+
+	        '    #ifdef SHOULD_WIGGLE_PARTICLES',
+	        '        float wiggleAmount = positionInTime * getWiggle();',
+	        '        float wiggleSin = isAlive * sin( wiggleAmount );',
+	        '        float wiggleCos = isAlive * cos( wiggleAmount );',
+	        '    #endif',
+
+	        //
+	        // Forces
+	        //
+
+	        // Get forces & position
+	        '    vec3 vel = getVelocity( age );',
+	        '    vec3 accel = getAcceleration( age );',
+	        '    vec3 force = vec3( 0.0 );',
+	        '    vec3 pos = vec3( position );',
+
+	        // Calculate the required drag to apply to the forces.
+	        '    float drag = 1.0 - (positionInTime * 0.5) * acceleration.w;',
+
+	        // Integrate forces...
+	        '    force += vel;',
+	        '    force *= drag;',
+	        '    force += accel * age;',
+	        '    pos += force;',
+
+
+	        // Wiggly wiggly wiggle!
+	        '    #ifdef SHOULD_WIGGLE_PARTICLES',
+	        '        pos.x += wiggleSin;',
+	        '        pos.y += wiggleCos;',
+	        '        pos.z += wiggleSin;',
+	        '    #endif',
+
+
+	        // Rotate the emitter around it's central point
+	        '    #ifdef SHOULD_ROTATE_PARTICLES',
+	        '        pos = getRotation( pos, positionInTime );',
+	        '    #endif',
+
+	        // Convert pos to a world-space value
+	        '    vec4 mvPos = modelViewMatrix * vec4( pos, 1.0 );',
+
+	        // Determine point size.
+	        '    highp float pointSize = getFloatOverLifetime( positionInTime, size ) * isAlive;',
+
+	        // Determine perspective
+	        '    #ifdef HAS_PERSPECTIVE',
+	        '        float perspective = scale / length( mvPos.xyz );',
+	        '    #else',
+	        '        float perspective = 1.0;',
+	        '    #endif',
+
+	        // Apply perpective to pointSize value
+	        '    float pointSizePerspective = pointSize * perspective;',
+
+
+	        //
+	        // Appearance
+	        //
+
+	        // Determine color and opacity for this particle
+	        '    #ifdef COLORIZE',
+	        '       vec3 c = isAlive * getColorOverLifetime(',
+	        '           positionInTime,',
+	        '           unpackColor( color.x ),',
+	        '           unpackColor( color.y ),',
+	        '           unpackColor( color.z ),',
+	        '           unpackColor( color.w )',
+	        '       );',
+	        '    #else',
+	        '       vec3 c = vec3(1.0);',
+	        '    #endif',
+
+	        '    float o = isAlive * getFloatOverLifetime( positionInTime, opacity );',
+
+	        // Assign color to vColor varying.
+	        '    vColor = vec4( c, o );',
+
+	        // Determine angle
+	        '    #ifdef SHOULD_ROTATE_TEXTURE',
+	        '        vAngle = isAlive * getFloatOverLifetime( positionInTime, angle );',
+	        '    #endif',
+
+	        // If this particle is using a sprite-sheet as a texture, we'll have to figure out
+	        // what frame of the texture the particle is using at it's current position in time.
+	        '    #ifdef SHOULD_CALCULATE_SPRITE',
+	        '        float framesX = textureAnimation.x;',
+	        '        float framesY = textureAnimation.y;',
+	        '        float loopCount = textureAnimation.w;',
+	        '        float totalFrames = textureAnimation.z;',
+	        '        float frameNumber = mod( (positionInTime * loopCount) * totalFrames, totalFrames );',
+
+	        '        float column = floor(mod( frameNumber, framesX ));',
+	        '        float row = floor( (frameNumber - column) / framesX );',
+
+	        '        float columnNorm = column / framesX;',
+	        '        float rowNorm = row / framesY;',
+
+	        '        vSpriteSheet.x = 1.0 / framesX;',
+	        '        vSpriteSheet.y = 1.0 / framesY;',
+	        '        vSpriteSheet.z = columnNorm;',
+	        '        vSpriteSheet.w = rowNorm;',
+	        '    #endif',
+
+	        //
+	        // Write values
+	        //
+
+	        // Set PointSize according to size at current point in time.
+	        '    gl_PointSize = pointSizePerspective;',
+	        '    gl_Position = projectionMatrix * mvPos;',
+
+	        THREE.ShaderChunk.logdepthbuf_vertex,
+
+	        '}'
+	    ].join( '\n' ),
+
+	    fragment: [
+	        SPE.shaderChunks.uniforms,
+
+	        THREE.ShaderChunk.common,
+	        THREE.ShaderChunk.fog_pars_fragment,
+	        THREE.ShaderChunk.logdepthbuf_pars_fragment,
+
+	        SPE.shaderChunks.varyings,
+
+	        SPE.shaderChunks.branchAvoidanceFunctions,
+
+	        'void main() {',
+	        '    vec3 outgoingLight = vColor.xyz;',
+	        '    ',
+	        '    #ifdef ALPHATEST',
+	        '       if ( vColor.w < float(ALPHATEST) ) discard;',
+	        '    #endif',
+
+	        SPE.shaderChunks.rotateTexture,
+
+	        THREE.ShaderChunk.logdepthbuf_fragment,
+
+	        '    outgoingLight = vColor.xyz * rotatedTexture.xyz;',
+
+	        THREE.ShaderChunk.fog_fragment,
+
+	        '    gl_FragColor = vec4( outgoingLight.xyz, rotatedTexture.w * vColor.w );',
+	        '}'
+	    ].join( '\n' )
+	};
+
+	/**
+	 * A bunch of utility functions used throughout the library.
+	 * @namespace
+	 * @type {Object}
+	 */
+	SPE.utils = {
+	    /**
+	     * A map of types used by `SPE.utils.ensureTypedArg` and
+	     * `SPE.utils.ensureArrayTypedArg` to compare types against.
+	     *
+	     * @enum {String}
+	     */
+	    types: {
+	        /**
+	         * Boolean type.
+	         * @type {String}
+	         */
+	        BOOLEAN: 'boolean',
+
+	        /**
+	         * String type.
+	         * @type {String}
+	         */
+	        STRING: 'string',
+
+	        /**
+	         * Number type.
+	         * @type {String}
+	         */
+	        NUMBER: 'number',
+
+	        /**
+	         * Object type.
+	         * @type {String}
+	         */
+	        OBJECT: 'object'
+	    },
+
+	    /**
+	     * Given a value, a type, and a default value to fallback to,
+	     * ensure the given argument adheres to the type requesting,
+	     * returning the default value if type check is false.
+	     *
+	     * @param  {(boolean|string|number|object)} arg          The value to perform a type-check on.
+	     * @param  {String} type         The type the `arg` argument should adhere to.
+	     * @param  {(boolean|string|number|object)} defaultValue A default value to fallback on if the type check fails.
+	     * @return {(boolean|string|number|object)}              The given value if type check passes, or the default value if it fails.
+	     */
+	    ensureTypedArg: function( arg, type, defaultValue ) {
+	        'use strict';
+
+	        if ( typeof arg === type ) {
+	            return arg;
+	        }
+	        else {
+	            return defaultValue;
+	        }
+	    },
+
+	    /**
+	     * Given an array of values, a type, and a default value,
+	     * ensure the given array's contents ALL adhere to the provided type,
+	     * returning the default value if type check fails.
+	     *
+	     * If the given value to check isn't an Array, delegates to SPE.utils.ensureTypedArg.
+	     *
+	     * @param  {Array|boolean|string|number|object} arg          The array of values to check type of.
+	     * @param  {String} type         The type that should be adhered to.
+	     * @param  {(boolean|string|number|object)} defaultValue A default fallback value.
+	     * @return {(boolean|string|number|object)}              The given value if type check passes, or the default value if it fails.
+	     */
+	    ensureArrayTypedArg: function( arg, type, defaultValue ) {
+	        'use strict';
+
+	        // If the argument being checked is an array, loop through
+	        // it and ensure all the values are of the correct type,
+	        // falling back to the defaultValue if any aren't.
+	        if ( Array.isArray( arg ) ) {
+	            for ( var i = arg.length - 1; i >= 0; --i ) {
+	                if ( typeof arg[ i ] !== type ) {
+	                    return defaultValue;
+	                }
+	            }
+
+	            return arg;
+	        }
+
+	        // If the arg isn't an array then just fallback to
+	        // checking the type.
+	        return this.ensureTypedArg( arg, type, defaultValue );
+	    },
+
+	    /**
+	     * Ensures the given value is an instance of a constructor function.
+	     *
+	     * @param  {Object} arg          The value to check instance of.
+	     * @param  {Function} instance     The constructor of the instance to check against.
+	     * @param  {Object} defaultValue A default fallback value if instance check fails
+	     * @return {Object}              The given value if type check passes, or the default value if it fails.
+	     */
+	    ensureInstanceOf: function( arg, instance, defaultValue ) {
+	        'use strict';
+
+	        if ( instance !== undefined && arg instanceof instance ) {
+	            return arg;
+	        }
+	        else {
+	            return defaultValue;
+	        }
+	    },
+
+	    /**
+	     * Given an array of values, ensure the instances of all items in the array
+	     * matches the given instance constructor falling back to a default value if
+	     * the check fails.
+	     *
+	     * If given value isn't an Array, delegates to `SPE.utils.ensureInstanceOf`.
+	     *
+	     * @param  {Array|Object} arg          The value to perform the instanceof check on.
+	     * @param  {Function} instance     The constructor of the instance to check against.
+	     * @param  {Object} defaultValue A default fallback value if instance check fails
+	     * @return {Object}              The given value if type check passes, or the default value if it fails.
+	     */
+	    ensureArrayInstanceOf: function( arg, instance, defaultValue ) {
+	        'use strict';
+
+	        // If the argument being checked is an array, loop through
+	        // it and ensure all the values are of the correct type,
+	        // falling back to the defaultValue if any aren't.
+	        if ( Array.isArray( arg ) ) {
+	            for ( var i = arg.length - 1; i >= 0; --i ) {
+	                if ( instance !== undefined && arg[ i ] instanceof instance === false ) {
+	                    return defaultValue;
+	                }
+	            }
+
+	            return arg;
+	        }
+
+	        // If the arg isn't an array then just fallback to
+	        // checking the type.
+	        return this.ensureInstanceOf( arg, instance, defaultValue );
+	    },
+
+	    /**
+	     * Ensures that any "value-over-lifetime" properties of an emitter are
+	     * of the correct length (as dictated by `SPE.valueOverLifetimeLength`).
+	     *
+	     * Delegates to `SPE.utils.interpolateArray` for array resizing.
+	     *
+	     * If properties aren't arrays, then property values are put into one.
+	     *
+	     * @param  {Object} property  The property of an SPE.Emitter instance to check compliance of.
+	     * @param  {Number} minLength The minimum length of the array to create.
+	     * @param  {Number} maxLength The maximum length of the array to create.
+	     */
+	    ensureValueOverLifetimeCompliance: function( property, minLength, maxLength ) {
+	        'use strict';
+
+	        minLength = minLength || 3;
+	        maxLength = maxLength || 3;
+
+	        // First, ensure both properties are arrays.
+	        if ( Array.isArray( property._value ) === false ) {
+	            property._value = [ property._value ];
+	        }
+
+	        if ( Array.isArray( property._spread ) === false ) {
+	            property._spread = [ property._spread ];
+	        }
+
+	        var valueLength = this.clamp( property._value.length, minLength, maxLength ),
+	            spreadLength = this.clamp( property._spread.length, minLength, maxLength ),
+	            desiredLength = Math.max( valueLength, spreadLength );
+
+	        if ( property._value.length !== desiredLength ) {
+	            property._value = this.interpolateArray( property._value, desiredLength );
+	        }
+
+	        if ( property._spread.length !== desiredLength ) {
+	            property._spread = this.interpolateArray( property._spread, desiredLength );
+	        }
+	    },
+
+	    /**
+	     * Performs linear interpolation (lerp) on an array.
+	     *
+	     * For example, lerping [1, 10], with a `newLength` of 10 will produce [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].
+	     *
+	     * Delegates to `SPE.utils.lerpTypeAgnostic` to perform the actual
+	     * interpolation.
+	     *
+	     * @param  {Array} srcArray  The array to lerp.
+	     * @param  {Number} newLength The length the array should be interpolated to.
+	     * @return {Array}           The interpolated array.
+	     */
+	    interpolateArray: function( srcArray, newLength ) {
+	        'use strict';
+
+	        var sourceLength = srcArray.length,
+	            newArray = [ typeof srcArray[ 0 ].clone === 'function' ? srcArray[ 0 ].clone() : srcArray[ 0 ] ],
+	            factor = ( sourceLength - 1 ) / ( newLength - 1 );
+
+
+	        for ( var i = 1; i < newLength - 1; ++i ) {
+	            var f = i * factor,
+	                before = Math.floor( f ),
+	                after = Math.ceil( f ),
+	                delta = f - before;
+
+	            newArray[ i ] = this.lerpTypeAgnostic( srcArray[ before ], srcArray[ after ], delta );
+	        }
+
+	        newArray.push(
+	            typeof srcArray[ sourceLength - 1 ].clone === 'function' ?
+	            srcArray[ sourceLength - 1 ].clone() :
+	            srcArray[ sourceLength - 1 ]
+	        );
+
+	        return newArray;
+	    },
+
+	    /**
+	     * Clamp a number to between the given min and max values.
+	     * @param  {Number} value The number to clamp.
+	     * @param  {Number} min   The minimum value.
+	     * @param  {Number} max   The maximum value.
+	     * @return {Number}       The clamped number.
+	     */
+	    clamp: function( value, min, max ) {
+	        'use strict';
+
+	        return Math.max( min, Math.min( value, max ) );
+	    },
+
+	    /**
+	     * If the given value is less than the epsilon value, then return
+	     * a randomised epsilon value if specified, or just the epsilon value if not.
+	     * Works for negative numbers as well as positive.
+	     *
+	     * @param  {Number} value     The value to perform the operation on.
+	     * @param  {Boolean} randomise Whether the value should be randomised.
+	     * @return {Number}           The result of the operation.
+	     */
+	    zeroToEpsilon: function( value, randomise ) {
+	        'use strict';
+
+	        var epsilon = 0.00001,
+	            result = value;
+
+	        result = randomise ? Math.random() * epsilon * 10 : epsilon;
+
+	        if ( value < 0 && value > -epsilon ) {
+	            result = -result;
+	        }
+
+	        // if ( value === 0 ) {
+	        //     result = randomise ? Math.random() * epsilon * 10 : epsilon;
+	        // }
+	        // else if ( value > 0 && value < epsilon ) {
+	        //     result = randomise ? Math.random() * epsilon * 10 : epsilon;
+	        // }
+	        // else if ( value < 0 && value > -epsilon ) {
+	        //     result = -( randomise ? Math.random() * epsilon * 10 : epsilon );
+	        // }
+
+	        return result;
+	    },
+
+	    /**
+	     * Linearly interpolates two values of various types. The given values
+	     * must be of the same type for the interpolation to work.
+	     * @param  {(number|Object)} start The start value of the lerp.
+	     * @param  {(number|object)} end   The end value of the lerp.
+	     * @param  {Number} delta The delta posiiton of the lerp operation. Ideally between 0 and 1 (inclusive).
+	     * @return {(number|object|undefined)}       The result of the operation. Result will be undefined if
+	     *                                               the start and end arguments aren't a supported type, or
+	     *                                               if their types do not match.
+	     */
+	    lerpTypeAgnostic: function( start, end, delta ) {
+	        'use strict';
+
+	        var types = this.types,
+	            out;
+
+	        if ( typeof start === types.NUMBER && typeof end === types.NUMBER ) {
+	            return start + ( ( end - start ) * delta );
+	        }
+	        else if ( start instanceof THREE.Vector2 && end instanceof THREE.Vector2 ) {
+	            out = start.clone();
+	            out.x = this.lerp( start.x, end.x, delta );
+	            out.y = this.lerp( start.y, end.y, delta );
+	            return out;
+	        }
+	        else if ( start instanceof THREE.Vector3 && end instanceof THREE.Vector3 ) {
+	            out = start.clone();
+	            out.x = this.lerp( start.x, end.x, delta );
+	            out.y = this.lerp( start.y, end.y, delta );
+	            out.z = this.lerp( start.z, end.z, delta );
+	            return out;
+	        }
+	        else if ( start instanceof THREE.Vector4 && end instanceof THREE.Vector4 ) {
+	            out = start.clone();
+	            out.x = this.lerp( start.x, end.x, delta );
+	            out.y = this.lerp( start.y, end.y, delta );
+	            out.z = this.lerp( start.z, end.z, delta );
+	            out.w = this.lerp( start.w, end.w, delta );
+	            return out;
+	        }
+	        else if ( start instanceof THREE.Color && end instanceof THREE.Color ) {
+	            out = start.clone();
+	            out.r = this.lerp( start.r, end.r, delta );
+	            out.g = this.lerp( start.g, end.g, delta );
+	            out.b = this.lerp( start.b, end.b, delta );
+	            return out;
+	        }
+	        else {
+	            console.warn( 'Invalid argument types, or argument types do not match:', start, end );
+	        }
+	    },
+
+	    /**
+	     * Perform a linear interpolation operation on two numbers.
+	     * @param  {Number} start The start value.
+	     * @param  {Number} end   The end value.
+	     * @param  {Number} delta The position to interpolate to.
+	     * @return {Number}       The result of the lerp operation.
+	     */
+	    lerp: function( start, end, delta ) {
+	        'use strict';
+	        return start + ( ( end - start ) * delta );
+	    },
+
+	    /**
+	     * Rounds a number to a nearest multiple.
+	     *
+	     * @param  {Number} n        The number to round.
+	     * @param  {Number} multiple The multiple to round to.
+	     * @return {Number}          The result of the round operation.
+	     */
+	    roundToNearestMultiple: function( n, multiple ) {
+	        'use strict';
+
+	        var remainder = 0;
+
+	        if ( multiple === 0 ) {
+	            return n;
+	        }
+
+	        remainder = Math.abs( n ) % multiple;
+
+	        if ( remainder === 0 ) {
+	            return n;
+	        }
+
+	        if ( n < 0 ) {
+	            return -( Math.abs( n ) - remainder );
+	        }
+
+	        return n + multiple - remainder;
+	    },
+
+	    /**
+	     * Check if all items in an array are equal. Uses strict equality.
+	     *
+	     * @param  {Array} array The array of values to check equality of.
+	     * @return {Boolean}       Whether the array's values are all equal or not.
+	     */
+	    arrayValuesAreEqual: function( array ) {
+	        'use strict';
+
+	        for ( var i = 0; i < array.length - 1; ++i ) {
+	            if ( array[ i ] !== array[ i + 1 ] ) {
+	                return false;
+	            }
+	        }
+
+	        return true;
+	    },
+
+	    // colorsAreEqual: function() {
+	    //     var colors = Array.prototype.slice.call( arguments ),
+	    //         numColors = colors.length;
+
+	    //     for ( var i = 0, color1, color2; i < numColors - 1; ++i ) {
+	    //         color1 = colors[ i ];
+	    //         color2 = colors[ i + 1 ];
+
+	    //         if (
+	    //             color1.r !== color2.r ||
+	    //             color1.g !== color2.g ||
+	    //             color1.b !== color2.b
+	    //         ) {
+	    //             return false
+	    //         }
+	    //     }
+
+	    //     return true;
+	    // },
+
+
+	    /**
+	     * Given a start value and a spread value, create and return a random
+	     * number.
+	     * @param  {Number} base   The start value.
+	     * @param  {Number} spread The size of the random variance to apply.
+	     * @return {Number}        A randomised number.
+	     */
+	    randomFloat: function( base, spread ) {
+	        'use strict';
+	        return base + spread * ( Math.random() - 0.5 );
+	    },
+
+
+
+	    /**
+	     * Given an SPE.ShaderAttribute instance, and various other settings,
+	     * assign values to the attribute's array in a `vec3` format.
+	     *
+	     * @param  {Object} attribute   The instance of SPE.ShaderAttribute to save the result to.
+	     * @param  {Number} index       The offset in the attribute's TypedArray to save the result from.
+	     * @param  {Object} base        THREE.Vector3 instance describing the start value.
+	     * @param  {Object} spread      THREE.Vector3 instance describing the random variance to apply to the start value.
+	     * @param  {Object} spreadClamp THREE.Vector3 instance describing the multiples to clamp the randomness to.
+	     */
+	    randomVector3: function( attribute, index, base, spread, spreadClamp ) {
+	        'use strict';
+
+	        var x = base.x + ( Math.random() * spread.x - ( spread.x * 0.5 ) ),
+	            y = base.y + ( Math.random() * spread.y - ( spread.y * 0.5 ) ),
+	            z = base.z + ( Math.random() * spread.z - ( spread.z * 0.5 ) );
+
+	        // var x = this.randomFloat( base.x, spread.x ),
+	        // y = this.randomFloat( base.y, spread.y ),
+	        // z = this.randomFloat( base.z, spread.z );
+
+	        if ( spreadClamp ) {
+	            x = -spreadClamp.x * 0.5 + this.roundToNearestMultiple( x, spreadClamp.x );
+	            y = -spreadClamp.y * 0.5 + this.roundToNearestMultiple( y, spreadClamp.y );
+	            z = -spreadClamp.z * 0.5 + this.roundToNearestMultiple( z, spreadClamp.z );
+	        }
+
+	        attribute.typedArray.setVec3Components( index, x, y, z );
+	    },
+
+	    /**
+	     * Given an SPE.Shader attribute instance, and various other settings,
+	     * assign Color values to the attribute.
+	     * @param  {Object} attribute The instance of SPE.ShaderAttribute to save the result to.
+	     * @param  {Number} index     The offset in the attribute's TypedArray to save the result from.
+	     * @param  {Object} base      THREE.Color instance describing the start color.
+	     * @param  {Object} spread    THREE.Vector3 instance describing the random variance to apply to the start color.
+	     */
+	    randomColor: function( attribute, index, base, spread ) {
+	        'use strict';
+
+	        var r = base.r + ( Math.random() * spread.x ),
+	            g = base.g + ( Math.random() * spread.y ),
+	            b = base.b + ( Math.random() * spread.z );
+
+	        r = this.clamp( r, 0, 1 );
+	        g = this.clamp( g, 0, 1 );
+	        b = this.clamp( b, 0, 1 );
+
+
+	        attribute.typedArray.setVec3Components( index, r, g, b );
+	    },
+
+
+	    randomColorAsHex: ( function() {
+	        'use strict';
+
+	        var workingColor = new THREE.Color();
+
+	        /**
+	         * Assigns a random color value, encoded as a hex value in decimal
+	         * format, to a SPE.ShaderAttribute instance.
+	         * @param  {Object} attribute The instance of SPE.ShaderAttribute to save the result to.
+	         * @param  {Number} index     The offset in the attribute's TypedArray to save the result from.
+	         * @param  {Object} base      THREE.Color instance describing the start color.
+	         * @param  {Object} spread    THREE.Vector3 instance describing the random variance to apply to the start color.
+	         */
+	        return function( attribute, index, base, spread ) {
+	            var numItems = base.length,
+	                colors = [];
+
+	            for ( var i = 0; i < numItems; ++i ) {
+	                var spreadVector = spread[ i ];
+
+	                workingColor.copy( base[ i ] );
+
+	                workingColor.r += ( Math.random() * spreadVector.x ) - ( spreadVector.x * 0.5 );
+	                workingColor.g += ( Math.random() * spreadVector.y ) - ( spreadVector.y * 0.5 );
+	                workingColor.b += ( Math.random() * spreadVector.z ) - ( spreadVector.z * 0.5 );
+
+	                workingColor.r = this.clamp( workingColor.r, 0, 1 );
+	                workingColor.g = this.clamp( workingColor.g, 0, 1 );
+	                workingColor.b = this.clamp( workingColor.b, 0, 1 );
+
+	                colors.push( workingColor.getHex() );
+	            }
+
+	            attribute.typedArray.setVec4Components( index, colors[ 0 ], colors[ 1 ], colors[ 2 ], colors[ 3 ] );
+	        };
+	    }() ),
+
+	    /**
+	     * Assigns a random vector 3 value to an SPE.ShaderAttribute instance, projecting the
+	     * given values onto a sphere.
+	     *
+	     * @param  {Object} attribute The instance of SPE.ShaderAttribute to save the result to.
+	     * @param  {Number} index     The offset in the attribute's TypedArray to save the result from.
+	     * @param  {Object} base              THREE.Vector3 instance describing the origin of the transform.
+	     * @param  {Number} radius            The radius of the sphere to project onto.
+	     * @param  {Number} radiusSpread      The amount of randomness to apply to the projection result
+	     * @param  {Object} radiusScale       THREE.Vector3 instance describing the scale of each axis of the sphere.
+	     * @param  {Number} radiusSpreadClamp What numeric multiple the projected value should be clamped to.
+	     */
+	    randomVector3OnSphere: function(
+	        attribute, index, base, radius, radiusSpread, radiusScale, radiusSpreadClamp, distributionClamp
+	    ) {
+	        'use strict';
+
+	        var depth = 2 * Math.random() - 1,
+	            t = 6.2832 * Math.random(),
+	            r = Math.sqrt( 1 - depth * depth ),
+	            rand = this.randomFloat( radius, radiusSpread ),
+	            x = 0,
+	            y = 0,
+	            z = 0;
+
+
+	        if ( radiusSpreadClamp ) {
+	            rand = Math.round( rand / radiusSpreadClamp ) * radiusSpreadClamp;
+	        }
+
+
+
+	        // Set position on sphere
+	        x = r * Math.cos( t ) * rand;
+	        y = r * Math.sin( t ) * rand;
+	        z = depth * rand;
+
+	        // Apply radius scale to this position
+	        x *= radiusScale.x;
+	        y *= radiusScale.y;
+	        z *= radiusScale.z;
+
+	        // Translate to the base position.
+	        x += base.x;
+	        y += base.y;
+	        z += base.z;
+
+	        // Set the values in the typed array.
+	        attribute.typedArray.setVec3Components( index, x, y, z );
+	    },
+
+	    seededRandom: function( seed ) {
+	        var x = Math.sin( seed ) * 10000;
+	        return x - ( x | 0 );
+	    },
+
+
+
+	    /**
+	     * Assigns a random vector 3 value to an SPE.ShaderAttribute instance, projecting the
+	     * given values onto a 2d-disc.
+	     *
+	     * @param  {Object} attribute The instance of SPE.ShaderAttribute to save the result to.
+	     * @param  {Number} index     The offset in the attribute's TypedArray to save the result from.
+	     * @param  {Object} base              THREE.Vector3 instance describing the origin of the transform.
+	     * @param  {Number} radius            The radius of the sphere to project onto.
+	     * @param  {Number} radiusSpread      The amount of randomness to apply to the projection result
+	     * @param  {Object} radiusScale       THREE.Vector3 instance describing the scale of each axis of the disc. The z-component is ignored.
+	     * @param  {Number} radiusSpreadClamp What numeric multiple the projected value should be clamped to.
+	     */
+	    randomVector3OnDisc: function( attribute, index, base, radius, radiusSpread, radiusScale, radiusSpreadClamp ) {
+	        'use strict';
+
+	        var t = 6.2832 * Math.random(),
+	            rand = Math.abs( this.randomFloat( radius, radiusSpread ) ),
+	            x = 0,
+	            y = 0,
+	            z = 0;
+
+	        if ( radiusSpreadClamp ) {
+	            rand = Math.round( rand / radiusSpreadClamp ) * radiusSpreadClamp;
+	        }
+
+	        // Set position on sphere
+	        x = Math.cos( t ) * rand;
+	        y = Math.sin( t ) * rand;
+
+	        // Apply radius scale to this position
+	        x *= radiusScale.x;
+	        y *= radiusScale.y;
+
+	        // Translate to the base position.
+	        x += base.x;
+	        y += base.y;
+	        z += base.z;
+
+	        // Set the values in the typed array.
+	        attribute.typedArray.setVec3Components( index, x, y, z );
+	    },
+
+	    randomDirectionVector3OnSphere: ( function() {
+	        'use strict';
+
+	        var v = new THREE.Vector3();
+
+	        /**
+	         * Given an SPE.ShaderAttribute instance, create a direction vector from the given
+	         * position, using `speed` as the magnitude. Values are saved to the attribute.
+	         *
+	         * @param  {Object} attribute       The instance of SPE.ShaderAttribute to save the result to.
+	         * @param  {Number} index           The offset in the attribute's TypedArray to save the result from.
+	         * @param  {Number} posX            The particle's x coordinate.
+	         * @param  {Number} posY            The particle's y coordinate.
+	         * @param  {Number} posZ            The particle's z coordinate.
+	         * @param  {Object} emitterPosition THREE.Vector3 instance describing the emitter's base position.
+	         * @param  {Number} speed           The magnitude to apply to the vector.
+	         * @param  {Number} speedSpread     The amount of randomness to apply to the magnitude.
+	         */
+	        return function( attribute, index, posX, posY, posZ, emitterPosition, speed, speedSpread ) {
+	            v.copy( emitterPosition );
+
+	            v.x -= posX;
+	            v.y -= posY;
+	            v.z -= posZ;
+
+	            v.normalize().multiplyScalar( -this.randomFloat( speed, speedSpread ) );
+
+	            attribute.typedArray.setVec3Components( index, v.x, v.y, v.z );
+	        };
+	    }() ),
+
+
+	    randomDirectionVector3OnDisc: ( function() {
+	        'use strict';
+
+	        var v = new THREE.Vector3();
+
+	        /**
+	         * Given an SPE.ShaderAttribute instance, create a direction vector from the given
+	         * position, using `speed` as the magnitude. Values are saved to the attribute.
+	         *
+	         * @param  {Object} attribute       The instance of SPE.ShaderAttribute to save the result to.
+	         * @param  {Number} index           The offset in the attribute's TypedArray to save the result from.
+	         * @param  {Number} posX            The particle's x coordinate.
+	         * @param  {Number} posY            The particle's y coordinate.
+	         * @param  {Number} posZ            The particle's z coordinate.
+	         * @param  {Object} emitterPosition THREE.Vector3 instance describing the emitter's base position.
+	         * @param  {Number} speed           The magnitude to apply to the vector.
+	         * @param  {Number} speedSpread     The amount of randomness to apply to the magnitude.
+	         */
+	        return function( attribute, index, posX, posY, posZ, emitterPosition, speed, speedSpread ) {
+	            v.copy( emitterPosition );
+
+	            v.x -= posX;
+	            v.y -= posY;
+	            v.z -= posZ;
+
+	            v.normalize().multiplyScalar( -this.randomFloat( speed, speedSpread ) );
+
+	            attribute.typedArray.setVec3Components( index, v.x, v.y, 0 );
+	        };
+	    }() ),
+
+	    getPackedRotationAxis: ( function() {
+	        'use strict';
+
+	        var v = new THREE.Vector3(),
+	            vSpread = new THREE.Vector3(),
+	            c = new THREE.Color(),
+	            addOne = new THREE.Vector3( 1, 1, 1 );
+
+	        /**
+	         * Given a rotation axis, and a rotation axis spread vector,
+	         * calculate a randomised rotation axis, and pack it into
+	         * a hexadecimal value represented in decimal form.
+	         * @param  {Object} axis       THREE.Vector3 instance describing the rotation axis.
+	         * @param  {Object} axisSpread THREE.Vector3 instance describing the amount of randomness to apply to the rotation axis.
+	         * @return {Number}            The packed rotation axis, with randomness.
+	         */
+	        return function( axis, axisSpread ) {
+	            v.copy( axis ).normalize();
+	            vSpread.copy( axisSpread ).normalize();
+
+	            v.x += ( -axisSpread.x * 0.5 ) + ( Math.random() * axisSpread.x );
+	            v.y += ( -axisSpread.y * 0.5 ) + ( Math.random() * axisSpread.y );
+	            v.z += ( -axisSpread.z * 0.5 ) + ( Math.random() * axisSpread.z );
+
+	            // v.x = Math.abs( v.x );
+	            // v.y = Math.abs( v.y );
+	            // v.z = Math.abs( v.z );
+
+	            v.normalize().add( addOne ).multiplyScalar( 0.5 );
+
+	            c.setRGB( v.x, v.y, v.z );
+
+	            return c.getHex();
+	        };
+	    }() )
+	};
+
+	/**
+	 * An SPE.Group instance.
+	 * @typedef {Object} Group
+	 * @see SPE.Group
+	 */
+
+	/**
+	 * A map of options to configure an SPE.Group instance.
+	 * @typedef {Object} GroupOptions
+	 *
+	 * @property {Object} texture An object describing the texture used by the group.
+	 *
+	 * @property {Object} texture.value An instance of THREE.Texture.
+	 *
+	 * @property {Object=} texture.frames A THREE.Vector2 instance describing the number
+	 *                                    of frames on the x- and y-axis of the given texture.
+	 *                                    If not provided, the texture will NOT be treated as
+	 *                                    a sprite-sheet and as such will NOT be animated.
+	 *
+	 * @property {Number} [texture.frameCount=texture.frames.x * texture.frames.y] The total number of frames in the sprite-sheet.
+	 *                                                                   Allows for sprite-sheets that don't fill the entire
+	 *                                                                   texture.
+	 *
+	 * @property {Number} texture.loop The number of loops through the sprite-sheet that should
+	 *                                 be performed over the course of a single particle's lifetime.
+	 *
+	 * @property {Number} fixedTimeStep If no `dt` (or `deltaTime`) value is passed to this group's
+	 *                                  `tick()` function, this number will be used to move the particle
+	 *                                  simulation forward. Value in SECONDS.
+	 *
+	 * @property {Boolean} hasPerspective Whether the distance a particle is from the camera should affect
+	 *                                    the particle's size.
+	 *
+	 * @property {Boolean} colorize Whether the particles in this group should be rendered with color, or
+	 *                              whether the only color of particles will come from the provided texture.
+	 *
+	 * @property {Number} blending One of Three.js's blending modes to apply to this group's `ShaderMaterial`.
+	 *
+	 * @property {Boolean} transparent Whether these particle's should be rendered with transparency.
+	 *
+	 * @property {Number} alphaTest Sets the alpha value to be used when running an alpha test on the `texture.value` property. Value between 0 and 1.
+	 *
+	 * @property {Boolean} depthWrite Whether rendering the group has any effect on the depth buffer.
+	 *
+	 * @property {Boolean} depthTest Whether to have depth test enabled when rendering this group.
+	 *
+	 * @property {Boolean} fog Whether this group's particles should be affected by their scene's fog.
+	 *
+	 * @property {Number} scale The scale factor to apply to this group's particle sizes. Useful for
+	 *                          setting particle sizes to be relative to renderer size.
+	 */
+
+
+	/**
+	 * The SPE.Group class. Creates a new group, containing a material, geometry, and mesh.
+	 *
+	 * @constructor
+	 * @param {GroupOptions} options A map of options to configure the group instance.
+	 */
+	SPE.Group = function( options ) {
+	    'use strict';
+
+	    var utils = SPE.utils,
+	        types = utils.types;
+
+	    // Ensure we have a map of options to play with
+	    options = utils.ensureTypedArg( options, types.OBJECT, {} );
+	    options.texture = utils.ensureTypedArg( options.texture, types.OBJECT, {} );
+
+	    // Assign a UUID to this instance
+	    this.uuid = THREE.Math.generateUUID();
+
+	    // If no `deltaTime` value is passed to the `SPE.Group.tick` function,
+	    // the value of this property will be used to advance the simulation.
+	    this.fixedTimeStep = utils.ensureTypedArg( options.fixedTimeStep, types.NUMBER, 0.016 );
+
+	    // Set properties used in the uniforms map, starting with the
+	    // texture stuff.
+	    this.texture = utils.ensureInstanceOf( options.texture.value, THREE.Texture, null );
+	    this.textureFrames = utils.ensureInstanceOf( options.texture.frames, THREE.Vector2, new THREE.Vector2( 1, 1 ) );
+	    this.textureFrameCount = utils.ensureTypedArg( options.texture.frameCount, types.NUMBER, this.textureFrames.x * this.textureFrames.y );
+	    this.textureLoop = utils.ensureTypedArg( options.texture.loop, types.NUMBER, 1 );
+	    this.textureFrames.max( new THREE.Vector2( 1, 1 ) );
+
+	    this.hasPerspective = utils.ensureTypedArg( options.hasPerspective, types.BOOLEAN, true );
+	    this.colorize = utils.ensureTypedArg( options.colorize, types.BOOLEAN, true );
+
+	    this.maxParticleCount = utils.ensureTypedArg( options.maxParticleCount, types.NUMBER, null );
+
+
+	    // Set properties used to define the ShaderMaterial's appearance.
+	    this.blending = utils.ensureTypedArg( options.blending, types.NUMBER, THREE.AdditiveBlending );
+	    this.transparent = utils.ensureTypedArg( options.transparent, types.BOOLEAN, true );
+	    this.alphaTest = parseFloat( utils.ensureTypedArg( options.alphaTest, types.NUMBER, 0.0 ) );
+	    this.depthWrite = utils.ensureTypedArg( options.depthWrite, types.BOOLEAN, false );
+	    this.depthTest = utils.ensureTypedArg( options.depthTest, types.BOOLEAN, true );
+	    this.fog = utils.ensureTypedArg( options.fog, types.BOOLEAN, true );
+	    this.scale = utils.ensureTypedArg( options.scale, types.NUMBER, 300 );
+
+	    // Where emitter's go to curl up in a warm blanket and live
+	    // out their days.
+	    this.emitters = [];
+	    this.emitterIDs = [];
+
+	    // Create properties for use by the emitter pooling functions.
+	    this._pool = [];
+	    this._poolCreationSettings = null;
+	    this._createNewWhenPoolEmpty = 0;
+
+	    // Whether all attributes should be forced to updated
+	    // their entire buffer contents on the next tick.
+	    //
+	    // Used when an emitter is removed.
+	    this._attributesNeedRefresh = false;
+	    this._attributesNeedDynamicReset = false;
+
+	    this.particleCount = 0;
+
+
+	    // Map of uniforms to be applied to the ShaderMaterial instance.
+	    this.uniforms = {
+	        texture: {
+	            type: 't',
+	            value: this.texture
+	        },
+	        textureAnimation: {
+	            type: 'v4',
+	            value: new THREE.Vector4(
+	                this.textureFrames.x,
+	                this.textureFrames.y,
+	                this.textureFrameCount,
+	                Math.max( Math.abs( this.textureLoop ), 1.0 )
+	            )
+	        },
+	        fogColor: {
+	            type: 'c',
+	            value: null
+	        },
+	        fogNear: {
+	            type: 'f',
+	            value: 10
+	        },
+	        fogFar: {
+	            type: 'f',
+	            value: 200
+	        },
+	        fogDensity: {
+	            type: 'f',
+	            value: 0.5
+	        },
+	        deltaTime: {
+	            type: 'f',
+	            value: 0
+	        },
+	        runTime: {
+	            type: 'f',
+	            value: 0
+	        },
+	        scale: {
+	            type: 'f',
+	            value: this.scale
+	        }
+	    };
+
+	    // Add some defines into the mix...
+	    this.defines = {
+	        HAS_PERSPECTIVE: this.hasPerspective,
+	        COLORIZE: this.colorize,
+	        VALUE_OVER_LIFETIME_LENGTH: SPE.valueOverLifetimeLength,
+
+	        SHOULD_ROTATE_TEXTURE: false,
+	        SHOULD_ROTATE_PARTICLES: false,
+	        SHOULD_WIGGLE_PARTICLES: false,
+
+	        SHOULD_CALCULATE_SPRITE: this.textureFrames.x > 1 || this.textureFrames.y > 1
+	    };
+
+	    // Map of all attributes to be applied to the particles.
+	    //
+	    // See SPE.ShaderAttribute for a bit more info on this bit.
+	    this.attributes = {
+	        position: new SPE.ShaderAttribute( 'v3', true ),
+	        acceleration: new SPE.ShaderAttribute( 'v4', true ), // w component is drag
+	        velocity: new SPE.ShaderAttribute( 'v3', true ),
+	        rotation: new SPE.ShaderAttribute( 'v4', true ),
+	        rotationCenter: new SPE.ShaderAttribute( 'v3', true ),
+	        params: new SPE.ShaderAttribute( 'v4', true ), // Holds (alive, age, delay, wiggle)
+	        size: new SPE.ShaderAttribute( 'v4', true ),
+	        angle: new SPE.ShaderAttribute( 'v4', true ),
+	        color: new SPE.ShaderAttribute( 'v4', true ),
+	        opacity: new SPE.ShaderAttribute( 'v4', true )
+	    };
+
+	    this.attributeKeys = Object.keys( this.attributes );
+	    this.attributeCount = this.attributeKeys.length;
+
+	    // Create the ShaderMaterial instance that'll help render the
+	    // particles.
+	    this.material = new THREE.ShaderMaterial( {
+	        uniforms: this.uniforms,
+	        vertexShader: SPE.shaders.vertex,
+	        fragmentShader: SPE.shaders.fragment,
+	        blending: this.blending,
+	        transparent: this.transparent,
+	        alphaTest: this.alphaTest,
+	        depthWrite: this.depthWrite,
+	        depthTest: this.depthTest,
+	        defines: this.defines,
+	        fog: this.fog
+	    } );
+
+	    // Create the BufferGeometry and Points instances, ensuring
+	    // the geometry and material are given to the latter.
+	    this.geometry = new THREE.BufferGeometry();
+	    this.mesh = new THREE.Points( this.geometry, this.material );
+
+	    if ( this.maxParticleCount === null ) {
+	        console.warn( 'SPE.Group: No maxParticleCount specified. Adding emitters after rendering will probably cause errors.' );
+	    }
+	};
+
+	SPE.Group.constructor = SPE.Group;
+
+
+	SPE.Group.prototype._updateDefines = function() {
+	    'use strict';
+
+	    var emitters = this.emitters,
+	        i = emitters.length - 1,
+	        emitter,
+	        defines = this.defines;
+
+	    for ( i; i >= 0; --i ) {
+	        emitter = emitters[ i ];
+
+	        // Only do angle calculation if there's no spritesheet defined.
+	        //
+	        // Saves calculations being done and then overwritten in the shaders.
+	        if ( !defines.SHOULD_CALCULATE_SPRITE ) {
+	            defines.SHOULD_ROTATE_TEXTURE = defines.SHOULD_ROTATE_TEXTURE || !!Math.max(
+	                Math.max.apply( null, emitter.angle.value ),
+	                Math.max.apply( null, emitter.angle.spread )
+	            );
+	        }
+
+	        defines.SHOULD_ROTATE_PARTICLES = defines.SHOULD_ROTATE_PARTICLES || !!Math.max(
+	            emitter.rotation.angle,
+	            emitter.rotation.angleSpread
+	        );
+
+	        defines.SHOULD_WIGGLE_PARTICLES = defines.SHOULD_WIGGLE_PARTICLES || !!Math.max(
+	            emitter.wiggle.value,
+	            emitter.wiggle.spread
+	        );
+	    }
+
+	    this.material.needsUpdate = true;
+	};
+
+	SPE.Group.prototype._applyAttributesToGeometry = function() {
+	    'use strict';
+
+	    var attributes = this.attributes,
+	        geometry = this.geometry,
+	        geometryAttributes = geometry.attributes,
+	        attribute,
+	        geometryAttribute;
+
+	    // Loop through all the shader attributes and assign (or re-assign)
+	    // typed array buffers to each one.
+	    for ( var attr in attributes ) {
+	        if ( attributes.hasOwnProperty( attr ) ) {
+	            attribute = attributes[ attr ];
+	            geometryAttribute = geometryAttributes[ attr ];
+
+	            // Update the array if this attribute exists on the geometry.
+	            //
+	            // This needs to be done because the attribute's typed array might have
+	            // been resized and reinstantiated, and might now be looking at a
+	            // different ArrayBuffer, so reference needs updating.
+	            if ( geometryAttribute ) {
+	                geometryAttribute.array = attribute.typedArray.array;
+	            }
+
+	            // // Add the attribute to the geometry if it doesn't already exist.
+	            else {
+	                geometry.addAttribute( attr, attribute.bufferAttribute );
+	            }
+
+	            // Mark the attribute as needing an update the next time a frame is rendered.
+	            attribute.bufferAttribute.needsUpdate = true;
+	        }
+	    }
+
+	    // Mark the draw range on the geometry. This will ensure
+	    // only the values in the attribute buffers that are
+	    // associated with a particle will be used in THREE's
+	    // render cycle.
+	    this.geometry.setDrawRange( 0, this.particleCount );
+	};
+
+	/**
+	 * Adds an SPE.Emitter instance to this group, creating particle values and
+	 * assigning them to this group's shader attributes.
+	 *
+	 * @param {Emitter} emitter The emitter to add to this group.
+	 */
+	SPE.Group.prototype.addEmitter = function( emitter ) {
+	    'use strict';
+
+	    // Ensure an actual emitter instance is passed here.
+	    //
+	    // Decided not to throw here, just in case a scene's
+	    // rendering would be paused. Logging an error instead
+	    // of stopping execution if exceptions aren't caught.
+	    if ( emitter instanceof SPE.Emitter === false ) {
+	        console.error( '`emitter` argument must be instance of SPE.Emitter. Was provided with:', emitter );
+	        return;
+	    }
+
+	    // If the emitter already exists as a member of this group, then
+	    // stop here, we don't want to add it again.
+	    else if ( this.emitterIDs.indexOf( emitter.uuid ) > -1 ) {
+	        console.error( 'Emitter already exists in this group. Will not add again.' );
+	        return;
+	    }
+
+	    // And finally, if the emitter is a member of another group,
+	    // don't add it to this group.
+	    else if ( emitter.group !== null ) {
+	        console.error( 'Emitter already belongs to another group. Will not add to requested group.' );
+	        return;
+	    }
+
+	    var attributes = this.attributes,
+	        start = this.particleCount,
+	        end = start + emitter.particleCount;
+
+	    // Update this group's particle count.
+	    this.particleCount = end;
+
+	    // Emit a warning if the emitter being added will exceed the buffer sizes specified.
+	    if ( this.maxParticleCount !== null && this.particleCount > this.maxParticleCount ) {
+	        console.warn( 'SPE.Group: maxParticleCount exceeded. Requesting', this.particleCount, 'particles, can support only', this.maxParticleCount );
+	    }
+
+
+	    // Set the `particlesPerSecond` value (PPS) on the emitter.
+	    // It's used to determine how many particles to release
+	    // on a per-frame basis.
+	    emitter._calculatePPSValue( emitter.maxAge._value + emitter.maxAge._spread );
+	    emitter._setBufferUpdateRanges( this.attributeKeys );
+
+	    // Store the offset value in the TypedArray attributes for this emitter.
+	    emitter._setAttributeOffset( start );
+
+	    // Save a reference to this group on the emitter so it knows
+	    // where it belongs.
+	    emitter.group = this;
+
+	    // Store reference to the attributes on the emitter for
+	    // easier access during the emitter's tick function.
+	    emitter.attributes = this.attributes;
+
+
+
+	    // Ensure the attributes and their BufferAttributes exist, and their
+	    // TypedArrays are of the correct size.
+	    for ( var attr in attributes ) {
+	        if ( attributes.hasOwnProperty( attr ) ) {
+	            // When creating a buffer, pass through the maxParticle count
+	            // if one is specified.
+	            attributes[ attr ]._createBufferAttribute(
+	                this.maxParticleCount !== null ?
+	                this.maxParticleCount :
+	                this.particleCount
+	            );
+	        }
+	    }
+
+	    // Loop through each particle this emitter wants to have, and create the attributes values,
+	    // storing them in the TypedArrays that each attribute holds.
+	    for ( var i = start; i < end; ++i ) {
+	        emitter._assignPositionValue( i );
+	        emitter._assignForceValue( i, 'velocity' );
+	        emitter._assignForceValue( i, 'acceleration' );
+	        emitter._assignAbsLifetimeValue( i, 'opacity' );
+	        emitter._assignAbsLifetimeValue( i, 'size' );
+	        emitter._assignAngleValue( i );
+	        emitter._assignRotationValue( i );
+	        emitter._assignParamsValue( i );
+	        emitter._assignColorValue( i );
+	    }
+
+	    // Update the geometry and make sure the attributes are referencing
+	    // the typed arrays properly.
+	    this._applyAttributesToGeometry();
+
+	    // Store this emitter in this group's emitter's store.
+	    this.emitters.push( emitter );
+	    this.emitterIDs.push( emitter.uuid );
+
+	    // Update certain flags to enable shader calculations only if they're necessary.
+	    this._updateDefines( emitter );
+
+	    // Update the material since defines might have changed
+	    this.material.needsUpdate = true;
+	    this.geometry.needsUpdate = true;
+	    this._attributesNeedRefresh = true;
+
+	    // Return the group to enable chaining.
+	    return this;
+	};
+
+	/**
+	 * Removes an SPE.Emitter instance from this group. When called,
+	 * all particle's belonging to the given emitter will be instantly
+	 * removed from the scene.
+	 *
+	 * @param {Emitter} emitter The emitter to add to this group.
+	 */
+	SPE.Group.prototype.removeEmitter = function( emitter ) {
+	    'use strict';
+
+	    var emitterIndex = this.emitterIDs.indexOf( emitter.uuid );
+
+	    // Ensure an actual emitter instance is passed here.
+	    //
+	    // Decided not to throw here, just in case a scene's
+	    // rendering would be paused. Logging an error instead
+	    // of stopping execution if exceptions aren't caught.
+	    if ( emitter instanceof SPE.Emitter === false ) {
+	        console.error( '`emitter` argument must be instance of SPE.Emitter. Was provided with:', emitter );
+	        return;
+	    }
+
+	    // Issue an error if the emitter isn't a member of this group.
+	    else if ( emitterIndex === -1 ) {
+	        console.error( 'Emitter does not exist in this group. Will not remove.' );
+	        return;
+	    }
+
+	    // Kill all particles by marking them as dead
+	    // and their age as 0.
+	    var start = emitter.attributeOffset,
+	        end = start + emitter.particleCount,
+	        params = this.attributes.params.typedArray;
+
+	    // Set alive and age to zero.
+	    for ( var i = start; i < end; ++i ) {
+	        params.array[ i * 4 ] = 0.0;
+	        params.array[ i * 4 + 1 ] = 0.0;
+	    }
+
+	    // Remove the emitter from this group's "store".
+	    this.emitters.splice( emitterIndex, 1 );
+	    this.emitterIDs.splice( emitterIndex, 1 );
+
+	    // Remove this emitter's attribute values from all shader attributes.
+	    // The `.splice()` call here also marks each attribute's buffer
+	    // as needing to update it's entire contents.
+	    for ( var attr in this.attributes ) {
+	        if ( this.attributes.hasOwnProperty( attr ) ) {
+	            this.attributes[ attr ].splice( start, end );
+	        }
+	    }
+
+	    // Ensure this group's particle count is correct.
+	    this.particleCount -= emitter.particleCount;
+
+	    // Call the emitter's remove method.
+	    emitter._onRemove();
+
+	    // Set a flag to indicate that the attribute buffers should
+	    // be updated in their entirety on the next frame.
+	    this._attributesNeedRefresh = true;
+	};
+
+
+	/**
+	 * Fetch a single emitter instance from the pool.
+	 * If there are no objects in the pool, a new emitter will be
+	 * created if specified.
+	 *
+	 * @return {Emitter|null}
+	 */
+	SPE.Group.prototype.getFromPool = function() {
+	    'use strict';
+
+	    var pool = this._pool,
+	        createNew = this._createNewWhenPoolEmpty;
+
+	    if ( pool.length ) {
+	        return pool.pop();
+	    }
+	    else if ( createNew ) {
+	        return new SPE.Emitter( this._poolCreationSettings );
+	    }
+
+	    return null;
+	};
+
+
+	/**
+	 * Release an emitter into the pool.
+	 *
+	 * @param  {ShaderParticleEmitter} emitter
+	 * @return {Group} This group instance.
+	 */
+	SPE.Group.prototype.releaseIntoPool = function( emitter ) {
+	    'use strict';
+
+	    if ( emitter instanceof SPE.Emitter === false ) {
+	        console.error( 'Argument is not instanceof SPE.Emitter:', emitter );
+	        return;
+	    }
+
+	    emitter.reset();
+	    this._pool.unshift( emitter );
+
+	    return this;
+	};
+
+
+	/**
+	 * Get the pool array
+	 *
+	 * @return {Array}
+	 */
+	SPE.Group.prototype.getPool = function() {
+	    'use strict';
+	    return this._pool;
+	};
+
+
+	/**
+	 * Add a pool of emitters to this particle group
+	 *
+	 * @param {Number} numEmitters      The number of emitters to add to the pool.
+	 * @param {EmitterOptions|Array} emitterOptions  An object, or array of objects, describing the options to pass to each emitter.
+	 * @param {Boolean} createNew       Should a new emitter be created if the pool runs out?
+	 * @return {Group} This group instance.
+	 */
+	SPE.Group.prototype.addPool = function( numEmitters, emitterOptions, createNew ) {
+	    'use strict';
+
+	    var emitter;
+
+	    // Save relevant settings and flags.
+	    this._poolCreationSettings = emitterOptions;
+	    this._createNewWhenPoolEmpty = !!createNew;
+
+	    // Create the emitters, add them to this group and the pool.
+	    for ( var i = 0; i < numEmitters; ++i ) {
+	        if ( Array.isArray( emitterOptions ) ) {
+	            emitter = new SPE.Emitter( emitterOptions[ i ] );
+	        }
+	        else {
+	            emitter = new SPE.Emitter( emitterOptions );
+	        }
+	        this.addEmitter( emitter );
+	        this.releaseIntoPool( emitter );
+	    }
+
+	    return this;
+	};
+
+
+
+	SPE.Group.prototype._triggerSingleEmitter = function( pos ) {
+	    'use strict';
+
+	    var emitter = this.getFromPool(),
+	        self = this;
+
+	    if ( emitter === null ) {
+	        console.log( 'SPE.Group pool ran out.' );
+	        return;
+	    }
+
+	    // TODO:
+	    // - Make sure buffers are update with thus new position.
+	    if ( pos instanceof THREE.Vector3 ) {
+	        emitter.position.value.copy( pos );
+
+	        // Trigger the setter for this property to force an
+	        // update to the emitter's position attribute.
+	        emitter.position.value = emitter.position.value;
+	    }
+
+	    emitter.enable();
+
+	    setTimeout( function() {
+	        emitter.disable();
+	        self.releaseIntoPool( emitter );
+	    }, ( Math.max( emitter.duration, ( emitter.maxAge.value + emitter.maxAge.spread ) ) ) * 1000 );
+
+	    return this;
+	};
+
+
+	/**
+	 * Set a given number of emitters as alive, with an optional position
+	 * vector3 to move them to.
+	 *
+	 * @param  {Number} numEmitters The number of emitters to activate
+	 * @param  {Object} [position=undefined] A THREE.Vector3 instance describing the position to activate the emitter(s) at.
+	 * @return {Group} This group instance.
+	 */
+	SPE.Group.prototype.triggerPoolEmitter = function( numEmitters, position ) {
+	    'use strict';
+
+	    if ( typeof numEmitters === 'number' && numEmitters > 1 ) {
+	        for ( var i = 0; i < numEmitters; ++i ) {
+	            this._triggerSingleEmitter( position );
+	        }
+	    }
+	    else {
+	        this._triggerSingleEmitter( position );
+	    }
+
+	    return this;
+	};
+
+
+
+	SPE.Group.prototype._updateUniforms = function( dt ) {
+	    'use strict';
+
+	    this.uniforms.runTime.value += dt;
+	    this.uniforms.deltaTime.value = dt;
+	};
+
+	SPE.Group.prototype._resetBufferRanges = function() {
+	    'use strict';
+
+	    var keys = this.attributeKeys,
+	        i = this.attributeCount - 1,
+	        attrs = this.attributes;
+
+	    for ( i; i >= 0; --i ) {
+	        attrs[ keys[ i ] ].resetUpdateRange();
+	    }
+	};
+
+
+	SPE.Group.prototype._updateBuffers = function( emitter ) {
+	    'use strict';
+
+	    var keys = this.attributeKeys,
+	        i = this.attributeCount - 1,
+	        attrs = this.attributes,
+	        emitterRanges = emitter.bufferUpdateRanges,
+	        key,
+	        emitterAttr,
+	        attr;
+
+	    for ( i; i >= 0; --i ) {
+	        key = keys[ i ];
+	        emitterAttr = emitterRanges[ key ];
+	        attr = attrs[ key ];
+	        attr.setUpdateRange( emitterAttr.min, emitterAttr.max );
+	        attr.flagUpdate();
+	    }
+	};
+
+
+	/**
+	 * Simulate all the emitter's belonging to this group, updating
+	 * attribute values along the way.
+	 * @param  {Number} [dt=Group's `fixedTimeStep` value] The number of seconds to simulate the group's emitters for (deltaTime)
+	 */
+	SPE.Group.prototype.tick = function( dt ) {
+	    'use strict';
+
+	    var emitters = this.emitters,
+	        numEmitters = emitters.length,
+	        deltaTime = dt || this.fixedTimeStep,
+	        keys = this.attributeKeys,
+	        i,
+	        attrs = this.attributes;
+
+	    // Update uniform values.
+	    this._updateUniforms( deltaTime );
+
+	    // Reset buffer update ranges on the shader attributes.
+	    this._resetBufferRanges();
+
+
+	    // If nothing needs updating, then stop here.
+	    if (
+	        numEmitters === 0 &&
+	        this._attributesNeedRefresh === false &&
+	        this._attributesNeedDynamicReset === false
+	    ) {
+	        return;
+	    }
+
+	    // Loop through each emitter in this group and
+	    // simulate it, then update the shader attribute
+	    // buffers.
+	    for ( var i = 0, emitter; i < numEmitters; ++i ) {
+	        emitter = emitters[ i ];
+	        emitter.tick( deltaTime );
+	        this._updateBuffers( emitter );
+	    }
+
+	    // If the shader attributes have been refreshed,
+	    // then the dynamic properties of each buffer
+	    // attribute will need to be reset back to
+	    // what they should be.
+	    if ( this._attributesNeedDynamicReset === true ) {
+	        i = this.attributeCount - 1;
+
+	        for ( i; i >= 0; --i ) {
+	            attrs[ keys[ i ] ].resetDynamic();
+	        }
+
+	        this._attributesNeedDynamicReset = false;
+	    }
+
+	    // If this group's shader attributes need a full refresh
+	    // then mark each attribute's buffer attribute as
+	    // needing so.
+	    if ( this._attributesNeedRefresh === true ) {
+	        i = this.attributeCount - 1;
+
+	        for ( i; i >= 0; --i ) {
+	            attrs[ keys[ i ] ].forceUpdateAll();
+	        }
+
+	        this._attributesNeedRefresh = false;
+	        this._attributesNeedDynamicReset = true;
+	    }
+	};
+
+
+	/**
+	 * Dipose the geometry and material for the group.
+	 *
+	 * @return {Group} Group instance.
+	 */
+	SPE.Group.prototype.dispose = function() {
+	    'use strict';
+	    this.geometry.dispose();
+	    this.material.dispose();
+	    return this;
+	};
+
+	/**
+	 * An SPE.Emitter instance.
+	 * @typedef {Object} Emitter
+	 * @see SPE.Emitter
+	 */
+
+	/**
+	 * A map of options to configure an SPE.Emitter instance.
+	 *
+	 * @typedef {Object} EmitterOptions
+	 *
+	 * @property {distribution} [type=BOX] The default distribution this emitter should use to control
+	 *                         its particle's spawn position and force behaviour.
+	 *                         Must be an SPE.distributions.* value.
+	 *
+	 *
+	 * @property {Number} [particleCount=100] The total number of particles this emitter will hold. NOTE: this is not the number
+	 *                                  of particles emitted in a second, or anything like that. The number of particles
+	 *                                  emitted per-second is calculated by particleCount / maxAge (approximately!)
+	 *
+	 * @property {Number|null} [duration=null] The duration in seconds that this emitter should live for. If not specified, the emitter
+	 *                                         will emit particles indefinitely.
+	 *                                         NOTE: When an emitter is older than a specified duration, the emitter is NOT removed from
+	 *                                         it's group, but rather is just marked as dead, allowing it to be reanimated at a later time
+	 *                                         using `SPE.Emitter.prototype.enable()`.
+	 *
+	 * @property {Boolean} [isStatic=false] Whether this emitter should be not be simulated (true).
+	 * @property {Boolean} [activeMultiplier=1] A value between 0 and 1 describing what percentage of this emitter's particlesPerSecond should be
+	 *                                          emitted, where 0 is 0%, and 1 is 100%.
+	 *                                          For example, having an emitter with 100 particles, a maxAge of 2, yields a particlesPerSecond
+	 *                                          value of 50. Setting `activeMultiplier` to 0.5, then, will only emit 25 particles per second (0.5 = 50%).
+	 *                                          Values greater than 1 will emulate a burst of particles, causing the emitter to run out of particles
+	 *                                          before it's next activation cycle.
+	 *
+	 * @property {Boolean} [direction=1] The direction of the emitter. If value is `1`, emitter will start at beginning of particle's lifecycle.
+	 *                                   If value is `-1`, emitter will start at end of particle's lifecycle and work it's way backwards.
+	 *
+	 * @property {Object} [maxAge={}] An object describing the particle's maximum age in seconds.
+	 * @property {Number} [maxAge.value=2] A number between 0 and 1 describing the amount of maxAge to apply to all particles.
+	 * @property {Number} [maxAge.spread=0] A number describing the maxAge variance on a per-particle basis.
+	 *
+	 *
+	 * @property {Object} [position={}] An object describing this emitter's position.
+	 * @property {Object} [position.value=new THREE.Vector3()] A THREE.Vector3 instance describing this emitter's base position.
+	 * @property {Object} [position.spread=new THREE.Vector3()] A THREE.Vector3 instance describing this emitter's position variance on a per-particle basis.
+	 *                                                          Note that when using a SPHERE or DISC distribution, only the x-component
+	 *                                                          of this vector is used.
+	 * @property {Object} [position.spreadClamp=new THREE.Vector3()] A THREE.Vector3 instance describing the numeric multiples the particle's should
+	 *                                                               be spread out over.
+	 *                                                               Note that when using a SPHERE or DISC distribution, only the x-component
+	 *                                                               of this vector is used.
+	 * @property {Number} [position.radius=10] This emitter's base radius.
+	 * @property {Object} [position.radiusScale=new THREE.Vector3()] A THREE.Vector3 instance describing the radius's scale in all three axes. Allows a SPHERE or DISC to be squashed or stretched.
+	 * @property {distribution} [position.distribution=value of the `type` option.] A specific distribution to use when radiusing particles. Overrides the `type` option.
+	 * @property {Boolean} [position.randomise=false] When a particle is re-spawned, whether it's position should be re-randomised or not. Can incur a performance hit.
+	 *
+	 *
+	 * @property {Object} [velocity={}] An object describing this particle velocity.
+	 * @property {Object} [velocity.value=new THREE.Vector3()] A THREE.Vector3 instance describing this emitter's base velocity.
+	 * @property {Object} [velocity.spread=new THREE.Vector3()] A THREE.Vector3 instance describing this emitter's velocity variance on a per-particle basis.
+	 *                                                          Note that when using a SPHERE or DISC distribution, only the x-component
+	 *                                                          of this vector is used.
+	 * @property {distribution} [velocity.distribution=value of the `type` option.] A specific distribution to use when calculating a particle's velocity. Overrides the `type` option.
+	 * @property {Boolean} [velocity.randomise=false] When a particle is re-spawned, whether it's velocity should be re-randomised or not. Can incur a performance hit.
+	 *
+	 *
+	 * @property {Object} [acceleration={}] An object describing this particle's acceleration.
+	 * @property {Object} [acceleration.value=new THREE.Vector3()] A THREE.Vector3 instance describing this emitter's base acceleration.
+	 * @property {Object} [acceleration.spread=new THREE.Vector3()] A THREE.Vector3 instance describing this emitter's acceleration variance on a per-particle basis.
+	 *                           Note that when using a SPHERE or DISC distribution, only the x-component
+	 *                           of this vector is used.
+	 * @property {distribution} [acceleration.distribution=value of the `type` option.] A specific distribution to use when calculating a particle's acceleration. Overrides the `type` option.
+	 * @property {Boolean} [acceleration.randomise=false] When a particle is re-spawned, whether it's acceleration should be re-randomised or not. Can incur a performance hit.
+	 *
+	 *
+	 * @property {Object} [drag={}] An object describing this particle drag. Drag is applied to both velocity and acceleration values.
+	 * @property {Number} [drag.value=0] A number between 0 and 1 describing the amount of drag to apply to all particles.
+	 * @property {Number} [drag.spread=0] A number describing the drag variance on a per-particle basis.
+	 * @property {Boolean} [drag.randomise=false] When a particle is re-spawned, whether it's drag should be re-randomised or not. Can incur a performance hit.
+	 *
+	 *
+	 * @property {Object} [wiggle={}] This is quite a fun one! The values of this object will determine whether a particle will wiggle, or jiggle, or wave,
+	 *                                or shimmy, or waggle, or... Well you get the idea. The wiggle is calculated over-time, meaning that a particle will
+	 *                                start off with no wiggle, and end up wiggling about with the distance of the `value` specified by the time it dies.
+	 *                                It's quite handy to simulate fire embers, or similar effects where the particle's position should slightly change over
+	 *                                time, and such change isn't easily controlled by rotation, velocity, or acceleration. The wiggle is a combination of sin and cos calculations, so is circular in nature.
+	 * @property {Number} [wiggle.value=0] A number describing the amount of wiggle to apply to all particles. It's measured in distance.
+	 * @property {Number} [wiggle.spread=0] A number describing the wiggle variance on a per-particle basis.
+	 *
+	 *
+	 * @property {Object} [rotation={}] An object describing this emitter's rotation. It can either be static, or set to rotate from 0radians to the value of `rotation.value`
+	 *                                  over a particle's lifetime. Rotation values affect both a particle's position and the forces applied to it.
+	 * @property {Object} [rotation.axis=new THREE.Vector3(0, 1, 0)] A THREE.Vector3 instance describing this emitter's axis of rotation.
+	 * @property {Object} [rotation.axisSpread=new THREE.Vector3()] A THREE.Vector3 instance describing the amount of variance to apply to the axis of rotation on
+	 *                                                              a per-particle basis.
+	 * @property {Number} [rotation.angle=0] The angle of rotation, given in radians. If `rotation.static` is true, the emitter will start off rotated at this angle, and stay as such.
+	 *                                       Otherwise, the particles will rotate from 0radians to this value over their lifetimes.
+	 * @property {Number} [rotation.angleSpread=0] The amount of variance in each particle's rotation angle.
+	 * @property {Boolean} [rotation.static=false] Whether the rotation should be static or not.
+	 * @property {Object} [rotation.center=The value of `position.value`] A THREE.Vector3 instance describing the center point of rotation.
+	 * @property {Boolean} [rotation.randomise=false] When a particle is re-spawned, whether it's rotation should be re-randomised or not. Can incur a performance hit.
+	 *
+	 *
+	 * @property {Object} [color={}] An object describing a particle's color. This property is a "value-over-lifetime" property, meaning an array of values and spreads can be
+	 *                               given to describe specific value changes over a particle's lifetime.
+	 *                               Depending on the value of SPE.valueOverLifetimeLength, if arrays of THREE.Color instances are given, then the array will be interpolated to
+	 *                               have a length matching the value of SPE.valueOverLifetimeLength.
+	 * @property {Object} [color.value=new THREE.Color()] Either a single THREE.Color instance, or an array of THREE.Color instances to describe the color of a particle over it's lifetime.
+	 * @property {Object} [color.spread=new THREE.Vector3()] Either a single THREE.Vector3 instance, or an array of THREE.Vector3 instances to describe the color variance of a particle over it's lifetime.
+	 * @property {Boolean} [color.randomise=false] When a particle is re-spawned, whether it's color should be re-randomised or not. Can incur a performance hit.
+	 *
+	 *
+	 * @property {Object} [opacity={}] An object describing a particle's opacity. This property is a "value-over-lifetime" property, meaning an array of values and spreads can be
+	 *                               given to describe specific value changes over a particle's lifetime.
+	 *                               Depending on the value of SPE.valueOverLifetimeLength, if arrays of numbers are given, then the array will be interpolated to
+	 *                               have a length matching the value of SPE.valueOverLifetimeLength.
+	 * @property {Number} [opacity.value=1] Either a single number, or an array of numbers to describe the opacity of a particle over it's lifetime.
+	 * @property {Number} [opacity.spread=0] Either a single number, or an array of numbers to describe the opacity variance of a particle over it's lifetime.
+	 * @property {Boolean} [opacity.randomise=false] When a particle is re-spawned, whether it's opacity should be re-randomised or not. Can incur a performance hit.
+	 *
+	 *
+	 * @property {Object} [size={}] An object describing a particle's size. This property is a "value-over-lifetime" property, meaning an array of values and spreads can be
+	 *                               given to describe specific value changes over a particle's lifetime.
+	 *                               Depending on the value of SPE.valueOverLifetimeLength, if arrays of numbers are given, then the array will be interpolated to
+	 *                               have a length matching the value of SPE.valueOverLifetimeLength.
+	 * @property {Number} [size.value=1] Either a single number, or an array of numbers to describe the size of a particle over it's lifetime.
+	 * @property {Number} [size.spread=0] Either a single number, or an array of numbers to describe the size variance of a particle over it's lifetime.
+	 * @property {Boolean} [size.randomise=false] When a particle is re-spawned, whether it's size should be re-randomised or not. Can incur a performance hit.
+	 *
+	 *
+	 * @property {Object} [angle={}] An object describing a particle's angle. The angle is a 2d-rotation, measured in radians, applied to the particle's texture.
+	 *                               NOTE: if a particle's texture is a sprite-sheet, this value IS IGNORED.
+	 *                               This property is a "value-over-lifetime" property, meaning an array of values and spreads can be
+	 *                               given to describe specific value changes over a particle's lifetime.
+	 *                               Depending on the value of SPE.valueOverLifetimeLength, if arrays of numbers are given, then the array will be interpolated to
+	 *                               have a length matching the value of SPE.valueOverLifetimeLength.
+	 * @property {Number} [angle.value=0] Either a single number, or an array of numbers to describe the angle of a particle over it's lifetime.
+	 * @property {Number} [angle.spread=0] Either a single number, or an array of numbers to describe the angle variance of a particle over it's lifetime.
+	 * @property {Boolean} [angle.randomise=false] When a particle is re-spawned, whether it's angle should be re-randomised or not. Can incur a performance hit.
+	 *
+	 */
+
+	/**
+	 * The SPE.Emitter class.
+	 *
+	 * @constructor
+	 *
+	 * @param {EmitterOptions} options A map of options to configure the emitter.
+	 */
+	SPE.Emitter = function( options ) {
+	    'use strict';
+
+	    var utils = SPE.utils,
+	        types = utils.types,
+	        lifetimeLength = SPE.valueOverLifetimeLength;
+
+	    // Ensure we have a map of options to play with,
+	    // and that each option is in the correct format.
+	    options = utils.ensureTypedArg( options, types.OBJECT, {} );
+	    options.position = utils.ensureTypedArg( options.position, types.OBJECT, {} );
+	    options.velocity = utils.ensureTypedArg( options.velocity, types.OBJECT, {} );
+	    options.acceleration = utils.ensureTypedArg( options.acceleration, types.OBJECT, {} );
+	    options.radius = utils.ensureTypedArg( options.radius, types.OBJECT, {} );
+	    options.drag = utils.ensureTypedArg( options.drag, types.OBJECT, {} );
+	    options.rotation = utils.ensureTypedArg( options.rotation, types.OBJECT, {} );
+	    options.color = utils.ensureTypedArg( options.color, types.OBJECT, {} );
+	    options.opacity = utils.ensureTypedArg( options.opacity, types.OBJECT, {} );
+	    options.size = utils.ensureTypedArg( options.size, types.OBJECT, {} );
+	    options.angle = utils.ensureTypedArg( options.angle, types.OBJECT, {} );
+	    options.wiggle = utils.ensureTypedArg( options.wiggle, types.OBJECT, {} );
+	    options.maxAge = utils.ensureTypedArg( options.maxAge, types.OBJECT, {} );
+
+	    if ( options.onParticleSpawn ) {
+	        console.warn( 'onParticleSpawn has been removed. Please set properties directly to alter values at runtime.' );
+	    }
+
+	    this.uuid = THREE.Math.generateUUID();
+
+	    this.type = utils.ensureTypedArg( options.type, types.NUMBER, SPE.distributions.BOX );
+
+	    // Start assigning properties...kicking it off with props that DON'T support values over
+	    // lifetimes.
+	    //
+	    // Btw, values over lifetimes are just the new way of referring to *Start, *Middle, and *End.
+	    this.position = {
+	        _value: utils.ensureInstanceOf( options.position.value, THREE.Vector3, new THREE.Vector3() ),
+	        _spread: utils.ensureInstanceOf( options.position.spread, THREE.Vector3, new THREE.Vector3() ),
+	        _spreadClamp: utils.ensureInstanceOf( options.position.spreadClamp, THREE.Vector3, new THREE.Vector3() ),
+	        _distribution: utils.ensureTypedArg( options.position.distribution, types.NUMBER, this.type ),
+	        _randomise: utils.ensureTypedArg( options.position.randomise, types.BOOLEAN, false ),
+	        _radius: utils.ensureTypedArg( options.position.radius, types.NUMBER, 10 ),
+	        _radiusScale: utils.ensureInstanceOf( options.position.radiusScale, THREE.Vector3, new THREE.Vector3( 1, 1, 1 ) ),
+	        _distributionClamp: utils.ensureTypedArg( options.position.distributionClamp, types.NUMBER, 0 ),
+	    };
+
+	    this.velocity = {
+	        _value: utils.ensureInstanceOf( options.velocity.value, THREE.Vector3, new THREE.Vector3() ),
+	        _spread: utils.ensureInstanceOf( options.velocity.spread, THREE.Vector3, new THREE.Vector3() ),
+	        _distribution: utils.ensureTypedArg( options.velocity.distribution, types.NUMBER, this.type ),
+	        _randomise: utils.ensureTypedArg( options.position.randomise, types.BOOLEAN, false )
+	    };
+
+	    this.acceleration = {
+	        _value: utils.ensureInstanceOf( options.acceleration.value, THREE.Vector3, new THREE.Vector3() ),
+	        _spread: utils.ensureInstanceOf( options.acceleration.spread, THREE.Vector3, new THREE.Vector3() ),
+	        _distribution: utils.ensureTypedArg( options.acceleration.distribution, types.NUMBER, this.type ),
+	        _randomise: utils.ensureTypedArg( options.position.randomise, types.BOOLEAN, false )
+	    };
+
+	    this.drag = {
+	        _value: utils.ensureTypedArg( options.drag.value, types.NUMBER, 0 ),
+	        _spread: utils.ensureTypedArg( options.drag.spread, types.NUMBER, 0 ),
+	        _randomise: utils.ensureTypedArg( options.position.randomise, types.BOOLEAN, false )
+	    };
+
+	    this.wiggle = {
+	        _value: utils.ensureTypedArg( options.wiggle.value, types.NUMBER, 0 ),
+	        _spread: utils.ensureTypedArg( options.wiggle.spread, types.NUMBER, 0 )
+	    };
+
+	    this.rotation = {
+	        _axis: utils.ensureInstanceOf( options.rotation.axis, THREE.Vector3, new THREE.Vector3( 0.0, 1.0, 0.0 ) ),
+	        _axisSpread: utils.ensureInstanceOf( options.rotation.axisSpread, THREE.Vector3, new THREE.Vector3() ),
+	        _angle: utils.ensureTypedArg( options.rotation.angle, types.NUMBER, 0 ),
+	        _angleSpread: utils.ensureTypedArg( options.rotation.angleSpread, types.NUMBER, 0 ),
+	        _static: utils.ensureTypedArg( options.rotation.static, types.BOOLEAN, false ),
+	        _center: utils.ensureInstanceOf( options.rotation.center, THREE.Vector3, this.position._value.clone() ),
+	        _randomise: utils.ensureTypedArg( options.position.randomise, types.BOOLEAN, false )
+	    };
+
+
+	    this.maxAge = {
+	        _value: utils.ensureTypedArg( options.maxAge.value, types.NUMBER, 2 ),
+	        _spread: utils.ensureTypedArg( options.maxAge.spread, types.NUMBER, 0 )
+	    };
+
+
+
+	    // The following properties can support either single values, or an array of values that change
+	    // the property over a particle's lifetime (value over lifetime).
+	    this.color = {
+	        _value: utils.ensureArrayInstanceOf( options.color.value, THREE.Color, new THREE.Color() ),
+	        _spread: utils.ensureArrayInstanceOf( options.color.spread, THREE.Vector3, new THREE.Vector3() ),
+	        _randomise: utils.ensureTypedArg( options.position.randomise, types.BOOLEAN, false )
+	    };
+
+	    this.opacity = {
+	        _value: utils.ensureArrayTypedArg( options.opacity.value, types.NUMBER, 1 ),
+	        _spread: utils.ensureArrayTypedArg( options.opacity.spread, types.NUMBER, 0 ),
+	        _randomise: utils.ensureTypedArg( options.position.randomise, types.BOOLEAN, false )
+	    };
+
+	    this.size = {
+	        _value: utils.ensureArrayTypedArg( options.size.value, types.NUMBER, 1 ),
+	        _spread: utils.ensureArrayTypedArg( options.size.spread, types.NUMBER, 0 ),
+	        _randomise: utils.ensureTypedArg( options.position.randomise, types.BOOLEAN, false )
+	    };
+
+	    this.angle = {
+	        _value: utils.ensureArrayTypedArg( options.angle.value, types.NUMBER, 0 ),
+	        _spread: utils.ensureArrayTypedArg( options.angle.spread, types.NUMBER, 0 ),
+	        _randomise: utils.ensureTypedArg( options.position.randomise, types.BOOLEAN, false )
+	    };
+
+
+	    // Assign renaining option values.
+	    this.particleCount = utils.ensureTypedArg( options.particleCount, types.NUMBER, 100 );
+	    this.duration = utils.ensureTypedArg( options.duration, types.NUMBER, null );
+	    this.isStatic = utils.ensureTypedArg( options.isStatic, types.BOOLEAN, false );
+	    this.activeMultiplier = utils.ensureTypedArg( options.activeMultiplier, types.NUMBER, 1 );
+	    this.direction = utils.ensureTypedArg( options.direction, types.NUMBER, 1 );
+
+	    // Whether this emitter is alive or not.
+	    this.alive = utils.ensureTypedArg( options.alive, types.BOOLEAN, true );
+
+
+	    // The following properties are set internally and are not
+	    // user-controllable.
+	    this.particlesPerSecond = 0;
+
+	    // The current particle index for which particles should
+	    // be marked as active on the next update cycle.
+	    this.activationIndex = 0;
+
+	    // The offset in the typed arrays this emitter's
+	    // particle's values will start at
+	    this.attributeOffset = 0;
+
+	    // The end of the range in the attribute buffers
+	    this.attributeEnd = 0;
+
+
+
+	    // Holds the time the emitter has been alive for.
+	    this.age = 0.0;
+
+	    // Holds the number of currently-alive particles
+	    this.activeParticleCount = 0.0;
+
+	    // Holds a reference to this emitter's group once
+	    // it's added to one.
+	    this.group = null;
+
+	    // Holds a reference to this emitter's group's attributes object
+	    // for easier access.
+	    this.attributes = null;
+
+	    // Holds a reference to the params attribute's typed array
+	    // for quicker access.
+	    this.paramsArray = null;
+
+	    // A set of flags to determine whether particular properties
+	    // should be re-randomised when a particle is reset.
+	    //
+	    // If a `randomise` property is given, this is preferred.
+	    // Otherwise, it looks at whether a spread value has been
+	    // given.
+	    //
+	    // It allows randomization to be turned off as desired. If
+	    // all randomization is turned off, then I'd expect a performance
+	    // boost as no attribute buffers (excluding the `params`)
+	    // would have to be re-passed to the GPU each frame (since nothing
+	    // except the `params` attribute would have changed).
+	    this.resetFlags = {
+	        // params: utils.ensureTypedArg( options.maxAge.randomise, types.BOOLEAN, !!options.maxAge.spread ) ||
+	        //     utils.ensureTypedArg( options.wiggle.randomise, types.BOOLEAN, !!options.wiggle.spread ),
+	        position: utils.ensureTypedArg( options.position.randomise, types.BOOLEAN, false ) ||
+	            utils.ensureTypedArg( options.radius.randomise, types.BOOLEAN, false ),
+	        velocity: utils.ensureTypedArg( options.velocity.randomise, types.BOOLEAN, false ),
+	        acceleration: utils.ensureTypedArg( options.acceleration.randomise, types.BOOLEAN, false ) ||
+	            utils.ensureTypedArg( options.drag.randomise, types.BOOLEAN, false ),
+	        rotation: utils.ensureTypedArg( options.rotation.randomise, types.BOOLEAN, false ),
+	        rotationCenter: utils.ensureTypedArg( options.rotation.randomise, types.BOOLEAN, false ),
+	        size: utils.ensureTypedArg( options.size.randomise, types.BOOLEAN, false ),
+	        color: utils.ensureTypedArg( options.color.randomise, types.BOOLEAN, false ),
+	        opacity: utils.ensureTypedArg( options.opacity.randomise, types.BOOLEAN, false ),
+	        angle: utils.ensureTypedArg( options.angle.randomise, types.BOOLEAN, false )
+	    };
+
+	    this.updateFlags = {};
+	    this.updateCounts = {};
+
+	    // A map to indicate which emitter parameters should update
+	    // which attribute.
+	    this.updateMap = {
+	        maxAge: 'params',
+	        position: 'position',
+	        velocity: 'velocity',
+	        acceleration: 'acceleration',
+	        drag: 'acceleration',
+	        wiggle: 'params',
+	        rotation: 'rotation',
+	        size: 'size',
+	        color: 'color',
+	        opacity: 'opacity',
+	        angle: 'angle'
+	    };
+
+	    for ( var i in this.updateMap ) {
+	        if ( this.updateMap.hasOwnProperty( i ) ) {
+	            this.updateCounts[ this.updateMap[ i ] ] = 0.0;
+	            this.updateFlags[ this.updateMap[ i ] ] = false;
+	            this._createGetterSetters( this[ i ], i );
+	        }
+	    }
+
+	    this.bufferUpdateRanges = {};
+	    this.attributeKeys = null;
+	    this.attributeCount = 0;
+
+
+	    // Ensure that the value-over-lifetime property objects above
+	    // have value and spread properties that are of the same length.
+	    //
+	    // Also, for now, make sure they have a length of 3 (min/max arguments here).
+	    utils.ensureValueOverLifetimeCompliance( this.color, lifetimeLength, lifetimeLength );
+	    utils.ensureValueOverLifetimeCompliance( this.opacity, lifetimeLength, lifetimeLength );
+	    utils.ensureValueOverLifetimeCompliance( this.size, lifetimeLength, lifetimeLength );
+	    utils.ensureValueOverLifetimeCompliance( this.angle, lifetimeLength, lifetimeLength );
+	};
+
+	SPE.Emitter.constructor = SPE.Emitter;
+
+	SPE.Emitter.prototype._createGetterSetters = function( propObj, propName ) {
+	    'use strict';
+
+	    var self = this;
+
+	    for ( var i in propObj ) {
+	        if ( propObj.hasOwnProperty( i ) ) {
+
+	            var name = i.replace( '_', '' );
+
+	            Object.defineProperty( propObj, name, {
+	                get: ( function( prop ) {
+	                    return function() {
+	                        return this[ prop ];
+	                    };
+	                }( i ) ),
+
+	                set: ( function( prop ) {
+	                    return function( value ) {
+	                        var mapName = self.updateMap[ propName ],
+	                            prevValue = this[ prop ],
+	                            length = SPE.valueOverLifetimeLength;
+
+	                        if ( prop === '_rotationCenter' ) {
+	                            self.updateFlags.rotationCenter = true;
+	                            self.updateCounts.rotationCenter = 0.0;
+	                        }
+	                        else if ( prop === '_randomise' ) {
+	                            self.resetFlags[ mapName ] = value;
+	                        }
+	                        else {
+	                            self.updateFlags[ mapName ] = true;
+	                            self.updateCounts[ mapName ] = 0.0;
+	                        }
+
+	                        self.group._updateDefines();
+
+	                        this[ prop ] = value;
+
+	                        // If the previous value was an array, then make
+	                        // sure the provided value is interpolated correctly.
+	                        if ( Array.isArray( prevValue ) ) {
+	                            SPE.utils.ensureValueOverLifetimeCompliance( self[ propName ], length, length );
+	                        }
+	                    };
+	                }( i ) )
+	            } );
+	        }
+	    }
+	};
+
+	SPE.Emitter.prototype._setBufferUpdateRanges = function( keys ) {
+	    'use strict';
+
+	    this.attributeKeys = keys;
+	    this.attributeCount = keys.length;
+
+	    for ( var i = this.attributeCount - 1; i >= 0; --i ) {
+	        this.bufferUpdateRanges[ keys[ i ] ] = {
+	            min: Number.POSITIVE_INFINITY,
+	            max: Number.NEGATIVE_INFINITY
+	        };
+	    }
+	};
+
+	SPE.Emitter.prototype._calculatePPSValue = function( groupMaxAge ) {
+	    'use strict';
+
+	    var particleCount = this.particleCount;
+
+
+	    // Calculate the `particlesPerSecond` value for this emitter. It's used
+	    // when determining which particles should die and which should live to
+	    // see another day. Or be born, for that matter. The "God" property.
+	    if ( this.duration ) {
+	        this.particlesPerSecond = particleCount / ( groupMaxAge < this.duration ? groupMaxAge : this.duration );
+	    }
+	    else {
+	        this.particlesPerSecond = particleCount / groupMaxAge;
+	    }
+	};
+
+	SPE.Emitter.prototype._setAttributeOffset = function( startIndex ) {
+	    this.attributeOffset = startIndex;
+	    this.activationIndex = startIndex;
+	    this.activationEnd = startIndex + this.particleCount;
+	};
+
+
+	SPE.Emitter.prototype._assignValue = function( prop, index ) {
+	    'use strict';
+
+	    switch ( prop ) {
+	        case 'position':
+	            this._assignPositionValue( index );
+	            break;
+
+	        case 'velocity':
+	        case 'acceleration':
+	            this._assignForceValue( index, prop );
+	            break;
+
+	        case 'size':
+	        case 'opacity':
+	            this._assignAbsLifetimeValue( index, prop );
+	            break;
+
+	        case 'angle':
+	            this._assignAngleValue( index );
+	            break;
+
+	        case 'params':
+	            this._assignParamsValue( index );
+	            break;
+
+	        case 'rotation':
+	            this._assignRotationValue( index );
+	            break;
+
+	        case 'color':
+	            this._assignColorValue( index );
+	            break;
+	    }
+	};
+
+	SPE.Emitter.prototype._assignPositionValue = function( index ) {
+	    'use strict';
+
+	    var distributions = SPE.distributions,
+	        utils = SPE.utils,
+	        prop = this.position,
+	        attr = this.attributes.position,
+	        value = prop._value,
+	        spread = prop._spread,
+	        distribution = prop._distribution;
+
+	    switch ( distribution ) {
+	        case distributions.BOX:
+	            utils.randomVector3( attr, index, value, spread, prop._spreadClamp );
+	            break;
+
+	        case distributions.SPHERE:
+	            utils.randomVector3OnSphere( attr, index, value, prop._radius, prop._spread.x, prop._radiusScale, prop._spreadClamp.x, prop._distributionClamp || this.particleCount );
+	            break;
+
+	        case distributions.DISC:
+	            utils.randomVector3OnDisc( attr, index, value, prop._radius, prop._spread.x, prop._radiusScale, prop._spreadClamp.x );
+	            break;
+	    }
+	};
+
+	SPE.Emitter.prototype._assignForceValue = function( index, attrName ) {
+	    'use strict';
+
+	    var distributions = SPE.distributions,
+	        utils = SPE.utils,
+	        prop = this[ attrName ],
+	        value = prop._value,
+	        spread = prop._spread,
+	        distribution = prop._distribution,
+	        pos,
+	        positionX,
+	        positionY,
+	        positionZ,
+	        i;
+
+	    switch ( distribution ) {
+	        case distributions.BOX:
+	            utils.randomVector3( this.attributes[ attrName ], index, value, spread );
+	            break;
+
+	        case distributions.SPHERE:
+	            pos = this.attributes.position.typedArray.array;
+	            i = index * 3;
+
+	            // Ensure position values aren't zero, otherwise no force will be
+	            // applied.
+	            // positionX = utils.zeroToEpsilon( pos[ i ], true );
+	            // positionY = utils.zeroToEpsilon( pos[ i + 1 ], true );
+	            // positionZ = utils.zeroToEpsilon( pos[ i + 2 ], true );
+	            positionX = pos[ i ];
+	            positionY = pos[ i + 1 ];
+	            positionZ = pos[ i + 2 ];
+
+	            utils.randomDirectionVector3OnSphere(
+	                this.attributes[ attrName ], index,
+	                positionX, positionY, positionZ,
+	                this.position._value,
+	                prop._value.x,
+	                prop._spread.x
+	            );
+	            break;
+
+	        case distributions.DISC:
+	            pos = this.attributes.position.typedArray.array;
+	            i = index * 3;
+
+	            // Ensure position values aren't zero, otherwise no force will be
+	            // applied.
+	            // positionX = utils.zeroToEpsilon( pos[ i ], true );
+	            // positionY = utils.zeroToEpsilon( pos[ i + 1 ], true );
+	            // positionZ = utils.zeroToEpsilon( pos[ i + 2 ], true );
+	            positionX = pos[ i ];
+	            positionY = pos[ i + 1 ];
+	            positionZ = pos[ i + 2 ];
+
+	            utils.randomDirectionVector3OnDisc(
+	                this.attributes[ attrName ], index,
+	                positionX, positionY, positionZ,
+	                this.position._value,
+	                prop._value.x,
+	                prop._spread.x
+	            );
+	            break;
+	    }
+
+	    if ( attrName === 'acceleration' ) {
+	        var drag = utils.clamp( utils.randomFloat( this.drag._value, this.drag._spread ), 0, 1 );
+	        this.attributes.acceleration.typedArray.array[ index * 4 + 3 ] = drag;
+	    }
+	};
+
+	SPE.Emitter.prototype._assignAbsLifetimeValue = function( index, propName ) {
+	    'use strict';
+
+	    var array = this.attributes[ propName ].typedArray,
+	        prop = this[ propName ],
+	        utils = SPE.utils,
+	        value;
+
+	    if ( utils.arrayValuesAreEqual( prop._value ) && utils.arrayValuesAreEqual( prop._spread ) ) {
+	        value = Math.abs( utils.randomFloat( prop._value[ 0 ], prop._spread[ 0 ] ) );
+	        array.setVec4Components( index, value, value, value, value );
+	    }
+	    else {
+	        array.setVec4Components( index,
+	            Math.abs( utils.randomFloat( prop._value[ 0 ], prop._spread[ 0 ] ) ),
+	            Math.abs( utils.randomFloat( prop._value[ 1 ], prop._spread[ 1 ] ) ),
+	            Math.abs( utils.randomFloat( prop._value[ 2 ], prop._spread[ 2 ] ) ),
+	            Math.abs( utils.randomFloat( prop._value[ 3 ], prop._spread[ 3 ] ) )
+	        );
+	    }
+	};
+
+	SPE.Emitter.prototype._assignAngleValue = function( index ) {
+	    'use strict';
+
+	    var array = this.attributes.angle.typedArray,
+	        prop = this.angle,
+	        utils = SPE.utils,
+	        value;
+
+	    if ( utils.arrayValuesAreEqual( prop._value ) && utils.arrayValuesAreEqual( prop._spread ) ) {
+	        value = utils.randomFloat( prop._value[ 0 ], prop._spread[ 0 ] );
+	        array.setVec4Components( index, value, value, value, value );
+	    }
+	    else {
+	        array.setVec4Components( index,
+	            utils.randomFloat( prop._value[ 0 ], prop._spread[ 0 ] ),
+	            utils.randomFloat( prop._value[ 1 ], prop._spread[ 1 ] ),
+	            utils.randomFloat( prop._value[ 2 ], prop._spread[ 2 ] ),
+	            utils.randomFloat( prop._value[ 3 ], prop._spread[ 3 ] )
+	        );
+	    }
+	};
+
+	SPE.Emitter.prototype._assignParamsValue = function( index ) {
+	    'use strict';
+
+	    this.attributes.params.typedArray.setVec4Components( index,
+	        this.isStatic ? 1 : 0,
+	        0.0,
+	        Math.abs( SPE.utils.randomFloat( this.maxAge._value, this.maxAge._spread ) ),
+	        SPE.utils.randomFloat( this.wiggle._value, this.wiggle._spread )
+	    );
+	};
+
+	SPE.Emitter.prototype._assignRotationValue = function( index ) {
+	    'use strict';
+
+	    this.attributes.rotation.typedArray.setVec3Components( index,
+	        SPE.utils.getPackedRotationAxis( this.rotation._axis, this.rotation._axisSpread ),
+	        SPE.utils.randomFloat( this.rotation._angle, this.rotation._angleSpread ),
+	        this.rotation._static ? 0 : 1
+	    );
+
+	    this.attributes.rotationCenter.typedArray.setVec3( index, this.rotation._center );
+	};
+
+	SPE.Emitter.prototype._assignColorValue = function( index ) {
+	    'use strict';
+	    SPE.utils.randomColorAsHex( this.attributes.color, index, this.color._value, this.color._spread );
+	};
+
+	SPE.Emitter.prototype._resetParticle = function( index ) {
+	    'use strict';
+
+	    var resetFlags = this.resetFlags,
+	        updateFlags = this.updateFlags,
+	        updateCounts = this.updateCounts,
+	        keys = this.attributeKeys,
+	        key,
+	        updateFlag;
+
+	    for ( var i = this.attributeCount - 1; i >= 0; --i ) {
+	        key = keys[ i ];
+	        updateFlag = updateFlags[ key ];
+
+	        if ( resetFlags[ key ] === true || updateFlag === true ) {
+	            this._assignValue( key, index );
+	            this._updateAttributeUpdateRange( key, index );
+
+	            if ( updateFlag === true && updateCounts[ key ] === this.particleCount ) {
+	                updateFlags[ key ] = false;
+	                updateCounts[ key ] = 0.0;
+	            }
+	            else if ( updateFlag == true ) {
+	                ++updateCounts[ key ];
+	            }
+	        }
+	    }
+	};
+
+	SPE.Emitter.prototype._updateAttributeUpdateRange = function( attr, i ) {
+	    'use strict';
+
+	    var ranges = this.bufferUpdateRanges[ attr ];
+
+	    ranges.min = Math.min( i, ranges.min );
+	    ranges.max = Math.max( i, ranges.max );
+	};
+
+	SPE.Emitter.prototype._resetBufferRanges = function() {
+	    'use strict';
+
+	    var ranges = this.bufferUpdateRanges,
+	        keys = this.bufferUpdateKeys,
+	        i = this.bufferUpdateCount - 1,
+	        key;
+
+	    for ( i; i >= 0; --i ) {
+	        key = keys[ i ];
+	        ranges[ key ].min = Number.POSITIVE_INFINITY;
+	        ranges[ key ].max = Number.NEGATIVE_INFINITY;
+	    }
+	};
+
+	SPE.Emitter.prototype._onRemove = function() {
+	    'use strict';
+	    // Reset any properties of the emitter that were set by
+	    // a group when it was added.
+	    this.particlesPerSecond = 0;
+	    this.attributeOffset = 0;
+	    this.activationIndex = 0;
+	    this.activeParticleCount = 0;
+	    this.group = null;
+	    this.attributes = null;
+	    this.paramsArray = null;
+	    this.age = 0.0;
+	};
+
+	SPE.Emitter.prototype._decrementParticleCount = function() {
+	    'use strict';
+	    --this.activeParticleCount;
+
+	    // TODO:
+	    //  - Trigger event if count === 0.
+	};
+
+	SPE.Emitter.prototype._incrementParticleCount = function() {
+	    'use strict';
+	    ++this.activeParticleCount;
+
+	    // TODO:
+	    //  - Trigger event if count === this.particleCount.
+	};
+
+	SPE.Emitter.prototype._checkParticleAges = function( start, end, params, dt ) {
+	    'use strict';
+	    for ( var i = end - 1, index, maxAge, age, alive; i >= start; --i ) {
+	        index = i * 4;
+
+	        alive = params[ index ];
+
+	        if ( alive === 0.0 ) {
+	            continue;
+	        }
+
+	        // Increment age
+	        age = params[ index + 1 ];
+	        maxAge = params[ index + 2 ];
+
+	        if ( this.direction === 1 ) {
+	            age += dt;
+
+	            if ( age >= maxAge ) {
+	                age = 0.0;
+	                alive = 0.0;
+	                this._decrementParticleCount();
+	            }
+	        }
+	        else {
+	            age -= dt;
+
+	            if ( age <= 0.0 ) {
+	                age = maxAge;
+	                alive = 0.0;
+	                this._decrementParticleCount();
+	            }
+	        }
+
+	        params[ index ] = alive;
+	        params[ index + 1 ] = age;
+
+	        this._updateAttributeUpdateRange( 'params', i );
+	    }
+	};
+
+	SPE.Emitter.prototype._activateParticles = function( activationStart, activationEnd, params, dtPerParticle ) {
+	    'use strict';
+	    var direction = this.direction;
+
+	    for ( var i = activationStart, index, dtValue; i < activationEnd; ++i ) {
+	        index = i * 4;
+
+	        // Don't re-activate particles that aren't dead yet.
+	        // if ( params[ index ] !== 0.0 && ( this.particleCount !== 1 || this.activeMultiplier !== 1 ) ) {
+	        //     continue;
+	        // }
+
+	        if ( params[ index ] != 0.0 && this.particleCount !== 1 ) {
+	            continue;
+	        }
+
+	        // Increment the active particle count.
+	        this._incrementParticleCount();
+
+	        // Mark the particle as alive.
+	        params[ index ] = 1.0;
+
+	        // Reset the particle
+	        this._resetParticle( i );
+
+	        // Move each particle being activated to
+	        // it's actual position in time.
+	        //
+	        // This stops particles being 'clumped' together
+	        // when frame rates are on the lower side of 60fps
+	        // or not constant (a very real possibility!)
+	        dtValue = dtPerParticle * ( i - activationStart )
+	        params[ index + 1 ] = direction === -1 ? params[ index + 2 ] - dtValue : dtValue;
+
+	        this._updateAttributeUpdateRange( 'params', i );
+	    }
+	};
+
+	/**
+	 * Simulates one frame's worth of particles, updating particles
+	 * that are already alive, and marking ones that are currently dead
+	 * but should be alive as alive.
+	 *
+	 * If the emitter is marked as static, then this function will do nothing.
+	 *
+	 * @param  {Number} dt The number of seconds to simulate (deltaTime)
+	 */
+	SPE.Emitter.prototype.tick = function( dt ) {
+	    'use strict';
+
+	    if ( this.isStatic ) {
+	        return;
+	    }
+
+	    if ( this.paramsArray === null ) {
+	        this.paramsArray = this.attributes.params.typedArray.array;
+	    }
+
+	    var start = this.attributeOffset,
+	        end = start + this.particleCount,
+	        params = this.paramsArray, // vec3( alive, age, maxAge, wiggle )
+	        ppsDt = this.particlesPerSecond * this.activeMultiplier * dt,
+	        activationIndex = this.activationIndex;
+
+	    // Reset the buffer update indices.
+	    this._resetBufferRanges();
+
+	    // Increment age for those particles that are alive,
+	    // and kill off any particles whose age is over the limit.
+	    this._checkParticleAges( start, end, params, dt );
+
+	    // If the emitter is dead, reset the age of the emitter to zero,
+	    // ready to go again if required
+	    if ( this.alive === false ) {
+	        this.age = 0.0;
+	        return;
+	    }
+
+	    // If the emitter has a specified lifetime and we've exceeded it,
+	    // mark the emitter as dead.
+	    if ( this.duration !== null && this.age > this.duration ) {
+	        this.alive = false;
+	        this.age = 0.0;
+	        return;
+	    }
+
+
+	    var activationStart = this.particleCount === 1 ? activationIndex : ( activationIndex | 0 ),
+	        activationEnd = Math.min( activationStart + ppsDt, this.activationEnd ),
+	        activationCount = activationEnd - this.activationIndex | 0,
+	        dtPerParticle = activationCount > 0 ? dt / activationCount : 0;
+
+	    this._activateParticles( activationStart, activationEnd, params, dtPerParticle );
+
+	    // Move the activation window forward, soldier.
+	    this.activationIndex += ppsDt;
+
+	    if ( this.activationIndex > end ) {
+	        this.activationIndex = start;
+	    }
+
+
+	    // Increment the age of the emitter.
+	    this.age += dt;
+	};
+
+	/**
+	 * Resets all the emitter's particles to their start positions
+	 * and marks the particles as dead if the `force` argument is
+	 * true.
+	 *
+	 * @param  {Boolean} [force=undefined] If true, all particles will be marked as dead instantly.
+	 * @return {Emitter}       This emitter instance.
+	 */
+	SPE.Emitter.prototype.reset = function( force ) {
+	    'use strict';
+
+	    this.age = 0.0;
+	    this.alive = false;
+
+	    if ( force === true ) {
+	        var start = this.attributeOffset,
+	            end = start + this.particleCount,
+	            array = this.paramsArray,
+	            attr = this.attributes.params.bufferAttribute;
+
+	        for ( var i = end - 1, index; i >= start; --i ) {
+	            index = i * 4;
+
+	            array[ index ] = 0.0;
+	            array[ index + 1 ] = 0.0;
+	        }
+
+	        attr.updateRange.offset = 0;
+	        attr.updateRange.count = -1;
+	        attr.needsUpdate = true;
+	    }
+
+	    return this;
+	};
+
+	/**
+	 * Enables the emitter. If not already enabled, the emitter
+	 * will start emitting particles.
+	 *
+	 * @return {Emitter} This emitter instance.
+	 */
+	SPE.Emitter.prototype.enable = function() {
+	    'use strict';
+	    this.alive = true;
+	    return this;
+	};
+
+	/**
+	 * Disables th emitter, but does not instantly remove it's
+	 * particles fromt the scene. When called, the emitter will be
+	 * 'switched off' and just stop emitting. Any particle's alive will
+	 * be allowed to finish their lifecycle.
+	 *
+	 * @return {Emitter} This emitter instance.
+	 */
+	SPE.Emitter.prototype.disable = function() {
+	    'use strict';
+
+	    this.alive = false;
+	    return this;
+	};
+
+	/**
+	 * Remove this emitter from it's parent group (if it has been added to one).
+	 * Delgates to SPE.group.prototype.removeEmitter().
+	 *
+	 * When called, all particle's belonging to this emitter will be instantly
+	 * removed from the scene.
+	 *
+	 * @return {Emitter} This emitter instance.
+	 *
+	 * @see SPE.Group.prototype.removeEmitter
+	 */
+	SPE.Emitter.prototype.remove = function() {
+	    'use strict';
+	    if ( this.group !== null ) {
+	        this.group.removeEmitter( this );
+	    }
+	    else {
+	        console.error( 'Emitter does not belong to a group, cannot remove.' );
+	    }
+
+	    return this;
+	};
+
+/***/ },
+/* 458 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';
+
+	/**
+	  mobile-touch-interaction.js
+	  Fixes touch mainly for iOS. Put on component to enable touch on it.
+	  Require's jquery
+	*/
+
+	AFRAME.registerComponent('mobile-touch-interaction', {
+	  schema: {
+	    startPlay: { default: false }
+	  },
+
+	  // FOR TOUCH EVENTS ON MOBILE
+	  init: function init() {
+
+	    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+	    if (iOS) {
+
+	      var node = $('.audio-player').data('node');
+	      if (!node) {
+	        return;
+	      }
+	    }
+	    document.addEventListener('touchstart', function start(e) {
+
+	      document.removeEventListener('touchstart', start, false);
+	      document.getElementById('scene').removeEventListener('start_song', this.startSong, false);
+	      document.getElementById('loaded-msg').emit('hide');
+	      node.start(0);
+	      document.getElementById('intro').emit('start_intro');
+	    }, false);
+	  }
+
+	});
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(455)))
+
+/***/ },
 /* 459 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -100385,7 +102684,67 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(455)))
 
 /***/ },
-/* 465 */,
+/* 465 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _aframeReact = __webpack_require__(460);
+
+	var _Camera = __webpack_require__(466);
+
+	var _Camera2 = _interopRequireDefault(_Camera);
+
+	var _Cursor = __webpack_require__(467);
+
+	var _Cursor2 = _interopRequireDefault(_Cursor);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 WalkableCameraCursor.js
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Component for a Camera + Cursor combination.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
+
+	var WalkableCameraCursor = function (_React$Component) {
+	  _inherits(WalkableCameraCursor, _React$Component);
+
+	  function WalkableCameraCursor(props) {
+	    _classCallCheck(this, WalkableCameraCursor);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(WalkableCameraCursor).call(this, props));
+	  }
+
+	  _createClass(WalkableCameraCursor, [{
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        _Camera2.default,
+	        { id: 'camera', 'wasd-controls': { enabled: true }, active: true, position: this.props.position || [0, 0, 0],
+	          rotation: this.props.rotation || [0, 0, 0] },
+	        this.props.children
+	      );
+	    }
+	  }]);
+
+	  return WalkableCameraCursor;
+	}(React.Component);
+
+	exports.default = WalkableCameraCursor;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ },
 /* 466 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -100738,7 +103097,92 @@
 	module.exports = shallowCompare;
 
 /***/ },
-/* 474 */,
+/* 474 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _aframeReact = __webpack_require__(460);
+
+	var _aframeExtras = __webpack_require__(475);
+
+	var _aframeExtras2 = _interopRequireDefault(_aframeExtras);
+
+	var _Helper = __webpack_require__(517);
+
+	var _Helper2 = _interopRequireDefault(_Helper);
+
+	var _Box = __webpack_require__(518);
+
+	var _Box2 = _interopRequireDefault(_Box);
+
+	var _Dust = __webpack_require__(519);
+
+	var _Dust2 = _interopRequireDefault(_Dust);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Ocean.js
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Creates an ocean with waves.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 IMPORTANT - Ocean needs to be registered
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
+
+	var Ocean = function (_React$Component) {
+	  _inherits(Ocean, _React$Component);
+
+	  function Ocean(props) {
+	    _classCallCheck(this, Ocean);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Ocean).call(this, props));
+	  }
+
+	  /**
+	    #componentWillMount
+	    Registers Ocean component
+	  */
+
+
+	  _createClass(Ocean, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      _aframeExtras2.default.registerAll();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        _aframeReact.Entity,
+	        null,
+	        React.createElement('a-ocean', { position: this.props.position || "0 -1 0" }),
+	        React.createElement(
+	          'a-box',
+	          { color: '#12308D', position: '0 -5 0', depth: '50000', height: '1', width: '50000' },
+	          React.createElement(_aframeReact.Animation, { attribute: 'visible', begin: '23000', to: 'false' })
+	        ),
+	        React.createElement(_Dust2.default, { position: [0, -50, 0] })
+	      );
+	    }
+	  }]);
+
+	  return Ocean;
+	}(React.Component);
+
+	exports.default = Ocean;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ },
 /* 475 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -121488,18 +123932,8 @@
 
 
 /***/ },
-/* 517 */,
-/* 518 */,
-/* 519 */,
-/* 520 */,
-/* 521 */,
-/* 522 */,
-/* 523 */,
-/* 524 */,
-/* 525 */,
-/* 526 */,
-/* 527 */
-/***/ function(module, exports, __webpack_require__) {
+/* 517 */
+/***/ function(module, exports) {
 
 	'use strict';
 
@@ -121509,19 +123943,228 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Helper = function () {
+	  function Helper() {
+	    _classCallCheck(this, Helper);
+	  }
+
+	  _createClass(Helper, null, [{
+	    key: 'chainTimingEvents',
+	    value: function chainTimingEvents(chainEventsArray) {
+	      if (chainEventsArray <= 0) return;
+	      var that = this;
+	      var newEvent = chainEventsArray.pop();
+	      setTimeout(function () {
+	        document.querySelector(newEvent.querySelector).emit(newEvent.emitEvent);
+	        that.chainTimingEvents(chainEventsArray);
+	      }, newEvent.delay);
+	    }
+	  }, {
+	    key: 'showTimer',
+	    value: function showTimer() {
+	      var timestamp = document.createElement('span');document.body.appendChild(timestamp);timestamp.style.position = 'absolute';timestamp.style.top = '20px';timestamp.style.right = '20px';timestamp.style.color = 'white';var ascene = document.querySelector('a-scene');
+	      window.setInterval(function () {
+	        timestamp.textContent = parseFloat(ascene.time / 1000).toFixed(2);
+	      }, 100);
+	    }
+	  }, {
+	    key: 'getRandomColor',
+	    value: function getRandomColor() {
+	      var letters = '0123456789ABCDEF'.split('');
+	      var color = '#';
+	      for (var i = 0; i < 6; i++) {
+	        color += letters[Math.floor(Math.random() * 16)];
+	      }
+	      return color;
+	    }
+	  }, {
+	    key: 'getRandWithMargin',
+	    value: function getRandWithMargin(margin) {
+	      var posOnly = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+
+	      var value = 0;
+	      value = Math.floor(Math.random() * margin) + 1;
+	      if (!posOnly) value *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
+	      return value;
+	    }
+	  }, {
+	    key: 'getRandArrayWithMargin',
+	    value: function getRandArrayWithMargin(margin) {
+	      var posOnly = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+
+	      var array = [0, 0, 0];
+	      for (var i = 0; i < 3; i++) {
+	        var value = 0;
+	        value = Math.floor(Math.random() * margin) + 1;
+	        if (!posOnly) value *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
+	        array[i] = value;
+	      }
+	      return array;
+	    }
+
+	    /**
+	    * Stringify components passed as an object.
+	    *
+	    * {primitive: box; width: 10} to 'primitive: box; width: 10'
+	    */
+
+	  }, {
+	    key: 'serializeComponents',
+	    value: function serializeComponents(props) {
+	      var serialProps = {};
+	      Object.keys(props).forEach(function (component) {
+	        if (['children', 'mixin'].indexOf(component) !== -1) {
+	          return;
+	        }
+
+	        if (props[component].constructor === Function) {
+	          return;
+	        }
+
+	        if (props[component].constructor === Array) {
+	          //Stringify components passed as array.
+	          serialProps[component] = props[component].join(' ');
+	        } else if (props[component].constructor === Object) {
+	          // Stringify components passed as object.
+	          serialProps[component] = styleParser.stringify(props[component]);
+	        } else {
+	          // Do nothing for components otherwise.
+	          serialProps[component] = props[component];
+	        }
+	      });
+	      return serialProps;
+	    }
+	  }]);
+
+	  return Helper;
+	}();
+
+	Helper.MODEL_LOCATION = "3d_models/";
+	exports.default = Helper;
+
+/***/ },
+/* 518 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _aframeReact = __webpack_require__(460);
 
-	var _react = __webpack_require__(1);
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var _react2 = _interopRequireDefault(_react);
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	var _underscore = __webpack_require__(528);
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Box.js
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Creates a box.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
 
-	var _underscore2 = _interopRequireDefault(_underscore);
+	var Box = function (_React$Component) {
+	  _inherits(Box, _React$Component);
 
-	var _jquery = __webpack_require__(459);
+	  function Box(props) {
+	    _classCallCheck(this, Box);
 
-	var _jquery2 = _interopRequireDefault(_jquery);
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Box).call(this, props));
+	  }
+
+	  _createClass(Box, [{
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(_aframeReact.Entity, { position: this.props.position,
+	        geometry: {
+	          primitive: 'box',
+	          width: this.props.width,
+	          height: this.props.height,
+	          depth: this.props.depth
+	        }
+	      });
+	    }
+	  }]);
+
+	  return Box;
+	}(React.Component);
+
+	exports.default = Box;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ },
+/* 519 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _aframeReact = __webpack_require__(460);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Dust.js
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Adds dust.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
+	var Dust = function (_React$Component) {
+	  _inherits(Dust, _React$Component);
+
+	  function Dust(props) {
+	    _classCallCheck(this, Dust);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Dust).call(this, props));
+	  }
+
+	  _createClass(Dust, [{
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(_aframeReact.Entity, _extends({}, this.props, {
+	        'particle-system': { preset: 'dust', particleCount: "10000", maxAge: this.props.maxAge || "6" }
+	      }));
+	    }
+	  }]);
+
+	  return Dust;
+	}(React.Component);
+
+	exports.default = Dust;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ },
+/* 520 */,
+/* 521 */,
+/* 522 */,
+/* 523 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _aframeExtras = __webpack_require__(475);
+
+	var _aframeExtras2 = _interopRequireDefault(_aframeExtras);
+
+	var _aframeReact = __webpack_require__(460);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -121529,2173 +124172,290 @@
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 SchoolOfFishes.js
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Adds a school of fishes.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
 
-	var Audio = function (_React$Component) {
-	  _inherits(Audio, _React$Component);
+	var SchoolOfFishes = function (_React$Component) {
+	  _inherits(SchoolOfFishes, _React$Component);
 
-	  function Audio(props) {
-	    _classCallCheck(this, Audio);
+	  function SchoolOfFishes(props) {
+	    _classCallCheck(this, SchoolOfFishes);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Audio).call(this, props));
-
-	    _this.state = {
-	      frequencyData: [],
-	      analyzer: '',
-	      node: '',
-	      audioElement: []
-	    };
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(SchoolOfFishes).call(this, props));
 	  }
 
-	  _createClass(Audio, [{
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(nextProps) {
-	      if (nextProps.shouldPlay == false) {
-	        var node = this.state.node;
-	        node.stop(0);
-	      }
-	    }
-	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      // this.setupAudioElement();
-	      this.setupAudioBuffer();
-
-	      if (this.props.shouldUpdateFrequencies) {
-	        var that = this;
-	        setInterval(function () {
-	          that.updateAudio();
-	        }, that.props.refreshRate);
-	      }
-	    }
-	  }, {
-	    key: 'setupAudioBuffer',
-	    value: function setupAudioBuffer() {
-	      var AudioContext = AudioContext || webkitAudioContext || mozAudioContext;
-	      var audioCtx = new AudioContext();
-	      var node = audioCtx.createBufferSource();
-	      // createBuffer(channels, samples, sampleRate)
-	      var buffer = audioCtx.createBuffer(1, 4096, audioCtx.sampleRate);
-
-	      var data = buffer.getChannelData(0);
-	      var that = this;
-
-	      //
-	      var request = new XMLHttpRequest();
-
-	      request.open('GET', this.props.audioSrc, true);
-
-	      request.responseType = 'arraybuffer';
-	      request.onload = function () {
-	        var audioData = request.response;
-
-	        audioCtx.decodeAudioData(audioData, function (buffer) {
-	          node.buffer = buffer;
-	          node.loop = false;
-	          node.connect(audioCtx.destination);
-	          // node.start(0);
-	          var element = document.createElement('div');
-	          element.setAttribute('class', 'audio-player');
-	          (0, _jquery2.default)(element).data('audio-node', node);
-	          document.getElementsByClassName('audio')[0].appendChild(element);
-
-	          if (that.props.shouldUpdateFrequencies) {
-	            var analyzer = audioCtx.createAnalyser();
-
-	            node.connect(analyzer);
-	            analyzer.connect(audioCtx.destination);
-
-	            analyzer.fftSize = that.props.fastFourierTransform;
-
-	            // FrequencyBinCount is unsigned long value HALF That of the FFT size
-	            // that.state.frequencyData = new Uint8Array(analyzer.frequencyBinCount);
-	            that.state.frequencyData = new Uint8Array(that.props.frequencySize);
-	            analyzer.getByteFrequencyData(that.state.frequencyData);
-	            that.state.analyzer = analyzer;
-	          }
-	          var animationLoadIn = document.createElement('a-animation');
-	          animationLoadIn.setAttribute('attribute', 'visible');
-	          animationLoadIn.setAttribute('to', true);
-	          if (document.getElementsByTagName('a-image') > 0) {
-	            document.getElementsByTagName('a-image')[0].appendChild(animationLoadIn);
-	            document.getElementsByTagName('a-image')[0].setAttribute('visible', true);
-	          }
-	          if (document.getElementById('curtain')) {
-	            var left = document.getElementById('curtain-left');
-	            var right = document.getElementById('curtain-right');
-	            left.emit('start');
-	            right.emit('start');
-	            left.children[0].addEventListener('animationend', function () {
-	              (0, _jquery2.default)(left).remove();
-	              (0, _jquery2.default)(right).remove();
-	              node.start(0);
-	            });
-	          } else if (document.getElementById('scene')) {
-	            document.getElementById('scene').emit('song_loaded');
-	            (0, _jquery2.default)(".audio-player").data('node', node);
-	            // node.start(0);
-	          } else {
-	              node.start(0);
-	            }
-	          that.setState({ node: node });
-	        }, function (e) {
-	          "Error with decoding audio data" + e.err;
-	        });
-	      };
-
-	      request.send();
-
-	      //
-	    }
-	  }, {
-	    key: 'setupAudioVisualizers',
-	    value: function setupAudioVisualizers(audioElement) {
-	      var AudioContext = AudioContext || webkitAudioContext || mozAudioContext;
-	      var audioCtx = new AudioContext();
-
-	      var src = audioCtx.createMediaElementSource(audioElement);
-
-	      var analyzer = audioCtx.createAnalyser();
-
-	      src.connect(analyzer);
-	      analyzer.connect(audioCtx.destination);
-
-	      analyzer.fftSize = this.props.fastFourierTransform;
-
-	      // FrequencyBinCount is unsigned long value HALF That of the FFT size
-	      this.state.frequencyData = new Uint8Array(analyzer.frequencyBinCount);
-	      analyzer.getByteFrequencyData(this.state.frequencyData);
-	      this.state.analyzer = analyzer;
-	    }
-	  }, {
-	    key: 'setupAudioElement',
-	    value: function setupAudioElement() {
-	      // NOTE: if you want an audio element to work on mobile, need to have a touch event first
-
-	      var audioElement = document.createElement('audio');
-	      audioElement.setAttribute('src', this.props.audioSrc);
-	      audioElement.setAttribute('loop', false);
-	      audioElement.setAttribute('crossOrigin', "anonymous");
-
-	      var element = document.createElement('div');
-	      element.setAttribute('class', 'audio-player');
-	      element.appendChild(audioElement);
-	      document.getElementsByClassName('audio')[0].appendChild(element);
-	      this.setState({ audioElement: audioElement });
-	      var that = this;
-	      setTimeout(function () {
-	        that.startAudioElement();
-	      }, 4000);
-	      // this.setupAudioVisualizers(audioElement);
-	    }
-	  }, {
-	    key: 'startAudioElement',
-	    value: function startAudioElement() {
-	      if (document.getElementById('scene')) {
-	        document.getElementById('scene').emit('song_loaded');
-	        document.querySelector('audio').play();
-	      }
-	    }
-	  }, {
-	    key: 'updateAudio',
-	    value: function updateAudio() {
-	      // Get the new frequency data
-	      var frequencyData = this.state.frequencyData;
-	      if (frequencyData.length == 0) return;
-	      this.state.analyzer.getByteFrequencyData(frequencyData);
-	      var y = [];
-
-	      for (var i = 0; i < this.props.frequencySize; i++) {
-	        y[i] = frequencyData[i];
-	      }
-	      // TODO/FIXME: This is so dirty
-	      // if (!_.isEqual(this._reactInternalInstance._currentElement._owner._instance.state.heights,y))
-	      // this._reactInternalInstance._currentElement._owner._instance.setState({heights:y});
-
-	      this.props.shouldUpdateFrequencies(y);
-	    }
-	  }, {
-	    key: 'shouldComponentUpdate',
-	    value: function shouldComponentUpdate(nextProps, nextState) {
-	      return false;
+	  _createClass(SchoolOfFishes, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      _aframeExtras2.default.registerAll();
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_aframeReact.Entity, { 'class': 'audio' });
+	      var fishLoader = {
+	        loader: 'json',
+	        animation: 'default',
+	        src: 'url(models/fish.js)'
+	      };
+	      return React.createElement(
+	        _aframeReact.Entity,
+	        this.props,
+	        React.createElement(_aframeReact.Entity, { 'three-model': fishLoader,
+	          position: [0, 0, 0] }),
+	        React.createElement(_aframeReact.Entity, { 'three-model': fishLoader,
+	          position: [10, 50, -80] }),
+	        React.createElement(_aframeReact.Entity, { 'three-model': fishLoader,
+	          position: [-50, 30, -120] }),
+	        React.createElement(_aframeReact.Entity, { 'three-model': fishLoader,
+	          position: [-50, 50, 0] }),
+	        React.createElement(_aframeReact.Entity, { 'three-model': fishLoader,
+	          position: [-50, -25, -40] }),
+	        this.props.children
+	      );
 	    }
 	  }]);
 
-	  return Audio;
-	}(_react2.default.Component);
+	  return SchoolOfFishes;
+	}(React.Component);
 
-	Audio.defaultProps = {
-	  fastFourierTransform: 1024,
-	  audioSrc: { default: '' },
-	  heights: '',
-	  refreshRate: 50,
-	  frequencySize: { default: 512 },
-	  shouldPlay: { default: false },
-	  shouldUpdateFrequencies: { default: false }
-	};
-	;
-
-	exports.default = Audio;
+	exports.default = SchoolOfFishes;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 528 */
+/* 524 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
-	//     http://underscorejs.org
-	//     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	//     Underscore may be freely distributed under the MIT license.
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
 
-	(function() {
-
-	  // Baseline setup
-	  // --------------
-
-	  // Establish the root object, `window` in the browser, or `exports` on the server.
-	  var root = this;
-
-	  // Save the previous value of the `_` variable.
-	  var previousUnderscore = root._;
-
-	  // Save bytes in the minified (but not gzipped) version:
-	  var ArrayProto = Array.prototype, ObjProto = Object.prototype, FuncProto = Function.prototype;
-
-	  // Create quick reference variables for speed access to core prototypes.
-	  var
-	    push             = ArrayProto.push,
-	    slice            = ArrayProto.slice,
-	    toString         = ObjProto.toString,
-	    hasOwnProperty   = ObjProto.hasOwnProperty;
-
-	  // All **ECMAScript 5** native function implementations that we hope to use
-	  // are declared here.
-	  var
-	    nativeIsArray      = Array.isArray,
-	    nativeKeys         = Object.keys,
-	    nativeBind         = FuncProto.bind,
-	    nativeCreate       = Object.create;
-
-	  // Naked function reference for surrogate-prototype-swapping.
-	  var Ctor = function(){};
-
-	  // Create a safe reference to the Underscore object for use below.
-	  var _ = function(obj) {
-	    if (obj instanceof _) return obj;
-	    if (!(this instanceof _)) return new _(obj);
-	    this._wrapped = obj;
-	  };
-
-	  // Export the Underscore object for **Node.js**, with
-	  // backwards-compatibility for the old `require()` API. If we're in
-	  // the browser, add `_` as a global object.
-	  if (true) {
-	    if (typeof module !== 'undefined' && module.exports) {
-	      exports = module.exports = _;
-	    }
-	    exports._ = _;
-	  } else {
-	    root._ = _;
-	  }
-
-	  // Current version.
-	  _.VERSION = '1.8.3';
-
-	  // Internal function that returns an efficient (for current engines) version
-	  // of the passed-in callback, to be repeatedly applied in other Underscore
-	  // functions.
-	  var optimizeCb = function(func, context, argCount) {
-	    if (context === void 0) return func;
-	    switch (argCount == null ? 3 : argCount) {
-	      case 1: return function(value) {
-	        return func.call(context, value);
-	      };
-	      case 2: return function(value, other) {
-	        return func.call(context, value, other);
-	      };
-	      case 3: return function(value, index, collection) {
-	        return func.call(context, value, index, collection);
-	      };
-	      case 4: return function(accumulator, value, index, collection) {
-	        return func.call(context, accumulator, value, index, collection);
-	      };
-	    }
-	    return function() {
-	      return func.apply(context, arguments);
-	    };
-	  };
-
-	  // A mostly-internal function to generate callbacks that can be applied
-	  // to each element in a collection, returning the desired result — either
-	  // identity, an arbitrary callback, a property matcher, or a property accessor.
-	  var cb = function(value, context, argCount) {
-	    if (value == null) return _.identity;
-	    if (_.isFunction(value)) return optimizeCb(value, context, argCount);
-	    if (_.isObject(value)) return _.matcher(value);
-	    return _.property(value);
-	  };
-	  _.iteratee = function(value, context) {
-	    return cb(value, context, Infinity);
-	  };
-
-	  // An internal function for creating assigner functions.
-	  var createAssigner = function(keysFunc, undefinedOnly) {
-	    return function(obj) {
-	      var length = arguments.length;
-	      if (length < 2 || obj == null) return obj;
-	      for (var index = 1; index < length; index++) {
-	        var source = arguments[index],
-	            keys = keysFunc(source),
-	            l = keys.length;
-	        for (var i = 0; i < l; i++) {
-	          var key = keys[i];
-	          if (!undefinedOnly || obj[key] === void 0) obj[key] = source[key];
-	        }
-	      }
-	      return obj;
-	    };
-	  };
-
-	  // An internal function for creating a new object that inherits from another.
-	  var baseCreate = function(prototype) {
-	    if (!_.isObject(prototype)) return {};
-	    if (nativeCreate) return nativeCreate(prototype);
-	    Ctor.prototype = prototype;
-	    var result = new Ctor;
-	    Ctor.prototype = null;
-	    return result;
-	  };
-
-	  var property = function(key) {
-	    return function(obj) {
-	      return obj == null ? void 0 : obj[key];
-	    };
-	  };
-
-	  // Helper for collection methods to determine whether a collection
-	  // should be iterated as an array or as an object
-	  // Related: http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength
-	  // Avoids a very nasty iOS 8 JIT bug on ARM-64. #2094
-	  var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
-	  var getLength = property('length');
-	  var isArrayLike = function(collection) {
-	    var length = getLength(collection);
-	    return typeof length == 'number' && length >= 0 && length <= MAX_ARRAY_INDEX;
-	  };
-
-	  // Collection Functions
-	  // --------------------
-
-	  // The cornerstone, an `each` implementation, aka `forEach`.
-	  // Handles raw objects in addition to array-likes. Treats all
-	  // sparse array-likes as if they were dense.
-	  _.each = _.forEach = function(obj, iteratee, context) {
-	    iteratee = optimizeCb(iteratee, context);
-	    var i, length;
-	    if (isArrayLike(obj)) {
-	      for (i = 0, length = obj.length; i < length; i++) {
-	        iteratee(obj[i], i, obj);
-	      }
-	    } else {
-	      var keys = _.keys(obj);
-	      for (i = 0, length = keys.length; i < length; i++) {
-	        iteratee(obj[keys[i]], keys[i], obj);
-	      }
-	    }
-	    return obj;
-	  };
-
-	  // Return the results of applying the iteratee to each element.
-	  _.map = _.collect = function(obj, iteratee, context) {
-	    iteratee = cb(iteratee, context);
-	    var keys = !isArrayLike(obj) && _.keys(obj),
-	        length = (keys || obj).length,
-	        results = Array(length);
-	    for (var index = 0; index < length; index++) {
-	      var currentKey = keys ? keys[index] : index;
-	      results[index] = iteratee(obj[currentKey], currentKey, obj);
-	    }
-	    return results;
-	  };
-
-	  // Create a reducing function iterating left or right.
-	  function createReduce(dir) {
-	    // Optimized iterator function as using arguments.length
-	    // in the main function will deoptimize the, see #1991.
-	    function iterator(obj, iteratee, memo, keys, index, length) {
-	      for (; index >= 0 && index < length; index += dir) {
-	        var currentKey = keys ? keys[index] : index;
-	        memo = iteratee(memo, obj[currentKey], currentKey, obj);
-	      }
-	      return memo;
-	    }
-
-	    return function(obj, iteratee, memo, context) {
-	      iteratee = optimizeCb(iteratee, context, 4);
-	      var keys = !isArrayLike(obj) && _.keys(obj),
-	          length = (keys || obj).length,
-	          index = dir > 0 ? 0 : length - 1;
-	      // Determine the initial value if none is provided.
-	      if (arguments.length < 3) {
-	        memo = obj[keys ? keys[index] : index];
-	        index += dir;
-	      }
-	      return iterator(obj, iteratee, memo, keys, index, length);
-	    };
-	  }
-
-	  // **Reduce** builds up a single result from a list of values, aka `inject`,
-	  // or `foldl`.
-	  _.reduce = _.foldl = _.inject = createReduce(1);
-
-	  // The right-associative version of reduce, also known as `foldr`.
-	  _.reduceRight = _.foldr = createReduce(-1);
-
-	  // Return the first value which passes a truth test. Aliased as `detect`.
-	  _.find = _.detect = function(obj, predicate, context) {
-	    var key;
-	    if (isArrayLike(obj)) {
-	      key = _.findIndex(obj, predicate, context);
-	    } else {
-	      key = _.findKey(obj, predicate, context);
-	    }
-	    if (key !== void 0 && key !== -1) return obj[key];
-	  };
-
-	  // Return all the elements that pass a truth test.
-	  // Aliased as `select`.
-	  _.filter = _.select = function(obj, predicate, context) {
-	    var results = [];
-	    predicate = cb(predicate, context);
-	    _.each(obj, function(value, index, list) {
-	      if (predicate(value, index, list)) results.push(value);
-	    });
-	    return results;
-	  };
-
-	  // Return all the elements for which a truth test fails.
-	  _.reject = function(obj, predicate, context) {
-	    return _.filter(obj, _.negate(cb(predicate)), context);
-	  };
-
-	  // Determine whether all of the elements match a truth test.
-	  // Aliased as `all`.
-	  _.every = _.all = function(obj, predicate, context) {
-	    predicate = cb(predicate, context);
-	    var keys = !isArrayLike(obj) && _.keys(obj),
-	        length = (keys || obj).length;
-	    for (var index = 0; index < length; index++) {
-	      var currentKey = keys ? keys[index] : index;
-	      if (!predicate(obj[currentKey], currentKey, obj)) return false;
-	    }
-	    return true;
-	  };
-
-	  // Determine if at least one element in the object matches a truth test.
-	  // Aliased as `any`.
-	  _.some = _.any = function(obj, predicate, context) {
-	    predicate = cb(predicate, context);
-	    var keys = !isArrayLike(obj) && _.keys(obj),
-	        length = (keys || obj).length;
-	    for (var index = 0; index < length; index++) {
-	      var currentKey = keys ? keys[index] : index;
-	      if (predicate(obj[currentKey], currentKey, obj)) return true;
-	    }
-	    return false;
-	  };
-
-	  // Determine if the array or object contains a given item (using `===`).
-	  // Aliased as `includes` and `include`.
-	  _.contains = _.includes = _.include = function(obj, item, fromIndex, guard) {
-	    if (!isArrayLike(obj)) obj = _.values(obj);
-	    if (typeof fromIndex != 'number' || guard) fromIndex = 0;
-	    return _.indexOf(obj, item, fromIndex) >= 0;
-	  };
-
-	  // Invoke a method (with arguments) on every item in a collection.
-	  _.invoke = function(obj, method) {
-	    var args = slice.call(arguments, 2);
-	    var isFunc = _.isFunction(method);
-	    return _.map(obj, function(value) {
-	      var func = isFunc ? method : value[method];
-	      return func == null ? func : func.apply(value, args);
-	    });
-	  };
-
-	  // Convenience version of a common use case of `map`: fetching a property.
-	  _.pluck = function(obj, key) {
-	    return _.map(obj, _.property(key));
-	  };
-
-	  // Convenience version of a common use case of `filter`: selecting only objects
-	  // containing specific `key:value` pairs.
-	  _.where = function(obj, attrs) {
-	    return _.filter(obj, _.matcher(attrs));
-	  };
-
-	  // Convenience version of a common use case of `find`: getting the first object
-	  // containing specific `key:value` pairs.
-	  _.findWhere = function(obj, attrs) {
-	    return _.find(obj, _.matcher(attrs));
-	  };
-
-	  // Return the maximum element (or element-based computation).
-	  _.max = function(obj, iteratee, context) {
-	    var result = -Infinity, lastComputed = -Infinity,
-	        value, computed;
-	    if (iteratee == null && obj != null) {
-	      obj = isArrayLike(obj) ? obj : _.values(obj);
-	      for (var i = 0, length = obj.length; i < length; i++) {
-	        value = obj[i];
-	        if (value > result) {
-	          result = value;
-	        }
-	      }
-	    } else {
-	      iteratee = cb(iteratee, context);
-	      _.each(obj, function(value, index, list) {
-	        computed = iteratee(value, index, list);
-	        if (computed > lastComputed || computed === -Infinity && result === -Infinity) {
-	          result = value;
-	          lastComputed = computed;
-	        }
-	      });
-	    }
-	    return result;
-	  };
-
-	  // Return the minimum element (or element-based computation).
-	  _.min = function(obj, iteratee, context) {
-	    var result = Infinity, lastComputed = Infinity,
-	        value, computed;
-	    if (iteratee == null && obj != null) {
-	      obj = isArrayLike(obj) ? obj : _.values(obj);
-	      for (var i = 0, length = obj.length; i < length; i++) {
-	        value = obj[i];
-	        if (value < result) {
-	          result = value;
-	        }
-	      }
-	    } else {
-	      iteratee = cb(iteratee, context);
-	      _.each(obj, function(value, index, list) {
-	        computed = iteratee(value, index, list);
-	        if (computed < lastComputed || computed === Infinity && result === Infinity) {
-	          result = value;
-	          lastComputed = computed;
-	        }
-	      });
-	    }
-	    return result;
-	  };
-
-	  // Shuffle a collection, using the modern version of the
-	  // [Fisher-Yates shuffle](http://en.wikipedia.org/wiki/Fisher–Yates_shuffle).
-	  _.shuffle = function(obj) {
-	    var set = isArrayLike(obj) ? obj : _.values(obj);
-	    var length = set.length;
-	    var shuffled = Array(length);
-	    for (var index = 0, rand; index < length; index++) {
-	      rand = _.random(0, index);
-	      if (rand !== index) shuffled[index] = shuffled[rand];
-	      shuffled[rand] = set[index];
-	    }
-	    return shuffled;
-	  };
-
-	  // Sample **n** random values from a collection.
-	  // If **n** is not specified, returns a single random element.
-	  // The internal `guard` argument allows it to work with `map`.
-	  _.sample = function(obj, n, guard) {
-	    if (n == null || guard) {
-	      if (!isArrayLike(obj)) obj = _.values(obj);
-	      return obj[_.random(obj.length - 1)];
-	    }
-	    return _.shuffle(obj).slice(0, Math.max(0, n));
-	  };
-
-	  // Sort the object's values by a criterion produced by an iteratee.
-	  _.sortBy = function(obj, iteratee, context) {
-	    iteratee = cb(iteratee, context);
-	    return _.pluck(_.map(obj, function(value, index, list) {
-	      return {
-	        value: value,
-	        index: index,
-	        criteria: iteratee(value, index, list)
-	      };
-	    }).sort(function(left, right) {
-	      var a = left.criteria;
-	      var b = right.criteria;
-	      if (a !== b) {
-	        if (a > b || a === void 0) return 1;
-	        if (a < b || b === void 0) return -1;
-	      }
-	      return left.index - right.index;
-	    }), 'value');
-	  };
-
-	  // An internal function used for aggregate "group by" operations.
-	  var group = function(behavior) {
-	    return function(obj, iteratee, context) {
-	      var result = {};
-	      iteratee = cb(iteratee, context);
-	      _.each(obj, function(value, index) {
-	        var key = iteratee(value, index, obj);
-	        behavior(result, value, key);
-	      });
-	      return result;
-	    };
-	  };
-
-	  // Groups the object's values by a criterion. Pass either a string attribute
-	  // to group by, or a function that returns the criterion.
-	  _.groupBy = group(function(result, value, key) {
-	    if (_.has(result, key)) result[key].push(value); else result[key] = [value];
-	  });
-
-	  // Indexes the object's values by a criterion, similar to `groupBy`, but for
-	  // when you know that your index values will be unique.
-	  _.indexBy = group(function(result, value, key) {
-	    result[key] = value;
-	  });
-
-	  // Counts instances of an object that group by a certain criterion. Pass
-	  // either a string attribute to count by, or a function that returns the
-	  // criterion.
-	  _.countBy = group(function(result, value, key) {
-	    if (_.has(result, key)) result[key]++; else result[key] = 1;
-	  });
-
-	  // Safely create a real, live array from anything iterable.
-	  _.toArray = function(obj) {
-	    if (!obj) return [];
-	    if (_.isArray(obj)) return slice.call(obj);
-	    if (isArrayLike(obj)) return _.map(obj, _.identity);
-	    return _.values(obj);
-	  };
-
-	  // Return the number of elements in an object.
-	  _.size = function(obj) {
-	    if (obj == null) return 0;
-	    return isArrayLike(obj) ? obj.length : _.keys(obj).length;
-	  };
-
-	  // Split a collection into two arrays: one whose elements all satisfy the given
-	  // predicate, and one whose elements all do not satisfy the predicate.
-	  _.partition = function(obj, predicate, context) {
-	    predicate = cb(predicate, context);
-	    var pass = [], fail = [];
-	    _.each(obj, function(value, key, obj) {
-	      (predicate(value, key, obj) ? pass : fail).push(value);
-	    });
-	    return [pass, fail];
-	  };
-
-	  // Array Functions
-	  // ---------------
-
-	  // Get the first element of an array. Passing **n** will return the first N
-	  // values in the array. Aliased as `head` and `take`. The **guard** check
-	  // allows it to work with `_.map`.
-	  _.first = _.head = _.take = function(array, n, guard) {
-	    if (array == null) return void 0;
-	    if (n == null || guard) return array[0];
-	    return _.initial(array, array.length - n);
-	  };
-
-	  // Returns everything but the last entry of the array. Especially useful on
-	  // the arguments object. Passing **n** will return all the values in
-	  // the array, excluding the last N.
-	  _.initial = function(array, n, guard) {
-	    return slice.call(array, 0, Math.max(0, array.length - (n == null || guard ? 1 : n)));
-	  };
-
-	  // Get the last element of an array. Passing **n** will return the last N
-	  // values in the array.
-	  _.last = function(array, n, guard) {
-	    if (array == null) return void 0;
-	    if (n == null || guard) return array[array.length - 1];
-	    return _.rest(array, Math.max(0, array.length - n));
-	  };
-
-	  // Returns everything but the first entry of the array. Aliased as `tail` and `drop`.
-	  // Especially useful on the arguments object. Passing an **n** will return
-	  // the rest N values in the array.
-	  _.rest = _.tail = _.drop = function(array, n, guard) {
-	    return slice.call(array, n == null || guard ? 1 : n);
-	  };
-
-	  // Trim out all falsy values from an array.
-	  _.compact = function(array) {
-	    return _.filter(array, _.identity);
-	  };
-
-	  // Internal implementation of a recursive `flatten` function.
-	  var flatten = function(input, shallow, strict, startIndex) {
-	    var output = [], idx = 0;
-	    for (var i = startIndex || 0, length = getLength(input); i < length; i++) {
-	      var value = input[i];
-	      if (isArrayLike(value) && (_.isArray(value) || _.isArguments(value))) {
-	        //flatten current level of array or arguments object
-	        if (!shallow) value = flatten(value, shallow, strict);
-	        var j = 0, len = value.length;
-	        output.length += len;
-	        while (j < len) {
-	          output[idx++] = value[j++];
-	        }
-	      } else if (!strict) {
-	        output[idx++] = value;
-	      }
-	    }
-	    return output;
-	  };
-
-	  // Flatten out an array, either recursively (by default), or just one level.
-	  _.flatten = function(array, shallow) {
-	    return flatten(array, shallow, false);
-	  };
-
-	  // Return a version of the array that does not contain the specified value(s).
-	  _.without = function(array) {
-	    return _.difference(array, slice.call(arguments, 1));
-	  };
-
-	  // Produce a duplicate-free version of the array. If the array has already
-	  // been sorted, you have the option of using a faster algorithm.
-	  // Aliased as `unique`.
-	  _.uniq = _.unique = function(array, isSorted, iteratee, context) {
-	    if (!_.isBoolean(isSorted)) {
-	      context = iteratee;
-	      iteratee = isSorted;
-	      isSorted = false;
-	    }
-	    if (iteratee != null) iteratee = cb(iteratee, context);
-	    var result = [];
-	    var seen = [];
-	    for (var i = 0, length = getLength(array); i < length; i++) {
-	      var value = array[i],
-	          computed = iteratee ? iteratee(value, i, array) : value;
-	      if (isSorted) {
-	        if (!i || seen !== computed) result.push(value);
-	        seen = computed;
-	      } else if (iteratee) {
-	        if (!_.contains(seen, computed)) {
-	          seen.push(computed);
-	          result.push(value);
-	        }
-	      } else if (!_.contains(result, value)) {
-	        result.push(value);
-	      }
-	    }
-	    return result;
-	  };
-
-	  // Produce an array that contains the union: each distinct element from all of
-	  // the passed-in arrays.
-	  _.union = function() {
-	    return _.uniq(flatten(arguments, true, true));
-	  };
-
-	  // Produce an array that contains every item shared between all the
-	  // passed-in arrays.
-	  _.intersection = function(array) {
-	    var result = [];
-	    var argsLength = arguments.length;
-	    for (var i = 0, length = getLength(array); i < length; i++) {
-	      var item = array[i];
-	      if (_.contains(result, item)) continue;
-	      for (var j = 1; j < argsLength; j++) {
-	        if (!_.contains(arguments[j], item)) break;
-	      }
-	      if (j === argsLength) result.push(item);
-	    }
-	    return result;
-	  };
-
-	  // Take the difference between one array and a number of other arrays.
-	  // Only the elements present in just the first array will remain.
-	  _.difference = function(array) {
-	    var rest = flatten(arguments, true, true, 1);
-	    return _.filter(array, function(value){
-	      return !_.contains(rest, value);
-	    });
-	  };
-
-	  // Zip together multiple lists into a single array -- elements that share
-	  // an index go together.
-	  _.zip = function() {
-	    return _.unzip(arguments);
-	  };
-
-	  // Complement of _.zip. Unzip accepts an array of arrays and groups
-	  // each array's elements on shared indices
-	  _.unzip = function(array) {
-	    var length = array && _.max(array, getLength).length || 0;
-	    var result = Array(length);
-
-	    for (var index = 0; index < length; index++) {
-	      result[index] = _.pluck(array, index);
-	    }
-	    return result;
-	  };
-
-	  // Converts lists into objects. Pass either a single array of `[key, value]`
-	  // pairs, or two parallel arrays of the same length -- one of keys, and one of
-	  // the corresponding values.
-	  _.object = function(list, values) {
-	    var result = {};
-	    for (var i = 0, length = getLength(list); i < length; i++) {
-	      if (values) {
-	        result[list[i]] = values[i];
-	      } else {
-	        result[list[i][0]] = list[i][1];
-	      }
-	    }
-	    return result;
-	  };
-
-	  // Generator function to create the findIndex and findLastIndex functions
-	  function createPredicateIndexFinder(dir) {
-	    return function(array, predicate, context) {
-	      predicate = cb(predicate, context);
-	      var length = getLength(array);
-	      var index = dir > 0 ? 0 : length - 1;
-	      for (; index >= 0 && index < length; index += dir) {
-	        if (predicate(array[index], index, array)) return index;
-	      }
-	      return -1;
-	    };
-	  }
-
-	  // Returns the first index on an array-like that passes a predicate test
-	  _.findIndex = createPredicateIndexFinder(1);
-	  _.findLastIndex = createPredicateIndexFinder(-1);
-
-	  // Use a comparator function to figure out the smallest index at which
-	  // an object should be inserted so as to maintain order. Uses binary search.
-	  _.sortedIndex = function(array, obj, iteratee, context) {
-	    iteratee = cb(iteratee, context, 1);
-	    var value = iteratee(obj);
-	    var low = 0, high = getLength(array);
-	    while (low < high) {
-	      var mid = Math.floor((low + high) / 2);
-	      if (iteratee(array[mid]) < value) low = mid + 1; else high = mid;
-	    }
-	    return low;
-	  };
-
-	  // Generator function to create the indexOf and lastIndexOf functions
-	  function createIndexFinder(dir, predicateFind, sortedIndex) {
-	    return function(array, item, idx) {
-	      var i = 0, length = getLength(array);
-	      if (typeof idx == 'number') {
-	        if (dir > 0) {
-	            i = idx >= 0 ? idx : Math.max(idx + length, i);
-	        } else {
-	            length = idx >= 0 ? Math.min(idx + 1, length) : idx + length + 1;
-	        }
-	      } else if (sortedIndex && idx && length) {
-	        idx = sortedIndex(array, item);
-	        return array[idx] === item ? idx : -1;
-	      }
-	      if (item !== item) {
-	        idx = predicateFind(slice.call(array, i, length), _.isNaN);
-	        return idx >= 0 ? idx + i : -1;
-	      }
-	      for (idx = dir > 0 ? i : length - 1; idx >= 0 && idx < length; idx += dir) {
-	        if (array[idx] === item) return idx;
-	      }
-	      return -1;
-	    };
-	  }
-
-	  // Return the position of the first occurrence of an item in an array,
-	  // or -1 if the item is not included in the array.
-	  // If the array is large and already in sort order, pass `true`
-	  // for **isSorted** to use binary search.
-	  _.indexOf = createIndexFinder(1, _.findIndex, _.sortedIndex);
-	  _.lastIndexOf = createIndexFinder(-1, _.findLastIndex);
-
-	  // Generate an integer Array containing an arithmetic progression. A port of
-	  // the native Python `range()` function. See
-	  // [the Python documentation](http://docs.python.org/library/functions.html#range).
-	  _.range = function(start, stop, step) {
-	    if (stop == null) {
-	      stop = start || 0;
-	      start = 0;
-	    }
-	    step = step || 1;
-
-	    var length = Math.max(Math.ceil((stop - start) / step), 0);
-	    var range = Array(length);
-
-	    for (var idx = 0; idx < length; idx++, start += step) {
-	      range[idx] = start;
-	    }
-
-	    return range;
-	  };
-
-	  // Function (ahem) Functions
-	  // ------------------
-
-	  // Determines whether to execute a function as a constructor
-	  // or a normal function with the provided arguments
-	  var executeBound = function(sourceFunc, boundFunc, context, callingContext, args) {
-	    if (!(callingContext instanceof boundFunc)) return sourceFunc.apply(context, args);
-	    var self = baseCreate(sourceFunc.prototype);
-	    var result = sourceFunc.apply(self, args);
-	    if (_.isObject(result)) return result;
-	    return self;
-	  };
-
-	  // Create a function bound to a given object (assigning `this`, and arguments,
-	  // optionally). Delegates to **ECMAScript 5**'s native `Function.bind` if
-	  // available.
-	  _.bind = function(func, context) {
-	    if (nativeBind && func.bind === nativeBind) return nativeBind.apply(func, slice.call(arguments, 1));
-	    if (!_.isFunction(func)) throw new TypeError('Bind must be called on a function');
-	    var args = slice.call(arguments, 2);
-	    var bound = function() {
-	      return executeBound(func, bound, context, this, args.concat(slice.call(arguments)));
-	    };
-	    return bound;
-	  };
-
-	  // Partially apply a function by creating a version that has had some of its
-	  // arguments pre-filled, without changing its dynamic `this` context. _ acts
-	  // as a placeholder, allowing any combination of arguments to be pre-filled.
-	  _.partial = function(func) {
-	    var boundArgs = slice.call(arguments, 1);
-	    var bound = function() {
-	      var position = 0, length = boundArgs.length;
-	      var args = Array(length);
-	      for (var i = 0; i < length; i++) {
-	        args[i] = boundArgs[i] === _ ? arguments[position++] : boundArgs[i];
-	      }
-	      while (position < arguments.length) args.push(arguments[position++]);
-	      return executeBound(func, bound, this, this, args);
-	    };
-	    return bound;
-	  };
-
-	  // Bind a number of an object's methods to that object. Remaining arguments
-	  // are the method names to be bound. Useful for ensuring that all callbacks
-	  // defined on an object belong to it.
-	  _.bindAll = function(obj) {
-	    var i, length = arguments.length, key;
-	    if (length <= 1) throw new Error('bindAll must be passed function names');
-	    for (i = 1; i < length; i++) {
-	      key = arguments[i];
-	      obj[key] = _.bind(obj[key], obj);
-	    }
-	    return obj;
-	  };
-
-	  // Memoize an expensive function by storing its results.
-	  _.memoize = function(func, hasher) {
-	    var memoize = function(key) {
-	      var cache = memoize.cache;
-	      var address = '' + (hasher ? hasher.apply(this, arguments) : key);
-	      if (!_.has(cache, address)) cache[address] = func.apply(this, arguments);
-	      return cache[address];
-	    };
-	    memoize.cache = {};
-	    return memoize;
-	  };
-
-	  // Delays a function for the given number of milliseconds, and then calls
-	  // it with the arguments supplied.
-	  _.delay = function(func, wait) {
-	    var args = slice.call(arguments, 2);
-	    return setTimeout(function(){
-	      return func.apply(null, args);
-	    }, wait);
-	  };
-
-	  // Defers a function, scheduling it to run after the current call stack has
-	  // cleared.
-	  _.defer = _.partial(_.delay, _, 1);
-
-	  // Returns a function, that, when invoked, will only be triggered at most once
-	  // during a given window of time. Normally, the throttled function will run
-	  // as much as it can, without ever going more than once per `wait` duration;
-	  // but if you'd like to disable the execution on the leading edge, pass
-	  // `{leading: false}`. To disable execution on the trailing edge, ditto.
-	  _.throttle = function(func, wait, options) {
-	    var context, args, result;
-	    var timeout = null;
-	    var previous = 0;
-	    if (!options) options = {};
-	    var later = function() {
-	      previous = options.leading === false ? 0 : _.now();
-	      timeout = null;
-	      result = func.apply(context, args);
-	      if (!timeout) context = args = null;
-	    };
-	    return function() {
-	      var now = _.now();
-	      if (!previous && options.leading === false) previous = now;
-	      var remaining = wait - (now - previous);
-	      context = this;
-	      args = arguments;
-	      if (remaining <= 0 || remaining > wait) {
-	        if (timeout) {
-	          clearTimeout(timeout);
-	          timeout = null;
-	        }
-	        previous = now;
-	        result = func.apply(context, args);
-	        if (!timeout) context = args = null;
-	      } else if (!timeout && options.trailing !== false) {
-	        timeout = setTimeout(later, remaining);
-	      }
-	      return result;
-	    };
-	  };
-
-	  // Returns a function, that, as long as it continues to be invoked, will not
-	  // be triggered. The function will be called after it stops being called for
-	  // N milliseconds. If `immediate` is passed, trigger the function on the
-	  // leading edge, instead of the trailing.
-	  _.debounce = function(func, wait, immediate) {
-	    var timeout, args, context, timestamp, result;
-
-	    var later = function() {
-	      var last = _.now() - timestamp;
-
-	      if (last < wait && last >= 0) {
-	        timeout = setTimeout(later, wait - last);
-	      } else {
-	        timeout = null;
-	        if (!immediate) {
-	          result = func.apply(context, args);
-	          if (!timeout) context = args = null;
-	        }
-	      }
-	    };
-
-	    return function() {
-	      context = this;
-	      args = arguments;
-	      timestamp = _.now();
-	      var callNow = immediate && !timeout;
-	      if (!timeout) timeout = setTimeout(later, wait);
-	      if (callNow) {
-	        result = func.apply(context, args);
-	        context = args = null;
-	      }
-
-	      return result;
-	    };
-	  };
-
-	  // Returns the first function passed as an argument to the second,
-	  // allowing you to adjust arguments, run code before and after, and
-	  // conditionally execute the original function.
-	  _.wrap = function(func, wrapper) {
-	    return _.partial(wrapper, func);
-	  };
-
-	  // Returns a negated version of the passed-in predicate.
-	  _.negate = function(predicate) {
-	    return function() {
-	      return !predicate.apply(this, arguments);
-	    };
-	  };
-
-	  // Returns a function that is the composition of a list of functions, each
-	  // consuming the return value of the function that follows.
-	  _.compose = function() {
-	    var args = arguments;
-	    var start = args.length - 1;
-	    return function() {
-	      var i = start;
-	      var result = args[start].apply(this, arguments);
-	      while (i--) result = args[i].call(this, result);
-	      return result;
-	    };
-	  };
-
-	  // Returns a function that will only be executed on and after the Nth call.
-	  _.after = function(times, func) {
-	    return function() {
-	      if (--times < 1) {
-	        return func.apply(this, arguments);
-	      }
-	    };
-	  };
-
-	  // Returns a function that will only be executed up to (but not including) the Nth call.
-	  _.before = function(times, func) {
-	    var memo;
-	    return function() {
-	      if (--times > 0) {
-	        memo = func.apply(this, arguments);
-	      }
-	      if (times <= 1) func = null;
-	      return memo;
-	    };
-	  };
-
-	  // Returns a function that will be executed at most one time, no matter how
-	  // often you call it. Useful for lazy initialization.
-	  _.once = _.partial(_.before, 2);
-
-	  // Object Functions
-	  // ----------------
-
-	  // Keys in IE < 9 that won't be iterated by `for key in ...` and thus missed.
-	  var hasEnumBug = !{toString: null}.propertyIsEnumerable('toString');
-	  var nonEnumerableProps = ['valueOf', 'isPrototypeOf', 'toString',
-	                      'propertyIsEnumerable', 'hasOwnProperty', 'toLocaleString'];
-
-	  function collectNonEnumProps(obj, keys) {
-	    var nonEnumIdx = nonEnumerableProps.length;
-	    var constructor = obj.constructor;
-	    var proto = (_.isFunction(constructor) && constructor.prototype) || ObjProto;
-
-	    // Constructor is a special case.
-	    var prop = 'constructor';
-	    if (_.has(obj, prop) && !_.contains(keys, prop)) keys.push(prop);
-
-	    while (nonEnumIdx--) {
-	      prop = nonEnumerableProps[nonEnumIdx];
-	      if (prop in obj && obj[prop] !== proto[prop] && !_.contains(keys, prop)) {
-	        keys.push(prop);
-	      }
-	    }
-	  }
-
-	  // Retrieve the names of an object's own properties.
-	  // Delegates to **ECMAScript 5**'s native `Object.keys`
-	  _.keys = function(obj) {
-	    if (!_.isObject(obj)) return [];
-	    if (nativeKeys) return nativeKeys(obj);
-	    var keys = [];
-	    for (var key in obj) if (_.has(obj, key)) keys.push(key);
-	    // Ahem, IE < 9.
-	    if (hasEnumBug) collectNonEnumProps(obj, keys);
-	    return keys;
-	  };
-
-	  // Retrieve all the property names of an object.
-	  _.allKeys = function(obj) {
-	    if (!_.isObject(obj)) return [];
-	    var keys = [];
-	    for (var key in obj) keys.push(key);
-	    // Ahem, IE < 9.
-	    if (hasEnumBug) collectNonEnumProps(obj, keys);
-	    return keys;
-	  };
-
-	  // Retrieve the values of an object's properties.
-	  _.values = function(obj) {
-	    var keys = _.keys(obj);
-	    var length = keys.length;
-	    var values = Array(length);
-	    for (var i = 0; i < length; i++) {
-	      values[i] = obj[keys[i]];
-	    }
-	    return values;
-	  };
-
-	  // Returns the results of applying the iteratee to each element of the object
-	  // In contrast to _.map it returns an object
-	  _.mapObject = function(obj, iteratee, context) {
-	    iteratee = cb(iteratee, context);
-	    var keys =  _.keys(obj),
-	          length = keys.length,
-	          results = {},
-	          currentKey;
-	      for (var index = 0; index < length; index++) {
-	        currentKey = keys[index];
-	        results[currentKey] = iteratee(obj[currentKey], currentKey, obj);
-	      }
-	      return results;
-	  };
-
-	  // Convert an object into a list of `[key, value]` pairs.
-	  _.pairs = function(obj) {
-	    var keys = _.keys(obj);
-	    var length = keys.length;
-	    var pairs = Array(length);
-	    for (var i = 0; i < length; i++) {
-	      pairs[i] = [keys[i], obj[keys[i]]];
-	    }
-	    return pairs;
-	  };
-
-	  // Invert the keys and values of an object. The values must be serializable.
-	  _.invert = function(obj) {
-	    var result = {};
-	    var keys = _.keys(obj);
-	    for (var i = 0, length = keys.length; i < length; i++) {
-	      result[obj[keys[i]]] = keys[i];
-	    }
-	    return result;
-	  };
-
-	  // Return a sorted list of the function names available on the object.
-	  // Aliased as `methods`
-	  _.functions = _.methods = function(obj) {
-	    var names = [];
-	    for (var key in obj) {
-	      if (_.isFunction(obj[key])) names.push(key);
-	    }
-	    return names.sort();
-	  };
-
-	  // Extend a given object with all the properties in passed-in object(s).
-	  _.extend = createAssigner(_.allKeys);
-
-	  // Assigns a given object with all the own properties in the passed-in object(s)
-	  // (https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
-	  _.extendOwn = _.assign = createAssigner(_.keys);
-
-	  // Returns the first key on an object that passes a predicate test
-	  _.findKey = function(obj, predicate, context) {
-	    predicate = cb(predicate, context);
-	    var keys = _.keys(obj), key;
-	    for (var i = 0, length = keys.length; i < length; i++) {
-	      key = keys[i];
-	      if (predicate(obj[key], key, obj)) return key;
-	    }
-	  };
-
-	  // Return a copy of the object only containing the whitelisted properties.
-	  _.pick = function(object, oiteratee, context) {
-	    var result = {}, obj = object, iteratee, keys;
-	    if (obj == null) return result;
-	    if (_.isFunction(oiteratee)) {
-	      keys = _.allKeys(obj);
-	      iteratee = optimizeCb(oiteratee, context);
-	    } else {
-	      keys = flatten(arguments, false, false, 1);
-	      iteratee = function(value, key, obj) { return key in obj; };
-	      obj = Object(obj);
-	    }
-	    for (var i = 0, length = keys.length; i < length; i++) {
-	      var key = keys[i];
-	      var value = obj[key];
-	      if (iteratee(value, key, obj)) result[key] = value;
-	    }
-	    return result;
-	  };
-
-	   // Return a copy of the object without the blacklisted properties.
-	  _.omit = function(obj, iteratee, context) {
-	    if (_.isFunction(iteratee)) {
-	      iteratee = _.negate(iteratee);
-	    } else {
-	      var keys = _.map(flatten(arguments, false, false, 1), String);
-	      iteratee = function(value, key) {
-	        return !_.contains(keys, key);
-	      };
-	    }
-	    return _.pick(obj, iteratee, context);
-	  };
-
-	  // Fill in a given object with default properties.
-	  _.defaults = createAssigner(_.allKeys, true);
-
-	  // Creates an object that inherits from the given prototype object.
-	  // If additional properties are provided then they will be added to the
-	  // created object.
-	  _.create = function(prototype, props) {
-	    var result = baseCreate(prototype);
-	    if (props) _.extendOwn(result, props);
-	    return result;
-	  };
-
-	  // Create a (shallow-cloned) duplicate of an object.
-	  _.clone = function(obj) {
-	    if (!_.isObject(obj)) return obj;
-	    return _.isArray(obj) ? obj.slice() : _.extend({}, obj);
-	  };
-
-	  // Invokes interceptor with the obj, and then returns obj.
-	  // The primary purpose of this method is to "tap into" a method chain, in
-	  // order to perform operations on intermediate results within the chain.
-	  _.tap = function(obj, interceptor) {
-	    interceptor(obj);
-	    return obj;
-	  };
-
-	  // Returns whether an object has a given set of `key:value` pairs.
-	  _.isMatch = function(object, attrs) {
-	    var keys = _.keys(attrs), length = keys.length;
-	    if (object == null) return !length;
-	    var obj = Object(object);
-	    for (var i = 0; i < length; i++) {
-	      var key = keys[i];
-	      if (attrs[key] !== obj[key] || !(key in obj)) return false;
-	    }
-	    return true;
-	  };
-
-
-	  // Internal recursive comparison function for `isEqual`.
-	  var eq = function(a, b, aStack, bStack) {
-	    // Identical objects are equal. `0 === -0`, but they aren't identical.
-	    // See the [Harmony `egal` proposal](http://wiki.ecmascript.org/doku.php?id=harmony:egal).
-	    if (a === b) return a !== 0 || 1 / a === 1 / b;
-	    // A strict comparison is necessary because `null == undefined`.
-	    if (a == null || b == null) return a === b;
-	    // Unwrap any wrapped objects.
-	    if (a instanceof _) a = a._wrapped;
-	    if (b instanceof _) b = b._wrapped;
-	    // Compare `[[Class]]` names.
-	    var className = toString.call(a);
-	    if (className !== toString.call(b)) return false;
-	    switch (className) {
-	      // Strings, numbers, regular expressions, dates, and booleans are compared by value.
-	      case '[object RegExp]':
-	      // RegExps are coerced to strings for comparison (Note: '' + /a/i === '/a/i')
-	      case '[object String]':
-	        // Primitives and their corresponding object wrappers are equivalent; thus, `"5"` is
-	        // equivalent to `new String("5")`.
-	        return '' + a === '' + b;
-	      case '[object Number]':
-	        // `NaN`s are equivalent, but non-reflexive.
-	        // Object(NaN) is equivalent to NaN
-	        if (+a !== +a) return +b !== +b;
-	        // An `egal` comparison is performed for other numeric values.
-	        return +a === 0 ? 1 / +a === 1 / b : +a === +b;
-	      case '[object Date]':
-	      case '[object Boolean]':
-	        // Coerce dates and booleans to numeric primitive values. Dates are compared by their
-	        // millisecond representations. Note that invalid dates with millisecond representations
-	        // of `NaN` are not equivalent.
-	        return +a === +b;
-	    }
-
-	    var areArrays = className === '[object Array]';
-	    if (!areArrays) {
-	      if (typeof a != 'object' || typeof b != 'object') return false;
-
-	      // Objects with different constructors are not equivalent, but `Object`s or `Array`s
-	      // from different frames are.
-	      var aCtor = a.constructor, bCtor = b.constructor;
-	      if (aCtor !== bCtor && !(_.isFunction(aCtor) && aCtor instanceof aCtor &&
-	                               _.isFunction(bCtor) && bCtor instanceof bCtor)
-	                          && ('constructor' in a && 'constructor' in b)) {
-	        return false;
-	      }
-	    }
-	    // Assume equality for cyclic structures. The algorithm for detecting cyclic
-	    // structures is adapted from ES 5.1 section 15.12.3, abstract operation `JO`.
-
-	    // Initializing stack of traversed objects.
-	    // It's done here since we only need them for objects and arrays comparison.
-	    aStack = aStack || [];
-	    bStack = bStack || [];
-	    var length = aStack.length;
-	    while (length--) {
-	      // Linear search. Performance is inversely proportional to the number of
-	      // unique nested structures.
-	      if (aStack[length] === a) return bStack[length] === b;
-	    }
-
-	    // Add the first object to the stack of traversed objects.
-	    aStack.push(a);
-	    bStack.push(b);
-
-	    // Recursively compare objects and arrays.
-	    if (areArrays) {
-	      // Compare array lengths to determine if a deep comparison is necessary.
-	      length = a.length;
-	      if (length !== b.length) return false;
-	      // Deep compare the contents, ignoring non-numeric properties.
-	      while (length--) {
-	        if (!eq(a[length], b[length], aStack, bStack)) return false;
-	      }
-	    } else {
-	      // Deep compare objects.
-	      var keys = _.keys(a), key;
-	      length = keys.length;
-	      // Ensure that both objects contain the same number of properties before comparing deep equality.
-	      if (_.keys(b).length !== length) return false;
-	      while (length--) {
-	        // Deep compare each member
-	        key = keys[length];
-	        if (!(_.has(b, key) && eq(a[key], b[key], aStack, bStack))) return false;
-	      }
-	    }
-	    // Remove the first object from the stack of traversed objects.
-	    aStack.pop();
-	    bStack.pop();
-	    return true;
-	  };
-
-	  // Perform a deep comparison to check if two objects are equal.
-	  _.isEqual = function(a, b) {
-	    return eq(a, b);
-	  };
-
-	  // Is a given array, string, or object empty?
-	  // An "empty" object has no enumerable own-properties.
-	  _.isEmpty = function(obj) {
-	    if (obj == null) return true;
-	    if (isArrayLike(obj) && (_.isArray(obj) || _.isString(obj) || _.isArguments(obj))) return obj.length === 0;
-	    return _.keys(obj).length === 0;
-	  };
-
-	  // Is a given value a DOM element?
-	  _.isElement = function(obj) {
-	    return !!(obj && obj.nodeType === 1);
-	  };
-
-	  // Is a given value an array?
-	  // Delegates to ECMA5's native Array.isArray
-	  _.isArray = nativeIsArray || function(obj) {
-	    return toString.call(obj) === '[object Array]';
-	  };
-
-	  // Is a given variable an object?
-	  _.isObject = function(obj) {
-	    var type = typeof obj;
-	    return type === 'function' || type === 'object' && !!obj;
-	  };
-
-	  // Add some isType methods: isArguments, isFunction, isString, isNumber, isDate, isRegExp, isError.
-	  _.each(['Arguments', 'Function', 'String', 'Number', 'Date', 'RegExp', 'Error'], function(name) {
-	    _['is' + name] = function(obj) {
-	      return toString.call(obj) === '[object ' + name + ']';
-	    };
-	  });
-
-	  // Define a fallback version of the method in browsers (ahem, IE < 9), where
-	  // there isn't any inspectable "Arguments" type.
-	  if (!_.isArguments(arguments)) {
-	    _.isArguments = function(obj) {
-	      return _.has(obj, 'callee');
-	    };
-	  }
-
-	  // Optimize `isFunction` if appropriate. Work around some typeof bugs in old v8,
-	  // IE 11 (#1621), and in Safari 8 (#1929).
-	  if (typeof /./ != 'function' && typeof Int8Array != 'object') {
-	    _.isFunction = function(obj) {
-	      return typeof obj == 'function' || false;
-	    };
-	  }
-
-	  // Is a given object a finite number?
-	  _.isFinite = function(obj) {
-	    return isFinite(obj) && !isNaN(parseFloat(obj));
-	  };
-
-	  // Is the given value `NaN`? (NaN is the only number which does not equal itself).
-	  _.isNaN = function(obj) {
-	    return _.isNumber(obj) && obj !== +obj;
-	  };
-
-	  // Is a given value a boolean?
-	  _.isBoolean = function(obj) {
-	    return obj === true || obj === false || toString.call(obj) === '[object Boolean]';
-	  };
-
-	  // Is a given value equal to null?
-	  _.isNull = function(obj) {
-	    return obj === null;
-	  };
-
-	  // Is a given variable undefined?
-	  _.isUndefined = function(obj) {
-	    return obj === void 0;
-	  };
-
-	  // Shortcut function for checking if an object has a given property directly
-	  // on itself (in other words, not on a prototype).
-	  _.has = function(obj, key) {
-	    return obj != null && hasOwnProperty.call(obj, key);
-	  };
-
-	  // Utility Functions
-	  // -----------------
-
-	  // Run Underscore.js in *noConflict* mode, returning the `_` variable to its
-	  // previous owner. Returns a reference to the Underscore object.
-	  _.noConflict = function() {
-	    root._ = previousUnderscore;
-	    return this;
-	  };
-
-	  // Keep the identity function around for default iteratees.
-	  _.identity = function(value) {
-	    return value;
-	  };
-
-	  // Predicate-generating functions. Often useful outside of Underscore.
-	  _.constant = function(value) {
-	    return function() {
-	      return value;
-	    };
-	  };
-
-	  _.noop = function(){};
-
-	  _.property = property;
-
-	  // Generates a function for a given object that returns a given property.
-	  _.propertyOf = function(obj) {
-	    return obj == null ? function(){} : function(key) {
-	      return obj[key];
-	    };
-	  };
-
-	  // Returns a predicate for checking whether an object has a given set of
-	  // `key:value` pairs.
-	  _.matcher = _.matches = function(attrs) {
-	    attrs = _.extendOwn({}, attrs);
-	    return function(obj) {
-	      return _.isMatch(obj, attrs);
-	    };
-	  };
-
-	  // Run a function **n** times.
-	  _.times = function(n, iteratee, context) {
-	    var accum = Array(Math.max(0, n));
-	    iteratee = optimizeCb(iteratee, context, 1);
-	    for (var i = 0; i < n; i++) accum[i] = iteratee(i);
-	    return accum;
-	  };
-
-	  // Return a random integer between min and max (inclusive).
-	  _.random = function(min, max) {
-	    if (max == null) {
-	      max = min;
-	      min = 0;
-	    }
-	    return min + Math.floor(Math.random() * (max - min + 1));
-	  };
-
-	  // A (possibly faster) way to get the current timestamp as an integer.
-	  _.now = Date.now || function() {
-	    return new Date().getTime();
-	  };
-
-	   // List of HTML entities for escaping.
-	  var escapeMap = {
-	    '&': '&amp;',
-	    '<': '&lt;',
-	    '>': '&gt;',
-	    '"': '&quot;',
-	    "'": '&#x27;',
-	    '`': '&#x60;'
-	  };
-	  var unescapeMap = _.invert(escapeMap);
-
-	  // Functions for escaping and unescaping strings to/from HTML interpolation.
-	  var createEscaper = function(map) {
-	    var escaper = function(match) {
-	      return map[match];
-	    };
-	    // Regexes for identifying a key that needs to be escaped
-	    var source = '(?:' + _.keys(map).join('|') + ')';
-	    var testRegexp = RegExp(source);
-	    var replaceRegexp = RegExp(source, 'g');
-	    return function(string) {
-	      string = string == null ? '' : '' + string;
-	      return testRegexp.test(string) ? string.replace(replaceRegexp, escaper) : string;
-	    };
-	  };
-	  _.escape = createEscaper(escapeMap);
-	  _.unescape = createEscaper(unescapeMap);
-
-	  // If the value of the named `property` is a function then invoke it with the
-	  // `object` as context; otherwise, return it.
-	  _.result = function(object, property, fallback) {
-	    var value = object == null ? void 0 : object[property];
-	    if (value === void 0) {
-	      value = fallback;
-	    }
-	    return _.isFunction(value) ? value.call(object) : value;
-	  };
-
-	  // Generate a unique integer id (unique within the entire client session).
-	  // Useful for temporary DOM ids.
-	  var idCounter = 0;
-	  _.uniqueId = function(prefix) {
-	    var id = ++idCounter + '';
-	    return prefix ? prefix + id : id;
-	  };
-
-	  // By default, Underscore uses ERB-style template delimiters, change the
-	  // following template settings to use alternative delimiters.
-	  _.templateSettings = {
-	    evaluate    : /<%([\s\S]+?)%>/g,
-	    interpolate : /<%=([\s\S]+?)%>/g,
-	    escape      : /<%-([\s\S]+?)%>/g
-	  };
-
-	  // When customizing `templateSettings`, if you don't want to define an
-	  // interpolation, evaluation or escaping regex, we need one that is
-	  // guaranteed not to match.
-	  var noMatch = /(.)^/;
-
-	  // Certain characters need to be escaped so that they can be put into a
-	  // string literal.
-	  var escapes = {
-	    "'":      "'",
-	    '\\':     '\\',
-	    '\r':     'r',
-	    '\n':     'n',
-	    '\u2028': 'u2028',
-	    '\u2029': 'u2029'
-	  };
-
-	  var escaper = /\\|'|\r|\n|\u2028|\u2029/g;
-
-	  var escapeChar = function(match) {
-	    return '\\' + escapes[match];
-	  };
-
-	  // JavaScript micro-templating, similar to John Resig's implementation.
-	  // Underscore templating handles arbitrary delimiters, preserves whitespace,
-	  // and correctly escapes quotes within interpolated code.
-	  // NB: `oldSettings` only exists for backwards compatibility.
-	  _.template = function(text, settings, oldSettings) {
-	    if (!settings && oldSettings) settings = oldSettings;
-	    settings = _.defaults({}, settings, _.templateSettings);
-
-	    // Combine delimiters into one regular expression via alternation.
-	    var matcher = RegExp([
-	      (settings.escape || noMatch).source,
-	      (settings.interpolate || noMatch).source,
-	      (settings.evaluate || noMatch).source
-	    ].join('|') + '|$', 'g');
-
-	    // Compile the template source, escaping string literals appropriately.
-	    var index = 0;
-	    var source = "__p+='";
-	    text.replace(matcher, function(match, escape, interpolate, evaluate, offset) {
-	      source += text.slice(index, offset).replace(escaper, escapeChar);
-	      index = offset + match.length;
-
-	      if (escape) {
-	        source += "'+\n((__t=(" + escape + "))==null?'':_.escape(__t))+\n'";
-	      } else if (interpolate) {
-	        source += "'+\n((__t=(" + interpolate + "))==null?'':__t)+\n'";
-	      } else if (evaluate) {
-	        source += "';\n" + evaluate + "\n__p+='";
-	      }
-
-	      // Adobe VMs need the match returned to produce the correct offest.
-	      return match;
-	    });
-	    source += "';\n";
-
-	    // If a variable is not specified, place data values in local scope.
-	    if (!settings.variable) source = 'with(obj||{}){\n' + source + '}\n';
-
-	    source = "var __t,__p='',__j=Array.prototype.join," +
-	      "print=function(){__p+=__j.call(arguments,'');};\n" +
-	      source + 'return __p;\n';
-
-	    try {
-	      var render = new Function(settings.variable || 'obj', '_', source);
-	    } catch (e) {
-	      e.source = source;
-	      throw e;
-	    }
-
-	    var template = function(data) {
-	      return render.call(this, data, _);
-	    };
-
-	    // Provide the compiled source as a convenience for precompilation.
-	    var argument = settings.variable || 'obj';
-	    template.source = 'function(' + argument + '){\n' + source + '}';
-
-	    return template;
-	  };
-
-	  // Add a "chain" function. Start chaining a wrapped Underscore object.
-	  _.chain = function(obj) {
-	    var instance = _(obj);
-	    instance._chain = true;
-	    return instance;
-	  };
-
-	  // OOP
-	  // ---------------
-	  // If Underscore is called as a function, it returns a wrapped object that
-	  // can be used OO-style. This wrapper holds altered versions of all the
-	  // underscore functions. Wrapped objects may be chained.
-
-	  // Helper function to continue chaining intermediate results.
-	  var result = function(instance, obj) {
-	    return instance._chain ? _(obj).chain() : obj;
-	  };
-
-	  // Add your own custom functions to the Underscore object.
-	  _.mixin = function(obj) {
-	    _.each(_.functions(obj), function(name) {
-	      var func = _[name] = obj[name];
-	      _.prototype[name] = function() {
-	        var args = [this._wrapped];
-	        push.apply(args, arguments);
-	        return result(this, func.apply(_, args));
-	      };
-	    });
-	  };
-
-	  // Add all of the Underscore functions to the wrapper object.
-	  _.mixin(_);
-
-	  // Add all mutator Array functions to the wrapper.
-	  _.each(['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'], function(name) {
-	    var method = ArrayProto[name];
-	    _.prototype[name] = function() {
-	      var obj = this._wrapped;
-	      method.apply(obj, arguments);
-	      if ((name === 'shift' || name === 'splice') && obj.length === 0) delete obj[0];
-	      return result(this, obj);
-	    };
-	  });
-
-	  // Add all accessor Array functions to the wrapper.
-	  _.each(['concat', 'join', 'slice'], function(name) {
-	    var method = ArrayProto[name];
-	    _.prototype[name] = function() {
-	      return result(this, method.apply(this._wrapped, arguments));
-	    };
-	  });
-
-	  // Extracts the result from a wrapped and chained object.
-	  _.prototype.value = function() {
-	    return this._wrapped;
-	  };
-
-	  // Provide unwrapping proxy for some methods used in engine operations
-	  // such as arithmetic and JSON stringification.
-	  _.prototype.valueOf = _.prototype.toJSON = _.prototype.value;
-
-	  _.prototype.toString = function() {
-	    return '' + this._wrapped;
-	  };
-
-	  // AMD registration happens at the end for compatibility with AMD loaders
-	  // that may not enforce next-turn semantics on modules. Even though general
-	  // practice for AMD registration is to be anonymous, underscore registers
-	  // as a named module because, like jQuery, it is a base library that is
-	  // popular enough to be bundled in a third party lib, but not be part of
-	  // an AMD load request. Those cases could generate an error when an
-	  // anonymous define() is called outside of a loader request.
-	  if (true) {
-	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function() {
-	      return _;
-	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  }
-	}.call(this));
-
-
-/***/ },
-/* 529 */,
-/* 530 */,
-/* 531 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(AFRAME) {/**
-	 * Text component for A-Frame.
-	 */
-	__webpack_require__(532);
-	__webpack_require__(533);
-	__webpack_require__(534);
-
-	AFRAME.registerComponent('text', {
-	  schema: {
-	    bevelEnabled: { default: false },
-	    bevelSize: { default: 8, min: 0 },
-	    bevelThickness: { default: 12, min: 0 },
-	    curveSegments: { default: 12, min: 0 },
-	    font: { default: 'helvetiker' },
-	    height: { default: 0.05, min: 0 },
-	    size: { default: 0.5, min: 0 },
-	    style: { default: 'normal', oneOf: [ 'normal', 'italics' ] },
-	    text: { default: '' },
-	    weight: { default: 'normal', oneOf: [ 'normal', 'bold' ] }
-	  },
-
-	  /**
-	   * Called when component is attached and when component data changes.
-	   * Generally modifies the entity based on the data.
-	   */
-	  update: function (oldData) {
-	    this.el.getOrCreateObject3D('mesh', THREE.Mesh).geometry = getTextGeometry(this.data);
-	  }
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
 	});
 
-	function getTextGeometry (data) {
-	  return new THREE.TextGeometry(data.text, data);
-	}
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(455)))
+	var _aframeExtras = __webpack_require__(475);
+
+	var _aframeExtras2 = _interopRequireDefault(_aframeExtras);
+
+	var _aframeReact = __webpack_require__(460);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 HerdOfHorses.js
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Generates a herd of horses.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
+	var HerdOfHorses = function (_React$Component) {
+	  _inherits(HerdOfHorses, _React$Component);
+
+	  function HerdOfHorses(props) {
+	    _classCallCheck(this, HerdOfHorses);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(HerdOfHorses).call(this, props));
+	  }
+
+	  _createClass(HerdOfHorses, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      _aframeExtras2.default.registerAll();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var horseLoader = {
+	        loader: 'json',
+	        animation: 'default',
+	        src: 'url(models/horse.js)'
+	      };
+	      return React.createElement(
+	        _aframeReact.Entity,
+	        this.props,
+	        this.props.children,
+	        React.createElement(
+	          _aframeReact.Entity,
+	          null,
+	          React.createElement(_aframeReact.Entity, { 'three-model': horseLoader,
+	            position: [0, 0, 0] }),
+	          React.createElement(_aframeReact.Entity, { 'three-model': horseLoader,
+	            position: [100, 0, -100] }),
+	          React.createElement(_aframeReact.Entity, { 'three-model': horseLoader,
+	            position: [-100, 0, -80] })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return HerdOfHorses;
+	}(React.Component);
+
+	exports.default = HerdOfHorses;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 532 */
-/***/ function(module, exports) {
+/* 525 */
+/***/ function(module, exports, __webpack_require__) {
 
-	/**
-	 * @author zz85 / http://www.lab4games.net/zz85/blog
-	 * @author alteredq / http://alteredqualia.com/
-	 *
-	 * For Text operations in three.js (See TextGeometry)
-	 *
-	 * It uses techniques used in:
-	 *
-	 *	Triangulation ported from AS3
-	 *		Simple Polygon Triangulation
-	 *		http://actionsnippet.com/?p=1462
-	 *
-	 * 	A Method to triangulate shapes with holes
-	 *		http://www.sakri.net/blog/2009/06/12/an-approach-to-triangulating-polygons-with-holes/
-	 *
-	 */
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
 
-	THREE.FontUtils = {
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 
-		faces: {},
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-		// Just for now. face[weight][style]
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-		face: 'helvetiker',
-		weight: 'normal',
-		style: 'normal',
-		size: 150,
-		divisions: 10,
+	__webpack_require__(464);
 
-		getFace: function () {
+	var _aframeExtras = __webpack_require__(475);
 
-			try {
+	var _aframeExtras2 = _interopRequireDefault(_aframeExtras);
 
-				return this.faces[ this.face.toLowerCase() ][ this.weight ][ this.style ];
+	var _aframeReact = __webpack_require__(460);
 
-			} catch ( e ) {
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-				throw "The font " + this.face + " with " + this.weight + " weight and " + this.style + " style is missing."
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-			}
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-		},
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Butterflies.js
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Adds a bunch of stupid butterflies.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 IMPORTANT - BUTTERFLIES ARE WHITE.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
 
-		loadFace: function ( data ) {
+	var Butterflies = function (_React$Component) {
+	  _inherits(Butterflies, _React$Component);
 
-			var family = data.familyName.toLowerCase();
+	  function Butterflies(props) {
+	    _classCallCheck(this, Butterflies);
 
-			var ThreeFont = this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Butterflies).call(this, props));
+	  }
 
-			ThreeFont.faces[ family ] = ThreeFont.faces[ family ] || {};
+	  _createClass(Butterflies, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      _aframeExtras2.default.registerAll();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var butterflyLoader = {
+	        loader: 'json',
+	        animation: 'default',
+	        src: 'url(models/butterfly.js)'
+	      };
 
-			ThreeFont.faces[ family ][ data.cssFontWeight ] = ThreeFont.faces[ family ][ data.cssFontWeight ] || {};
-			ThreeFont.faces[ family ][ data.cssFontWeight ][ data.cssFontStyle ] = data;
+	      var butterflyHolder = [];
+	      for (var i = 0; i < 20; i++) {
+	        butterflyHolder.push(React.createElement(_aframeReact.Entity, { 'three-model': butterflyLoader }));
+	      }
 
-			ThreeFont.faces[ family ][ data.cssFontWeight ][ data.cssFontStyle ] = data;
+	      return React.createElement(
+	        _aframeReact.Entity,
+	        _extends({ layout: {
+	            type: 'dodecahedron',
+	            radius: 75
+	          } }, this.props),
+	        this.props.children,
+	        butterflyHolder
+	      );
+	    }
+	  }]);
 
-			return data;
+	  return Butterflies;
+	}(React.Component);
 
-		},
-
-		drawText: function ( text ) {
-
-			// RenderText
-
-			var i,
-				face = this.getFace(),
-				scale = this.size / face.resolution,
-				offset = 0,
-				chars = String( text ).split( '' ),
-				length = chars.length;
-
-			var fontPaths = [];
-
-			for ( i = 0; i < length; i ++ ) {
-
-				var path = new THREE.Path();
-
-				var ret = this.extractGlyphPoints( chars[ i ], face, scale, offset, path );
-				offset += ret.offset;
-
-				fontPaths.push( ret.path );
-
-			}
-
-			// get the width
-
-			var width = offset / 2;
-			//
-			// for ( p = 0; p < allPts.length; p++ ) {
-			//
-			// 	allPts[ p ].x -= width;
-			//
-			// }
-
-			//var extract = this.extractPoints( allPts, characterPts );
-			//extract.contour = allPts;
-
-			//extract.paths = fontPaths;
-			//extract.offset = width;
-
-			return { paths: fontPaths, offset: width };
-
-		},
-
-
-
-
-		extractGlyphPoints: function ( c, face, scale, offset, path ) {
-
-			var pts = [];
-
-			var b2 = THREE.ShapeUtils.b2;
-			var b3 = THREE.ShapeUtils.b3;
-
-			var i, i2, divisions,
-				outline, action, length,
-				scaleX, scaleY,
-				x, y, cpx, cpy, cpx0, cpy0, cpx1, cpy1, cpx2, cpy2,
-				laste,
-				glyph = face.glyphs[ c ] || face.glyphs[ '?' ];
-
-			if ( ! glyph ) return;
-
-			if ( glyph.o ) {
-
-				outline = glyph._cachedOutline || ( glyph._cachedOutline = glyph.o.split( ' ' ) );
-				length = outline.length;
-
-				scaleX = scale;
-				scaleY = scale;
-
-				for ( i = 0; i < length; ) {
-
-					action = outline[ i ++ ];
-
-					//console.log( action );
-
-					switch ( action ) {
-
-					case 'm':
-
-						// Move To
-
-						x = outline[ i ++ ] * scaleX + offset;
-						y = outline[ i ++ ] * scaleY;
-
-						path.moveTo( x, y );
-						break;
-
-					case 'l':
-
-						// Line To
-
-						x = outline[ i ++ ] * scaleX + offset;
-						y = outline[ i ++ ] * scaleY;
-						path.lineTo( x, y );
-						break;
-
-					case 'q':
-
-						// QuadraticCurveTo
-
-						cpx  = outline[ i ++ ] * scaleX + offset;
-						cpy  = outline[ i ++ ] * scaleY;
-						cpx1 = outline[ i ++ ] * scaleX + offset;
-						cpy1 = outline[ i ++ ] * scaleY;
-
-						path.quadraticCurveTo( cpx1, cpy1, cpx, cpy );
-
-						laste = pts[ pts.length - 1 ];
-
-						if ( laste ) {
-
-							cpx0 = laste.x;
-							cpy0 = laste.y;
-
-							for ( i2 = 1, divisions = this.divisions; i2 <= divisions; i2 ++ ) {
-
-								var t = i2 / divisions;
-								b2( t, cpx0, cpx1, cpx );
-								b2( t, cpy0, cpy1, cpy );
-
-							}
-
-						}
-
-						break;
-
-					case 'b':
-
-						// Cubic Bezier Curve
-
-						cpx  = outline[ i ++ ] * scaleX + offset;
-						cpy  = outline[ i ++ ] * scaleY;
-						cpx1 = outline[ i ++ ] * scaleX + offset;
-						cpy1 = outline[ i ++ ] * scaleY;
-						cpx2 = outline[ i ++ ] * scaleX + offset;
-						cpy2 = outline[ i ++ ] * scaleY;
-
-						path.bezierCurveTo( cpx1, cpy1, cpx2, cpy2, cpx, cpy );
-
-						laste = pts[ pts.length - 1 ];
-
-						if ( laste ) {
-
-							cpx0 = laste.x;
-							cpy0 = laste.y;
-
-							for ( i2 = 1, divisions = this.divisions; i2 <= divisions; i2 ++ ) {
-
-								var t = i2 / divisions;
-								b3( t, cpx0, cpx1, cpx2, cpx );
-								b3( t, cpy0, cpy1, cpy2, cpy );
-
-							}
-
-						}
-
-						break;
-
-					}
-
-				}
-
-			}
-
-
-
-			return { offset: glyph.ha * scale, path: path };
-
-		}
-
-	};
-
-
-	THREE.FontUtils.generateShapes = function ( text, parameters ) {
-
-		// Parameters
-
-		parameters = parameters || {};
-
-		var size = parameters.size !== undefined ? parameters.size : 100;
-		var curveSegments = parameters.curveSegments !== undefined ? parameters.curveSegments : 4;
-
-		var font = parameters.font !== undefined ? parameters.font : 'helvetiker';
-		var weight = parameters.weight !== undefined ? parameters.weight : 'normal';
-		var style = parameters.style !== undefined ? parameters.style : 'normal';
-
-		THREE.FontUtils.size = size;
-		THREE.FontUtils.divisions = curveSegments;
-
-		THREE.FontUtils.face = font;
-		THREE.FontUtils.weight = weight;
-		THREE.FontUtils.style = style;
-
-		// Get a Font data json object
-
-		var data = THREE.FontUtils.drawText( text );
-
-		var paths = data.paths;
-		var shapes = [];
-
-		for ( var p = 0, pl = paths.length; p < pl; p ++ ) {
-
-			Array.prototype.push.apply( shapes, paths[ p ].toShapes() );
-
-		}
-
-		return shapes;
-
-	};
-
-	// To use the typeface.js face files, hook up the API
-
-	THREE.typeface_js = { faces: THREE.FontUtils.faces, loadFace: THREE.FontUtils.loadFace };
-	if ( typeof self !== 'undefined' ) self._typeface_js = THREE.typeface_js;
-
+	exports.default = Butterflies;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 533 */
-/***/ function(module, exports) {
+/* 526 */
+/***/ function(module, exports, __webpack_require__) {
 
-	/**
-	 * @author zz85 / http://www.lab4games.net/zz85/blog
-	 * @author alteredq / http://alteredqualia.com/
-	 *
-	 * For creating 3D text geometry in three.js
-	 *
-	 * Text = 3D Text
-	 *
-	 * parameters = {
-	 *  size: 			<float>, 	// size of the text
-	 *  height: 		<float>, 	// thickness to extrude text
-	 *  curveSegments: 	<int>,		// number of points on the curves
-	 *
-	 *  font: 			<string>,		// font name
-	 *  weight: 		<string>,		// font weight (normal, bold)
-	 *  style: 			<string>,		// font style  (normal, italics)
-	 *
-	 *  bevelEnabled:	<bool>,			// turn on bevel
-	 *  bevelThickness: <float>, 		// how deep into text bevel goes
-	 *  bevelSize:		<float>, 		// how far from text outline is bevel
-	 *  }
-	 *
-	 */
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
 
-	/*	Usage Examples
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 
-		// TextGeometry wrapper
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-		var text3d = new TextGeometry( text, options );
+	var _aframeExtras = __webpack_require__(475);
 
-		// Complete manner
+	var _aframeExtras2 = _interopRequireDefault(_aframeExtras);
 
-		var textShapes = THREE.FontUtils.generateShapes( text, options );
-		var text3d = new ExtrudeGeometry( textShapes, options );
+	var _aframeReact = __webpack_require__(460);
 
-	*/
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	THREE.TextGeometry = function ( text, parameters ) {
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-		parameters = parameters || {};
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Eagle.js
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Adds a stupid eagle.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
 
-		var textShapes = THREE.FontUtils.generateShapes( text, parameters );
+	var Eagle = function (_React$Component) {
+	  _inherits(Eagle, _React$Component);
 
-		// translate parameters to ExtrudeGeometry API
+	  function Eagle(props) {
+	    _classCallCheck(this, Eagle);
 
-		parameters.amount = parameters.height !== undefined ? parameters.height : 50;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Eagle).call(this, props));
+	  }
 
-		// defaults
+	  _createClass(Eagle, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      _aframeExtras2.default.registerAll();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
 
-		if ( parameters.bevelThickness === undefined ) parameters.bevelThickness = 10;
-		if ( parameters.bevelSize === undefined ) parameters.bevelSize = 8;
-		if ( parameters.bevelEnabled === undefined ) parameters.bevelEnabled = false;
+	      var eagleLoader = {
+	        loader: 'json',
+	        animation: 'default',
+	        src: 'url(models/eagle.js)'
+	      };
 
-		THREE.ExtrudeGeometry.call( this, textShapes, parameters );
+	      return React.createElement(
+	        _aframeReact.Entity,
+	        this.props,
+	        React.createElement(_aframeReact.Entity, { 'three-model': eagleLoader,
+	          position: [0, 0, 0] }),
+	        this.props.children
+	      );
+	    }
+	  }]);
 
-		this.type = 'TextGeometry';
+	  return Eagle;
+	}(React.Component);
 
-	};
-
-	THREE.TextGeometry.prototype = Object.create( THREE.ExtrudeGeometry.prototype );
-	THREE.TextGeometry.prototype.constructor = THREE.TextGeometry;
-
-
-/***/ },
-/* 534 */
-/***/ function(module, exports) {
-
-	if (_typeface_js && _typeface_js.loadFace) _typeface_js.loadFace({"glyphs":{"ο":{"x_min":0,"x_max":712,"ha":815,"o":"m 356 -25 q 96 88 192 -25 q 0 368 0 201 q 92 642 0 533 q 356 761 192 761 q 617 644 517 761 q 712 368 712 533 q 619 91 712 201 q 356 -25 520 -25 m 356 85 q 527 175 465 85 q 583 369 583 255 q 528 562 583 484 q 356 651 466 651 q 189 560 250 651 q 135 369 135 481 q 187 177 135 257 q 356 85 250 85 "},"S":{"x_min":0,"x_max":788,"ha":890,"o":"m 788 291 q 662 54 788 144 q 397 -26 550 -26 q 116 68 226 -26 q 0 337 0 168 l 131 337 q 200 152 131 220 q 384 85 269 85 q 557 129 479 85 q 650 270 650 183 q 490 429 650 379 q 194 513 341 470 q 33 739 33 584 q 142 964 33 881 q 388 1041 242 1041 q 644 957 543 1041 q 756 716 756 867 l 625 716 q 561 874 625 816 q 395 933 497 933 q 243 891 309 933 q 164 759 164 841 q 325 609 164 656 q 625 526 475 568 q 788 291 788 454 "},"¦":{"x_min":343,"x_max":449,"ha":792,"o":"m 449 462 l 343 462 l 343 986 l 449 986 l 449 462 m 449 -242 l 343 -242 l 343 280 l 449 280 l 449 -242 "},"/":{"x_min":183.25,"x_max":608.328125,"ha":792,"o":"m 608 1041 l 266 -129 l 183 -129 l 520 1041 l 608 1041 "},"Τ":{"x_min":-0.4375,"x_max":777.453125,"ha":839,"o":"m 777 893 l 458 893 l 458 0 l 319 0 l 319 892 l 0 892 l 0 1013 l 777 1013 l 777 893 "},"y":{"x_min":0,"x_max":684.78125,"ha":771,"o":"m 684 738 l 388 -83 q 311 -216 356 -167 q 173 -279 252 -279 q 97 -266 133 -279 l 97 -149 q 132 -155 109 -151 q 168 -160 155 -160 q 240 -114 213 -160 q 274 -26 248 -98 l 0 738 l 137 737 l 341 139 l 548 737 l 684 738 "},"Π":{"x_min":0,"x_max":803,"ha":917,"o":"m 803 0 l 667 0 l 667 886 l 140 886 l 140 0 l 0 0 l 0 1012 l 803 1012 l 803 0 "},"ΐ":{"x_min":-111,"x_max":339,"ha":361,"o":"m 339 800 l 229 800 l 229 925 l 339 925 l 339 800 m -1 800 l -111 800 l -111 925 l -1 925 l -1 800 m 284 3 q 233 -10 258 -5 q 182 -15 207 -15 q 85 26 119 -15 q 42 200 42 79 l 42 737 l 167 737 l 168 215 q 172 141 168 157 q 226 101 183 101 q 248 103 239 101 q 284 112 257 104 l 284 3 m 302 1040 l 113 819 l 30 819 l 165 1040 l 302 1040 "},"g":{"x_min":0,"x_max":686,"ha":838,"o":"m 686 34 q 586 -213 686 -121 q 331 -306 487 -306 q 131 -252 216 -306 q 31 -84 31 -190 l 155 -84 q 228 -174 166 -138 q 345 -207 284 -207 q 514 -109 454 -207 q 564 89 564 -27 q 461 6 521 36 q 335 -23 401 -23 q 88 100 184 -23 q 0 370 0 215 q 87 634 0 522 q 330 758 183 758 q 457 728 398 758 q 564 644 515 699 l 564 737 l 686 737 l 686 34 m 582 367 q 529 560 582 481 q 358 652 468 652 q 189 561 250 652 q 135 369 135 482 q 189 176 135 255 q 361 85 251 85 q 529 176 468 85 q 582 367 582 255 "},"²":{"x_min":0,"x_max":442,"ha":539,"o":"m 442 383 l 0 383 q 91 566 0 492 q 260 668 176 617 q 354 798 354 727 q 315 875 354 845 q 227 905 277 905 q 136 869 173 905 q 99 761 99 833 l 14 761 q 82 922 14 864 q 232 974 141 974 q 379 926 316 974 q 442 797 442 878 q 351 635 442 704 q 183 539 321 611 q 92 455 92 491 l 442 455 l 442 383 "},"–":{"x_min":0,"x_max":705.5625,"ha":803,"o":"m 705 334 l 0 334 l 0 410 l 705 410 l 705 334 "},"Κ":{"x_min":0,"x_max":819.5625,"ha":893,"o":"m 819 0 l 650 0 l 294 509 l 139 356 l 139 0 l 0 0 l 0 1013 l 139 1013 l 139 526 l 626 1013 l 809 1013 l 395 600 l 819 0 "},"ƒ":{"x_min":-46.265625,"x_max":392,"ha":513,"o":"m 392 651 l 259 651 l 79 -279 l -46 -278 l 134 651 l 14 651 l 14 751 l 135 751 q 151 948 135 900 q 304 1041 185 1041 q 334 1040 319 1041 q 392 1034 348 1039 l 392 922 q 337 931 360 931 q 271 883 287 931 q 260 793 260 853 l 260 751 l 392 751 l 392 651 "},"e":{"x_min":0,"x_max":714,"ha":813,"o":"m 714 326 l 140 326 q 200 157 140 227 q 359 87 260 87 q 488 130 431 87 q 561 245 545 174 l 697 245 q 577 48 670 123 q 358 -26 484 -26 q 97 85 195 -26 q 0 363 0 197 q 94 642 0 529 q 358 765 195 765 q 626 627 529 765 q 714 326 714 503 m 576 429 q 507 583 564 522 q 355 650 445 650 q 206 583 266 650 q 140 429 152 522 l 576 429 "},"ό":{"x_min":0,"x_max":712,"ha":815,"o":"m 356 -25 q 94 91 194 -25 q 0 368 0 202 q 92 642 0 533 q 356 761 192 761 q 617 644 517 761 q 712 368 712 533 q 619 91 712 201 q 356 -25 520 -25 m 356 85 q 527 175 465 85 q 583 369 583 255 q 528 562 583 484 q 356 651 466 651 q 189 560 250 651 q 135 369 135 481 q 187 177 135 257 q 356 85 250 85 m 576 1040 l 387 819 l 303 819 l 438 1040 l 576 1040 "},"J":{"x_min":0,"x_max":588,"ha":699,"o":"m 588 279 q 287 -26 588 -26 q 58 73 126 -26 q 0 327 0 158 l 133 327 q 160 172 133 227 q 288 96 198 96 q 426 171 391 96 q 449 336 449 219 l 449 1013 l 588 1013 l 588 279 "},"»":{"x_min":-1,"x_max":503,"ha":601,"o":"m 503 302 l 280 136 l 281 256 l 429 373 l 281 486 l 280 608 l 503 440 l 503 302 m 221 302 l 0 136 l 0 255 l 145 372 l 0 486 l -1 608 l 221 440 l 221 302 "},"©":{"x_min":-3,"x_max":1008,"ha":1106,"o":"m 502 -7 q 123 151 263 -7 q -3 501 -3 294 q 123 851 -3 706 q 502 1011 263 1011 q 881 851 739 1011 q 1008 501 1008 708 q 883 151 1008 292 q 502 -7 744 -7 m 502 60 q 830 197 709 60 q 940 501 940 322 q 831 805 940 681 q 502 944 709 944 q 174 805 296 944 q 65 501 65 680 q 173 197 65 320 q 502 60 294 60 m 741 394 q 661 246 731 302 q 496 190 591 190 q 294 285 369 190 q 228 497 228 370 q 295 714 228 625 q 499 813 370 813 q 656 762 588 813 q 733 625 724 711 l 634 625 q 589 704 629 673 q 498 735 550 735 q 377 666 421 735 q 334 504 334 597 q 374 340 334 408 q 490 272 415 272 q 589 304 549 272 q 638 394 628 337 l 741 394 "},"ώ":{"x_min":0,"x_max":922,"ha":1030,"o":"m 687 1040 l 498 819 l 415 819 l 549 1040 l 687 1040 m 922 339 q 856 97 922 203 q 650 -26 780 -26 q 538 9 587 -26 q 461 103 489 44 q 387 12 436 46 q 277 -22 339 -22 q 69 97 147 -22 q 0 338 0 202 q 45 551 0 444 q 161 737 84 643 l 302 737 q 175 552 219 647 q 124 336 124 446 q 155 179 124 248 q 275 88 197 88 q 375 163 341 88 q 400 294 400 219 l 400 572 l 524 572 l 524 294 q 561 135 524 192 q 643 88 591 88 q 762 182 719 88 q 797 341 797 257 q 745 555 797 450 q 619 737 705 637 l 760 737 q 874 551 835 640 q 922 339 922 444 "},"^":{"x_min":193.0625,"x_max":598.609375,"ha":792,"o":"m 598 772 l 515 772 l 395 931 l 277 772 l 193 772 l 326 1013 l 462 1013 l 598 772 "},"«":{"x_min":0,"x_max":507.203125,"ha":604,"o":"m 506 136 l 284 302 l 284 440 l 506 608 l 507 485 l 360 371 l 506 255 l 506 136 m 222 136 l 0 302 l 0 440 l 222 608 l 221 486 l 73 373 l 222 256 l 222 136 "},"D":{"x_min":0,"x_max":828,"ha":935,"o":"m 389 1013 q 714 867 593 1013 q 828 521 828 729 q 712 161 828 309 q 382 0 587 0 l 0 0 l 0 1013 l 389 1013 m 376 124 q 607 247 523 124 q 681 510 681 355 q 607 771 681 662 q 376 896 522 896 l 139 896 l 139 124 l 376 124 "},"∙":{"x_min":0,"x_max":142,"ha":239,"o":"m 142 585 l 0 585 l 0 738 l 142 738 l 142 585 "},"ÿ":{"x_min":0,"x_max":47,"ha":125,"o":"m 47 3 q 37 -7 47 -7 q 28 0 30 -7 q 39 -4 32 -4 q 45 3 45 -1 l 37 0 q 28 9 28 0 q 39 19 28 19 l 47 16 l 47 19 l 47 3 m 37 1 q 44 8 44 1 q 37 16 44 16 q 30 8 30 16 q 37 1 30 1 m 26 1 l 23 22 l 14 0 l 3 22 l 3 3 l 0 25 l 13 1 l 22 25 l 26 1 "},"w":{"x_min":0,"x_max":1009.71875,"ha":1100,"o":"m 1009 738 l 783 0 l 658 0 l 501 567 l 345 0 l 222 0 l 0 738 l 130 738 l 284 174 l 432 737 l 576 738 l 721 173 l 881 737 l 1009 738 "},"$":{"x_min":0,"x_max":700,"ha":793,"o":"m 664 717 l 542 717 q 490 825 531 785 q 381 872 450 865 l 381 551 q 620 446 540 522 q 700 241 700 370 q 618 45 700 116 q 381 -25 536 -25 l 381 -152 l 307 -152 l 307 -25 q 81 62 162 -25 q 0 297 0 149 l 124 297 q 169 146 124 204 q 307 81 215 89 l 307 441 q 80 536 148 469 q 13 725 13 603 q 96 910 13 839 q 307 982 180 982 l 307 1077 l 381 1077 l 381 982 q 574 917 494 982 q 664 717 664 845 m 307 565 l 307 872 q 187 831 233 872 q 142 724 142 791 q 180 618 142 656 q 307 565 218 580 m 381 76 q 562 237 562 96 q 517 361 562 313 q 381 423 472 409 l 381 76 "},"\\":{"x_min":-0.015625,"x_max":425.0625,"ha":522,"o":"m 425 -129 l 337 -129 l 0 1041 l 83 1041 l 425 -129 "},"µ":{"x_min":0,"x_max":697.21875,"ha":747,"o":"m 697 -4 q 629 -14 658 -14 q 498 97 513 -14 q 422 9 470 41 q 313 -23 374 -23 q 207 4 258 -23 q 119 81 156 32 l 119 -278 l 0 -278 l 0 738 l 124 738 l 124 343 q 165 173 124 246 q 308 83 216 83 q 452 178 402 83 q 493 359 493 255 l 493 738 l 617 738 l 617 214 q 623 136 617 160 q 673 92 637 92 q 697 96 684 92 l 697 -4 "},"Ι":{"x_min":42,"x_max":181,"ha":297,"o":"m 181 0 l 42 0 l 42 1013 l 181 1013 l 181 0 "},"Ύ":{"x_min":0,"x_max":1144.5,"ha":1214,"o":"m 1144 1012 l 807 416 l 807 0 l 667 0 l 667 416 l 325 1012 l 465 1012 l 736 533 l 1004 1012 l 1144 1012 m 277 1040 l 83 799 l 0 799 l 140 1040 l 277 1040 "},"’":{"x_min":0,"x_max":139,"ha":236,"o":"m 139 851 q 102 737 139 784 q 0 669 65 690 l 0 734 q 59 787 42 741 q 72 873 72 821 l 0 873 l 0 1013 l 139 1013 l 139 851 "},"Ν":{"x_min":0,"x_max":801,"ha":915,"o":"m 801 0 l 651 0 l 131 822 l 131 0 l 0 0 l 0 1013 l 151 1013 l 670 191 l 670 1013 l 801 1013 l 801 0 "},"-":{"x_min":8.71875,"x_max":350.390625,"ha":478,"o":"m 350 317 l 8 317 l 8 428 l 350 428 l 350 317 "},"Q":{"x_min":0,"x_max":968,"ha":1072,"o":"m 954 5 l 887 -79 l 744 35 q 622 -11 687 2 q 483 -26 556 -26 q 127 130 262 -26 q 0 504 0 279 q 127 880 0 728 q 484 1041 262 1041 q 841 884 708 1041 q 968 507 968 735 q 933 293 968 398 q 832 104 899 188 l 954 5 m 723 191 q 802 330 777 248 q 828 499 828 412 q 744 790 828 673 q 483 922 650 922 q 228 791 322 922 q 142 505 142 673 q 227 221 142 337 q 487 91 323 91 q 632 123 566 91 l 520 215 l 587 301 l 723 191 "},"ς":{"x_min":1,"x_max":676.28125,"ha":740,"o":"m 676 460 l 551 460 q 498 595 542 546 q 365 651 448 651 q 199 578 263 651 q 136 401 136 505 q 266 178 136 241 q 508 106 387 142 q 640 -50 640 62 q 625 -158 640 -105 q 583 -278 611 -211 l 465 -278 q 498 -182 490 -211 q 515 -80 515 -126 q 381 12 515 -15 q 134 91 197 51 q 1 388 1 179 q 100 651 1 542 q 354 761 199 761 q 587 680 498 761 q 676 460 676 599 "},"M":{"x_min":0,"x_max":954,"ha":1067,"o":"m 954 0 l 819 0 l 819 869 l 537 0 l 405 0 l 128 866 l 128 0 l 0 0 l 0 1013 l 200 1013 l 472 160 l 757 1013 l 954 1013 l 954 0 "},"Ψ":{"x_min":0,"x_max":1006,"ha":1094,"o":"m 1006 678 q 914 319 1006 429 q 571 200 814 200 l 571 0 l 433 0 l 433 200 q 92 319 194 200 q 0 678 0 429 l 0 1013 l 139 1013 l 139 679 q 191 417 139 492 q 433 326 255 326 l 433 1013 l 571 1013 l 571 326 l 580 326 q 813 423 747 326 q 868 679 868 502 l 868 1013 l 1006 1013 l 1006 678 "},"C":{"x_min":0,"x_max":886,"ha":944,"o":"m 886 379 q 760 87 886 201 q 455 -26 634 -26 q 112 136 236 -26 q 0 509 0 283 q 118 882 0 737 q 469 1041 245 1041 q 748 955 630 1041 q 879 708 879 859 l 745 708 q 649 862 724 805 q 473 920 573 920 q 219 791 312 920 q 136 509 136 675 q 217 229 136 344 q 470 99 311 99 q 672 179 591 99 q 753 379 753 259 l 886 379 "},"!":{"x_min":0,"x_max":138,"ha":236,"o":"m 138 684 q 116 409 138 629 q 105 244 105 299 l 33 244 q 16 465 33 313 q 0 684 0 616 l 0 1013 l 138 1013 l 138 684 m 138 0 l 0 0 l 0 151 l 138 151 l 138 0 "},"{":{"x_min":0,"x_max":480.5625,"ha":578,"o":"m 480 -286 q 237 -213 303 -286 q 187 -45 187 -159 q 194 48 187 -15 q 201 141 201 112 q 164 264 201 225 q 0 314 118 314 l 0 417 q 164 471 119 417 q 201 605 201 514 q 199 665 201 644 q 193 772 193 769 q 241 941 193 887 q 480 1015 308 1015 l 480 915 q 336 866 375 915 q 306 742 306 828 q 310 662 306 717 q 314 577 314 606 q 288 452 314 500 q 176 365 256 391 q 289 275 257 337 q 314 143 314 226 q 313 84 314 107 q 310 -11 310 -5 q 339 -131 310 -94 q 480 -182 377 -182 l 480 -286 "},"X":{"x_min":-0.015625,"x_max":854.15625,"ha":940,"o":"m 854 0 l 683 0 l 423 409 l 166 0 l 0 0 l 347 519 l 18 1013 l 186 1013 l 428 637 l 675 1013 l 836 1013 l 504 520 l 854 0 "},"#":{"x_min":0,"x_max":963.890625,"ha":1061,"o":"m 963 690 l 927 590 l 719 590 l 655 410 l 876 410 l 840 310 l 618 310 l 508 -3 l 393 -2 l 506 309 l 329 310 l 215 -2 l 102 -3 l 212 310 l 0 310 l 36 410 l 248 409 l 312 590 l 86 590 l 120 690 l 347 690 l 459 1006 l 573 1006 l 462 690 l 640 690 l 751 1006 l 865 1006 l 754 690 l 963 690 m 606 590 l 425 590 l 362 410 l 543 410 l 606 590 "},"ι":{"x_min":42,"x_max":284,"ha":361,"o":"m 284 3 q 233 -10 258 -5 q 182 -15 207 -15 q 85 26 119 -15 q 42 200 42 79 l 42 738 l 167 738 l 168 215 q 172 141 168 157 q 226 101 183 101 q 248 103 239 101 q 284 112 257 104 l 284 3 "},"Ά":{"x_min":0,"x_max":906.953125,"ha":982,"o":"m 283 1040 l 88 799 l 5 799 l 145 1040 l 283 1040 m 906 0 l 756 0 l 650 303 l 251 303 l 143 0 l 0 0 l 376 1012 l 529 1012 l 906 0 m 609 421 l 452 866 l 293 421 l 609 421 "},")":{"x_min":0,"x_max":318,"ha":415,"o":"m 318 365 q 257 25 318 191 q 87 -290 197 -141 l 0 -290 q 140 21 93 -128 q 193 360 193 189 q 141 704 193 537 q 0 1024 97 850 l 87 1024 q 257 706 197 871 q 318 365 318 542 "},"ε":{"x_min":0,"x_max":634.71875,"ha":714,"o":"m 634 234 q 527 38 634 110 q 300 -25 433 -25 q 98 29 183 -25 q 0 204 0 93 q 37 314 0 265 q 128 390 67 353 q 56 460 82 419 q 26 555 26 505 q 114 712 26 654 q 295 763 191 763 q 499 700 416 763 q 589 515 589 631 l 478 515 q 419 618 464 580 q 307 657 374 657 q 207 630 253 657 q 151 547 151 598 q 238 445 151 469 q 389 434 280 434 l 389 331 l 349 331 q 206 315 255 331 q 125 210 125 287 q 183 107 125 145 q 302 76 233 76 q 436 117 379 76 q 509 234 493 159 l 634 234 "},"Δ":{"x_min":0,"x_max":952.78125,"ha":1028,"o":"m 952 0 l 0 0 l 400 1013 l 551 1013 l 952 0 m 762 124 l 476 867 l 187 124 l 762 124 "},"}":{"x_min":0,"x_max":481,"ha":578,"o":"m 481 314 q 318 262 364 314 q 282 136 282 222 q 284 65 282 97 q 293 -58 293 -48 q 241 -217 293 -166 q 0 -286 174 -286 l 0 -182 q 143 -130 105 -182 q 171 -2 171 -93 q 168 81 171 22 q 165 144 165 140 q 188 275 165 229 q 306 365 220 339 q 191 455 224 391 q 165 588 165 505 q 168 681 165 624 q 171 742 171 737 q 141 865 171 827 q 0 915 102 915 l 0 1015 q 243 942 176 1015 q 293 773 293 888 q 287 675 293 741 q 282 590 282 608 q 318 466 282 505 q 481 417 364 417 l 481 314 "},"‰":{"x_min":-3,"x_max":1672,"ha":1821,"o":"m 846 0 q 664 76 732 0 q 603 244 603 145 q 662 412 603 344 q 846 489 729 489 q 1027 412 959 489 q 1089 244 1089 343 q 1029 76 1089 144 q 846 0 962 0 m 845 103 q 945 143 910 103 q 981 243 981 184 q 947 340 981 301 q 845 385 910 385 q 745 342 782 385 q 709 243 709 300 q 742 147 709 186 q 845 103 781 103 m 888 986 l 284 -25 l 199 -25 l 803 986 l 888 986 m 241 468 q 58 545 126 468 q -3 715 -3 615 q 56 881 -3 813 q 238 958 124 958 q 421 881 353 958 q 483 712 483 813 q 423 544 483 612 q 241 468 356 468 m 241 855 q 137 811 175 855 q 100 710 100 768 q 136 612 100 653 q 240 572 172 572 q 344 614 306 572 q 382 713 382 656 q 347 810 382 771 q 241 855 308 855 m 1428 0 q 1246 76 1314 0 q 1185 244 1185 145 q 1244 412 1185 344 q 1428 489 1311 489 q 1610 412 1542 489 q 1672 244 1672 343 q 1612 76 1672 144 q 1428 0 1545 0 m 1427 103 q 1528 143 1492 103 q 1564 243 1564 184 q 1530 340 1564 301 q 1427 385 1492 385 q 1327 342 1364 385 q 1291 243 1291 300 q 1324 147 1291 186 q 1427 103 1363 103 "},"a":{"x_min":0,"x_max":698.609375,"ha":794,"o":"m 698 0 q 661 -12 679 -7 q 615 -17 643 -17 q 536 12 564 -17 q 500 96 508 41 q 384 6 456 37 q 236 -25 312 -25 q 65 31 130 -25 q 0 194 0 88 q 118 390 0 334 q 328 435 180 420 q 488 483 476 451 q 495 523 495 504 q 442 619 495 584 q 325 654 389 654 q 209 617 257 654 q 152 513 161 580 l 33 513 q 123 705 33 633 q 332 772 207 772 q 528 712 448 772 q 617 531 617 645 l 617 163 q 624 108 617 126 q 664 90 632 90 l 698 94 l 698 0 m 491 262 l 491 372 q 272 329 350 347 q 128 201 128 294 q 166 113 128 144 q 264 83 205 83 q 414 130 346 83 q 491 262 491 183 "},"—":{"x_min":0,"x_max":941.671875,"ha":1039,"o":"m 941 334 l 0 334 l 0 410 l 941 410 l 941 334 "},"=":{"x_min":8.71875,"x_max":780.953125,"ha":792,"o":"m 780 510 l 8 510 l 8 606 l 780 606 l 780 510 m 780 235 l 8 235 l 8 332 l 780 332 l 780 235 "},"N":{"x_min":0,"x_max":801,"ha":914,"o":"m 801 0 l 651 0 l 131 823 l 131 0 l 0 0 l 0 1013 l 151 1013 l 670 193 l 670 1013 l 801 1013 l 801 0 "},"ρ":{"x_min":0,"x_max":712,"ha":797,"o":"m 712 369 q 620 94 712 207 q 362 -26 521 -26 q 230 2 292 -26 q 119 83 167 30 l 119 -278 l 0 -278 l 0 362 q 91 643 0 531 q 355 764 190 764 q 617 647 517 764 q 712 369 712 536 m 583 366 q 530 559 583 480 q 359 651 469 651 q 190 562 252 651 q 135 370 135 483 q 189 176 135 257 q 359 85 250 85 q 528 175 466 85 q 583 366 583 254 "},"2":{"x_min":59,"x_max":731,"ha":792,"o":"m 731 0 l 59 0 q 197 314 59 188 q 457 487 199 315 q 598 691 598 580 q 543 819 598 772 q 411 867 488 867 q 272 811 328 867 q 209 630 209 747 l 81 630 q 182 901 81 805 q 408 986 271 986 q 629 909 536 986 q 731 694 731 826 q 613 449 731 541 q 378 316 495 383 q 201 122 235 234 l 731 122 l 731 0 "},"¯":{"x_min":0,"x_max":941.671875,"ha":938,"o":"m 941 1033 l 0 1033 l 0 1109 l 941 1109 l 941 1033 "},"Z":{"x_min":0,"x_max":779,"ha":849,"o":"m 779 0 l 0 0 l 0 113 l 621 896 l 40 896 l 40 1013 l 779 1013 l 778 887 l 171 124 l 779 124 l 779 0 "},"u":{"x_min":0,"x_max":617,"ha":729,"o":"m 617 0 l 499 0 l 499 110 q 391 10 460 45 q 246 -25 322 -25 q 61 58 127 -25 q 0 258 0 136 l 0 738 l 125 738 l 125 284 q 156 148 125 202 q 273 82 197 82 q 433 165 369 82 q 493 340 493 243 l 493 738 l 617 738 l 617 0 "},"k":{"x_min":0,"x_max":612.484375,"ha":697,"o":"m 612 738 l 338 465 l 608 0 l 469 0 l 251 382 l 121 251 l 121 0 l 0 0 l 0 1013 l 121 1013 l 121 402 l 456 738 l 612 738 "},"Η":{"x_min":0,"x_max":803,"ha":917,"o":"m 803 0 l 667 0 l 667 475 l 140 475 l 140 0 l 0 0 l 0 1013 l 140 1013 l 140 599 l 667 599 l 667 1013 l 803 1013 l 803 0 "},"Α":{"x_min":0,"x_max":906.953125,"ha":985,"o":"m 906 0 l 756 0 l 650 303 l 251 303 l 143 0 l 0 0 l 376 1013 l 529 1013 l 906 0 m 609 421 l 452 866 l 293 421 l 609 421 "},"s":{"x_min":0,"x_max":604,"ha":697,"o":"m 604 217 q 501 36 604 104 q 292 -23 411 -23 q 86 43 166 -23 q 0 238 0 114 l 121 237 q 175 122 121 164 q 300 85 223 85 q 415 112 363 85 q 479 207 479 147 q 361 309 479 276 q 140 372 141 370 q 21 544 21 426 q 111 708 21 647 q 298 761 190 761 q 492 705 413 761 q 583 531 583 643 l 462 531 q 412 625 462 594 q 298 657 363 657 q 199 636 242 657 q 143 558 143 608 q 262 454 143 486 q 484 394 479 397 q 604 217 604 341 "},"B":{"x_min":0,"x_max":778,"ha":876,"o":"m 580 546 q 724 469 670 535 q 778 311 778 403 q 673 83 778 171 q 432 0 575 0 l 0 0 l 0 1013 l 411 1013 q 629 957 541 1013 q 732 768 732 892 q 691 633 732 693 q 580 546 650 572 m 393 899 l 139 899 l 139 588 l 379 588 q 521 624 462 588 q 592 744 592 667 q 531 859 592 819 q 393 899 471 899 m 419 124 q 566 169 504 124 q 635 303 635 219 q 559 436 635 389 q 402 477 494 477 l 139 477 l 139 124 l 419 124 "},"…":{"x_min":0,"x_max":614,"ha":708,"o":"m 142 0 l 0 0 l 0 151 l 142 151 l 142 0 m 378 0 l 236 0 l 236 151 l 378 151 l 378 0 m 614 0 l 472 0 l 472 151 l 614 151 l 614 0 "},"?":{"x_min":0,"x_max":607,"ha":704,"o":"m 607 777 q 543 599 607 674 q 422 474 482 537 q 357 272 357 391 l 236 272 q 297 487 236 395 q 411 619 298 490 q 474 762 474 691 q 422 885 474 838 q 301 933 371 933 q 179 880 228 933 q 124 706 124 819 l 0 706 q 94 963 0 872 q 302 1044 177 1044 q 511 973 423 1044 q 607 777 607 895 m 370 0 l 230 0 l 230 151 l 370 151 l 370 0 "},"H":{"x_min":0,"x_max":803,"ha":915,"o":"m 803 0 l 667 0 l 667 475 l 140 475 l 140 0 l 0 0 l 0 1013 l 140 1013 l 140 599 l 667 599 l 667 1013 l 803 1013 l 803 0 "},"ν":{"x_min":0,"x_max":675,"ha":761,"o":"m 675 738 l 404 0 l 272 0 l 0 738 l 133 738 l 340 147 l 541 738 l 675 738 "},"c":{"x_min":1,"x_max":701.390625,"ha":775,"o":"m 701 264 q 584 53 681 133 q 353 -26 487 -26 q 91 91 188 -26 q 1 370 1 201 q 92 645 1 537 q 353 761 190 761 q 572 688 479 761 q 690 493 666 615 l 556 493 q 487 606 545 562 q 356 650 428 650 q 186 563 246 650 q 134 372 134 487 q 188 179 134 258 q 359 88 250 88 q 492 136 437 88 q 566 264 548 185 l 701 264 "},"¶":{"x_min":0,"x_max":566.671875,"ha":678,"o":"m 21 892 l 52 892 l 98 761 l 145 892 l 176 892 l 178 741 l 157 741 l 157 867 l 108 741 l 88 741 l 40 871 l 40 741 l 21 741 l 21 892 m 308 854 l 308 731 q 252 691 308 691 q 227 691 240 691 q 207 696 213 695 l 207 712 l 253 706 q 288 733 288 706 l 288 763 q 244 741 279 741 q 193 797 193 741 q 261 860 193 860 q 287 860 273 860 q 308 854 302 855 m 288 842 l 263 843 q 213 796 213 843 q 248 756 213 756 q 288 796 288 756 l 288 842 m 566 988 l 502 988 l 502 -1 l 439 -1 l 439 988 l 317 988 l 317 -1 l 252 -1 l 252 602 q 81 653 155 602 q 0 805 0 711 q 101 989 0 918 q 309 1053 194 1053 l 566 1053 l 566 988 "},"β":{"x_min":0,"x_max":660,"ha":745,"o":"m 471 550 q 610 450 561 522 q 660 280 660 378 q 578 64 660 151 q 367 -22 497 -22 q 239 5 299 -22 q 126 82 178 32 l 126 -278 l 0 -278 l 0 593 q 54 903 0 801 q 318 1042 127 1042 q 519 964 436 1042 q 603 771 603 887 q 567 644 603 701 q 471 550 532 586 m 337 79 q 476 138 418 79 q 535 279 535 198 q 427 437 535 386 q 226 477 344 477 l 226 583 q 398 620 329 583 q 486 762 486 668 q 435 884 486 833 q 312 935 384 935 q 169 861 219 935 q 126 698 126 797 l 126 362 q 170 169 126 242 q 337 79 224 79 "},"Μ":{"x_min":0,"x_max":954,"ha":1068,"o":"m 954 0 l 819 0 l 819 868 l 537 0 l 405 0 l 128 865 l 128 0 l 0 0 l 0 1013 l 199 1013 l 472 158 l 758 1013 l 954 1013 l 954 0 "},"Ό":{"x_min":0.109375,"x_max":1120,"ha":1217,"o":"m 1120 505 q 994 132 1120 282 q 642 -29 861 -29 q 290 130 422 -29 q 167 505 167 280 q 294 883 167 730 q 650 1046 430 1046 q 999 882 868 1046 q 1120 505 1120 730 m 977 504 q 896 784 977 669 q 644 915 804 915 q 391 785 484 915 q 307 504 307 669 q 391 224 307 339 q 644 95 486 95 q 894 224 803 95 q 977 504 977 339 m 277 1040 l 83 799 l 0 799 l 140 1040 l 277 1040 "},"Ή":{"x_min":0,"x_max":1158,"ha":1275,"o":"m 1158 0 l 1022 0 l 1022 475 l 496 475 l 496 0 l 356 0 l 356 1012 l 496 1012 l 496 599 l 1022 599 l 1022 1012 l 1158 1012 l 1158 0 m 277 1040 l 83 799 l 0 799 l 140 1040 l 277 1040 "},"•":{"x_min":0,"x_max":663.890625,"ha":775,"o":"m 663 529 q 566 293 663 391 q 331 196 469 196 q 97 294 194 196 q 0 529 0 393 q 96 763 0 665 q 331 861 193 861 q 566 763 469 861 q 663 529 663 665 "},"¥":{"x_min":0.1875,"x_max":819.546875,"ha":886,"o":"m 563 561 l 697 561 l 696 487 l 520 487 l 482 416 l 482 380 l 697 380 l 695 308 l 482 308 l 482 0 l 342 0 l 342 308 l 125 308 l 125 380 l 342 380 l 342 417 l 303 487 l 125 487 l 125 561 l 258 561 l 0 1013 l 140 1013 l 411 533 l 679 1013 l 819 1013 l 563 561 "},"(":{"x_min":0,"x_max":318.0625,"ha":415,"o":"m 318 -290 l 230 -290 q 61 23 122 -142 q 0 365 0 190 q 62 712 0 540 q 230 1024 119 869 l 318 1024 q 175 705 219 853 q 125 360 125 542 q 176 22 125 187 q 318 -290 223 -127 "},"U":{"x_min":0,"x_max":796,"ha":904,"o":"m 796 393 q 681 93 796 212 q 386 -25 566 -25 q 101 95 208 -25 q 0 393 0 211 l 0 1013 l 138 1013 l 138 391 q 204 191 138 270 q 394 107 276 107 q 586 191 512 107 q 656 391 656 270 l 656 1013 l 796 1013 l 796 393 "},"γ":{"x_min":0.5,"x_max":744.953125,"ha":822,"o":"m 744 737 l 463 54 l 463 -278 l 338 -278 l 338 54 l 154 495 q 104 597 124 569 q 13 651 67 651 l 0 651 l 0 751 l 39 753 q 168 711 121 753 q 242 594 207 676 l 403 208 l 617 737 l 744 737 "},"α":{"x_min":0,"x_max":765.5625,"ha":809,"o":"m 765 -4 q 698 -14 726 -14 q 564 97 586 -14 q 466 7 525 40 q 337 -26 407 -26 q 88 98 186 -26 q 0 369 0 212 q 88 637 0 525 q 337 760 184 760 q 465 728 407 760 q 563 637 524 696 l 563 739 l 685 739 l 685 222 q 693 141 685 168 q 748 94 708 94 q 765 96 760 94 l 765 -4 m 584 371 q 531 562 584 485 q 360 653 470 653 q 192 566 254 653 q 135 379 135 489 q 186 181 135 261 q 358 84 247 84 q 528 176 465 84 q 584 371 584 260 "},"F":{"x_min":0,"x_max":683.328125,"ha":717,"o":"m 683 888 l 140 888 l 140 583 l 613 583 l 613 458 l 140 458 l 140 0 l 0 0 l 0 1013 l 683 1013 l 683 888 "},"­":{"x_min":0,"x_max":705.5625,"ha":803,"o":"m 705 334 l 0 334 l 0 410 l 705 410 l 705 334 "},":":{"x_min":0,"x_max":142,"ha":239,"o":"m 142 585 l 0 585 l 0 738 l 142 738 l 142 585 m 142 0 l 0 0 l 0 151 l 142 151 l 142 0 "},"Χ":{"x_min":0,"x_max":854.171875,"ha":935,"o":"m 854 0 l 683 0 l 423 409 l 166 0 l 0 0 l 347 519 l 18 1013 l 186 1013 l 427 637 l 675 1013 l 836 1013 l 504 521 l 854 0 "},"*":{"x_min":116,"x_max":674,"ha":792,"o":"m 674 768 l 475 713 l 610 544 l 517 477 l 394 652 l 272 478 l 178 544 l 314 713 l 116 766 l 153 876 l 341 812 l 342 1013 l 446 1013 l 446 811 l 635 874 l 674 768 "},"†":{"x_min":0,"x_max":777,"ha":835,"o":"m 458 804 l 777 804 l 777 683 l 458 683 l 458 0 l 319 0 l 319 681 l 0 683 l 0 804 l 319 804 l 319 1015 l 458 1013 l 458 804 "},"°":{"x_min":0,"x_max":347,"ha":444,"o":"m 173 802 q 43 856 91 802 q 0 977 0 905 q 45 1101 0 1049 q 173 1153 90 1153 q 303 1098 255 1153 q 347 977 347 1049 q 303 856 347 905 q 173 802 256 802 m 173 884 q 238 910 214 884 q 262 973 262 937 q 239 1038 262 1012 q 173 1064 217 1064 q 108 1037 132 1064 q 85 973 85 1010 q 108 910 85 937 q 173 884 132 884 "},"V":{"x_min":0,"x_max":862.71875,"ha":940,"o":"m 862 1013 l 505 0 l 361 0 l 0 1013 l 143 1013 l 434 165 l 718 1012 l 862 1013 "},"Ξ":{"x_min":0,"x_max":734.71875,"ha":763,"o":"m 723 889 l 9 889 l 9 1013 l 723 1013 l 723 889 m 673 463 l 61 463 l 61 589 l 673 589 l 673 463 m 734 0 l 0 0 l 0 124 l 734 124 l 734 0 "}," ":{"x_min":0,"x_max":0,"ha":853},"Ϋ":{"x_min":0.328125,"x_max":819.515625,"ha":889,"o":"m 588 1046 l 460 1046 l 460 1189 l 588 1189 l 588 1046 m 360 1046 l 232 1046 l 232 1189 l 360 1189 l 360 1046 m 819 1012 l 482 416 l 482 0 l 342 0 l 342 416 l 0 1012 l 140 1012 l 411 533 l 679 1012 l 819 1012 "},"0":{"x_min":73,"x_max":715,"ha":792,"o":"m 394 -29 q 153 129 242 -29 q 73 479 73 272 q 152 829 73 687 q 394 989 241 989 q 634 829 545 989 q 715 479 715 684 q 635 129 715 270 q 394 -29 546 -29 m 394 89 q 546 211 489 89 q 598 479 598 322 q 548 748 598 640 q 394 871 491 871 q 241 748 298 871 q 190 479 190 637 q 239 211 190 319 q 394 89 296 89 "},"”":{"x_min":0,"x_max":347,"ha":454,"o":"m 139 851 q 102 737 139 784 q 0 669 65 690 l 0 734 q 59 787 42 741 q 72 873 72 821 l 0 873 l 0 1013 l 139 1013 l 139 851 m 347 851 q 310 737 347 784 q 208 669 273 690 l 208 734 q 267 787 250 741 q 280 873 280 821 l 208 873 l 208 1013 l 347 1013 l 347 851 "},"@":{"x_min":0,"x_max":1260,"ha":1357,"o":"m 1098 -45 q 877 -160 1001 -117 q 633 -203 752 -203 q 155 -29 327 -203 q 0 360 0 127 q 176 802 0 616 q 687 1008 372 1008 q 1123 854 969 1008 q 1260 517 1260 718 q 1155 216 1260 341 q 868 82 1044 82 q 772 106 801 82 q 737 202 737 135 q 647 113 700 144 q 527 82 594 82 q 367 147 420 82 q 314 312 314 212 q 401 565 314 452 q 639 690 498 690 q 810 588 760 690 l 849 668 l 938 668 q 877 441 900 532 q 833 226 833 268 q 853 182 833 198 q 902 167 873 167 q 1088 272 1012 167 q 1159 512 1159 372 q 1051 793 1159 681 q 687 925 925 925 q 248 747 415 925 q 97 361 97 586 q 226 26 97 159 q 627 -122 370 -122 q 856 -87 737 -122 q 1061 8 976 -53 l 1098 -45 m 786 488 q 738 580 777 545 q 643 615 700 615 q 483 517 548 615 q 425 322 425 430 q 457 203 425 250 q 552 156 490 156 q 722 273 665 156 q 786 488 738 309 "},"Ί":{"x_min":0,"x_max":499,"ha":613,"o":"m 277 1040 l 83 799 l 0 799 l 140 1040 l 277 1040 m 499 0 l 360 0 l 360 1012 l 499 1012 l 499 0 "},"i":{"x_min":14,"x_max":136,"ha":275,"o":"m 136 873 l 14 873 l 14 1013 l 136 1013 l 136 873 m 136 0 l 14 0 l 14 737 l 136 737 l 136 0 "},"Β":{"x_min":0,"x_max":778,"ha":877,"o":"m 580 545 q 724 468 671 534 q 778 310 778 402 q 673 83 778 170 q 432 0 575 0 l 0 0 l 0 1013 l 411 1013 q 629 957 541 1013 q 732 768 732 891 q 691 632 732 692 q 580 545 650 571 m 393 899 l 139 899 l 139 587 l 379 587 q 521 623 462 587 q 592 744 592 666 q 531 859 592 819 q 393 899 471 899 m 419 124 q 566 169 504 124 q 635 302 635 219 q 559 435 635 388 q 402 476 494 476 l 139 476 l 139 124 l 419 124 "},"υ":{"x_min":0,"x_max":617,"ha":725,"o":"m 617 352 q 540 94 617 199 q 308 -24 455 -24 q 76 94 161 -24 q 0 352 0 199 l 0 739 l 126 739 l 126 355 q 169 185 126 257 q 312 98 220 98 q 451 185 402 98 q 492 355 492 257 l 492 739 l 617 739 l 617 352 "},"]":{"x_min":0,"x_max":275,"ha":372,"o":"m 275 -281 l 0 -281 l 0 -187 l 151 -187 l 151 920 l 0 920 l 0 1013 l 275 1013 l 275 -281 "},"m":{"x_min":0,"x_max":1019,"ha":1128,"o":"m 1019 0 l 897 0 l 897 454 q 860 591 897 536 q 739 660 816 660 q 613 586 659 660 q 573 436 573 522 l 573 0 l 447 0 l 447 455 q 412 591 447 535 q 294 657 372 657 q 165 586 213 657 q 122 437 122 521 l 122 0 l 0 0 l 0 738 l 117 738 l 117 640 q 202 730 150 697 q 316 763 254 763 q 437 730 381 763 q 525 642 494 697 q 621 731 559 700 q 753 763 682 763 q 943 694 867 763 q 1019 512 1019 625 l 1019 0 "},"χ":{"x_min":8.328125,"x_max":780.5625,"ha":815,"o":"m 780 -278 q 715 -294 747 -294 q 616 -257 663 -294 q 548 -175 576 -227 l 379 133 l 143 -277 l 9 -277 l 313 254 l 163 522 q 127 586 131 580 q 36 640 91 640 q 8 637 27 640 l 8 752 l 52 757 q 162 719 113 757 q 236 627 200 690 l 383 372 l 594 737 l 726 737 l 448 250 l 625 -69 q 670 -153 647 -110 q 743 -188 695 -188 q 780 -184 759 -188 l 780 -278 "},"8":{"x_min":55,"x_max":736,"ha":792,"o":"m 571 527 q 694 424 652 491 q 736 280 736 358 q 648 71 736 158 q 395 -26 551 -26 q 142 69 238 -26 q 55 279 55 157 q 96 425 55 359 q 220 527 138 491 q 120 615 153 562 q 88 726 88 668 q 171 904 88 827 q 395 986 261 986 q 618 905 529 986 q 702 727 702 830 q 670 616 702 667 q 571 527 638 565 m 394 565 q 519 610 475 565 q 563 717 563 655 q 521 823 563 781 q 392 872 474 872 q 265 824 312 872 q 224 720 224 783 q 265 613 224 656 q 394 565 312 565 m 395 91 q 545 150 488 91 q 597 280 597 204 q 546 408 597 355 q 395 465 492 465 q 244 408 299 465 q 194 280 194 356 q 244 150 194 203 q 395 91 299 91 "},"ί":{"x_min":42,"x_max":326.71875,"ha":361,"o":"m 284 3 q 233 -10 258 -5 q 182 -15 207 -15 q 85 26 119 -15 q 42 200 42 79 l 42 737 l 167 737 l 168 215 q 172 141 168 157 q 226 101 183 101 q 248 102 239 101 q 284 112 257 104 l 284 3 m 326 1040 l 137 819 l 54 819 l 189 1040 l 326 1040 "},"Ζ":{"x_min":0,"x_max":779.171875,"ha":850,"o":"m 779 0 l 0 0 l 0 113 l 620 896 l 40 896 l 40 1013 l 779 1013 l 779 887 l 170 124 l 779 124 l 779 0 "},"R":{"x_min":0,"x_max":781.953125,"ha":907,"o":"m 781 0 l 623 0 q 587 242 590 52 q 407 433 585 433 l 138 433 l 138 0 l 0 0 l 0 1013 l 396 1013 q 636 946 539 1013 q 749 731 749 868 q 711 597 749 659 q 608 502 674 534 q 718 370 696 474 q 729 207 722 352 q 781 26 736 62 l 781 0 m 373 551 q 533 594 465 551 q 614 731 614 645 q 532 859 614 815 q 373 896 465 896 l 138 896 l 138 551 l 373 551 "},"o":{"x_min":0,"x_max":713,"ha":821,"o":"m 357 -25 q 94 91 194 -25 q 0 368 0 202 q 93 642 0 533 q 357 761 193 761 q 618 644 518 761 q 713 368 713 533 q 619 91 713 201 q 357 -25 521 -25 m 357 85 q 528 175 465 85 q 584 369 584 255 q 529 562 584 484 q 357 651 467 651 q 189 560 250 651 q 135 369 135 481 q 187 177 135 257 q 357 85 250 85 "},"5":{"x_min":54.171875,"x_max":738,"ha":792,"o":"m 738 314 q 626 60 738 153 q 382 -23 526 -23 q 155 47 248 -23 q 54 256 54 125 l 183 256 q 259 132 204 174 q 382 91 314 91 q 533 149 471 91 q 602 314 602 213 q 538 469 602 411 q 386 528 475 528 q 284 506 332 528 q 197 439 237 484 l 81 439 l 159 958 l 684 958 l 684 840 l 254 840 l 214 579 q 306 627 258 612 q 407 643 354 643 q 636 552 540 643 q 738 314 738 457 "},"7":{"x_min":58.71875,"x_max":730.953125,"ha":792,"o":"m 730 839 q 469 448 560 641 q 335 0 378 255 l 192 0 q 328 441 235 252 q 593 830 421 630 l 58 830 l 58 958 l 730 958 l 730 839 "},"K":{"x_min":0,"x_max":819.46875,"ha":906,"o":"m 819 0 l 649 0 l 294 509 l 139 355 l 139 0 l 0 0 l 0 1013 l 139 1013 l 139 526 l 626 1013 l 809 1013 l 395 600 l 819 0 "},",":{"x_min":0,"x_max":142,"ha":239,"o":"m 142 -12 q 105 -132 142 -82 q 0 -205 68 -182 l 0 -138 q 57 -82 40 -124 q 70 0 70 -51 l 0 0 l 0 151 l 142 151 l 142 -12 "},"d":{"x_min":0,"x_max":683,"ha":796,"o":"m 683 0 l 564 0 l 564 93 q 456 6 516 38 q 327 -25 395 -25 q 87 100 181 -25 q 0 365 0 215 q 90 639 0 525 q 343 763 187 763 q 564 647 486 763 l 564 1013 l 683 1013 l 683 0 m 582 373 q 529 562 582 484 q 361 653 468 653 q 190 561 253 653 q 135 365 135 479 q 189 175 135 254 q 358 85 251 85 q 529 178 468 85 q 582 373 582 258 "},"¨":{"x_min":-109,"x_max":247,"ha":232,"o":"m 247 1046 l 119 1046 l 119 1189 l 247 1189 l 247 1046 m 19 1046 l -109 1046 l -109 1189 l 19 1189 l 19 1046 "},"E":{"x_min":0,"x_max":736.109375,"ha":789,"o":"m 736 0 l 0 0 l 0 1013 l 725 1013 l 725 889 l 139 889 l 139 585 l 677 585 l 677 467 l 139 467 l 139 125 l 736 125 l 736 0 "},"Y":{"x_min":0,"x_max":820,"ha":886,"o":"m 820 1013 l 482 416 l 482 0 l 342 0 l 342 416 l 0 1013 l 140 1013 l 411 534 l 679 1012 l 820 1013 "},"\"":{"x_min":0,"x_max":299,"ha":396,"o":"m 299 606 l 203 606 l 203 988 l 299 988 l 299 606 m 96 606 l 0 606 l 0 988 l 96 988 l 96 606 "},"‹":{"x_min":17.984375,"x_max":773.609375,"ha":792,"o":"m 773 40 l 18 376 l 17 465 l 773 799 l 773 692 l 159 420 l 773 149 l 773 40 "},"„":{"x_min":0,"x_max":364,"ha":467,"o":"m 141 -12 q 104 -132 141 -82 q 0 -205 67 -182 l 0 -138 q 56 -82 40 -124 q 69 0 69 -51 l 0 0 l 0 151 l 141 151 l 141 -12 m 364 -12 q 327 -132 364 -82 q 222 -205 290 -182 l 222 -138 q 279 -82 262 -124 q 292 0 292 -51 l 222 0 l 222 151 l 364 151 l 364 -12 "},"δ":{"x_min":1,"x_max":710,"ha":810,"o":"m 710 360 q 616 87 710 196 q 356 -28 518 -28 q 99 82 197 -28 q 1 356 1 192 q 100 606 1 509 q 355 703 199 703 q 180 829 288 754 q 70 903 124 866 l 70 1012 l 643 1012 l 643 901 l 258 901 q 462 763 422 794 q 636 592 577 677 q 710 360 710 485 m 584 365 q 552 501 584 447 q 451 602 521 555 q 372 611 411 611 q 197 541 258 611 q 136 355 136 472 q 190 171 136 245 q 358 85 252 85 q 528 173 465 85 q 584 365 584 252 "},"έ":{"x_min":0,"x_max":634.71875,"ha":714,"o":"m 634 234 q 527 38 634 110 q 300 -25 433 -25 q 98 29 183 -25 q 0 204 0 93 q 37 313 0 265 q 128 390 67 352 q 56 459 82 419 q 26 555 26 505 q 114 712 26 654 q 295 763 191 763 q 499 700 416 763 q 589 515 589 631 l 478 515 q 419 618 464 580 q 307 657 374 657 q 207 630 253 657 q 151 547 151 598 q 238 445 151 469 q 389 434 280 434 l 389 331 l 349 331 q 206 315 255 331 q 125 210 125 287 q 183 107 125 145 q 302 76 233 76 q 436 117 379 76 q 509 234 493 159 l 634 234 m 520 1040 l 331 819 l 248 819 l 383 1040 l 520 1040 "},"ω":{"x_min":0,"x_max":922,"ha":1031,"o":"m 922 339 q 856 97 922 203 q 650 -26 780 -26 q 538 9 587 -26 q 461 103 489 44 q 387 12 436 46 q 277 -22 339 -22 q 69 97 147 -22 q 0 339 0 203 q 45 551 0 444 q 161 738 84 643 l 302 738 q 175 553 219 647 q 124 336 124 446 q 155 179 124 249 q 275 88 197 88 q 375 163 341 88 q 400 294 400 219 l 400 572 l 524 572 l 524 294 q 561 135 524 192 q 643 88 591 88 q 762 182 719 88 q 797 342 797 257 q 745 556 797 450 q 619 738 705 638 l 760 738 q 874 551 835 640 q 922 339 922 444 "},"´":{"x_min":0,"x_max":96,"ha":251,"o":"m 96 606 l 0 606 l 0 988 l 96 988 l 96 606 "},"±":{"x_min":11,"x_max":781,"ha":792,"o":"m 781 490 l 446 490 l 446 255 l 349 255 l 349 490 l 11 490 l 11 586 l 349 586 l 349 819 l 446 819 l 446 586 l 781 586 l 781 490 m 781 21 l 11 21 l 11 115 l 781 115 l 781 21 "},"|":{"x_min":343,"x_max":449,"ha":792,"o":"m 449 462 l 343 462 l 343 986 l 449 986 l 449 462 m 449 -242 l 343 -242 l 343 280 l 449 280 l 449 -242 "},"ϋ":{"x_min":0,"x_max":617,"ha":725,"o":"m 482 800 l 372 800 l 372 925 l 482 925 l 482 800 m 239 800 l 129 800 l 129 925 l 239 925 l 239 800 m 617 352 q 540 93 617 199 q 308 -24 455 -24 q 76 93 161 -24 q 0 352 0 199 l 0 738 l 126 738 l 126 354 q 169 185 126 257 q 312 98 220 98 q 451 185 402 98 q 492 354 492 257 l 492 738 l 617 738 l 617 352 "},"§":{"x_min":0,"x_max":593,"ha":690,"o":"m 593 425 q 554 312 593 369 q 467 233 516 254 q 537 83 537 172 q 459 -74 537 -12 q 288 -133 387 -133 q 115 -69 184 -133 q 47 96 47 -6 l 166 96 q 199 7 166 40 q 288 -26 232 -26 q 371 -5 332 -26 q 420 60 420 21 q 311 201 420 139 q 108 309 210 255 q 0 490 0 383 q 33 602 0 551 q 124 687 66 654 q 75 743 93 712 q 58 812 58 773 q 133 984 58 920 q 300 1043 201 1043 q 458 987 394 1043 q 529 814 529 925 l 411 814 q 370 908 404 877 q 289 939 336 939 q 213 911 246 939 q 180 841 180 883 q 286 720 180 779 q 484 612 480 615 q 593 425 593 534 m 467 409 q 355 544 467 473 q 196 630 228 612 q 146 587 162 609 q 124 525 124 558 q 239 387 124 462 q 398 298 369 315 q 448 345 429 316 q 467 409 467 375 "},"b":{"x_min":0,"x_max":685,"ha":783,"o":"m 685 372 q 597 99 685 213 q 347 -25 501 -25 q 219 5 277 -25 q 121 93 161 36 l 121 0 l 0 0 l 0 1013 l 121 1013 l 121 634 q 214 723 157 692 q 341 754 272 754 q 591 637 493 754 q 685 372 685 526 m 554 356 q 499 550 554 470 q 328 644 437 644 q 162 556 223 644 q 108 369 108 478 q 160 176 108 256 q 330 83 221 83 q 498 169 435 83 q 554 356 554 245 "},"q":{"x_min":0,"x_max":683,"ha":876,"o":"m 683 -278 l 564 -278 l 564 97 q 474 8 533 39 q 345 -23 415 -23 q 91 93 188 -23 q 0 364 0 203 q 87 635 0 522 q 337 760 184 760 q 466 727 408 760 q 564 637 523 695 l 564 737 l 683 737 l 683 -278 m 582 375 q 527 564 582 488 q 358 652 466 652 q 190 565 253 652 q 135 377 135 488 q 189 179 135 261 q 361 84 251 84 q 530 179 469 84 q 582 375 582 260 "},"Ω":{"x_min":-0.171875,"x_max":969.5625,"ha":1068,"o":"m 969 0 l 555 0 l 555 123 q 744 308 675 194 q 814 558 814 423 q 726 812 814 709 q 484 922 633 922 q 244 820 334 922 q 154 567 154 719 q 223 316 154 433 q 412 123 292 199 l 412 0 l 0 0 l 0 124 l 217 124 q 68 327 122 210 q 15 572 15 444 q 144 911 15 781 q 484 1041 274 1041 q 822 909 691 1041 q 953 569 953 777 q 899 326 953 443 q 750 124 846 210 l 969 124 l 969 0 "},"ύ":{"x_min":0,"x_max":617,"ha":725,"o":"m 617 352 q 540 93 617 199 q 308 -24 455 -24 q 76 93 161 -24 q 0 352 0 199 l 0 738 l 126 738 l 126 354 q 169 185 126 257 q 312 98 220 98 q 451 185 402 98 q 492 354 492 257 l 492 738 l 617 738 l 617 352 m 535 1040 l 346 819 l 262 819 l 397 1040 l 535 1040 "},"z":{"x_min":-0.015625,"x_max":613.890625,"ha":697,"o":"m 613 0 l 0 0 l 0 100 l 433 630 l 20 630 l 20 738 l 594 738 l 593 636 l 163 110 l 613 110 l 613 0 "},"™":{"x_min":0,"x_max":894,"ha":1000,"o":"m 389 951 l 229 951 l 229 503 l 160 503 l 160 951 l 0 951 l 0 1011 l 389 1011 l 389 951 m 894 503 l 827 503 l 827 939 l 685 503 l 620 503 l 481 937 l 481 503 l 417 503 l 417 1011 l 517 1011 l 653 580 l 796 1010 l 894 1011 l 894 503 "},"ή":{"x_min":0.78125,"x_max":697,"ha":810,"o":"m 697 -278 l 572 -278 l 572 454 q 540 587 572 536 q 425 650 501 650 q 271 579 337 650 q 206 420 206 509 l 206 0 l 81 0 l 81 489 q 73 588 81 562 q 0 644 56 644 l 0 741 q 68 755 38 755 q 158 721 124 755 q 200 630 193 687 q 297 726 234 692 q 434 761 359 761 q 620 692 544 761 q 697 516 697 624 l 697 -278 m 479 1040 l 290 819 l 207 819 l 341 1040 l 479 1040 "},"Θ":{"x_min":0,"x_max":960,"ha":1056,"o":"m 960 507 q 833 129 960 280 q 476 -32 698 -32 q 123 129 255 -32 q 0 507 0 280 q 123 883 0 732 q 476 1045 255 1045 q 832 883 696 1045 q 960 507 960 732 m 817 500 q 733 789 817 669 q 476 924 639 924 q 223 792 317 924 q 142 507 142 675 q 222 222 142 339 q 476 89 315 89 q 730 218 636 89 q 817 500 817 334 m 716 449 l 243 449 l 243 571 l 716 571 l 716 449 "},"®":{"x_min":-3,"x_max":1008,"ha":1106,"o":"m 503 532 q 614 562 566 532 q 672 658 672 598 q 614 747 672 716 q 503 772 569 772 l 338 772 l 338 532 l 503 532 m 502 -7 q 123 151 263 -7 q -3 501 -3 294 q 123 851 -3 706 q 502 1011 263 1011 q 881 851 739 1011 q 1008 501 1008 708 q 883 151 1008 292 q 502 -7 744 -7 m 502 60 q 830 197 709 60 q 940 501 940 322 q 831 805 940 681 q 502 944 709 944 q 174 805 296 944 q 65 501 65 680 q 173 197 65 320 q 502 60 294 60 m 788 146 l 678 146 q 653 316 655 183 q 527 449 652 449 l 338 449 l 338 146 l 241 146 l 241 854 l 518 854 q 688 808 621 854 q 766 658 766 755 q 739 563 766 607 q 668 497 713 519 q 751 331 747 472 q 788 164 756 190 l 788 146 "},"~":{"x_min":0,"x_max":833,"ha":931,"o":"m 833 958 q 778 753 833 831 q 594 665 716 665 q 402 761 502 665 q 240 857 302 857 q 131 795 166 857 q 104 665 104 745 l 0 665 q 54 867 0 789 q 237 958 116 958 q 429 861 331 958 q 594 765 527 765 q 704 827 670 765 q 729 958 729 874 l 833 958 "},"Ε":{"x_min":0,"x_max":736.21875,"ha":778,"o":"m 736 0 l 0 0 l 0 1013 l 725 1013 l 725 889 l 139 889 l 139 585 l 677 585 l 677 467 l 139 467 l 139 125 l 736 125 l 736 0 "},"³":{"x_min":0,"x_max":450,"ha":547,"o":"m 450 552 q 379 413 450 464 q 220 366 313 366 q 69 414 130 366 q 0 567 0 470 l 85 567 q 126 470 85 504 q 225 437 168 437 q 320 467 280 437 q 360 552 360 498 q 318 632 360 608 q 213 657 276 657 q 195 657 203 657 q 176 657 181 657 l 176 722 q 279 733 249 722 q 334 815 334 752 q 300 881 334 856 q 220 907 267 907 q 133 875 169 907 q 97 781 97 844 l 15 781 q 78 926 15 875 q 220 972 135 972 q 364 930 303 972 q 426 817 426 888 q 344 697 426 733 q 421 642 392 681 q 450 552 450 603 "},"[":{"x_min":0,"x_max":273.609375,"ha":371,"o":"m 273 -281 l 0 -281 l 0 1013 l 273 1013 l 273 920 l 124 920 l 124 -187 l 273 -187 l 273 -281 "},"L":{"x_min":0,"x_max":645.828125,"ha":696,"o":"m 645 0 l 0 0 l 0 1013 l 140 1013 l 140 126 l 645 126 l 645 0 "},"σ":{"x_min":0,"x_max":803.390625,"ha":894,"o":"m 803 628 l 633 628 q 713 368 713 512 q 618 93 713 204 q 357 -25 518 -25 q 94 91 194 -25 q 0 368 0 201 q 94 644 0 533 q 356 761 194 761 q 481 750 398 761 q 608 739 564 739 l 803 739 l 803 628 m 360 85 q 529 180 467 85 q 584 374 584 262 q 527 566 584 490 q 352 651 463 651 q 187 559 247 651 q 135 368 135 478 q 189 175 135 254 q 360 85 251 85 "},"ζ":{"x_min":0,"x_max":573,"ha":642,"o":"m 573 -40 q 553 -162 573 -97 q 510 -278 543 -193 l 400 -278 q 441 -187 428 -219 q 462 -90 462 -132 q 378 -14 462 -14 q 108 45 197 -14 q 0 290 0 117 q 108 631 0 462 q 353 901 194 767 l 55 901 l 55 1012 l 561 1012 l 561 924 q 261 669 382 831 q 128 301 128 489 q 243 117 128 149 q 458 98 350 108 q 573 -40 573 80 "},"θ":{"x_min":0,"x_max":674,"ha":778,"o":"m 674 496 q 601 160 674 304 q 336 -26 508 -26 q 73 153 165 -26 q 0 485 0 296 q 72 840 0 683 q 343 1045 166 1045 q 605 844 516 1045 q 674 496 674 692 m 546 579 q 498 798 546 691 q 336 935 437 935 q 178 798 237 935 q 126 579 137 701 l 546 579 m 546 475 l 126 475 q 170 233 126 348 q 338 80 230 80 q 504 233 447 80 q 546 475 546 346 "},"Ο":{"x_min":0,"x_max":958,"ha":1054,"o":"m 485 1042 q 834 883 703 1042 q 958 511 958 735 q 834 136 958 287 q 481 -26 701 -26 q 126 130 261 -26 q 0 504 0 279 q 127 880 0 729 q 485 1042 263 1042 m 480 98 q 731 225 638 98 q 815 504 815 340 q 733 783 815 670 q 480 913 640 913 q 226 785 321 913 q 142 504 142 671 q 226 224 142 339 q 480 98 319 98 "},"Γ":{"x_min":0,"x_max":705.28125,"ha":749,"o":"m 705 886 l 140 886 l 140 0 l 0 0 l 0 1012 l 705 1012 l 705 886 "}," ":{"x_min":0,"x_max":0,"ha":375},"%":{"x_min":-3,"x_max":1089,"ha":1186,"o":"m 845 0 q 663 76 731 0 q 602 244 602 145 q 661 412 602 344 q 845 489 728 489 q 1027 412 959 489 q 1089 244 1089 343 q 1029 76 1089 144 q 845 0 962 0 m 844 103 q 945 143 909 103 q 981 243 981 184 q 947 340 981 301 q 844 385 909 385 q 744 342 781 385 q 708 243 708 300 q 741 147 708 186 q 844 103 780 103 m 888 986 l 284 -25 l 199 -25 l 803 986 l 888 986 m 241 468 q 58 545 126 468 q -3 715 -3 615 q 56 881 -3 813 q 238 958 124 958 q 421 881 353 958 q 483 712 483 813 q 423 544 483 612 q 241 468 356 468 m 241 855 q 137 811 175 855 q 100 710 100 768 q 136 612 100 653 q 240 572 172 572 q 344 614 306 572 q 382 713 382 656 q 347 810 382 771 q 241 855 308 855 "},"P":{"x_min":0,"x_max":726,"ha":806,"o":"m 424 1013 q 640 931 555 1013 q 726 719 726 850 q 637 506 726 587 q 413 426 548 426 l 140 426 l 140 0 l 0 0 l 0 1013 l 424 1013 m 379 889 l 140 889 l 140 548 l 372 548 q 522 589 459 548 q 593 720 593 637 q 528 845 593 801 q 379 889 463 889 "},"Έ":{"x_min":0,"x_max":1078.21875,"ha":1118,"o":"m 1078 0 l 342 0 l 342 1013 l 1067 1013 l 1067 889 l 481 889 l 481 585 l 1019 585 l 1019 467 l 481 467 l 481 125 l 1078 125 l 1078 0 m 277 1040 l 83 799 l 0 799 l 140 1040 l 277 1040 "},"Ώ":{"x_min":0.125,"x_max":1136.546875,"ha":1235,"o":"m 1136 0 l 722 0 l 722 123 q 911 309 842 194 q 981 558 981 423 q 893 813 981 710 q 651 923 800 923 q 411 821 501 923 q 321 568 321 720 q 390 316 321 433 q 579 123 459 200 l 579 0 l 166 0 l 166 124 l 384 124 q 235 327 289 210 q 182 572 182 444 q 311 912 182 782 q 651 1042 441 1042 q 989 910 858 1042 q 1120 569 1120 778 q 1066 326 1120 443 q 917 124 1013 210 l 1136 124 l 1136 0 m 277 1040 l 83 800 l 0 800 l 140 1041 l 277 1040 "},"_":{"x_min":0,"x_max":705.5625,"ha":803,"o":"m 705 -334 l 0 -334 l 0 -234 l 705 -234 l 705 -334 "},"Ϊ":{"x_min":-110,"x_max":246,"ha":275,"o":"m 246 1046 l 118 1046 l 118 1189 l 246 1189 l 246 1046 m 18 1046 l -110 1046 l -110 1189 l 18 1189 l 18 1046 m 136 0 l 0 0 l 0 1012 l 136 1012 l 136 0 "},"+":{"x_min":23,"x_max":768,"ha":792,"o":"m 768 372 l 444 372 l 444 0 l 347 0 l 347 372 l 23 372 l 23 468 l 347 468 l 347 840 l 444 840 l 444 468 l 768 468 l 768 372 "},"½":{"x_min":0,"x_max":1050,"ha":1149,"o":"m 1050 0 l 625 0 q 712 178 625 108 q 878 277 722 187 q 967 385 967 328 q 932 456 967 429 q 850 484 897 484 q 759 450 798 484 q 721 352 721 416 l 640 352 q 706 502 640 448 q 851 551 766 551 q 987 509 931 551 q 1050 385 1050 462 q 976 251 1050 301 q 829 179 902 215 q 717 68 740 133 l 1050 68 l 1050 0 m 834 985 l 215 -28 l 130 -28 l 750 984 l 834 985 m 224 422 l 142 422 l 142 811 l 0 811 l 0 867 q 104 889 62 867 q 164 973 157 916 l 224 973 l 224 422 "},"Ρ":{"x_min":0,"x_max":720,"ha":783,"o":"m 424 1013 q 637 933 554 1013 q 720 723 720 853 q 633 508 720 591 q 413 426 546 426 l 140 426 l 140 0 l 0 0 l 0 1013 l 424 1013 m 378 889 l 140 889 l 140 548 l 371 548 q 521 589 458 548 q 592 720 592 637 q 527 845 592 801 q 378 889 463 889 "},"'":{"x_min":0,"x_max":139,"ha":236,"o":"m 139 851 q 102 737 139 784 q 0 669 65 690 l 0 734 q 59 787 42 741 q 72 873 72 821 l 0 873 l 0 1013 l 139 1013 l 139 851 "},"ª":{"x_min":0,"x_max":350,"ha":397,"o":"m 350 625 q 307 616 328 616 q 266 631 281 616 q 247 673 251 645 q 190 628 225 644 q 116 613 156 613 q 32 641 64 613 q 0 722 0 669 q 72 826 0 800 q 247 866 159 846 l 247 887 q 220 934 247 916 q 162 953 194 953 q 104 934 129 953 q 76 882 80 915 l 16 882 q 60 976 16 941 q 166 1011 104 1011 q 266 979 224 1011 q 308 891 308 948 l 308 706 q 311 679 308 688 q 331 670 315 670 l 350 672 l 350 625 m 247 757 l 247 811 q 136 790 175 798 q 64 726 64 773 q 83 682 64 697 q 132 667 103 667 q 207 690 174 667 q 247 757 247 718 "},"΅":{"x_min":0,"x_max":450,"ha":553,"o":"m 450 800 l 340 800 l 340 925 l 450 925 l 450 800 m 406 1040 l 212 800 l 129 800 l 269 1040 l 406 1040 m 110 800 l 0 800 l 0 925 l 110 925 l 110 800 "},"T":{"x_min":0,"x_max":777,"ha":835,"o":"m 777 894 l 458 894 l 458 0 l 319 0 l 319 894 l 0 894 l 0 1013 l 777 1013 l 777 894 "},"Φ":{"x_min":0,"x_max":915,"ha":997,"o":"m 527 0 l 389 0 l 389 122 q 110 231 220 122 q 0 509 0 340 q 110 785 0 677 q 389 893 220 893 l 389 1013 l 527 1013 l 527 893 q 804 786 693 893 q 915 509 915 679 q 805 231 915 341 q 527 122 696 122 l 527 0 m 527 226 q 712 310 641 226 q 779 507 779 389 q 712 705 779 627 q 527 787 641 787 l 527 226 m 389 226 l 389 787 q 205 698 275 775 q 136 505 136 620 q 206 308 136 391 q 389 226 276 226 "},"⁋":{"x_min":0,"x_max":0,"ha":694},"j":{"x_min":-77.78125,"x_max":167,"ha":349,"o":"m 167 871 l 42 871 l 42 1013 l 167 1013 l 167 871 m 167 -80 q 121 -231 167 -184 q -26 -278 76 -278 l -77 -278 l -77 -164 l -41 -164 q 26 -143 11 -164 q 42 -65 42 -122 l 42 737 l 167 737 l 167 -80 "},"Σ":{"x_min":0,"x_max":756.953125,"ha":819,"o":"m 756 0 l 0 0 l 0 107 l 395 523 l 22 904 l 22 1013 l 745 1013 l 745 889 l 209 889 l 566 523 l 187 125 l 756 125 l 756 0 "},"1":{"x_min":215.671875,"x_max":574,"ha":792,"o":"m 574 0 l 442 0 l 442 697 l 215 697 l 215 796 q 386 833 330 796 q 475 986 447 875 l 574 986 l 574 0 "},"›":{"x_min":18.0625,"x_max":774,"ha":792,"o":"m 774 376 l 18 40 l 18 149 l 631 421 l 18 692 l 18 799 l 774 465 l 774 376 "},"<":{"x_min":17.984375,"x_max":773.609375,"ha":792,"o":"m 773 40 l 18 376 l 17 465 l 773 799 l 773 692 l 159 420 l 773 149 l 773 40 "},"£":{"x_min":0,"x_max":704.484375,"ha":801,"o":"m 704 41 q 623 -10 664 5 q 543 -26 583 -26 q 359 15 501 -26 q 243 36 288 36 q 158 23 197 36 q 73 -21 119 10 l 6 76 q 125 195 90 150 q 175 331 175 262 q 147 443 175 383 l 0 443 l 0 512 l 108 512 q 43 734 43 623 q 120 929 43 854 q 358 1010 204 1010 q 579 936 487 1010 q 678 729 678 857 l 678 684 l 552 684 q 504 838 552 780 q 362 896 457 896 q 216 852 263 896 q 176 747 176 815 q 199 627 176 697 q 248 512 217 574 l 468 512 l 468 443 l 279 443 q 297 356 297 398 q 230 194 297 279 q 153 107 211 170 q 227 133 190 125 q 293 142 264 142 q 410 119 339 142 q 516 96 482 96 q 579 105 550 96 q 648 142 608 115 l 704 41 "},"t":{"x_min":0,"x_max":367,"ha":458,"o":"m 367 0 q 312 -5 339 -2 q 262 -8 284 -8 q 145 28 183 -8 q 108 143 108 64 l 108 638 l 0 638 l 0 738 l 108 738 l 108 944 l 232 944 l 232 738 l 367 738 l 367 638 l 232 638 l 232 185 q 248 121 232 140 q 307 102 264 102 q 345 104 330 102 q 367 107 360 107 l 367 0 "},"¬":{"x_min":0,"x_max":706,"ha":803,"o":"m 706 411 l 706 158 l 630 158 l 630 335 l 0 335 l 0 411 l 706 411 "},"λ":{"x_min":0,"x_max":750,"ha":803,"o":"m 750 -7 q 679 -15 716 -15 q 538 59 591 -15 q 466 214 512 97 l 336 551 l 126 0 l 0 0 l 270 705 q 223 837 247 770 q 116 899 190 899 q 90 898 100 899 l 90 1004 q 152 1011 125 1011 q 298 938 244 1011 q 373 783 326 901 l 605 192 q 649 115 629 136 q 716 95 669 95 l 736 95 q 750 97 745 97 l 750 -7 "},"W":{"x_min":0,"x_max":1263.890625,"ha":1351,"o":"m 1263 1013 l 995 0 l 859 0 l 627 837 l 405 0 l 265 0 l 0 1013 l 136 1013 l 342 202 l 556 1013 l 701 1013 l 921 207 l 1133 1012 l 1263 1013 "},">":{"x_min":18.0625,"x_max":774,"ha":792,"o":"m 774 376 l 18 40 l 18 149 l 631 421 l 18 692 l 18 799 l 774 465 l 774 376 "},"v":{"x_min":0,"x_max":675.15625,"ha":761,"o":"m 675 738 l 404 0 l 272 0 l 0 738 l 133 737 l 340 147 l 541 737 l 675 738 "},"τ":{"x_min":0.28125,"x_max":644.5,"ha":703,"o":"m 644 628 l 382 628 l 382 179 q 388 120 382 137 q 436 91 401 91 q 474 94 447 91 q 504 97 501 97 l 504 0 q 454 -9 482 -5 q 401 -14 426 -14 q 278 67 308 -14 q 260 233 260 118 l 260 628 l 0 628 l 0 739 l 644 739 l 644 628 "},"ξ":{"x_min":0,"x_max":624.9375,"ha":699,"o":"m 624 -37 q 608 -153 624 -96 q 563 -278 593 -211 l 454 -278 q 491 -183 486 -200 q 511 -83 511 -126 q 484 -23 511 -44 q 370 1 452 1 q 323 0 354 1 q 283 -1 293 -1 q 84 76 169 -1 q 0 266 0 154 q 56 431 0 358 q 197 538 108 498 q 94 613 134 562 q 54 730 54 665 q 77 823 54 780 q 143 901 101 867 l 27 901 l 27 1012 l 576 1012 l 576 901 l 380 901 q 244 863 303 901 q 178 745 178 820 q 312 600 178 636 q 532 582 380 582 l 532 479 q 276 455 361 479 q 118 281 118 410 q 165 173 118 217 q 274 120 208 133 q 494 101 384 110 q 624 -37 624 76 "},"&":{"x_min":-3,"x_max":894.25,"ha":992,"o":"m 894 0 l 725 0 l 624 123 q 471 0 553 40 q 306 -41 390 -41 q 168 -7 231 -41 q 62 92 105 26 q 14 187 31 139 q -3 276 -3 235 q 55 433 -3 358 q 248 581 114 508 q 170 689 196 640 q 137 817 137 751 q 214 985 137 922 q 384 1041 284 1041 q 548 988 483 1041 q 622 824 622 928 q 563 666 622 739 q 431 556 516 608 l 621 326 q 649 407 639 361 q 663 493 653 426 l 781 493 q 703 229 781 352 l 894 0 m 504 818 q 468 908 504 877 q 384 940 433 940 q 293 907 331 940 q 255 818 255 875 q 289 714 255 767 q 363 628 313 678 q 477 729 446 682 q 504 818 504 771 m 556 209 l 314 499 q 179 395 223 449 q 135 283 135 341 q 146 222 135 253 q 183 158 158 192 q 333 80 241 80 q 556 209 448 80 "},"Λ":{"x_min":0,"x_max":862.5,"ha":942,"o":"m 862 0 l 719 0 l 426 847 l 143 0 l 0 0 l 356 1013 l 501 1013 l 862 0 "},"I":{"x_min":41,"x_max":180,"ha":293,"o":"m 180 0 l 41 0 l 41 1013 l 180 1013 l 180 0 "},"G":{"x_min":0,"x_max":921,"ha":1011,"o":"m 921 0 l 832 0 l 801 136 q 655 15 741 58 q 470 -28 568 -28 q 126 133 259 -28 q 0 499 0 284 q 125 881 0 731 q 486 1043 259 1043 q 763 957 647 1043 q 905 709 890 864 l 772 709 q 668 866 747 807 q 486 926 589 926 q 228 795 322 926 q 142 507 142 677 q 228 224 142 342 q 483 94 323 94 q 712 195 625 94 q 796 435 796 291 l 477 435 l 477 549 l 921 549 l 921 0 "},"ΰ":{"x_min":0,"x_max":617,"ha":725,"o":"m 524 800 l 414 800 l 414 925 l 524 925 l 524 800 m 183 800 l 73 800 l 73 925 l 183 925 l 183 800 m 617 352 q 540 93 617 199 q 308 -24 455 -24 q 76 93 161 -24 q 0 352 0 199 l 0 738 l 126 738 l 126 354 q 169 185 126 257 q 312 98 220 98 q 451 185 402 98 q 492 354 492 257 l 492 738 l 617 738 l 617 352 m 489 1040 l 300 819 l 216 819 l 351 1040 l 489 1040 "},"`":{"x_min":0,"x_max":138.890625,"ha":236,"o":"m 138 699 l 0 699 l 0 861 q 36 974 0 929 q 138 1041 72 1020 l 138 977 q 82 931 95 969 q 69 839 69 893 l 138 839 l 138 699 "},"·":{"x_min":0,"x_max":142,"ha":239,"o":"m 142 585 l 0 585 l 0 738 l 142 738 l 142 585 "},"Υ":{"x_min":0.328125,"x_max":819.515625,"ha":889,"o":"m 819 1013 l 482 416 l 482 0 l 342 0 l 342 416 l 0 1013 l 140 1013 l 411 533 l 679 1013 l 819 1013 "},"r":{"x_min":0,"x_max":355.5625,"ha":432,"o":"m 355 621 l 343 621 q 179 569 236 621 q 122 411 122 518 l 122 0 l 0 0 l 0 737 l 117 737 l 117 604 q 204 719 146 686 q 355 753 262 753 l 355 621 "},"x":{"x_min":0,"x_max":675,"ha":764,"o":"m 675 0 l 525 0 l 331 286 l 144 0 l 0 0 l 256 379 l 12 738 l 157 737 l 336 473 l 516 738 l 661 738 l 412 380 l 675 0 "},"μ":{"x_min":0,"x_max":696.609375,"ha":747,"o":"m 696 -4 q 628 -14 657 -14 q 498 97 513 -14 q 422 8 470 41 q 313 -24 374 -24 q 207 3 258 -24 q 120 80 157 31 l 120 -278 l 0 -278 l 0 738 l 124 738 l 124 343 q 165 172 124 246 q 308 82 216 82 q 451 177 402 82 q 492 358 492 254 l 492 738 l 616 738 l 616 214 q 623 136 616 160 q 673 92 636 92 q 696 95 684 92 l 696 -4 "},"h":{"x_min":0,"x_max":615,"ha":724,"o":"m 615 472 l 615 0 l 490 0 l 490 454 q 456 590 490 535 q 338 654 416 654 q 186 588 251 654 q 122 436 122 522 l 122 0 l 0 0 l 0 1013 l 122 1013 l 122 633 q 218 727 149 694 q 362 760 287 760 q 552 676 484 760 q 615 472 615 600 "},".":{"x_min":0,"x_max":142,"ha":239,"o":"m 142 0 l 0 0 l 0 151 l 142 151 l 142 0 "},"φ":{"x_min":-2,"x_max":878,"ha":974,"o":"m 496 -279 l 378 -279 l 378 -17 q 101 88 204 -17 q -2 367 -2 194 q 68 626 -2 510 q 283 758 151 758 l 283 646 q 167 537 209 626 q 133 373 133 462 q 192 177 133 254 q 378 93 259 93 l 378 758 q 445 764 426 763 q 476 765 464 765 q 765 659 653 765 q 878 377 878 553 q 771 96 878 209 q 496 -17 665 -17 l 496 -279 m 496 93 l 514 93 q 687 183 623 93 q 746 380 746 265 q 691 569 746 491 q 522 658 629 658 l 496 656 l 496 93 "},";":{"x_min":0,"x_max":142,"ha":239,"o":"m 142 585 l 0 585 l 0 738 l 142 738 l 142 585 m 142 -12 q 105 -132 142 -82 q 0 -206 68 -182 l 0 -138 q 58 -82 43 -123 q 68 0 68 -56 l 0 0 l 0 151 l 142 151 l 142 -12 "},"f":{"x_min":0,"x_max":378,"ha":472,"o":"m 378 638 l 246 638 l 246 0 l 121 0 l 121 638 l 0 638 l 0 738 l 121 738 q 137 935 121 887 q 290 1028 171 1028 q 320 1027 305 1028 q 378 1021 334 1026 l 378 908 q 323 918 346 918 q 257 870 273 918 q 246 780 246 840 l 246 738 l 378 738 l 378 638 "},"“":{"x_min":1,"x_max":348.21875,"ha":454,"o":"m 140 670 l 1 670 l 1 830 q 37 943 1 897 q 140 1011 74 990 l 140 947 q 82 900 97 940 q 68 810 68 861 l 140 810 l 140 670 m 348 670 l 209 670 l 209 830 q 245 943 209 897 q 348 1011 282 990 l 348 947 q 290 900 305 940 q 276 810 276 861 l 348 810 l 348 670 "},"A":{"x_min":0.03125,"x_max":906.953125,"ha":1008,"o":"m 906 0 l 756 0 l 648 303 l 251 303 l 142 0 l 0 0 l 376 1013 l 529 1013 l 906 0 m 610 421 l 452 867 l 293 421 l 610 421 "},"6":{"x_min":53,"x_max":739,"ha":792,"o":"m 739 312 q 633 62 739 162 q 400 -31 534 -31 q 162 78 257 -31 q 53 439 53 206 q 178 859 53 712 q 441 986 284 986 q 643 912 559 986 q 732 713 732 833 l 601 713 q 544 830 594 786 q 426 875 494 875 q 268 793 331 875 q 193 517 193 697 q 301 597 240 570 q 427 624 362 624 q 643 540 552 624 q 739 312 739 451 m 603 298 q 540 461 603 400 q 404 516 484 516 q 268 461 323 516 q 207 300 207 401 q 269 137 207 198 q 405 83 325 83 q 541 137 486 83 q 603 298 603 197 "},"‘":{"x_min":1,"x_max":139.890625,"ha":236,"o":"m 139 670 l 1 670 l 1 830 q 37 943 1 897 q 139 1011 74 990 l 139 947 q 82 900 97 940 q 68 810 68 861 l 139 810 l 139 670 "},"ϊ":{"x_min":-70,"x_max":283,"ha":361,"o":"m 283 800 l 173 800 l 173 925 l 283 925 l 283 800 m 40 800 l -70 800 l -70 925 l 40 925 l 40 800 m 283 3 q 232 -10 257 -5 q 181 -15 206 -15 q 84 26 118 -15 q 41 200 41 79 l 41 737 l 166 737 l 167 215 q 171 141 167 157 q 225 101 182 101 q 247 103 238 101 q 283 112 256 104 l 283 3 "},"π":{"x_min":-0.21875,"x_max":773.21875,"ha":857,"o":"m 773 -7 l 707 -11 q 575 40 607 -11 q 552 174 552 77 l 552 226 l 552 626 l 222 626 l 222 0 l 97 0 l 97 626 l 0 626 l 0 737 l 773 737 l 773 626 l 676 626 l 676 171 q 695 103 676 117 q 773 90 714 90 l 773 -7 "},"ά":{"x_min":0,"x_max":765.5625,"ha":809,"o":"m 765 -4 q 698 -14 726 -14 q 564 97 586 -14 q 466 7 525 40 q 337 -26 407 -26 q 88 98 186 -26 q 0 369 0 212 q 88 637 0 525 q 337 760 184 760 q 465 727 407 760 q 563 637 524 695 l 563 738 l 685 738 l 685 222 q 693 141 685 168 q 748 94 708 94 q 765 95 760 94 l 765 -4 m 584 371 q 531 562 584 485 q 360 653 470 653 q 192 566 254 653 q 135 379 135 489 q 186 181 135 261 q 358 84 247 84 q 528 176 465 84 q 584 371 584 260 m 604 1040 l 415 819 l 332 819 l 466 1040 l 604 1040 "},"O":{"x_min":0,"x_max":958,"ha":1057,"o":"m 485 1041 q 834 882 702 1041 q 958 512 958 734 q 834 136 958 287 q 481 -26 702 -26 q 126 130 261 -26 q 0 504 0 279 q 127 880 0 728 q 485 1041 263 1041 m 480 98 q 731 225 638 98 q 815 504 815 340 q 733 783 815 669 q 480 912 640 912 q 226 784 321 912 q 142 504 142 670 q 226 224 142 339 q 480 98 319 98 "},"n":{"x_min":0,"x_max":615,"ha":724,"o":"m 615 463 l 615 0 l 490 0 l 490 454 q 453 592 490 537 q 331 656 410 656 q 178 585 240 656 q 117 421 117 514 l 117 0 l 0 0 l 0 738 l 117 738 l 117 630 q 218 728 150 693 q 359 764 286 764 q 552 675 484 764 q 615 463 615 593 "},"3":{"x_min":54,"x_max":737,"ha":792,"o":"m 737 284 q 635 55 737 141 q 399 -25 541 -25 q 156 52 248 -25 q 54 308 54 140 l 185 308 q 245 147 185 202 q 395 96 302 96 q 539 140 484 96 q 602 280 602 190 q 510 429 602 390 q 324 454 451 454 l 324 565 q 487 584 441 565 q 565 719 565 617 q 515 835 565 791 q 395 879 466 879 q 255 824 307 879 q 203 661 203 769 l 78 661 q 166 909 78 822 q 387 992 250 992 q 603 921 513 992 q 701 723 701 844 q 669 607 701 656 q 578 524 637 558 q 696 434 655 499 q 737 284 737 369 "},"9":{"x_min":53,"x_max":739,"ha":792,"o":"m 739 524 q 619 94 739 241 q 362 -32 516 -32 q 150 47 242 -32 q 59 244 59 126 l 191 244 q 246 129 191 176 q 373 82 301 82 q 526 161 466 82 q 597 440 597 255 q 363 334 501 334 q 130 432 216 334 q 53 650 53 521 q 134 880 53 786 q 383 986 226 986 q 659 841 566 986 q 739 524 739 719 m 388 449 q 535 514 480 449 q 585 658 585 573 q 535 805 585 744 q 388 873 480 873 q 242 809 294 873 q 191 658 191 745 q 239 514 191 572 q 388 449 292 449 "},"l":{"x_min":41,"x_max":166,"ha":279,"o":"m 166 0 l 41 0 l 41 1013 l 166 1013 l 166 0 "},"¤":{"x_min":40.09375,"x_max":728.796875,"ha":825,"o":"m 728 304 l 649 224 l 512 363 q 383 331 458 331 q 256 363 310 331 l 119 224 l 40 304 l 177 441 q 150 553 150 493 q 184 673 150 621 l 40 818 l 119 898 l 267 749 q 321 766 291 759 q 384 773 351 773 q 447 766 417 773 q 501 749 477 759 l 649 898 l 728 818 l 585 675 q 612 618 604 648 q 621 553 621 587 q 591 441 621 491 l 728 304 m 384 682 q 280 643 318 682 q 243 551 243 604 q 279 461 243 499 q 383 423 316 423 q 487 461 449 423 q 525 553 525 500 q 490 641 525 605 q 384 682 451 682 "},"κ":{"x_min":0,"x_max":632.328125,"ha":679,"o":"m 632 0 l 482 0 l 225 384 l 124 288 l 124 0 l 0 0 l 0 738 l 124 738 l 124 446 l 433 738 l 596 738 l 312 466 l 632 0 "},"4":{"x_min":48,"x_max":742.453125,"ha":792,"o":"m 742 243 l 602 243 l 602 0 l 476 0 l 476 243 l 48 243 l 48 368 l 476 958 l 602 958 l 602 354 l 742 354 l 742 243 m 476 354 l 476 792 l 162 354 l 476 354 "},"p":{"x_min":0,"x_max":685,"ha":786,"o":"m 685 364 q 598 96 685 205 q 350 -23 504 -23 q 121 89 205 -23 l 121 -278 l 0 -278 l 0 738 l 121 738 l 121 633 q 220 726 159 691 q 351 761 280 761 q 598 636 504 761 q 685 364 685 522 m 557 371 q 501 560 557 481 q 330 651 437 651 q 162 559 223 651 q 108 366 108 479 q 162 177 108 254 q 333 87 224 87 q 502 178 441 87 q 557 371 557 258 "},"‡":{"x_min":0,"x_max":777,"ha":835,"o":"m 458 238 l 458 0 l 319 0 l 319 238 l 0 238 l 0 360 l 319 360 l 319 681 l 0 683 l 0 804 l 319 804 l 319 1015 l 458 1013 l 458 804 l 777 804 l 777 683 l 458 683 l 458 360 l 777 360 l 777 238 l 458 238 "},"ψ":{"x_min":0,"x_max":808,"ha":907,"o":"m 465 -278 l 341 -278 l 341 -15 q 87 102 180 -15 q 0 378 0 210 l 0 739 l 133 739 l 133 379 q 182 195 133 275 q 341 98 242 98 l 341 922 l 465 922 l 465 98 q 623 195 563 98 q 675 382 675 278 l 675 742 l 808 742 l 808 381 q 720 104 808 213 q 466 -13 627 -13 l 465 -278 "},"η":{"x_min":0.78125,"x_max":697,"ha":810,"o":"m 697 -278 l 572 -278 l 572 454 q 540 587 572 536 q 425 650 501 650 q 271 579 337 650 q 206 420 206 509 l 206 0 l 81 0 l 81 489 q 73 588 81 562 q 0 644 56 644 l 0 741 q 68 755 38 755 q 158 720 124 755 q 200 630 193 686 q 297 726 234 692 q 434 761 359 761 q 620 692 544 761 q 697 516 697 624 l 697 -278 "}},"cssFontWeight":"normal","ascender":1189,"underlinePosition":-100,"cssFontStyle":"normal","boundingBox":{"yMin":-334,"xMin":-111,"yMax":1189,"xMax":1672},"resolution":1000,"original_font_information":{"postscript_name":"Helvetiker-Regular","version_string":"Version 1.00 2004 initial release","vendor_url":"http://www.magenta.gr/","full_font_name":"Helvetiker","font_family_name":"Helvetiker","copyright":"Copyright (c) Μagenta ltd, 2004","description":"","trademark":"","designer":"","designer_url":"","unique_font_identifier":"Μagenta ltd:Helvetiker:22-10-104","license_url":"http://www.ellak.gr/fonts/MgOpen/license.html","license_description":"Copyright (c) 2004 by MAGENTA Ltd. All Rights Reserved.\r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy of the fonts accompanying this license (\"Fonts\") and associated documentation files (the \"Font Software\"), to reproduce and distribute the Font Software, including without limitation the rights to use, copy, merge, publish, distribute, and/or sell copies of the Font Software, and to permit persons to whom the Font Software is furnished to do so, subject to the following conditions: \r\n\r\nThe above copyright and this permission notice shall be included in all copies of one or more of the Font Software typefaces.\r\n\r\nThe Font Software may be modified, altered, or added to, and in particular the designs of glyphs or characters in the Fonts may be modified and additional glyphs or characters may be added to the Fonts, only if the fonts are renamed to names not containing the word \"MgOpen\", or if the modifications are accepted for inclusion in the Font Software itself by the each appointed Administrator.\r\n\r\nThis License becomes null and void to the extent applicable to Fonts or Font Software that has been modified and is distributed under the \"MgOpen\" name.\r\n\r\nThe Font Software may be sold as part of a larger software package but no copy of one or more of the Font Software typefaces may be sold by itself. \r\n\r\nTHE FONT SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL MAGENTA OR PERSONS OR BODIES IN CHARGE OF ADMINISTRATION AND MAINTENANCE OF THE FONT SOFTWARE BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM OTHER DEALINGS IN THE FONT SOFTWARE.","manufacturer_name":"Μagenta ltd","font_sub_family_name":"Regular"},"descender":-334,"familyName":"Helvetiker","lineHeight":1522,"underlineThickness":50});
+	exports.default = Eagle;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
+/* 527 */,
+/* 528 */,
+/* 529 */,
+/* 530 */,
+/* 531 */,
+/* 532 */,
+/* 533 */,
+/* 534 */,
 /* 535 */,
 /* 536 */,
 /* 537 */,
@@ -123717,249 +124477,15 @@
 /* 553 */,
 /* 554 */,
 /* 555 */,
-/* 556 */
+/* 556 */,
+/* 557 */,
+/* 558 */,
+/* 559 */,
+/* 560 */,
+/* 561 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(141);
-
-/***/ },
-/* 557 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';
-
-	/* global AFRAME */
-
-	/**
-	 * Create ton of entities at random positions.
-	 * Update raycasters to realize the boxes.
-	 */
-	AFRAME.registerComponent('entity-generator', {
-	  schema: {
-	    mixin: { default: '' },
-	    numElements: { default: 2000 },
-	    raycasterEls: { default: '[mixin~="raycaster"]', type: 'selectorAll' },
-	    spread: { default: 50 },
-	    minExclusion: { default: 0 },
-	    maxExclusion: { default: 25 }
-	  },
-
-	  // TODO: make the position of the elements depending on starting position
-	  init: function init() {
-	    var data = this.data;
-	    // Create entities with supplied mixin.
-	    for (var i = 0; i < data.numElements; i++) {
-	      var entity = document.createElement('a-entity');
-
-	      entity.setAttribute('mixin', data.mixin);
-	      // Set random position with supplied spread.
-	      entity.setAttribute('position', {
-	        x: getSpread(data.spread),
-	        y: getSpread(data.spread),
-	        z: getSpread(data.spread)
-	      });
-	      this.el.appendChild(entity);
-	    }
-	    // Refresh raycasters.
-	    if (!data.raycasterEls) {
-	      return;
-	    }
-	    for (i = 0; i < data.raycasterEls.length; i++) {
-	      data.raycasterEls[i].components.raycaster.refreshObjects();
-	    }
-	  }
-	});
-
-	AFRAME.registerComponent('entity-generator-positive-y', {
-	  schema: {
-	    mixin: { default: '' },
-	    numElements: { default: 2000 },
-	    raycasterEls: { default: '[mixin~="raycaster"]', type: 'selectorAll' },
-	    spread: { default: 50 },
-	    minExclusion: { default: 0 },
-	    maxExclusion: { default: 25 }
-	  },
-
-	  // TODO: make the position of the elements depending on starting position
-	  init: function init() {
-	    var data = this.data;
-	    // Create entities with supplied mixin.
-	    for (var i = 0; i < data.numElements; i++) {
-	      var entity = document.createElement('a-entity');
-
-	      entity.setAttribute('mixin', data.mixin);
-	      // Set random position with supplied spread.
-	      entity.setAttribute('position', {
-	        x: getSpecificSpread(data.spread, data.minExclusion, data.maxExclusion),
-	        y: getPositiveSpread(data.spread, 0, 0),
-	        z: getSpecificSpread(data.spread, data.minExclusion, data.maxExclusion)
-	      });
-	      this.el.appendChild(entity);
-	    }
-	    // Refresh raycasters.
-	    if (!data.raycasterEls) {
-	      return;
-	    }
-	    for (i = 0; i < data.raycasterEls.length; i++) {
-	      data.raycasterEls[i].components.raycaster.refreshObjects();
-	    }
-	  }
-	});
-
-	AFRAME.registerComponent('entity-generator-primitive', {
-	  schema: {
-	    mixin: { default: '' },
-	    numElements: { default: 2000 },
-	    raycasterEls: { default: '[mixin~="raycaster"]', type: 'selectorAll' },
-	    spread: { default: 50 },
-	    minExclusion: { default: 0 },
-	    maxExclusion: { default: 25 }
-	  },
-
-	  // TODO: make the position of the elements depending on starting position
-	  init: function init() {
-	    var data = this.data;
-	    // Create entities with supplied mixin.
-	    for (var i = 0; i < data.numElements; i++) {
-	      var entity = document.createElement('a-entity');
-	      entity.setAttribute('mixin', data.mixin);
-	      // Set random position with supplied spread.
-	      entity.setAttribute('position', {
-	        x: getSpecificSpread(data.spread, data.minExclusion, data.maxExclusion),
-	        y: getPositiveSpread(data.spread, data.minExclusion, data.maxExclusion),
-	        z: getSpecificSpread(data.spread, data.minExclusion, data.maxExclusion)
-	      });
-	      this.el.appendChild(entity);
-	    }
-	    // Refresh raycasters.
-	    if (!data.raycasterEls) {
-	      return;
-	    }
-	    for (i = 0; i < data.raycasterEls.length; i++) {
-	      data.raycasterEls[i].components.raycaster.refreshObjects();
-	    }
-	  }
-	});
-
-	AFRAME.registerComponent('entity-generator-collada', {
-	  schema: {
-	    collada: { default: '' },
-	    numElements: { default: 2000 },
-	    raycasterEls: { default: '[mixin~="raycaster"]', type: 'selectorAll' },
-	    spread: { default: 50 },
-	    minExclusion: { default: 0 },
-	    maxExclusion: { default: 25 }
-	  },
-
-	  // TODO: make the position of the elements depending on starting position
-	  init: function init() {
-	    var data = this.data;
-	    // Create entities with supplied mixin.
-	    for (var i = 0; i < data.numElements; i++) {
-	      var entity = document.createElement('a-entity');
-	      entity.setAttribute('collada-model', data.collada);
-	      entity.setAttribute('rotation', {
-	        x: 0,
-	        y: getRandomDegree(),
-	        z: 0
-	      });
-	      // Set random position with supplied spread.
-	      entity.setAttribute('position', {
-	        x: getSpecificSpread(data.spread, data.minExclusion, data.maxExclusion),
-	        y: 0,
-	        z: getSpecificSpread(data.spread, data.minExclusion, data.maxExclusion)
-	      });
-	      this.el.appendChild(entity);
-	    }
-	    // Refresh raycasters.
-	    if (!data.raycasterEls) {
-	      return;
-	    }
-	    for (i = 0; i < data.raycasterEls.length; i++) {
-	      data.raycasterEls[i].components.raycaster.refreshObjects();
-	    }
-	  }
-	});
-
-	AFRAME.registerComponent('entity-generator-planets', {
-	  schema: {
-	    mixin: { default: '' },
-	    numElements: { default: 2000 },
-	    raycasterEls: { default: '[mixin~="raycaster"]', type: 'selectorAll' },
-	    spread: { default: 50 },
-	    minExclusion: { default: 0 },
-	    maxExclusion: { default: 25 }
-	  },
-
-	  // TODO: make the position of the elements depending on starting position
-	  init: function init() {
-	    var data = this.data;
-	    // Create entities with supplied mixin.
-	    for (var i = 0; i < data.numElements; i++) {
-	      var entity = document.createElement('a-entity');
-	      entity.setAttribute('mixin', data.mixin);
-	      entity.setAttribute('geometry', { 'radius': Math.random() * 25 });
-	      entity.setAttribute('material', { 'color': getRandomColor() });
-	      // Set random position with supplied spread.
-	      entity.setAttribute('position', {
-	        x: getSpecificSpread(data.spread, data.minExclusion, data.maxExclusion),
-	        y: getSpecificSpread(data.spread, data.minExclusion, data.maxExclusion),
-	        z: getSpecificSpread(data.spread, data.minExclusion, data.maxExclusion)
-	      });
-	      this.el.appendChild(entity);
-	    }
-	    // Refresh raycasters.
-	    if (!data.raycasterEls) {
-	      return;
-	    }
-	    for (i = 0; i < data.raycasterEls.length; i++) {
-	      data.raycasterEls[i].components.raycaster.refreshObjects();
-	    }
-	  }
-	});
-
-	function getPositiveSpread(spread, minExclusion, maxExclusion) {
-	  var value = 0;
-
-	  value = Math.floor(Math.random() * spread) + 1;
-	  while (value < maxExclusion && value > minExclusion) {
-	    return getPositiveSpread(spread, minExclusion, maxExclusion);
-	  }return value;
-	}
-
-	function getRandomDegree() {
-	  var value = Math.random() * 360;
-	  return value;
-	}
-
-	function getRandomColor() {
-	  var letters = '0123456789ABCDEF'.split('');
-	  var color = '#';
-	  for (var i = 0; i < 6; i++) {
-	    color += letters[Math.floor(Math.random() * 16)];
-	  }
-	  return color;
-	}
-	function getSpecificSpread(spread, minExclusion, maxExclusion) {
-	  var value = 0;
-
-	  value = Math.floor(Math.random() * spread) + 1;
-	  value *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
-	  while (value < maxExclusion && value > minExclusion) {
-	    return getSpecificSpread(spread, minExclusion, maxExclusion);
-	  }return value;
-	}
-
-	function getSpread(spread) {
-	  return Math.random() * spread - spread / 2;
-	}
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(455)))
-
-/***/ },
-/* 558 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -123967,13 +124493,39 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	var _aframeExtras = __webpack_require__(475);
+
+	var _aframeExtras2 = _interopRequireDefault(_aframeExtras);
+
 	var _aframeReact = __webpack_require__(460);
 
-	var _react = __webpack_require__(1);
+	var _WalkableCameraCursor = __webpack_require__(465);
 
-	var _react2 = _interopRequireDefault(_react);
+	var _WalkableCameraCursor2 = _interopRequireDefault(_WalkableCameraCursor);
 
-	__webpack_require__(559);
+	var _Ocean = __webpack_require__(474);
+
+	var _Ocean2 = _interopRequireDefault(_Ocean);
+
+	var _Sky = __webpack_require__(470);
+
+	var _Sky2 = _interopRequireDefault(_Sky);
+
+	var _SchoolOfFishes = __webpack_require__(523);
+
+	var _SchoolOfFishes2 = _interopRequireDefault(_SchoolOfFishes);
+
+	var _HerdOfHorses = __webpack_require__(524);
+
+	var _HerdOfHorses2 = _interopRequireDefault(_HerdOfHorses);
+
+	var _Butterflies = __webpack_require__(525);
+
+	var _Butterflies2 = _interopRequireDefault(_Butterflies);
+
+	var _Eagle = __webpack_require__(526);
+
+	var _Eagle2 = _interopRequireDefault(_Eagle);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -123981,97 +124533,62 @@
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 _AnimalFarm.js
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Animals running around and stuff scene.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Optimal case is that you include this ontop of any scene.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
 
-	var RainingObjects = function (_React$Component) {
-	  _inherits(RainingObjects, _React$Component);
+	var AnimalFarm = function (_React$Component) {
+	  _inherits(AnimalFarm, _React$Component);
 
-	  function RainingObjects(props) {
-	    _classCallCheck(this, RainingObjects);
+	  function AnimalFarm(props) {
+	    _classCallCheck(this, AnimalFarm);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RainingObjects).call(this, props));
-
-	    _this.state = {};
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(AnimalFarm).call(this, props));
 	  }
 
-	  _createClass(RainingObjects, [{
-	    key: 'shouldComponentUpdate',
-	    value: function shouldComponentUpdate(nextProps, nextState) {
-	      return false;
+	  /**
+	    componentWillMount
+	    Registers the importer for animals.
+	  */
+
+
+	  _createClass(AnimalFarm, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      _aframeExtras2.default.registerAll();
 	    }
+
+	    /**
+	      <HerdOfHorses position={[0, -100, -300]} rotation={[0, 90, 0]}/>
+	       <SchoolOfFishes position={[-500, -100, -300]} rotation={[0, 90, 0]}>
+	        <Animation attribute='position' to={[500, -100, -300]} dur="10000"/>
+	      </SchoolOfFishes>
+	     */
+
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_aframeReact.Entity, {
-	        "entity-generator-positive-y": {
-	          numElements: this.props.numElements,
-	          mixin: this.props.mixin,
-	          spread: this.props.spread,
-	          minExclusion: this.props.minExclusion,
-	          maxExclusion: this.props.maxExclusion
-	        },
-	        position: this.props.position
-	      }, _react2.default.createElement(_aframeReact.Animation, {
-	        attribute: "position",
-	        dur: this.props.duration,
-	        easing: "linear",
-	        repeat: "indefinite",
-	        to: this.props.position,
-	        direction: this.props.animationDirection
-	      }));
+	      return React.createElement(
+	        _aframeReact.Entity,
+	        null,
+	        React.createElement(
+	          _aframeReact.Entity,
+	          null,
+	          React.createElement(_WalkableCameraCursor2.default, { position: [0, 0, 0] })
+	        ),
+	        React.createElement(_Eagle2.default, { position: [0, 0, -300], rotation: [0, 90, 0] }),
+	        React.createElement(_Sky2.default, { color: 'black' })
+	      );
 	    }
 	  }]);
 
-	  return RainingObjects;
-	}(_react2.default.Component);
+	  return AnimalFarm;
+	}(React.Component);
 
-	RainingObjects.defaultProps = {
-	  animationDirection: { default: 'normal' },
-	  mixin: { default: '' },
-	  numElements: 2000,
-	  spread: 50,
-	  position: '0 10 0',
-	  duration: 16000,
-	  minExclusion: 0,
-	  maxExclusion: 25
-	};
-	;
-
-	exports.default = RainingObjects;
-
-/***/ },
-/* 559 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(AFRAME) {'use strict';
-
-	AFRAME.registerComponent('collider', {
-	  dependencies: ['raycaster'],
-	  init: function init() {
-	    console.log('init collider');
-	    var el = this.el;
-
-	    // Set color using raycaster parent color.
-	    el.addEventListener('raycaster-intersected', function (evt) {
-	      console.log('intersected');
-	    });
-
-	    // Reset color.
-	    el.addEventListener('raycaster-intersected-cleared', function (evt) {
-	      console.log('intersected cleared');
-	    });
-	  }
-	});
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(455)))
-
-/***/ },
-/* 560 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	if (_typeface_js && _typeface_js.loadFace) _typeface_js.loadFace({ "glyphs": { "0": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "1": { "ha": 889, "x_min": 17, "x_max": 654, "o": "m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "2": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "3": { "ha": 889, "x_min": 17, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "4": { "ha": 889, "x_min": 32, "x_max": 844, "o": "m 793 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 793 500 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 674 -169 l 633 -107 l 683 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 174 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 z " }, "5": { "ha": 889, "x_min": 17, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "6": { "ha": 889, "x_min": -36, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "7": { "ha": 889, "x_min": 64, "x_max": 783, "o": "m 783 1029 l 728 971 l 524 971 l 481 1026 l 536 1085 l 742 1085 l 783 1029 m 713 801 l 508 497 l 467 497 l 481 617 l 704 950 l 729 950 l 713 801 m 449 1029 l 393 971 l 188 971 l 146 1026 l 201 1085 l 407 1085 l 449 1029 m 313 222 l 88 -111 l 64 -111 l 81 36 l 285 342 l 325 342 l 313 222 z " }, "8": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "9": { "ha": 889, "x_min": 17, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, " ": { "ha": 889, "x_min": 0, "x_max": 0, "o": "" }, "!": { "ha": 889, "x_min": 260, "x_max": 514, "o": "m 464 500 l 413 439 l 371 500 l 422 946 l 474 1007 l 514 946 l 464 500 m 425 -144 q 397 -212 421 -183 q 333 -246 371 -246 q 278 -211 299 -246 q 264 -144 260 -181 q 294 -76 269 -106 q 356 -46 319 -46 q 411 -76 393 -46 q 425 -144 429 -106 z " }, "\"": { "ha": 889, "x_min": 14, "x_max": 458, "o": "m 440 778 l 389 717 l 349 778 l 368 946 l 419 1007 l 458 946 l 440 778 m 106 778 l 53 717 l 14 778 l 32 946 l 85 1007 l 125 946 l 106 778 z " }, "#": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 793 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 793 500 m 458 500 l 407 439 l 367 500 l 417 946 l 469 1007 l 508 946 l 458 500 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 674 -169 l 633 -107 l 683 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 174 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 440 338 l 390 -107 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "$": { "ha": 889, "x_min": 17, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 z " }, "%": { "ha": 889, "x_min": 32, "x_max": 775, "o": "m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 z " }, "&": { "ha": 889, "x_min": -36, "x_max": 668, "o": "m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 m 654 222 l 431 -111 l 407 -111 l 424 36 l 628 342 l 668 342 l 654 222 z " }, "'": { "ha": 889, "x_min": 349, "x_max": 458, "o": "m 440 778 l 389 717 l 349 778 l 368 946 l 419 1007 l 458 946 l 440 778 z " }, "(": { "ha": 889, "x_min": 299, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 z " }, ")": { "ha": 889, "x_min": 17, "x_max": 508, "o": "m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "*": { "ha": 889, "x_min": 71, "x_max": 736, "o": "m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 350 497 l 310 497 l 175 801 l 192 950 l 215 950 l 364 617 l 350 497 m 617 -111 l 592 -111 l 444 222 l 458 342 l 497 342 l 633 36 l 617 -111 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 z " }, "+": { "ha": 889, "x_min": 85, "x_max": 724, "o": "m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 z " }, ",": { "ha": 889, "x_min": 324, "x_max": 493, "o": "m 489 -144 q 456 -253 483 -189 q 388 -329 421 -329 q 339 -257 357 -329 q 329 -144 324 -196 q 358 -76 333 -106 q 419 -46 382 -46 q 475 -76 457 -46 q 489 -144 493 -106 z " }, "-": { "ha": 889, "x_min": 85, "x_max": 724, "o": "m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 z " }, ".": { "ha": 889, "x_min": 319, "x_max": 489, "o": "m 485 -144 q 454 -214 481 -182 q 392 -246 428 -246 q 338 -211 357 -246 q 324 -144 319 -181 q 353 -76 328 -106 q 415 -46 378 -46 q 471 -76 453 -46 q 485 -144 489 -106 z " }, "/": { "ha": 889, "x_min": 71, "x_max": 736, "o": "m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 z " }, ":": { "ha": 889, "x_min": 299, "x_max": 510, "o": "m 506 604 q 478 538 501 565 q 414 506 451 506 q 357 538 376 506 q 344 604 340 565 q 374 674 349 643 q 436 706 399 706 q 492 674 474 706 q 506 604 510 643 m 464 235 q 433 164 460 196 q 371 132 407 132 q 315 167 335 132 q 303 235 299 197 q 333 304 308 275 q 394 333 357 333 q 449 302 431 333 q 464 235 467 271 z " }, ";": { "ha": 889, "x_min": 304, "x_max": 514, "o": "m 510 604 q 482 538 506 565 q 418 506 456 506 q 361 538 381 506 q 349 604 344 565 q 378 674 353 643 q 442 706 404 706 q 497 671 478 706 q 510 604 514 642 m 468 235 q 432 122 463 188 q 367 49 397 49 q 318 125 336 49 q 308 235 304 188 q 336 304 313 275 q 399 333 360 333 q 453 303 435 333 q 468 235 472 272 z " }, "<": { "ha": 889, "x_min": 444, "x_max": 736, "o": "m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 617 -111 l 592 -111 l 444 222 l 458 342 l 497 342 l 633 36 l 617 -111 z " }, "=": { "ha": 889, "x_min": 69, "x_max": 739, "o": "m 739 560 l 683 501 l 478 501 l 436 557 l 492 615 l 696 615 l 739 560 m 403 560 l 347 501 l 143 501 l 100 557 l 156 615 l 361 615 l 403 560 m 708 282 l 653 224 l 447 224 l 404 279 l 460 338 l 664 338 l 708 282 m 372 282 l 317 224 l 113 224 l 69 279 l 125 338 l 331 338 l 372 282 z " }, ">": { "ha": 889, "x_min": 71, "x_max": 364, "o": "m 350 497 l 310 497 l 175 801 l 192 950 l 215 950 l 364 617 l 350 497 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 z " }, "?": { "ha": 889, "x_min": 149, "x_max": 840, "o": "m 786 1029 l 731 971 l 526 971 l 483 1026 l 539 1085 l 744 1085 l 786 1029 m 790 500 l 738 439 l 697 500 l 749 949 l 800 1010 l 840 949 l 790 500 m 453 1029 l 397 971 l 192 971 l 149 1026 l 204 1085 l 408 1085 l 453 1029 m 719 421 l 664 363 l 458 363 l 415 418 l 471 476 l 675 476 l 719 421 m 386 -107 l 335 -169 l 294 -107 l 344 338 l 397 399 l 436 338 l 386 -107 z " }, "@": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 350 497 l 310 497 l 175 801 l 192 950 l 215 950 l 364 617 l 350 497 m 617 -111 l 592 -111 l 444 222 l 458 342 l 497 342 l 633 36 l 617 -111 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "A": { "ha": 889, "x_min": -33, "x_max": 779, "o": "m 689 497 l 647 497 l 513 801 l 529 950 l 553 950 l 703 617 l 689 497 m 726 421 l 671 363 l 465 363 l 424 418 l 479 476 l 683 476 l 726 421 m 729 -107 l 678 -169 l 636 -107 l 688 338 l 739 399 l 779 338 l 729 -107 m 388 801 l 183 497 l 143 497 l 157 617 l 381 950 l 404 950 l 388 801 m 392 421 l 336 363 l 131 363 l 88 418 l 143 476 l 349 476 l 392 421 m 58 -107 l 7 -169 l -33 -107 l 17 338 l 69 399 l 108 338 l 58 -107 z " }, "B": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "C": { "ha": 889, "x_min": -36, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "D": { "ha": 889, "x_min": -36, "x_max": 699, "o": "m 686 497 l 646 497 l 508 801 l 525 950 l 550 950 l 699 617 l 686 497 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 654 222 l 431 -111 l 407 -111 l 424 36 l 628 342 l 668 342 l 654 222 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "E": { "ha": 889, "x_min": -36, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "F": { "ha": 889, "x_min": -42, "x_max": 786, "o": "m 786 1029 l 731 971 l 526 971 l 483 1026 l 539 1085 l 744 1085 l 786 1029 m 453 1029 l 397 971 l 192 971 l 149 1026 l 204 1085 l 408 1085 l 453 1029 m 719 421 l 664 363 l 458 363 l 415 418 l 471 476 l 675 476 l 719 421 m 119 500 l 68 439 l 28 500 l 78 946 l 131 1007 l 169 946 l 119 500 m 383 421 l 328 363 l 124 363 l 81 418 l 136 476 l 342 476 l 383 421 m 51 -107 l 0 -169 l -42 -107 l 10 338 l 61 399 l 101 338 l 51 -107 z " }, "G": { "ha": 889, "x_min": -36, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "H": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 793 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 793 500 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 674 -169 l 633 -107 l 683 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 174 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "I": { "ha": 889, "x_min": 17, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "J": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "K": { "ha": 889, "x_min": -36, "x_max": 736, "o": "m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 617 -111 l 592 -111 l 444 222 l 458 342 l 497 342 l 633 36 l 617 -111 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "L": { "ha": 889, "x_min": -32, "x_max": 658, "o": "m 128 500 l 76 439 l 36 500 l 86 946 l 138 1007 l 178 946 l 128 500 m 658 -187 l 603 -246 l 399 -246 l 356 -190 l 411 -132 l 617 -132 l 658 -187 m 60 -107 l 8 -169 l -32 -107 l 18 338 l 69 399 l 110 338 l 60 -107 m 325 -187 l 269 -246 l 64 -246 l 21 -190 l 76 -132 l 281 -132 l 325 -187 z " }, "M": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 793 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 793 500 m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 725 -107 l 674 -169 l 633 -107 l 683 338 l 736 399 l 775 338 l 725 -107 m 350 497 l 310 497 l 174 801 l 190 950 l 214 950 l 364 617 l 350 497 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 174 946 l 124 500 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "N": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 793 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 793 500 m 725 -107 l 674 -169 l 633 -107 l 683 338 l 736 399 l 775 338 l 725 -107 m 350 497 l 310 497 l 174 801 l 190 950 l 214 950 l 364 617 l 350 497 m 617 -111 l 592 -111 l 443 222 l 457 342 l 497 342 l 633 36 l 617 -111 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 174 946 l 124 500 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "O": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "P": { "ha": 889, "x_min": -42, "x_max": 840, "o": "m 786 1029 l 731 971 l 526 971 l 483 1026 l 539 1085 l 744 1085 l 786 1029 m 790 500 l 738 439 l 697 500 l 749 949 l 800 1010 l 840 949 l 790 500 m 453 1029 l 397 971 l 192 971 l 149 1026 l 204 1085 l 408 1085 l 453 1029 m 719 421 l 664 363 l 458 363 l 415 418 l 471 476 l 675 476 l 719 421 m 119 500 l 68 439 l 28 500 l 78 946 l 131 1007 l 169 946 l 119 500 m 383 421 l 328 363 l 124 363 l 81 418 l 136 476 l 342 476 l 383 421 m 51 -107 l 0 -169 l -42 -107 l 10 338 l 61 399 l 101 338 l 51 -107 z " }, "Q": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 617 -111 l 592 -111 l 444 222 l 458 342 l 497 342 l 633 36 l 617 -111 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "R": { "ha": 889, "x_min": -42, "x_max": 840, "o": "m 786 1029 l 731 971 l 526 971 l 483 1026 l 539 1085 l 744 1085 l 786 1029 m 790 500 l 738 439 l 697 500 l 749 949 l 800 1010 l 840 949 l 790 500 m 453 1029 l 397 971 l 192 971 l 149 1026 l 204 1085 l 408 1085 l 453 1029 m 719 421 l 664 363 l 458 363 l 415 418 l 471 476 l 675 476 l 719 421 m 614 -111 l 589 -111 l 440 222 l 453 342 l 493 342 l 631 36 l 614 -111 m 119 500 l 68 439 l 28 500 l 78 946 l 131 1007 l 169 946 l 119 500 m 383 421 l 328 363 l 124 363 l 81 418 l 136 476 l 342 476 l 383 421 m 51 -107 l 0 -169 l -42 -107 l 10 338 l 61 399 l 101 338 l 51 -107 z " }, "S": { "ha": 889, "x_min": 17, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "T": { "ha": 889, "x_min": 149, "x_max": 786, "o": "m 786 1029 l 731 971 l 526 971 l 483 1026 l 539 1085 l 744 1085 l 786 1029 m 453 1029 l 397 971 l 192 971 l 149 1026 l 204 1085 l 408 1085 l 453 1029 m 454 500 l 403 439 l 364 500 l 414 946 l 464 1007 l 504 946 l 454 500 m 386 -107 l 335 -169 l 294 -107 l 344 338 l 397 399 l 436 338 l 386 -107 z " }, "U": { "ha": 889, "x_min": -32, "x_max": 849, "o": "m 797 500 l 747 439 l 707 500 l 757 949 l 808 1010 l 849 949 l 797 500 m 731 -107 l 678 -169 l 638 -107 l 688 338 l 740 399 l 781 338 l 731 -107 m 128 500 l 76 439 l 36 500 l 86 946 l 138 1007 l 178 946 l 128 500 m 658 -187 l 603 -246 l 397 -246 l 356 -190 l 411 -132 l 617 -132 l 658 -187 m 60 -107 l 8 -169 l -32 -107 l 18 338 l 69 399 l 110 338 l 60 -107 m 324 -187 l 268 -246 l 64 -246 l 21 -190 l 75 -132 l 281 -132 l 324 -187 z " }, "V": { "ha": 889, "x_min": 29, "x_max": 842, "o": "m 790 500 l 739 439 l 699 500 l 749 949 l 801 1010 l 842 949 l 790 500 m 651 222 l 428 -111 l 403 -111 l 419 36 l 625 342 l 664 342 l 651 222 m 119 500 l 69 439 l 29 500 l 79 946 l 131 1007 l 169 946 l 119 500 m 279 -111 l 254 -111 l 106 222 l 119 342 l 158 342 l 296 36 l 279 -111 z " }, "W": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 793 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 793 500 m 725 -107 l 674 -169 l 633 -107 l 683 338 l 736 399 l 775 338 l 725 -107 m 617 -111 l 592 -111 l 443 222 l 457 342 l 497 342 l 633 36 l 617 -111 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 174 946 l 124 500 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "X": { "ha": 889, "x_min": 71, "x_max": 736, "o": "m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 350 497 l 310 497 l 175 801 l 192 950 l 215 950 l 364 617 l 350 497 m 617 -111 l 592 -111 l 444 222 l 458 342 l 497 342 l 633 36 l 617 -111 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 z " }, "Y": { "ha": 889, "x_min": 178, "x_max": 740, "o": "m 724 801 l 519 497 l 478 497 l 492 617 l 715 950 l 740 950 l 724 801 m 353 497 l 314 497 l 178 801 l 193 950 l 218 950 l 367 617 l 353 497 m 393 -107 l 342 -169 l 303 -107 l 353 338 l 403 399 l 443 338 l 393 -107 z " }, "Z": { "ha": 889, "x_min": 17, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "[": { "ha": 889, "x_min": 299, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 z " }, "\\": { "ha": 889, "x_min": 175, "x_max": 633, "o": "m 350 497 l 310 497 l 175 801 l 192 950 l 215 950 l 364 617 l 350 497 m 617 -111 l 592 -111 l 444 222 l 458 342 l 497 342 l 633 36 l 617 -111 z " }, "]": { "ha": 889, "x_min": 17, "x_max": 508, "o": "m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "^": { "ha": 889, "x_min": 106, "x_max": 664, "o": "m 651 497 l 611 497 l 475 801 l 492 950 l 515 950 l 664 617 l 651 497 m 351 801 l 146 497 l 106 497 l 119 617 l 342 950 l 367 950 l 351 801 z " }, "_": { "ha": 889, "x_min": 85, "x_max": 724, "o": "m 724 -187 l 668 -246 l 463 -246 l 419 -190 l 475 -132 l 681 -132 l 724 -187 m 388 -187 l 332 -246 l 128 -246 l 85 -190 l 140 -132 l 346 -132 l 388 -187 z " }, "`": { "ha": 889, "x_min": 140, "x_max": 331, "o": "m 317 497 l 275 497 l 140 801 l 157 950 l 181 950 l 331 617 l 317 497 z " }, "a": { "ha": 889, "x_min": -33, "x_max": 779, "o": "m 689 497 l 647 497 l 513 801 l 529 950 l 553 950 l 703 617 l 689 497 m 726 421 l 671 363 l 465 363 l 424 418 l 479 476 l 683 476 l 726 421 m 729 -107 l 678 -169 l 636 -107 l 688 338 l 739 399 l 779 338 l 729 -107 m 388 801 l 183 497 l 143 497 l 157 617 l 381 950 l 404 950 l 388 801 m 392 421 l 336 363 l 131 363 l 88 418 l 143 476 l 349 476 l 392 421 m 58 -107 l 7 -169 l -33 -107 l 17 338 l 69 399 l 108 338 l 58 -107 z " }, "b": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "c": { "ha": 889, "x_min": -36, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "d": { "ha": 889, "x_min": -36, "x_max": 699, "o": "m 686 497 l 646 497 l 508 801 l 525 950 l 550 950 l 699 617 l 686 497 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 654 222 l 431 -111 l 407 -111 l 424 36 l 628 342 l 668 342 l 654 222 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "e": { "ha": 889, "x_min": -36, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "f": { "ha": 889, "x_min": -42, "x_max": 786, "o": "m 786 1029 l 731 971 l 526 971 l 483 1026 l 539 1085 l 744 1085 l 786 1029 m 453 1029 l 397 971 l 192 971 l 149 1026 l 204 1085 l 408 1085 l 453 1029 m 719 421 l 664 363 l 458 363 l 415 418 l 471 476 l 675 476 l 719 421 m 119 500 l 68 439 l 28 500 l 78 946 l 131 1007 l 169 946 l 119 500 m 383 421 l 328 363 l 124 363 l 81 418 l 136 476 l 342 476 l 383 421 m 51 -107 l 0 -169 l -42 -107 l 10 338 l 61 399 l 101 338 l 51 -107 z " }, "g": { "ha": 889, "x_min": -36, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "h": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 793 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 793 500 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 674 -169 l 633 -107 l 683 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 174 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "i": { "ha": 889, "x_min": 17, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "j": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "k": { "ha": 889, "x_min": -36, "x_max": 736, "o": "m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 617 -111 l 592 -111 l 444 222 l 458 342 l 497 342 l 633 36 l 617 -111 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "l": { "ha": 889, "x_min": -32, "x_max": 658, "o": "m 128 500 l 76 439 l 36 500 l 86 946 l 138 1007 l 178 946 l 128 500 m 658 -187 l 603 -246 l 399 -246 l 356 -190 l 411 -132 l 617 -132 l 658 -187 m 60 -107 l 8 -169 l -32 -107 l 18 338 l 69 399 l 110 338 l 60 -107 m 325 -187 l 269 -246 l 64 -246 l 21 -190 l 76 -132 l 281 -132 l 325 -187 z " }, "m": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 793 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 793 500 m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 725 -107 l 674 -169 l 633 -107 l 683 338 l 736 399 l 775 338 l 725 -107 m 350 497 l 310 497 l 174 801 l 190 950 l 214 950 l 364 617 l 350 497 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 174 946 l 124 500 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "n": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 793 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 793 500 m 725 -107 l 674 -169 l 633 -107 l 683 338 l 736 399 l 775 338 l 725 -107 m 350 497 l 310 497 l 174 801 l 190 950 l 214 950 l 364 617 l 350 497 m 617 -111 l 592 -111 l 443 222 l 457 342 l 497 342 l 633 36 l 617 -111 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 174 946 l 124 500 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "o": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "p": { "ha": 889, "x_min": -42, "x_max": 840, "o": "m 786 1029 l 731 971 l 526 971 l 483 1026 l 539 1085 l 744 1085 l 786 1029 m 790 500 l 738 439 l 697 500 l 749 949 l 800 1010 l 840 949 l 790 500 m 453 1029 l 397 971 l 192 971 l 149 1026 l 204 1085 l 408 1085 l 453 1029 m 719 421 l 664 363 l 458 363 l 415 418 l 471 476 l 675 476 l 719 421 m 119 500 l 68 439 l 28 500 l 78 946 l 131 1007 l 169 946 l 119 500 m 383 421 l 328 363 l 124 363 l 81 418 l 136 476 l 342 476 l 383 421 m 51 -107 l 0 -169 l -42 -107 l 10 338 l 61 399 l 101 338 l 51 -107 z " }, "q": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 617 -111 l 592 -111 l 444 222 l 458 342 l 497 342 l 633 36 l 617 -111 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "r": { "ha": 889, "x_min": -42, "x_max": 840, "o": "m 786 1029 l 731 971 l 526 971 l 483 1026 l 539 1085 l 744 1085 l 786 1029 m 790 500 l 738 439 l 697 500 l 749 949 l 800 1010 l 840 949 l 790 500 m 453 1029 l 397 971 l 192 971 l 149 1026 l 204 1085 l 408 1085 l 453 1029 m 719 421 l 664 363 l 458 363 l 415 418 l 471 476 l 675 476 l 719 421 m 614 -111 l 589 -111 l 440 222 l 453 342 l 493 342 l 631 36 l 614 -111 m 119 500 l 68 439 l 28 500 l 78 946 l 131 1007 l 169 946 l 119 500 m 383 421 l 328 363 l 124 363 l 81 418 l 136 476 l 342 476 l 383 421 m 51 -107 l 0 -169 l -42 -107 l 10 338 l 61 399 l 101 338 l 51 -107 z " }, "s": { "ha": 889, "x_min": 17, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "t": { "ha": 889, "x_min": 149, "x_max": 786, "o": "m 786 1029 l 731 971 l 526 971 l 483 1026 l 539 1085 l 744 1085 l 786 1029 m 453 1029 l 397 971 l 192 971 l 149 1026 l 204 1085 l 408 1085 l 453 1029 m 454 500 l 403 439 l 364 500 l 414 946 l 464 1007 l 504 946 l 454 500 m 386 -107 l 335 -169 l 294 -107 l 344 338 l 397 399 l 436 338 l 386 -107 z " }, "u": { "ha": 889, "x_min": -32, "x_max": 849, "o": "m 797 500 l 747 439 l 707 500 l 757 949 l 808 1010 l 849 949 l 797 500 m 731 -107 l 678 -169 l 638 -107 l 688 338 l 740 399 l 781 338 l 731 -107 m 128 500 l 76 439 l 36 500 l 86 946 l 138 1007 l 178 946 l 128 500 m 658 -187 l 603 -246 l 397 -246 l 356 -190 l 411 -132 l 617 -132 l 658 -187 m 60 -107 l 8 -169 l -32 -107 l 18 338 l 69 399 l 110 338 l 60 -107 m 324 -187 l 268 -246 l 64 -246 l 21 -190 l 75 -132 l 281 -132 l 324 -187 z " }, "v": { "ha": 889, "x_min": 29, "x_max": 842, "o": "m 790 500 l 739 439 l 699 500 l 749 949 l 801 1010 l 842 949 l 790 500 m 651 222 l 428 -111 l 403 -111 l 419 36 l 625 342 l 664 342 l 651 222 m 119 500 l 69 439 l 29 500 l 79 946 l 131 1007 l 169 946 l 119 500 m 279 -111 l 254 -111 l 106 222 l 119 342 l 158 342 l 296 36 l 279 -111 z " }, "w": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 793 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 793 500 m 725 -107 l 674 -169 l 633 -107 l 683 338 l 736 399 l 775 338 l 725 -107 m 617 -111 l 592 -111 l 443 222 l 457 342 l 497 342 l 633 36 l 617 -111 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 174 946 l 124 500 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "x": { "ha": 889, "x_min": 71, "x_max": 736, "o": "m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 350 497 l 310 497 l 175 801 l 192 950 l 215 950 l 364 617 l 350 497 m 617 -111 l 592 -111 l 444 222 l 458 342 l 497 342 l 633 36 l 617 -111 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 z " }, "y": { "ha": 889, "x_min": 178, "x_max": 740, "o": "m 724 801 l 519 497 l 478 497 l 492 617 l 715 950 l 740 950 l 724 801 m 353 497 l 314 497 l 178 801 l 193 950 l 218 950 l 367 617 l 353 497 m 393 -107 l 342 -169 l 303 -107 l 353 338 l 403 399 l 443 338 l 393 -107 z " }, "z": { "ha": 889, "x_min": 17, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "{": { "ha": 889, "x_min": 85, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 z " }, "|": { "ha": 889, "x_min": 299, "x_max": 508, "o": "m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 z " }, "}": { "ha": 889, "x_min": 17, "x_max": 724, "o": "m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 z " }, "Æ": { "ha": 889, "x_min": -36, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 385 801 l 181 497 l 140 497 l 153 617 l 376 950 l 401 950 l 385 801 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "Ø": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " }, "æ": { "ha": 889, "x_min": -36, "x_max": 792, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 458 500 l 408 439 l 367 500 l 418 946 l 469 1007 l 508 946 l 458 500 m 724 421 l 668 363 l 463 363 l 419 418 l 475 476 l 681 476 l 724 421 m 385 801 l 181 497 l 140 497 l 153 617 l 376 950 l 401 950 l 385 801 m 388 421 l 332 363 l 128 363 l 85 418 l 140 476 l 346 476 l 388 421 m 390 -107 l 339 -169 l 299 -107 l 349 338 l 400 399 l 442 338 l 390 -107 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 z " }, "ø": { "ha": 889, "x_min": -36, "x_max": 844, "o": "m 792 1029 l 736 971 l 531 971 l 488 1026 l 543 1085 l 749 1085 l 792 1029 m 794 500 l 742 439 l 703 500 l 753 949 l 804 1010 l 844 949 l 794 500 m 719 801 l 515 497 l 475 497 l 488 617 l 713 950 l 736 950 l 719 801 m 457 1029 l 401 971 l 196 971 l 153 1026 l 208 1085 l 414 1085 l 457 1029 m 725 -107 l 675 -169 l 635 -107 l 685 338 l 736 399 l 775 338 l 725 -107 m 124 500 l 72 439 l 32 500 l 82 946 l 133 1007 l 175 946 l 124 500 m 654 -187 l 599 -246 l 394 -246 l 351 -190 l 407 -132 l 613 -132 l 654 -187 m 319 222 l 96 -111 l 71 -111 l 88 36 l 292 342 l 333 342 l 319 222 m 56 -107 l 3 -169 l -36 -107 l 14 338 l 65 399 l 106 338 l 56 -107 m 319 -187 l 264 -246 l 58 -246 l 17 -190 l 72 -132 l 276 -132 l 319 -187 z " } }, "familyName": "Digital dream Skew Narrow", "ascender": 1111, "descender": -329, "underlinePosition": -133, "underlineThickness": 20, "boundingBox": { "yMin": -237, "xMin": -30, "yMax": 800, "xMax": 611 }, "resolution": 1000, "original_font_information": { "format": 0, "copyright": "(c) Jakob Fischer at www.pizzadude.dk - DO NOT DISTRIBUTE WITHOUT AUTHOR'S PERMISSION!", "fontFamily": "digital dream skew narrow", "fontSubfamily": "Regular", "uniqueID": "Digital dream SkewNarrow", "fullName": "Digital dream Skew Narrow", "version": "2", "postScriptName": "DigitaldreamSkewNarrow", "trademark": "" }, "cssFontWeight": "normal", "cssFontStyle": "normal" });
+	exports.default = AnimalFarm;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }
 /******/ ]);

@@ -9,7 +9,10 @@ import MovingMountains from '../components/_MovingMountains';
 import Space from '../components/_Space';
 import Cubic from '../components/_Cubic';
 import Loading from '../components/_Loading';
+import SkyToOcean from '../components/_SkyToOcean';
 import Ending from '../components/_Ending';
+import 'aframe-particle-system-component';
+import '../aframe_components/mobile-touch-interaction';
 class LionWild extends React.Component{
   constructor(props){
     super(props);
@@ -24,7 +27,8 @@ class LionWild extends React.Component{
   getMixins(){
     return(
       <Entity>
-        {Cubic.getMixins()}
+        {Cubic.getMixins()},
+        <a-mixin id="laser" geometry="primitive: box; depth: 0.5; width: 0.5;" material="opacity:0.3;shader:flat;"></a-mixin>
       </Entity>
     );
   }
@@ -78,7 +82,7 @@ class LionWild extends React.Component{
     else if (this.state.stage == 2)
       return <Space nextScene={this.nextScene.bind(this)}/>;
     else if (this.state.stage == 3)
-      return <Ending/>;
+      return <SkyToOcean/>;
   }
 
   render(){

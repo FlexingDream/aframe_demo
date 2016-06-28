@@ -13,7 +13,7 @@ class SequencedLasers extends React.Component{
     let startingX=0,startingY=0,startingZ=0;
     if (this.props.centerOn == 'x')
       startingX = (this.props.numLasers* this.props.width + this.props.numLasers*this.props.margin)/ 2 * -1;
-    
+
 
     for (let i =0;i<this.props.numLasers;i++){
       let position = ""+(startingX+(i*this.props.margin))+" " + startingY+" " +startingZ;
@@ -28,7 +28,7 @@ class SequencedLasers extends React.Component{
         endAnimRotation = [-90,-90,-90];
       }
       lasers.push(
-        <Entity geometry={{primitive: 'box',height: this.props.height, depth: this.props.depth, width: this.props.width}} 
+        <Entity geometry={{primitive: 'box',height: this.props.height, depth: this.props.depth, width: this.props.width}}
         material={{color: Helper.getRandomColor()}}
         position={position}
         >
@@ -43,8 +43,9 @@ class SequencedLasers extends React.Component{
   render(){
     let elements = this.getLasers();
     return(
-      <Entity position={this.props.position} rotation={this.props.rotation}>
+      <Entity visible={this.props.visible || 'true'} position={this.props.position} rotation={this.props.rotation}>
         {elements}
+        {this.props.children}
       </Entity>
     );
   }
