@@ -39,8 +39,8 @@ class Butterflies extends React.Component{
         type: 'dodecahedron',
         radius: 75
       }} {...this.props}>
-        <Animation attribute='rotation' dur='20000'  direction='reverse' to={[0, 360, 0]}/>
         {butterflyHolder}
+        {this.props.children}
       </Entity>
     );
   }

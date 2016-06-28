@@ -14,6 +14,7 @@ import SequencedLasers from './SequencedLasers';
 import Lasers from './Laser';
 import SchoolOfFishes from './SchoolOfFishes';
 import HerdOfHorses from './HerdOfHorses';
+import Butterflies from './Butterflies';
 /**
 <Entity
   geometry={{primitive: 'sphere', radius: 0.5}}
@@ -49,7 +50,7 @@ class SkyToOcean extends React.Component{
         <Ocean/>
 
         <SchoolOfFishes position={[500, -200, -2000]}>
-          <Animation attribute='position' to={[-500, -200, 2000]} dur="30000"/>
+          <Animation attribute='position' to={[-500, -200, 2000]} dur="50000"/>
         </SchoolOfFishes>
 
         <Entity layout={{
@@ -65,7 +66,12 @@ class SkyToOcean extends React.Component{
 
         </Entity>
 
+        <Butterflies position={[0, 0, -1000]}>
+          <Animation attribute='position' dur='20000' to={[0, 0, 1000]}/>
+          <Animation attribute='rotation' dur='20000' to={[0, 360, 360]} begin='20000'/>
+          <Animation attribute='position' dur='20000' to={[0, 0, 2000]} begin='40000'/>
 
+        </Butterflies>
 
         <Sky color="black"/>
 
