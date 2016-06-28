@@ -128343,9 +128343,9 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      var that = this;
-	      setTimeout(function () {
-	        that.props.nextScene();
-	      }, 15000);
+	      /*    setTimeout(function(){
+	            that.props.nextScene();
+	          },15000);*/
 	    }
 	  }, {
 	    key: 'render',

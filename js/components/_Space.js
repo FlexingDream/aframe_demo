@@ -16,9 +16,9 @@ class Space extends React.Component{
   }
   componentDidMount(){
     let that = this;
-    setTimeout(function(){
+/*    setTimeout(function(){
       that.props.nextScene();
-    },15000);
+    },15000);*/
   }
 
   static getModels(){
